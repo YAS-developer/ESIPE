@@ -11,7 +11,7 @@ void print_pointer(int* p){
 }
 
 void set_pointer(int *p, int n){
-    p = &n;
+    *p = n;
 }
 
 
