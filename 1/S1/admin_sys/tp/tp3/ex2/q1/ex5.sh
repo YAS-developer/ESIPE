@@ -1,9 +1,9 @@
-
+#!/bin/bash
 
 if [ $# -lt 1 ]
     then
         echo "Veuillez rentrez un fichier comme ci-dessous:"$'\n'"$0 fichier.txt"
-        exit 2
+        exit 1
 fi
 
 txt=$(cat $1)

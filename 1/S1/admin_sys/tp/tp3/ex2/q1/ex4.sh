@@ -1,3 +1,5 @@
+#!/bin/bash
+
 
 if [ $# = 2 ] 
     then echo $2

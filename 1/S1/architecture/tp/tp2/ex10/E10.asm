@@ -15,7 +15,7 @@ main:
 loop:
     call read_int
     cmp eax, -1
-    je input_done
+    je input_fin
 
     cmp eax, 0
     jl loop
@@ -28,7 +28,7 @@ loop:
     mov [number_counts + edx * 4], eax
     jmp loop
 
-input_done:
+input_fin:
     mov ecx, 0
     mov edi, sorted_numbers
     mov eax, 0
