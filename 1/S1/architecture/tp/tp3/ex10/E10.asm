@@ -1,7 +1,7 @@
 %include "asm_io.inc"
 
 SECTION .data
-    message : db 'l assembleur',0
+    message : db 'l assembleur',10, 0
 
 SECTION .text
 global main
@@ -12,7 +12,9 @@ push message
 call print_string2
 
 
-
+mov eax, 1
+mov ebx, 0
+int 0x80
 
 print_string2 :
     push ebp
@@ -30,13 +32,7 @@ print_string2 :
     inc edx
     cmp byte [edx],0
     jne loop_tc
-    sub edx, [ebp+8]
-
-    push eax
-    mov eax, edx
-    call print_int
-    pop eax
-    
+    sub edx, [ebp+8]    
     
     mov eax, 4
     mov ebx, 1
@@ -51,7 +47,5 @@ print_string2 :
     ret
 
 
-mov eax, 1
-mov ebx, 0
-int 0x80
+
     
