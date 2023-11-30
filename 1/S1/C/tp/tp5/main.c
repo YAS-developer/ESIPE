@@ -111,19 +111,25 @@ int* random_array(int size, int max_entry){
 int* concat_array(int* first, int* second){
     int size_first = array_size(first);
     int size_second = array_size(second);
+
+    // printf("%d\n", size_first);
+    // printf("%d\n", size_second);
     int size = size_first + size_second;
-    
+    // printf("%d\n", size);
     int* new_array = allocate_integer_array(size);
     new_array[size]=-1;
-
+    
+    int count_second = 0;
     for(int i=0; i<size;i++){
         if(i < size_first){
-            printf("first[%d] : %d\n", i,first[i]);
+            // printf("first[%d] : %d\n", i,first[i]);
+            new_array[i] = first[i];
         }
-        else if(i > size_first){
-            printf("second[%d] : %d\n", i,second[i]);
+        else if(i >= size_first){
+            // printf("second[%d] : %d\n", count_second, second[count_second]);
+            new_array[i] = second[count_second];
+            count_second++;
         }
-
     }
 
     return new_array;
@@ -135,17 +141,20 @@ int* concat_array(int* first, int* second){
    functions. */
 int main(int argc, char* argv[]){
     
-    int* tab = allocate_integer_array(2);
-    tab[2] = 2;
-    tab[10]=-1;
+    int size_tab = 4;
 
-    int* tab2 = allocate_integer_array(4);
-    tab2[2] = 122;
-    tab2[10]=-1;
+    int* tab = allocate_integer_array(size_tab);
+    tab[2] = 2;
+    tab[size_tab]=-1;
+
+    int size_tab2 = 6;
+    int* tab2 = allocate_integer_array(size_tab2);
+    tab2[5] = 122;
+    tab2[size_tab2]=-1;
 
 
     int* concat = concat_array(tab, tab2);
-    // print_array(concat);
+    print_array(concat);
 
 
     // print_array(tab);
