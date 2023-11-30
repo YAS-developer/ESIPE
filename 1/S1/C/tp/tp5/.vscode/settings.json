@@ -1,0 +1,26 @@
+{
+    "files.associations": {
+        "system_error": "c",
+        "type_traits": "c",
+        "memory": "c",
+        "utility": "c",
+        "array": "c",
+        "bitset": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "ranges": "c",
+        "__hash_table": "c",
+        "__split_buffer": "c",
+        "__tree": "c",
+        "deque": "c",
+        "iterator": "c",
+        "list": "c",
+        "map": "c",
+        "queue": "c",
+        "random": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
