@@ -136,6 +136,16 @@ int* concat_array(int* first, int* second){
 }
 
 
+// int* merge_sorted_arrays(int* first, int* second){
+    
+//     int size_first = array_size(first);
+//     int size_second = array_size(second);
+
+//     for(int i = 0; i<size_first;i++){
+
+//     }
+// }
+
 
 /* An empty main to test the compilation of the allocation and free
    functions. */
