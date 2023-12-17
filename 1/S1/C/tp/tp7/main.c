@@ -43,25 +43,27 @@ int main(){
             underRightX=0, underRightY=0;
             
         addX=0, addY=0;
-        int currentX=85, currentY=85;
+        int currentX=60, currentY=60;
         for(int i=0; i<SIZE; i++){
+
             for(int j=0; j<SIZE; j++){
                 currentX+=addX;
                 currentY+=addY;
-                // if(x <= )){
+                if(x>=currentX && x<=(currentX+60) && y>=(currentY) &&y<=(currentY+60) ){
+                    MLV_draw_filled_rectangle(currentX, currentY, 60, 60, MLV_COLOR_BLACK);
+                    // MLV_draw_text(85+addX, 85+addY,"1", MLV_COLOR_BLACK);
 
-                // }
-                // MLV_draw_filled_rectangle(int x, int y, 50, 50, MLV_COLOR_BLACK);
+                }
+                
                 MLV_draw_text(85+addX, 85+addY,"1", MLV_COLOR_ANTIQUE_WHITE);
                 addY+=60; 
             }
             addX+=60;
             addY=0;
-            aboveLeftY+=60;
-            aboveRightY+=60;
-            underRightY+=60;
-        } 
-        MLV_update_window();  
+        }
+        addX=0, addY=0;
+        currentX=85, currentY=85;
+        MLV_actualise_window();
     }
 
     return 0;
