@@ -9,6 +9,7 @@
 
 
 int main(int argc, char* argv[]){
+  Board originalB;
   Board B;
 
   if (argc != 2){
@@ -16,11 +17,14 @@ int main(int argc, char* argv[]){
     return 1;
   }
 
+  fread_board(argv[1], originalB);
   fread_board(argv[1], B);
+  
+  
 
   init_graphics();
   update_graphics_board(B);
-  graphics_main();
+  graphics_main(B);
 
 
 
