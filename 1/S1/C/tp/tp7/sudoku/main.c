@@ -9,22 +9,21 @@
 
 
 int main(int argc, char* argv[]){
-  Board originalB;
   Board B;
 
   if (argc != 2){
     fprintf(stderr, "Usage: %s <file>\n", argv[0]);
     return 1;
   }
-
-  fread_board(argv[1], originalB);
   fread_board(argv[1], B);
   
   
-
+  set_original_board(B);
+  set_board(B);
+  
   init_graphics();
-  update_graphics_board(B);
-  graphics_main(B);
+  update_graphics_board();
+  graphics_main();
 
 
 

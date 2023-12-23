@@ -3,21 +3,20 @@
 #include "sudoku.h"
 
 bool is_valid_move(Board grid, int row, int col, int num) {
-    // Check if the number already exists in the same row
     for (int i = 0; i < 9; i++) {
         if (grid[row][i] == num) {
             return false;
         }
     }
 
-    // Check if the number already exists in the same column
+ 
     for (int i = 0; i < 9; i++) {
         if (grid[i][col] == num) {
             return false;
         }
     }
 
-    // Check if the number already exists in the same 3x3 box
+
     int startRow = row - row % 3;
     int startCol = col - col % 3;
     for (int i = 0; i < 3; i++) {
