@@ -33,6 +33,7 @@ void set_board(Board newGrid){
 
 void init_graphics(){
     MLV_create_window("Frame", NULL, 1200, 800);
+    MLV_draw_filled_rectangle(0, 0, 1200, 880, MLV_COLOR_CADET_BLUE);
     for(int i=1; i<=SIZE+1; i++){
         MLV_draw_line(60, 60*i, 600, 60*i, MLV_COLOR_ANTIQUE_WHITE);
         MLV_draw_line(60*i, 60, 60*i, 600, MLV_COLOR_ANTIQUE_WHITE);
@@ -49,7 +50,11 @@ void update_graphics_board(){
         for(int j=0; j<SIZE; j++){
             number = grid[i][j];
             sprintf(str, "%d", number);
-            if(number != 0){
+            if(number == 0){
+                MLV_draw_filled_rectangle(85+addX, 85+addY, 20, 20, MLV_COLOR_CADET_BLUE);
+            }
+            else{
+                MLV_draw_filled_rectangle(85+addX, 85+addY, 20, 20, MLV_COLOR_CADET_BLUE);
                 MLV_draw_text(85+addX, 85+addY, str, MLV_COLOR_ANTIQUE_WHITE);
             }
             addX+=60; 
@@ -80,12 +85,13 @@ void check_coord(int x, int y){
             if (x >= currentX && x <= (currentX + 60) && y >= currentY && y <= (currentY + 60)) {
                 if(original_grid[i][j] == 0){
                     row = i; col = j;
-                    MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_BLACK);
-                    MLV_draw_text(currentX+25, currentY+25, "?", MLV_COLOR_RED);
+                    MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_CADET_BLUE);
+                    MLV_draw_text(currentX+25, currentY+25, "?", MLV_COLOR_GREEN);
                     answer_draw();
+                    
                 }
-                // MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_BLACK);
-                // MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_BLACK);
+                // MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_CADET_BLUE);
+                // MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_CADET_BLUE);
             }
             currentX += 60; 
         }
@@ -112,6 +118,11 @@ void answer_draw(){
         addX=0;
         addY+=60;
     }
+    MLV_draw_filled_rectangle(750, 440, 180, 60, MLV_COLOR_RED);
+    char* txt="Annuler";
+    MLV_draw_text(805, 460, txt, MLV_COLOR_ANTIQUE_WHITE);
+
+
     MLV_actualise_window();
 
 
@@ -126,11 +137,20 @@ void answer_draw(){
         }
     }
 
-    MLV_actualise_window();
+    // MLV_actualise_window();
 }
 
 
 bool check_coord_answer(int x, int y){
+
+    
+
+    if(x>= 750 && x <= (750+180) && y >= 440 && y <= 500){
+        update_graphics_board();
+        delete_answer_draw();
+        return true;
+    }
+
     int currentX = 750, currentY = 240;
     for (int i = 0; i < ANSWER_SIZE; i++) {
         currentX = 750; 
@@ -161,10 +181,10 @@ void delete_answer_draw(){
     int add=0;
     // int currentX=;
     for(int i=0; i<=ANSWER_SIZE; i++){
-        MLV_draw_line(750, 240+add, 930, 240+add, MLV_COLOR_BLACK);
-        MLV_draw_line(750+add, 240, 750+add, 420, MLV_COLOR_BLACK);
+        MLV_draw_line(750, 240+add, 930, 240+add, MLV_COLOR_CADET_BLUE);
+        MLV_draw_line(750+add, 240, 750+add, 420, MLV_COLOR_CADET_BLUE);
         add+=60;
     }
-    MLV_draw_filled_rectangle(750, 240, 930, 420, MLV_COLOR_BLACK);
+    MLV_draw_filled_rectangle(750, 240, 930, 420, MLV_COLOR_CADET_BLUE);
 }
 
