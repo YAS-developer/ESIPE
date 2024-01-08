@@ -18,12 +18,7 @@ int main(int argc, char* argv[]){
   fread_board(argv[1], B);
   
   
-  set_original_board(B);
-  set_board(B);
-  
-  init_graphics();
-  update_graphics_board();
-  graphics_main();
+  graphics_main(B);
 
 
 
