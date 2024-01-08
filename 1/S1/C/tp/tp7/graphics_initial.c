@@ -3,8 +3,8 @@
 #include "sudoku.h"
 #include "graphics.h"
 
-// const int SIZE = 9;
-// const int ANSWER_SIZE = 3;
+const int SIZE = 9;
+const int ANSWER_SIZE = 3;
 const int grid_answer[3][3]={
     {1,2,3},
     {4,5,6},
