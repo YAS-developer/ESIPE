@@ -14,12 +14,16 @@ void init_game(SudokuGame *game, Board grid){
         }
     }
 
-    for(int i=0; i<9; i++){
-        for(int j=0; j<9; j++){
+    for(int i=0; i<SIZE; i++){
+        for(int j=0; j<SIZE; j++){
             game->original_grid[i][j] = grid[i][j];
             game->grid[i][j] = grid[i][j];
+            game->solved_grid[i][j] = grid[i][j];
         }
     }
+
+    solve_sudoku(game->solved_grid);
+    
 }
 
 
@@ -34,7 +38,8 @@ void init_graphics(){
 }
 
 
-void update_graphics_board(SudokuGame *game){
+int update_graphics_board(SudokuGame *game){
+
     int number=0;
     char str[2];
     int addX=0, addY=0;
@@ -54,7 +59,21 @@ void update_graphics_board(SudokuGame *game){
         addX=0;
         addY+=60;
     }
+     MLV_actualise_window();
+
+    // VICTORY
+    for(int i=0; i<SIZE; i++){
+        for(int j=0; j<SIZE; j++){
+            if(game->grid[i][j] != game->solved_grid[i][j]){
+                return 0;
+            }
+        }
+    }
+
+    MLV_draw_filled_rectangle(0, 0, 1200, 800, MLV_COLOR_CADET_BLUE);
+    MLV_draw_text(550, 350,"VICTOIRE", MLV_COLOR_GREEN);
     MLV_actualise_window();
+    return 1;
 }
 
 
@@ -72,8 +91,6 @@ void check_coord(SudokuGame *game, int x, int y){
                     answer_draw(game);
                     
                 }
-                // MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_CADET_BLUE);
-                // MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_CADET_BLUE);
             }
             currentX += 60; 
         }
@@ -84,7 +101,6 @@ void check_coord(SudokuGame *game, int x, int y){
 
 void answer_draw(SudokuGame *game){
     int add=0, addX=0, addY=0;
-    // int number=1;
     char str[2];
     for(int i=0; i<=ANSWER_SIZE; i++){
         MLV_draw_line(750, 240+add, 930, 240+add, MLV_COLOR_ANTIQUE_WHITE);
@@ -117,15 +133,10 @@ void answer_draw(SudokuGame *game){
         }
         x=0;y=0;
     }
-
-    // MLV_actualise_window();
 }
 
 
 bool check_coord_answer(SudokuGame *game, int x, int y){
-
-    
-
     if(x>= 750 && x <= (750+180) && y >= 440 && y <= 500){
         update_graphics_board(game);
         delete_answer_draw();

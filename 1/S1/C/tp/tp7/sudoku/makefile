@@ -5,7 +5,6 @@ OBJ=sudoku.o main.o in_out.o graphics.o
 
 sudoku: $(OBJ)
 	$(CC) -o sudoku $(OBJ) $(CFLAGS)
-	./sudoku data/grid1.txt
 
 main.o: main.c sudoku.h in_out.h graphics.h
 	$(CC) -c main.c $(CFLAGS) 
