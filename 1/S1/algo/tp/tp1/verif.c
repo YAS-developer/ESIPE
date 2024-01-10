@@ -7,7 +7,7 @@
 #include "arrays.h"
 #include "verif_func.h"
 #include "parse.h"
-
+#define SIZE 50000
 
 FILE *fh; /* file handle */
 
@@ -115,28 +115,32 @@ int main(int argc, char* argv[]) {
             break;
         }
         else if(exo == '2'){
-            clock_t start, end;
-            double cpu_time_used;
 
-            int max_size = 250000000; // Taille maximale du tableau
-            int elt = 42; // Elément à insérer ou chercher dans le tableau
+
+            //Question 1
+
+            //clock_t start, end;
+            //double cpu_time_used;
+
+            //int max_size = 250000000; // Taille maximale du tableau
+            //int elt = 42; // Elément à insérer ou chercher dans le tableau
 
             // Mesures pour la fonction create_array
-            start = clock();
-            int *arr = create_array(max_size);
-            end = clock();
-            cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-            printf("Time taken to create_array: %f\n", cpu_time_used);
+            // start = clock();
+            // int *arr = create_array(max_size);
+            // end = clock();
+            // cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+            // printf("Time taken to create_array: %f\n", cpu_time_used);
 
             // Mesures pour la fonction insert_unsorted
-            start = clock();
-            int size = 0;
-            for (int i = 0; i < max_size; i++) {
-                insert_unsorted(arr, &size, elt);
-            }
-            end = clock();
-            cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-            printf("Time taken to insert_unsorted: %f\n", cpu_time_used);
+            // start = clock();
+            // int size = 0;
+            // for (int i = 0; i < max_size; i++) {
+            //     insert_unsorted(arr, &size, elt);
+            // }
+            // end = clock();
+            // cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+            // printf("Time taken to insert_unsorted: %f\n", cpu_time_used);
 
             // Mesures pour la fonction find_unsorted
             // start = clock();
@@ -147,8 +151,32 @@ int main(int argc, char* argv[]) {
             // cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
             // printf("Time taken to find_unsorted: %f\n", cpu_time_used);
 
+
+
             // Libérer la mémoire allouée pour le tableau
-            free_array(arr);
+            //free_array(arr);
+
+            int *tableau_tri = create_array(SIZE);
+            int taille = 0;
+
+            // Variables pour mesurer le temps d'exécution
+            clock_t debut, fin;
+            double temps_execution;
+
+            // Insertion des valeurs de 50000 à 1 dans l'ordre croissant
+            debut = clock();
+            for (int i = SIZE; i > 0; --i) {
+                insert_sorted(tableau_tri, &taille, i);
+            }
+            fin = clock();
+
+         
+            temps_execution = ((double) (fin - debut)) / CLOCKS_PER_SEC;
+
+            printf("Temps nécessaire pour insérer les valeurs de 50000 à 1 : %f secondes\n", temps_execution);
+
+            
+            free_array(tableau_tri);
 
             return 0;
         }

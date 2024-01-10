@@ -1,3 +1,6 @@
+NOM PRENOM
+
+
 l'exo 2 se trouve dans le main de verif.c
 
 EX2
