@@ -67,11 +67,19 @@ int max_count(int t[], int lo, int hi) {
  * Exercice 4
  */
 int sum_digits_iter(int n) {
-    return -1;
+    int sum=0;
+    for(int i=0; i<n; i++){
+        sum += n % 10;
+        n /= 10;
+    }
+    return sum;
 }
 
 int sum_digits_rec(int n) {
-    return -1;
+   if(n==0){
+        return 1;
+    }
+    return n%10+sum_digits_iter(n%10);
 }
 
 /***
