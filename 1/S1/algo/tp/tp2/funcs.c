@@ -17,7 +17,7 @@ int palindrome_rec(char str[], int lo, int hi) {
 }
 
 int palindrome(char str[]) {
-    return palindrome_rec("abba",0,3);
+    return palindrome_rec(str, 0, strlen(str) - 1);
 }
 
 /***

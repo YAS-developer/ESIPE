@@ -1,3 +1,0 @@
-Quand je ne trouve pas de solution:
-
-Appeler une fonction sur une partie plus petite, et comment faire pour l'étendre

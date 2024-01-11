@@ -1,3 +1,33 @@
 #
 # Add your tests here
 #
+
+test_verify_palindrome_rec1 verify_palindrome_rec
+"level"
+0
+4
+1
+
+
+#
+test_verify_palindrome_rec2 verify_palindrome_rec
+"ratatouille"
+0
+10
+0
+
+
+
+#
+test_verify_palindrome1 verify_palindrome
+"kayak"                     # string
+1                           # expected result
+
+
+#
+test_verify_palindrome2 verify_palindrome
+"algorithm"                 # string
+0                           # expected result
+
+
+
