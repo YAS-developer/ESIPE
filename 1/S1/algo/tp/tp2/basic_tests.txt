@@ -1,0 +1,111 @@
+
+# <test id> <test function>
+test_exo1_1 verify_palindrome_rec
+"abba"                      # string
+0                           # lo
+3                           # hi
+1                           # expected result
+
+#
+test_exo1_2 verify_palindrome_rec
+"radar"
+0
+4
+1
+
+# <test id> <test function>
+test_exo1_3 verify_palindrome_rec
+"esoperesteicietserepose"
+0
+22
+1
+
+#
+test_exo1_4 verify_palindrome
+""
+1
+
+#
+test_exo1_5 verify_palindrome
+"nitalarbralatin"
+1
+
+#
+test_exo3_1 verify_count 
+[1, 4, 3, 3, 2, 3, 3, 4]    # [array]
+0                           # lo
+7                           # hi
+4                           # elt
+2                           # expected result
+
+# 
+test_exo3_2 verify_max_count
+[1, 4, 3, 3, 2, 3, 3, 4]    # [array]
+0                           # lo
+7                           # hi
+4                           # expected result
+
+# 
+test_exo4_1 verify_sum_digits_iter
+912942                      # input value (n)
+27                          # expected result
+
+# 
+test_exo4_2 verify_sum_digits_rec
+912942
+27
+
+# 
+test_exo5_1 verify_digit_sum_digits_iter
+912942
+9
+
+# 
+test_exo5_2 verify_digit_sum_digits_iter
+99992
+2
+
+# 
+test_exo5_3 verify_digit_sum_digits_rec
+912942
+9
+
+# 
+test_exo5_4 verify_digit_sum_digits_rec
+99992
+2
+
+#
+test_exo6_1 verify_longest_incr_iter
+[1, 2, 3, 2, 4, 6, 8, 3]    # [array]
+0                           # lo
+7                           # hi
+4                           # expected result
+
+#
+test_exo6_2 verify_longest_incr_iter
+[1, 2, 3, 1, 2, 3, 4, 5]
+0
+7
+5
+
+#
+test_exo6_3 verify_first_incr
+[1, 2, 3, 1, 2, 3, 4, 5]
+0
+7
+3
+
+#
+test_exo6_4 verify_longest_incr_rec
+[1, 2, 3, 2, 4, 6, 8, 3]
+0
+7
+4
+
+#
+test_exo6_5 verify_longest_incr_rec
+[1, 2, 3, 1, 2, 3, 4, 5]
+0
+7
+5
