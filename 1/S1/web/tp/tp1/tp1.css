@@ -1,0 +1,27 @@
+
+
+
+#cartouche td{
+    margin-top: 10px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    border-top: 1px dashed; 
+}
+
+.traitd{
+    border-right: 1px solid ;
+}
+
+.traitg{
+    border-left: 1px solid ;
+}
+
+.lastr{
+    border-bottom: 1px dashed; 
+}
+
+
+img{
+    width: 250px;
+    height: 200px;
+}
