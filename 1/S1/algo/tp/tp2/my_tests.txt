@@ -1,33 +1,61 @@
-#
-# Add your tests here
-#
 
+# test avec une chaine vide. Elle est sense retourner 1.
 test_verify_palindrome_rec1 verify_palindrome_rec
+""
+0
+0
+1
+
+
+# test avec un palindrome dont la taille de la chaine est pair. Elle est sense retourner 1.
+test_verify_palindrome_rec2 verify_palindrome_rec
+"abababababbababababa"
+0
+19
+1
+
+# test avec un palindrome dont la taille de la chaine est impair. Elle est sense retourner 1.
+test_verify_palindrome_rec3 verify_palindrome_rec
 "level"
 0
 4
 1
 
 
-#
-test_verify_palindrome_rec2 verify_palindrome_rec
-"ratatouille"
+# test dans le cas ou la chaine n'est pas un palindrome. Elle est sense retourner 0.
+test_verify_palindrome_rec4 verify_palindrome_rec
+"ratattbtra"
 0
-10
+9
 0
 
 
 
-#
+# test avec une chaine vide. Retourne 1
 test_verify_palindrome1 verify_palindrome
+""                          
+1                           
+
+# test avec un palindrome dont la taille de la chaine est pair. 
+test_verify_palindrome2 verify_palindrome
+"kaak"                      # string
+1                           # expected result
+
+
+
+# test avec un palindrome dont la taille de la chaine est impair. 
+test_verify_palindrome3 verify_palindrome
 "kayak"                     # string
 1                           # expected result
 
 
+
 #
-test_verify_palindrome2 verify_palindrome
+test_verify_palindrome4 verify_palindrome
 "algorithm"                 # string
 0                           # expected result
+
+
 
 
 

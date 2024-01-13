@@ -76,10 +76,10 @@ int sum_digits_iter(int n) {
 }
 
 int sum_digits_rec(int n) {
-   if(n==0){
-        return 1;
+    if(n < 0){
+        return n;
     }
-    return n%10+sum_digits_iter(n%10);
+    return n%10+sum_digits_iter(n/10);
 }
 
 /***

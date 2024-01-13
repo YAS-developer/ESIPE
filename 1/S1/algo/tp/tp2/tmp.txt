@@ -1,0 +1,15 @@
+
+
+
+
+
+#
+test_verify_palindrome1 verify_palindrome
+"kayak"                     # string
+1                           # expected result
+
+
+#
+test_verify_palindrome2 verify_palindrome
+"algorithm"                 # string
+0                           # expected result
