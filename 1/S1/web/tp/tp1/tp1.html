@@ -99,10 +99,10 @@
       </li>
 
       <li>
-        <b>Prenez une feuille de papier puis dessinez l'arbre des différents tags correspondant à votre compte rendu.</b><br>
+        <b>Prenez une feuille de papier puis dessinez l'arbre des différents tags correspondant à votre compte rendu.</b><br><br>
       </li>
-      <br>
-      </li>
+     
+
       <li>
         <b>Utilisez ensuite le tag img pour inclure l'image dans votre compte rendu.</b><br><br>
         <img src="./IMG_5959.jpg" alt="Arbre decrivant l'arborescence des tags html de ce">
@@ -194,8 +194,7 @@
         </b>
         <p>
           Je trouve pour le ms: 272 ms et comme ttl=41<br>
-          Ce qui semble resonnable etant donne que le serveur se trouve kyoto au Japon.<br>
-          Le TLL est de 41 car il est passer 
+          Ce qui semble etre resonnable etant donne que le serveur se trouve kyoto au Japon.<br>
         </p>
 
         <b>
@@ -203,7 +202,7 @@
         </b>
         <p>
           Je trouve pour le ms: 3.35 ms et comme ttl=58<br>
-          Ce qui semble egalement correcte resonnable etant donne que le serveur se trouve surement en France.<br>
+          Ce qui semble egalement etre correcte etant donne que le serveur se trouve surement en France.<br>
         </p>
       </li>
     </ol>
@@ -218,8 +217,85 @@
         </p>
       </li>
 
+      <li>
+        <b>Utilisez la commande grep sur le fichier /etc/services pour déterminer le numéro du port TCP correspondant au service http.</b>
+        <p>
+          Le numéro du port TCP correspondant au service http est le port 80.
+        </p>
+        <b>Quel est le header (l'entête, en français) de la réponse ? </b>
+        <p>
+          HTTP/1.0 404 Not Found
+        </p>
+      </li>
+
+      <li>
+        <b>A quoi correspondent les 3 valeurs sur la première ligne de l'entête ?</b>
+        <p>
+          les trois valeurs sur la première ligne de l'entête correspondent à:<br>
+          <ul>
+            <li>La version du protocole HTTP utilisé. Ici on nous renvoie du HTTP/1.0</li>
+            <li>Le code de statut de la réponse. Ici on a une erreur 404. Une page internet ou une ressource non disponible.</li>
+            <li>Le descriptive du statut. "Not Found" ce qui est bien en lien avec le code de statut.</li>
+          </ul>
+        </p>
+      </li>
       
+            
+      <li>
+        <b>A quoi correspond la valeur de Content-Type ?</b>
+        <p>
+          L'en-tête Content-Type indique le type de contenu de la réponse.<br> 
+          Dans notre cas ca serait: text/html
+        </p>
+      </li>
+      <li>
+        <b>A quoi correspond la valeur de Content-Length ?</b>
+        <p>
+          L'en-tête Content-Length indique la longueur du contenu en octets.
+          Dans notre cas ca serait: 345 octets
+        </p>
+      </li>
     
+      <li>
+        <b>
+          Faites la même analyse, mais avec la requête<br>
+          GET / HTTP/1.1<br>
+          Host: www.example.com
+        </b>
+        <p>
+          Les trois valeurs sur la première ligne de l'entête correspondent à:<br>
+          <ul>
+            <li>Renvoie du HTTP/1.0</li>
+            <li>Le code de statut de la réponse est 200. Cela indique la réussite d'une requête</li>
+            <li>le descriptive de code de statut "OK" pour dire que tout c'est bien passer.</li>
+          </ul>
+          <br>
+          Le Content-type est toujours du text/html mais en y ajouter le charset=UTF-8.<br>
+          Le Content-Length est de 1256 octets.
+        </p>
+      </li>
+
+     
+            
+      <li>
+        <b>Pourquoi dans la version 1.1 du protocole HTTP, on doit fournir le Host ?</b>
+        <p>Car a partir du HTTP/1.1, les sites Web peuvent partager la même adresse IP et le même port mais ils sont distingués en fonction du nom de domaine<br>
+          spécifié dans l'en-tête Host de la requête HTTP. </p>
+      </li>
+
+
+      <li>
+        <b>
+          Enfin, sur la machine www.forax.org, faite la requête suivante et analysé la réponse<br>
+          GET / HTTP/1.1<br>
+          Host: www.forax.org<br><br>
+          À quoi correspond la valeur de Location ? 
+        </b>
+        <p>
+          La valeur location correspond a la redirection vers un nom de domaine. Dans notre cas, ca serait ici:<br>
+          http://www-igm.univ-mlv.fr/~forax
+        </p>
+      </li>
     </ol>
     
 
