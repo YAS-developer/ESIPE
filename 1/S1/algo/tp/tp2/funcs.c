@@ -86,7 +86,14 @@ int sum_digits_rec(int n) {
  * Exercice 5
  */
 int digit_sum_digits_iter(int n) {
-    return -1;
+    //  int sum=0;
+    // for(int i=0; i<n; i++){
+    //     sum += n % 10;
+    //     n /= 10;
+    // }
+
+
+    // return sum;
 }
 
 int digit_sum_digits_rec(int n) {

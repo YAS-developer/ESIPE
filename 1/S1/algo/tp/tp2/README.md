@@ -34,18 +34,10 @@ test_verify_palyndrome4:
     Meme cas que: test_verify_palindrome_rec4
 
    
-
-
-
-
-
-Exercice 2
-
-On peut les tester. Mais comme vous l'avez dit ca prend pas mal de temps pour verifier la chaine de caracteres au lieu d'un entier.
-
-
 Exercice 3
 
+test_verify_count1:
+    On teste le cas ou c'est un tableau vide. Dans un premier elle fait une recursion pour ensuite aller dans la condition lo > hi, pour renvoyer 0.
 
 
 

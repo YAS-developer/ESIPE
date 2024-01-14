@@ -58,4 +58,19 @@ test_verify_palindrome4 verify_palindrome
 
 
 
+# test avec un tableau vide, La fonction retourne 0.
+test_verify_count1 verify_count
+[]    
+0                           # lo
+0                           # hi
+5                           # elt
+0                           # expected result
+
+# test avec 
+test_verify_count2 verify_count
+[3,3,3,3,3,3,3,3,3,3,3,3,3]    
+0                           # lo
+12                          # hi
+3                           # elt
+12                          # expected result
 
