@@ -105,7 +105,7 @@
 
       <li>
         <b>Utilisez ensuite le tag img pour inclure l'image dans votre compte rendu.</b><br><br>
-        <img src="./IMG_5959.jpg" alt="Arbre decrivant l'arborescence des tags html de ce">
+        <img src="./arbre.jpg" alt="Arbre decrivant l'arborescence des tags html de ce">
       </li>
 
       <li>
@@ -231,12 +231,10 @@
       <li>
         <b>A quoi correspondent les 3 valeurs sur la première ligne de l'entête ?</b>
         <p>
-          les trois valeurs sur la première ligne de l'entête correspondent à:<br>
-          <ul>
-            <li>La version du protocole HTTP utilisé. Ici on nous renvoie du HTTP/1.0</li>
-            <li>Le code de statut de la réponse. Ici on a une erreur 404. Une page internet ou une ressource non disponible.</li>
-            <li>Le descriptive du statut. "Not Found" ce qui est bien en lien avec le code de statut.</li>
-          </ul>
+          les trois valeurs sur la première ligne de l'entête correspondent à:<br><br>
+          La version du protocole HTTP utilisé. Ici on nous renvoie du HTTP/1.0<br>
+          Le code de statut de la réponse. Ici on a une erreur 404. Une page internet ou une ressource non disponible.<br>
+          Le descriptive du statut. "Not Found" ce qui est bien en lien avec le code de statut.<br><br>
         </p>
       </li>
       
@@ -258,35 +256,29 @@
     
       <li>
         <b>
-          Faites la même analyse, mais avec la requête<br>
+          Faites la même analyse, mais avec la requête<br><br>
           GET / HTTP/1.1<br>
           Host: www.example.com
         </b>
         <p>
-          Les trois valeurs sur la première ligne de l'entête correspondent à:<br>
-          <ul>
-            <li>Renvoie du HTTP/1.0</li>
-            <li>Le code de statut de la réponse est 200. Cela indique la réussite d'une requête</li>
-            <li>le descriptive de code de statut "OK" pour dire que tout c'est bien passer.</li>
-          </ul>
-          <br>
+          Les trois valeurs sur la première ligne de l'entête correspondent à:<br><br>
+          Renvoie du HTTP/1.0<br>
+          Le code de statut de la réponse est 200. Cela indique la réussite d'une requête<br>
+          le descriptive de code de statut "OK" pour dire que tout c'est bien passer.<br><br>
           Le Content-type est toujours du text/html mais en y ajouter le charset=UTF-8.<br>
           Le Content-Length est de 1256 octets.
         </p>
       </li>
-
-     
-            
+       
       <li>
         <b>Pourquoi dans la version 1.1 du protocole HTTP, on doit fournir le Host ?</b>
         <p>Car a partir du HTTP/1.1, les sites Web peuvent partager la même adresse IP et le même port mais ils sont distingués en fonction du nom de domaine<br>
           spécifié dans l'en-tête Host de la requête HTTP. </p>
       </li>
 
-
       <li>
         <b>
-          Enfin, sur la machine www.forax.org, faite la requête suivante et analysé la réponse<br>
+          Enfin, sur la machine www.forax.org, faite la requête suivante et analysé la réponse<br><br>
           GET / HTTP/1.1<br>
           Host: www.forax.org<br><br>
           À quoi correspond la valeur de Location ? 
@@ -297,14 +289,14 @@
         </p>
       </li>
     </ol>
-    
+    <h2>Conclusion personnelle</h2>
+    <p>
+      Ce TP a offert une premiere immersion dans les fondamentaux de la programmation web et de la gestion réseau. En explorant la structuration HTML,<br> 
+      les balises essentielles, la configuration réseau avec des commandes telles que host et traceroute, ainsi que l'analyse des protocoles HTTP,<br>
+      J'ai acquis une compréhension approfondie du fonctionnement des applications web. Les notions clés, telles que la résolution DNS, les entêtes HTTP, les ports réseau, 
+      et l'importance des noms de domaine.
+    </p>
 
   </body>
 </html>
 
-
-<!-- 
-<li>
-  <b></b>
-  <p></p>
-</li> -->
