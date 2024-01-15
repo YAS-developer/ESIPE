@@ -94,6 +94,7 @@ int digit_sum_digits_iter(int n) {
 
 
     // return sum;
+    return -1;
 }
 
 int digit_sum_digits_rec(int n) {

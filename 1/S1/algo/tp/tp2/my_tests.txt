@@ -66,11 +66,29 @@ test_verify_count1 verify_count
 5                           # elt
 0                           # expected result
 
-# test avec 
+# test avec un tableau avec le même entier, la fonction retourne 5
 test_verify_count2 verify_count
-[3,3,3,3,3,3,3,3,3,3,3,3,3]    
+[3,3,3,3,3]    
 0                           # lo
-12                          # hi
+4                           # hi
 3                           # elt
-12                          # expected result
+5                           # expected result
+
+
+# test avec un tableau entier ou elt n'est pas compris dedans, la fonction retourne 0 
+test_verify_count3 verify_count
+[1,2,3,4,5]    
+0                           # lo
+4                           # hi
+6                           # elt
+0                           # expected result
+
+
+# test avec un tableau entier ou elt est dedans, la fonction retourne 2
+test_verify_count4 verify_count
+[3,2,3,4,5]    
+0                           # lo
+4                           # hi
+3                           # elt
+2                           # expected result
 

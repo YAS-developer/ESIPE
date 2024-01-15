@@ -37,7 +37,32 @@ test_verify_palyndrome4:
 Exercice 3
 
 test_verify_count1:
-    On teste le cas ou c'est un tableau vide. Dans un premier elle fait une recursion pour ensuite aller dans la condition lo > hi, pour renvoyer 0.
+    On teste le cas ou c'est un tableau vide. Dans un premier la fonction fait une recursion pour ensuite aller dans la condition lo > hi, pour renvoyer 0.
+
+test_verify_count2:
+    On teste le cas ou c'est un tableau avec le même entier. Par exemple ici c'est 3, etant donnée qu'on cherche le nombre d'occurences du même entier et que le tableau à seulement cet entier, cela nous renvoie la taille du tableau.
+
+
+test_verify_count3:
+    On teste le cas ou le elt n'est pas dans le tableau d'entier. Cela nous renvoie 0 car elle ne rentre jamais dans la condition
+    t[lo] == elt étant donnée que la valeur n'existe pas dans le tableau.
+
+
+test_verify_count4:
+    On teste le cas ou elt est dans le tableau d'entier. A chaque fois que l'une des cases du tableau est égal à elt, on va ajouter 1 et la recursion sinon return . jusqu'à ce que lo > hi, dans ce cas on return 0+les anciens returns. Ce qui va nous donner 2 dans notre example.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
