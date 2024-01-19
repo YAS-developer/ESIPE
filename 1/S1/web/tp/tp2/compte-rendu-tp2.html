@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Compte Rendu de TP2</title> 
+    <link rel="stylesheet" href="compte-rendu-tp2.css">
+    <style>
+      body{
+        font-family: sans-serif;
+      }
+      h1{
+        font-size: 26px;
+      }
+
+      h2{
+        font-size: 22px;
+        color: lightgray; /* Toutes les balises h2 sont grises sauf la suivante */
+      }
+
+
+      h3{
+        font-size: 18px;
+      }
+
+      /* Classe pour le titre centré */
+      .centered{
+        text-align: center;
+      }
+
+      /* Classe pour aligner le texte à droite */
+      .right{
+        text-align: right;
+      }
+
+      .centered{
+        text-align: center;
+      }
+
+      /* Style des liens */
+      a{
+          font-weight: bold; /* Lien en gras par défaut */
+      }
+
+      a:hover{
+          font-weight: normal;
+          color: teal; /* Couleur du lien au survol */
+      }
+    </style>
+  </head>
+  <body>
+   <table id="cartouche">
+      <tr>
+        <td class="traitg traitd"></td>
+        <td class="traitd">
+          <h4 class="right">Yassine HAMROUNI</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="traitg traitd">
+          <h4>ESIPE INFO 1</h4>
+        </td>
+        <td class="traitd"></td>
+      </tr>
+      <tr>
+        <td class="traitg lastr">
+          <h4>TP 2 de Programmation Web</h4>
+        </td>
+        <td class="traitd lastr"></td>
+      </tr>
+    </table>
+    <h1 class="centered">Compte Rendu de TP2</h1>
+
+    <h2 style="color: red;">Exercice 1 - Style de base</h2>
+    <ol>
+      <li>
+        <h3>Le titre de l'exercice courant, puis ajoutez à la balise h2 un attribut style qui permet de mettre le titre de l'exercice en rouge brique</h3>
+          <p>
+            
+          </p>
+      </li>
+      
+      <li>
+        <h3>Déclarez une balise style à l'intérieur des balises head du document, puis faites en sorte que tout le document utilise une police sans-serif.</h3>
+        <p></p>
+      </li>
+
+
+      <li>
+        <h3>Faites en sorte que la balise h1 corresponde à une police de 26 points, la balise h2 à une police de 22 points et la balise h3 à une police 18 points. </h3>
+        <p></p>
+      </li>
+
+      <li>
+        <h3>Faites en sorte que le titre du compte rendu de TP soit centré.</h3>
+        <p></p>
+      </li>
+    
+      <li>
+        <h3>On veut que votre nom soit aligné à droite. Commencez par déclarer votre nom entre des balises div puis ajoutez une classe right permettant d'aligner le texte à droite.</h3>
+        <p class="right">Yassine HAMROUNI</p>
+      </li>
+    
+      <li>
+        <h3>
+          Ajoutez un lien vers le cours <a href="http://forax.github.io/course/progweb/">http://forax.github.io/course/progweb/</a> puis faites en sorte que le lien soit en gras si la souris n'est pas sur le lien et en bleu-vert (teal) si la souris survole le lien.<br>
+          Conseil: Vous utiliserez pour cela les pseudo-classes des liens. 
+        </h3>
+        <p></p>
+      </li>
+      
+    </ol>
+
+
+    <h2>Exercice 2 - Style de liste et de table</h2>
+    <ol>
+      <li>
+        <h3>
+          On veut maintenant créer une feuille de style externe, c'est-à-dire une feuille de style déclarée non pas à l'intérieur de compte-rendu-tp2.html mais dans un fichier externe nommé compte-rendu-tp2.css.<br>
+          Modifiez votre travail pour que le compte rendu utilise ce fichier de style.
+        </h3>
+        <p></p>
+      </li>
+
+
+      <li>
+        <h3>
+          Pour la suite du TP, nous ne modifierons plus la balise style du compte rendu mais le fichier compte-rendu-tp2.css<br>
+          Faites en sorte que la liste des questions de cet exercice et de l'exercice précédent utilise les chiffres romains (en majuscule) plutôt que les traditionnels chiffres 1, 2, 3, etc.
+        </h3>
+        <p></p>
+      </li>
+    
+
+      <li>
+        <h3>
+          Le site https://en.wikipedia.org/wiki/List_of_2023_box_office_number-one_films_in_the_United_States#In-Year_Release contient un tableau des films au box office.<br>
+          On souhaite recopier les données en fait, uniquement le rang, le titre du film et les recettes actuelles (Gross) pour les 5 films ayant rapporté le plus d'argent pour les mettre dans une table dont nous allons changer l'aspect.<br>
+          Donc dans un premier temps, créez la table HTML en utilisant les balises table, th et td dans votre compte rendu. 
+        </h3>
+        <!-- <p></p>-->
+        <table class="movieTable">
+          <tr>
+              <th class="left">Rang</th>
+              <th class="left">Titre du Film</th>
+              <th>Recettes (Gross)</th>
+          </tr>
+          <tr>
+              <td>1</td>
+              <td>Barbie</td>
+              <td>$636,236,256</td>
+          </tr>
+          <tr>
+              <td>2</td>
+              <td>The Super Mario Bros. Movie</td>
+              <td>$574,934,330</td>
+          </tr>
+          <tr>
+              <td>3</td>
+              <td>Spider-Man: Across the Spider-Verse</td>
+              <td>$381,311,319</td>
+          </tr>
+          <tr>
+              <td>4</td>
+              <td>Guardians of the Galaxy Vol. 3</td>
+              <td>$358,995,815</td>
+          </tr>
+          <tr>
+              <td>5</td>
+              <td>Oppenheimer</td>
+              <td>$326,434,905</td>
+          </tr>
+        </table>
+      </li>
+    
+      <li>
+        <h3>Faites en sorte que la table occupe toute la largeur du compte rendu.</h3>
+        <p></p>
+      </li>
+    
+
+      <li>
+        <h3>Centrez les titres et changer la police de caractères des titres pour utiliser des petites majuscules (small caps).</h3>
+        <p></p>
+      </li>
+
+      <li>
+        <h3>Aérez la table avec la propriété padding pour que le texte ne soit pas collé aux bordures.</h3>
+        <p></p>
+        <h3>Faites en sorte que les valeurs des deux premières colonnes (rang et titre) soient alignées à gauche et que les valeurs de la dernière colonne soient centrées.</h3>
+        <p>
+          La ville est: Kyoto Shi Nakagyo Ku
+        </p>
+        <h3>
+          Puis faites un ping sur la machine www.mai-ko.com.<br>
+          Les temps affichés et le ttl vous semble-t-il corrects ? 
+        </h3>
+        <p>
+          Je trouve pour le ms: 272 ms et comme ttl=41<br>
+          Ce qui semble etre resonnable etant donne que le serveur se trouve kyoto au Japon.<br>
+        </p>
+
+        <h3>
+          Faire de même avec la machine forax.github.io qui héberge le cours (whois + ping) 
+        </h3>
+        <p>
+          Je trouve pour le ms: 3.35 ms et comme ttl=58<br>
+          Ce qui semble egalement etre correcte etant donne que le serveur se trouve surement en France.<br>
+        </p>
+      </li>
+    </ol>
+
+    <h2>Exercice: 3</h2>
+    <ol>
+      <li>
+        <h3>On cherche à savoir à quoi correspond le fichier /etc/services.</h3>
+        <p>
+          On y trouve des informations sur les services réseaux associés à des ports, <br>
+          notamment les noms de service et les numéros de port associés.
+        </p>
+      </li>
+
+      <li>
+        <h3>Utilisez la commande grep sur le fichier /etc/services pour déterminer le numéro du port TCP correspondant au service http.</h3>
+        <p>
+          Le numéro du port TCP correspondant au service http est le port 80.
+        </p>
+        <h3>Quel est le header (l'entête, en français) de la réponse ? </h3>
+        <p>
+          HTTP/1.0 404 Not Found
+        </p>
+      </li>
+
+      <li>
+        <h3>A quoi correspondent les 3 valeurs sur la première ligne de l'entête ?</h3>
+        <p>
+          les trois valeurs sur la première ligne de l'entête correspondent à:<br><br>
+          La version du protocole HTTP utilisé. Ici on nous renvoie du HTTP/1.0<br>
+          Le code de statut de la réponse. Ici on a une erreur 404. Une page internet ou une ressource non disponible.<br>
+          Le descriptive du statut. "Not Found" ce qui est bien en lien avec le code de statut.<br><br>
+        </p>
+      </li>
+      
+            
+      <li>
+        <h3>A quoi correspond la valeur de Content-Type ?</h3>
+        <p>
+          L'en-tête Content-Type indique le type de contenu de la réponse.<br> 
+          Dans notre cas ca serait: text/html
+        </p>
+      </li>
+      <li>
+        <h3>A quoi correspond la valeur de Content-Length ?</h3>
+        <p>
+          L'en-tête Content-Length indique la longueur du contenu en octets.
+          Dans notre cas ca serait: 345 octets
+        </p>
+      </li>
+    
+      <li>
+        <h3>
+          Faites la même analyse, mais avec la requête<br><br>
+          GET / HTTP/1.1<br>
+          Host: www.example.com
+        </h3>
+        <p>
+          Les trois valeurs sur la première ligne de l'entête correspondent à:<br><br>
+          Renvoie du HTTP/1.0<br>
+          Le code de statut de la réponse est 200. Cela indique la réussite d'une requête<br>
+          le descriptive de code de statut "OK" pour dire que tout c'est bien passer.<br><br>
+          Le Content-type est toujours du text/html mais en y ajouter le charset=UTF-8.<br>
+          Le Content-Length est de 1256 octets.
+        </p>
+      </li>
+       
+      <li>
+        <h3>Pourquoi dans la version 1.1 du protocole HTTP, on doit fournir le Host ?</h3>
+        <p>Car a partir du HTTP/1.1, les sites Web peuvent partager la même adresse IP et le même port mais ils sont distingués en fonction du nom de domaine<br>
+          spécifié dans l'en-tête Host de la requête HTTP. </p>
+      </li>
+
+      <li>
+        <h3>
+          Enfin, sur la machine www.forax.org, faite la requête suivante et analysé la réponse<br><br>
+          GET / HTTP/1.1<br>
+          Host: www.forax.org<br><br>
+          À quoi correspond la valeur de Location ? 
+        </h3>
+        <p>
+          La valeur location correspond a la redirection vers un nom de domaine. Dans notre cas, ca serait ici:<br>
+          http://www-igm.univ-mlv.fr/~forax
+        </p>
+      </li>
+    </ol>
+    <h2>Conclusion personnelle</h2>
+    <p>
+      Ce TP a offert une premiere immersion dans les fondamentaux de la programmation web et de la gestion réseau. En explorant la structuration HTML,<br> 
+      les balises essentielles, la configuration réseau avec des commandes telles que host et traceroute, ainsi que l'analyse des protocoles HTTP,<br>
+      J'ai acquis une compréhension approfondie du fonctionnement des applications web. Les notions clés, telles que la résolution DNS, les entêtes HTTP, les ports réseau, 
+      et l'importance des noms de domaine.
+    </p>
+
+  </body>
+</html>
+

@@ -1,0 +1,62 @@
+/* 
+body {
+    font-family: sans-serif;
+} */
+
+table{
+    width: 100%;
+}
+
+#cartouche td{
+    border-top: 1px dashed; 
+}
+
+.traitd{
+    border-right: 1px solid ;
+}
+
+.traitg{
+    border-left: 1px solid ;
+}
+
+.lastr{
+    border-bottom: 1px dashed; 
+}
+
+img{
+    width: 250px;
+    height: 200px;
+}
+
+
+
+
+ol {
+   
+}
+
+
+/* #filmTable th{
+    border-right: 1px solid ;
+    text-align: center;
+    text-transform: small-caps;
+    padding: 1%;
+} */
+
+.movieTable{
+    border-collapse: collapse;
+    border: 1px solid black ;
+    padding: 1%;
+}
+
+/* .filmTable {
+    border: 1px solid black ;
+    padding: 1%;
+} */
+
+
+
+
+.left{
+    text-align: left;
+}
