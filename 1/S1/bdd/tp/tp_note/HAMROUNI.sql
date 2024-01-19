@@ -66,7 +66,12 @@ SELECT ville, MIN(prixUnit) FROM magasin NATURAL JOIN stocke GROUP BY ville;
 --20 rows
 
 --13. La liste des magasins (idmag, nom) qui ont édité au moins 20 factures, triée par nombre de factures décroissant.
-SELECT m.idmag, nom, count(*) as ligne  FROM magasin m NATURAL JOIN stocke;
+SELECT m.idmag, m.nom, COUNT(*) AS nombre_de_factures
+FROM magasin m
+JOIN facture f ON m.idmag = f.idmag
+GROUP BY m.idmag, m.nom
+HAVING COUNT(*) >= 20
+ORDER BY nombre_de_factures DESC;
 
 
 --14. La liste des clients (numcli, prénom, nom) avec pour chacun l'argent total qu'il a dépensé.
