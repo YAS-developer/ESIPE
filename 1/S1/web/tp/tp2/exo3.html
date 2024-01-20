@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <style>
+    /* Styliser les divs contenant les images pour qu'elles flottent à gauche */
+    body > div {
+      float: left;
+      margin: 10px; /* Espace entre les boîtes */
+      border: 1px solid #aaaaaa; /* Bordure des images */
+      position: relative; /* Position relative pour le placement du titre */
+    }
+  
+    /* Fixer la largeur des images à 250 pixels */
+    img {
+      width: 250px;
+    }
+  
+    /* Centrer le texte des titres et styliser ces derniers */
+    div > div {
+      background-color: black;
+      color: white;
+      text-align: center;
+      padding: 5px; /* Espace autour du texte */
+      position: absolute; /* Position absolue pour le superposer à l'image */
+      bottom: 5px; /* Décalage du bas */
+      left: 0;
+      right: 0;
+      margin-bottom: -5px; /* Mordre légèrement sur l'image */
+    }
+  
+    /* Changer l'opacité des images lors du survol */
+    img:hover {
+      opacity: 0.7;
+    }
+  
+    /* Clearfix pour s'assurer que le parent contient les divs flottantes */
+    .end {
+      clear: both;
+    }
+  </style>
+ </head>
+ <body>
+   <div>
+    <img src="animal1.jpg">
+    <div>Animal 1</div>
+   </div>
+   <div>
+    <img src="animal2.jpg">
+    <div>Animal 2</div>
+   </div>
+   <div>
+    <img src="animal3.jpg">
+    <div>Animal 3</div>
+   </div>
+   <div>
+    <img src="animal4.jpg">
+    <div>Animal 4</div>
+   </div>
+   <div>
+    <img src="animal5.jpg">
+    <div>Animal 5</div>
+   </div>
+   <div>
+    <img src="animal6.jpg">
+    <div>Animal 6</div>
+   </div>
+  <div class="end"></div>
+  <div> 
+   Ce texte doit s'afficher après toute les images en bas.
+  </div>
+ </body>
+</html>

@@ -1,7 +1,7 @@
-/* 
+
 body {
     font-family: sans-serif;
-} */
+}
 
 table{
     width: 100%;
@@ -29,34 +29,78 @@ img{
 }
 
 
-
-
-ol {
-   
-}
-
-
-/* #filmTable th{
-    border-right: 1px solid ;
+.centered{
     text-align: center;
-    text-transform: small-caps;
-    padding: 1%;
-} */
+  }
 
-.movieTable{
-    border-collapse: collapse;
-    border: 1px solid black ;
-    padding: 1%;
+/* Style des liens */
+.linkStyle{
+    font-weight: bold; /* Lien en gras par défaut */
 }
 
-/* .filmTable {
-    border: 1px solid black ;
-    padding: 1%;
-} */
+.linkStyle:hover{
+    font-weight: normal;
+    color: teal; /* Couleur du lien au survol */
+}
 
 
 
 
 .left{
     text-align: left;
+}
+
+/* Ajout des styles pour h1 et h2 */
+h1 {
+    font-size: 26px;
+}
+
+h2 {
+    font-size: 22px;
+    color: lightgray;
+}
+
+/* Styliser les listes ordonnées pour utiliser des chiffres romains en majuscules */
+ol {
+    list-style-type: upper-roman;
+}
+
+/* Styles pour la table .movieTable */
+.movieTable {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black ;
+    padding: 1%;
+}
+
+.movieTable th {
+    text-align: center;
+    text-transform: lowercase; 
+    font-variant: small-caps;
+    padding: 1%; /* Ajuster selon le besoin */
+}
+
+.movieTable td {
+    text-align: left; /* Pour les deux premières colonnes */
+    padding: 10px; /* Ajuster selon le besoin */
+}
+
+.movieTable th:first-child, 
+.movieTable th:nth-child(2) {
+    text-align: left;
+}
+
+.movieTable td:last-child,
+.movieTable tr:last-child {
+    text-align: center; /* Pour la dernière colonne */
+}
+
+/* Lignes paires de la table en bleu clair */
+.movieTable tr:nth-child(even) {
+    background-color: lightblue;
+}
+
+/* Style de survol des lignes de la table */
+.movieTable tr:hover {
+    background-color: #26182C; /* Correspond à 38, 24, 44 en RGB */
 }

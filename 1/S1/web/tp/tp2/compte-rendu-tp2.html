@@ -4,7 +4,7 @@
     <meta charset="UTF-8"> 
     <title>Compte Rendu de TP2</title> 
     <link rel="stylesheet" href="compte-rendu-tp2.css">
-    <style>
+    <!-- <style>
       body{
         font-family: sans-serif;
       }
@@ -45,7 +45,7 @@
           font-weight: normal;
           color: teal; /* Couleur du lien au survol */
       }
-    </style>
+    </style> -->
   </head>
   <body>
    <table id="cartouche">
@@ -74,25 +74,19 @@
     <ol>
       <li>
         <h3>Le titre de l'exercice courant, puis ajoutez à la balise h2 un attribut style qui permet de mettre le titre de l'exercice en rouge brique</h3>
-          <p>
-            
-          </p>
       </li>
       
       <li>
         <h3>Déclarez une balise style à l'intérieur des balises head du document, puis faites en sorte que tout le document utilise une police sans-serif.</h3>
-        <p></p>
       </li>
 
 
       <li>
         <h3>Faites en sorte que la balise h1 corresponde à une police de 26 points, la balise h2 à une police de 22 points et la balise h3 à une police 18 points. </h3>
-        <p></p>
       </li>
 
       <li>
         <h3>Faites en sorte que le titre du compte rendu de TP soit centré.</h3>
-        <p></p>
       </li>
     
       <li>
@@ -102,10 +96,9 @@
     
       <li>
         <h3>
-          Ajoutez un lien vers le cours <a href="http://forax.github.io/course/progweb/">http://forax.github.io/course/progweb/</a> puis faites en sorte que le lien soit en gras si la souris n'est pas sur le lien et en bleu-vert (teal) si la souris survole le lien.<br>
+          Ajoutez un lien vers le cours <a class="linkStyle" href="http://forax.github.io/course/progweb/">http://forax.github.io/course/progweb/</a> puis faites en sorte que le lien soit en gras si la souris n'est pas sur le lien et en bleu-vert (teal) si la souris survole le lien.<br>
           Conseil: Vous utiliserez pour cela les pseudo-classes des liens. 
         </h3>
-        <p></p>
       </li>
       
     </ol>
@@ -118,7 +111,6 @@
           On veut maintenant créer une feuille de style externe, c'est-à-dire une feuille de style déclarée non pas à l'intérieur de compte-rendu-tp2.html mais dans un fichier externe nommé compte-rendu-tp2.css.<br>
           Modifiez votre travail pour que le compte rendu utilise ce fichier de style.
         </h3>
-        <p></p>
       </li>
 
 
@@ -127,168 +119,136 @@
           Pour la suite du TP, nous ne modifierons plus la balise style du compte rendu mais le fichier compte-rendu-tp2.css<br>
           Faites en sorte que la liste des questions de cet exercice et de l'exercice précédent utilise les chiffres romains (en majuscule) plutôt que les traditionnels chiffres 1, 2, 3, etc.
         </h3>
-        <p></p>
       </li>
     
 
       <li>
         <h3>
-          Le site https://en.wikipedia.org/wiki/List_of_2023_box_office_number-one_films_in_the_United_States#In-Year_Release contient un tableau des films au box office.<br>
+          Le site <a href="https://en.wikipedia.org/wiki/List_of_2023_box_office_number-one_films_in_the_United_States#In-Year_Release">https://en.wikipedia.org/wiki/List_of_2023_box_office_number-one_films_in_the_United_States#In-Year_Release</a> contient un tableau des films au box office.<br>
           On souhaite recopier les données en fait, uniquement le rang, le titre du film et les recettes actuelles (Gross) pour les 5 films ayant rapporté le plus d'argent pour les mettre dans une table dont nous allons changer l'aspect.<br>
           Donc dans un premier temps, créez la table HTML en utilisant les balises table, th et td dans votre compte rendu. 
         </h3>
-        <!-- <p></p>-->
-        <table class="movieTable">
-          <tr>
-              <th class="left">Rang</th>
-              <th class="left">Titre du Film</th>
-              <th>Recettes (Gross)</th>
-          </tr>
-          <tr>
-              <td>1</td>
-              <td>Barbie</td>
-              <td>$636,236,256</td>
-          </tr>
-          <tr>
-              <td>2</td>
-              <td>The Super Mario Bros. Movie</td>
-              <td>$574,934,330</td>
-          </tr>
-          <tr>
-              <td>3</td>
-              <td>Spider-Man: Across the Spider-Verse</td>
-              <td>$381,311,319</td>
-          </tr>
-          <tr>
-              <td>4</td>
-              <td>Guardians of the Galaxy Vol. 3</td>
-              <td>$358,995,815</td>
-          </tr>
-          <tr>
-              <td>5</td>
-              <td>Oppenheimer</td>
-              <td>$326,434,905</td>
-          </tr>
-        </table>
       </li>
     
       <li>
         <h3>Faites en sorte que la table occupe toute la largeur du compte rendu.</h3>
-        <p></p>
       </li>
     
 
       <li>
         <h3>Centrez les titres et changer la police de caractères des titres pour utiliser des petites majuscules (small caps).</h3>
-        <p></p>
       </li>
 
       <li>
         <h3>Aérez la table avec la propriété padding pour que le texte ne soit pas collé aux bordures.</h3>
-        <p></p>
+      </li>
+      <li>
         <h3>Faites en sorte que les valeurs des deux premières colonnes (rang et titre) soient alignées à gauche et que les valeurs de la dernière colonne soient centrées.</h3>
-        <p>
-          La ville est: Kyoto Shi Nakagyo Ku
-        </p>
-        <h3>
-          Puis faites un ping sur la machine www.mai-ko.com.<br>
-          Les temps affichés et le ttl vous semble-t-il corrects ? 
-        </h3>
-        <p>
-          Je trouve pour le ms: 272 ms et comme ttl=41<br>
-          Ce qui semble etre resonnable etant donne que le serveur se trouve kyoto au Japon.<br>
-        </p>
-
-        <h3>
-          Faire de même avec la machine forax.github.io qui héberge le cours (whois + ping) 
-        </h3>
-        <p>
-          Je trouve pour le ms: 3.35 ms et comme ttl=58<br>
-          Ce qui semble egalement etre correcte etant donne que le serveur se trouve surement en France.<br>
-        </p>
+      </li>
+      <li>
+        <h3>Changez la couleur de fond des lignes paires (even) pour mettre du bleu clair en utilisant la pseudo-classe :nth-child.</h3>
+      </li>
+      <li>
+        <h3>Faites en sorte que si l'on survole une ligne avec la souris la couleur du fond correspond à 38 sur 255 de rouge, 24 sur 255 de vert et 44 sur 255 de bleu en utilisant un codage hexadécimal.</h3>
       </li>
     </ol>
-
+    <table class="movieTable">
+      <tr>
+          <th>Rang</th>
+          <th>Titre du Film</th>
+          <th>Recettes (Gross)</th>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>Barbie</td>
+          <td>$636,236,256</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>The Super Mario Bros. Movie</td>
+          <td>$574,934,330</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Spider-Man: Across the Spider-Verse</td>
+          <td>$381,311,319</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Guardians of the Galaxy Vol. 3</td>
+          <td>$358,995,815</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>Oppenheimer</td>
+          <td>$326,434,905</td>
+      </tr>
+    </table>
     <h2>Exercice: 3</h2>
     <ol>
       <li>
-        <h3>On cherche à savoir à quoi correspond le fichier /etc/services.</h3>
+        <h3>Récupérez les 6 images d'animaux ainsi que le fichier exo1.html dans ce <a href="https://monge.univ-mlv.fr/ens/IR/IR1/2023-2024/ProgWeb/src/td02/">répertoire</a>.</h3>
         <p>
-          On y trouve des informations sur les services réseaux associés à des ports, <br>
-          notamment les noms de service et les numéros de port associés.
+          Le fichier <a href="https://monge.univ-mlv.fr/ens/IR/IR1/2023-2024/ProgWeb/src/td02/resultat.png">resultat.png</a> correspond à l'affichage que l'on souhaite avoir à la fin de cet exercice.<br>
+          <b>Note:</b> Le jeu est d'arriver à écrire le CSS sans changer le HTML, si vous avez du mal, vous avez le droit d'ajouter des classes, mais pas de faire d'autres modifications de la partie HTML. 
         </p>
       </li>
 
       <li>
-        <h3>Utilisez la commande grep sur le fichier /etc/services pour déterminer le numéro du port TCP correspondant au service http.</h3>
-        <p>
-          Le numéro du port TCP correspondant au service http est le port 80.
-        </p>
-        <h3>Quel est le header (l'entête, en français) de la réponse ? </h3>
-        <p>
-          HTTP/1.0 404 Not Found
-        </p>
+        <h3>Faites en sorte que toutes les images à l'intérieur des boites (pas les autres) aient une largeur (width) de 250 pixels.</h3>
+        <p>Note: on suppose aue l'on peut ajouter des images pas dans les boites par la suite.</p>
       </li>
 
       <li>
-        <h3>A quoi correspondent les 3 valeurs sur la première ligne de l'entête ?</h3>
-        <p>
-          les trois valeurs sur la première ligne de l'entête correspondent à:<br><br>
-          La version du protocole HTTP utilisé. Ici on nous renvoie du HTTP/1.0<br>
-          Le code de statut de la réponse. Ici on a une erreur 404. Une page internet ou une ressource non disponible.<br>
-          Le descriptive du statut. "Not Found" ce qui est bien en lien avec le code de statut.<br><br>
-        </p>
+        <h3>
+          Au lieu d'afficher les images verticalement, on souhaite les afficher horizontalement.
+          Utilisez pour cela l'attribut float. 
+        </h3>
+        <p></p>
       </li>
       
             
       <li>
-        <h3>A quoi correspond la valeur de Content-Type ?</h3>
+        <h3>Que se passe-t-il si l'on fait varier la taille de la fenêtre du navigateur horizontalement ?</h3>
         <p>
-          L'en-tête Content-Type indique le type de contenu de la réponse.<br> 
-          Dans notre cas ca serait: text/html
+          
         </p>
       </li>
       <li>
-        <h3>A quoi correspond la valeur de Content-Length ?</h3>
-        <p>
-          L'en-tête Content-Length indique la longueur du contenu en octets.
-          Dans notre cas ca serait: 345 octets
-        </p>
+        <h3>
+          Vérifiez que vous pouvez aussi mettre toutes les images à droite en changeant juste un mot dans la partie CSS du document.<br>
+          Puis remettez les images alignées à gauche.
+        </h3>
       </li>
     
       <li>
         <h3>
-          Faites la même analyse, mais avec la requête<br><br>
-          GET / HTTP/1.1<br>
-          Host: www.example.com
+          Faites en sorte que les titres (animal1, animal2, etc.) soient affichés en blanc sur fond noir et soient centrés horizontalement par rapport à la boite qui les contient.<br>
+          Jouez de plus avec la propriété <b>padding</b> pour avoir un espacement convenable. 
         </h3>
-        <p>
-          Les trois valeurs sur la première ligne de l'entête correspondent à:<br><br>
-          Renvoie du HTTP/1.0<br>
-          Le code de statut de la réponse est 200. Cela indique la réussite d'une requête<br>
-          le descriptive de code de statut "OK" pour dire que tout c'est bien passer.<br><br>
-          Le Content-type est toujours du text/html mais en y ajouter le charset=UTF-8.<br>
-          Le Content-Length est de 1256 octets.
-        </p>
       </li>
        
       <li>
-        <h3>Pourquoi dans la version 1.1 du protocole HTTP, on doit fournir le Host ?</h3>
-        <p>Car a partir du HTTP/1.1, les sites Web peuvent partager la même adresse IP et le même port mais ils sont distingués en fonction du nom de domaine<br>
-          spécifié dans l'en-tête Host de la requête HTTP. </p>
+        <h3>Espacez les unes des autres les boites contenant les images avec la propriété <b>margin</b>.</h3>
       </li>
 
       <li>
         <h3>
-          Enfin, sur la machine www.forax.org, faite la requête suivante et analysé la réponse<br><br>
-          GET / HTTP/1.1<br>
-          Host: www.forax.org<br><br>
-          À quoi correspond la valeur de Location ? 
+          Faites en sorte que les images à l'intérieur des boites aient une bordure d'un pixel de largeur de couleur <b>#aaaaaa</b>.
         </h3>
-        <p>
-          La valeur location correspond a la redirection vers un nom de domaine. Dans notre cas, ca serait ici:<br>
-          http://www-igm.univ-mlv.fr/~forax
-        </p>
+      </li>
+
+      <li>
+        <h3>
+          Changez l'opacité (propriété <b>opacity</b>) lorsque l'utilisateur passe sa souris au-dessus d'une image dans une boite.
+        </h3>
+      </li>
+
+      <li>
+        <h3>
+          Faites en sorte que les titres soient accolés par le bas à l'image et mordent légèrement sur l'image (de 5 pixels par exemple).<br>
+          Note: l'idée est de placer la boite contenant le texte relativement par rapport à la boite contenant l'image.
+        </h3>
       </li>
     </ol>
     <h2>Conclusion personnelle</h2>
