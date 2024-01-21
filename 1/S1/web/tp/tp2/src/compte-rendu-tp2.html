@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Compte Rendu de TP2</title> 
+    <link rel="stylesheet" href="./styles/compte-rendu-tp2.css">
+    <!-- <style>
+      body{
+        font-family: sans-serif;
+      }
+      h1{
+        font-size: 26px;
+      }
+
+      h2{
+        font-size: 22px;
+        color: lightgray; /* Toutes les balises h2 sont grises sauf la suivante */
+      }
+
+
+      h3{
+        font-size: 18px;
+      }
+
+      /* Classe pour le titre centré */
+      .centered{
+        text-align: center;
+      }
+
+      /* Classe pour aligner le texte à droite */
+      .right{
+        text-align: right;
+      }
+
+      .centered{
+        text-align: center;
+      }
+
+      /* Style des liens */
+      a{
+          font-weight: bold; /* Lien en gras par défaut */
+      }
+
+      a:hover{
+          font-weight: normal;
+          color: teal; /* Couleur du lien au survol */
+      }
+    </style> -->
+  </head>
+  <body>
+   <table id="cartouche">
+      <tr>
+        <td class="traitg traitd"></td>
+        <td class="traitd">
+          <h4 class="right">Yassine HAMROUNI</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="traitg traitd">
+          <h4>ESIPE INFO 1</h4>
+        </td>
+        <td class="traitd"></td>
+      </tr>
+      <tr>
+        <td class="traitg lastr">
+          <h4>TP 2 de Programmation Web</h4>
+        </td>
+        <td class="traitd lastr"></td>
+      </tr>
+    </table>
+    <h1 class="centered">Compte Rendu de TP2</h1>
+
+    <h2 style="color: red;">Exercice 1 - Style de base</h2>
+    <ol>
+      <li>
+        <h3>Le titre de l'exercice courant, puis ajoutez à la balise h2 un attribut style qui permet de mettre le titre de l'exercice en rouge brique</h3>
+        <p class="reponse">
+          &lt;h2 style="color: brickred;">Exercice 1 - Style de base&lt;/h2>
+        </p>
+      </li>
+      
+      <li>
+        <h3>Déclarez une balise style à l'intérieur des balises head du document, puis faites en sorte que tout le document utilise une police sans-serif.</h3>
+        <p class="reponse">
+          body { font-family: sans-serif; }
+        </p>
+      </li>
+
+      <li>
+        <h3>Faites en sorte que la balise h1 corresponde à une police de 26 points, la balise h2 à une police de 22 points et la balise h3 à une police 18 points. </h3>
+        <p class="reponse">
+          h1 { font-size: 26px; } h2 { font-size: 22px; } h3 { font-size: 18px; }
+        </p>
+      </li>
+
+      <li>
+        <h3>Faites en sorte que le titre du compte rendu de TP soit centré.</h3>
+        <p class="reponse">
+          .centered { text-align: center; }
+        </p>
+      </li>
+
+      <li>
+        <h3>On veut que votre nom soit aligné à droite. Commencez par déclarer votre nom entre des balises div puis ajoutez une classe right permettant d'aligner le texte à droite.</h3>
+        <p class="reponse">
+          &lt;div class="right">Yassine HAMROUNI&lt;/div>
+        </p>
+      </li>
+
+      <li>
+        <h3>
+          Ajoutez un lien vers le cours <a class="linkStyle" href="http://forax.github.io/course/progweb/">http://forax.github.io/course/progweb/</a> puis faites en sorte que le lien soit en gras si la souris n'est pas sur le lien et en bleu-vert (teal) si la souris survole le lien.<br>
+          Conseil: Vous utiliserez pour cela les pseudo-classes des liens. 
+        </h3>
+        <p class="reponse">
+          .linkStyle { font-weight: bold; } .linkStyle:hover { font-weight: normal; color: teal; }
+        </p>
+      </li>
+    </ol>
+
+    <h2>Exercice 2 - Style de liste et de table</h2>
+    <ol>
+      <li>
+          <h3>
+              On veut maintenant créer une feuille de style externe, c'est-à-dire une feuille de style déclarée non pas à l'intérieur de compte-rendu-tp2.html mais dans un fichier externe nommé compte-rendu-tp2.css.<br>
+              Modifiez votre travail pour que le compte rendu utilise ce fichier de style.
+          </h3>
+          <p class="reponse">
+              Le fichier de style est lié avec &lt;link rel="stylesheet" href="./styles/compte-rendu-tp2.css"&gt; dans l'en-tête du document HTML.
+          </p>
+      </li>
+
+      <li>
+          <h3>
+              Pour la suite du TP, nous ne modifierons plus la balise style du compte rendu mais le fichier compte-rendu-tp2.css<br>
+              Faites en sorte que la liste des questions de cet exercice et de l'exercice précédent utilise les chiffres romains (en majuscule) plutôt que les traditionnels chiffres 1, 2, 3, etc.
+          </h3>
+          <p class="reponse">
+              ol { list-style-type: upper-roman; }
+          </p>
+      </li>
+
+      <!-- ... autres questions ... -->
+
+      <li>
+          <h3>Faites en sorte que la table occupe toute la largeur du compte rendu.</h3>
+          <p class="reponse">
+              .movieTable { width: 100%; }
+          </p>
+      </li>
+
+      <li>
+          <h3>Centrez les titres et changer la police de caractères des titres pour utiliser des petites majuscules (small caps).</h3>
+          <p class="reponse">
+              .movieTable th { text-align: center; font-variant: small-caps; }
+          </p>
+      </li>
+
+      <li>
+          <h3>Aérez la table avec la propriété padding pour que le texte ne soit pas collé aux bordures.</h3>
+          <p class="reponse">
+              .movieTable td, .movieTable th { padding: 10px; }
+          </p>
+      </li>
+
+      <li>
+          <h3>Faites en sorte que les valeurs des deux premières colonnes (rang et titre) soient alignées à gauche et que les valeurs de la dernière colonne soient centrées.</h3>
+          <p class="reponse">
+              .movieTable th:first-child, .movieTable td:first-child, .movieTable th:nth-child(2), .movieTable td:nth-child(2) { text-align: left; } .movieTable td:last-child { text-align: center; }
+          </p>
+      </li>
+
+      <li>
+          <h3>Changez la couleur de fond des lignes paires (even) pour mettre du bleu clair en utilisant la pseudo-classe :nth-child.</h3>
+          <p class="reponse">
+              .movieTable tr:nth-child(even) { background-color: lightblue; }
+          </p>
+      </li>
+
+      <li>
+          <h3>Faites en sorte que si l'on survole une ligne avec la souris la couleur du fond correspond à 38 sur 255 de rouge, 24 sur 255 de vert et 44 sur 255 de bleu en utilisant un codage hexadécimal.</h3>
+          <p class="reponse">
+              .movieTable tr:hover { background-color: #26182C; }
+          </p>
+      </li>
+    </ol>
+    <table class="movieTable">
+      <tr>
+          <th>Rang</th>
+          <th>Titre du Film</th>
+          <th>Recettes (Gross)</th>
+      </tr>
+      <tr>
+          <td>1</td>
+          <td>Barbie</td>
+          <td>$636,236,256</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>The Super Mario Bros. Movie</td>
+          <td>$574,934,330</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Spider-Man: Across the Spider-Verse</td>
+          <td>$381,311,319</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Guardians of the Galaxy Vol. 3</td>
+          <td>$358,995,815</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>Oppenheimer</td>
+          <td>$326,434,905</td>
+      </tr>
+    </table>
+    <h2>Exercice 3 - Vignettes <a href="./exo3.html">exo3.html</a></h2>
+    <ol>
+      <li>
+        <h3>Récupérez les 6 images d'animaux ainsi que le fichier exo1.html dans ce <a href="https://monge.univ-mlv.fr/ens/IR/IR1/2023-2024/ProgWeb/src/td02/">répertoire</a>.</h3>
+      </li>
+
+      <li>
+        <h3>Faites en sorte que toutes les images à l'intérieur des boîtes (pas les autres) aient une largeur (width) de 250 pixels.</h3>
+        <p class="reponse">
+          img { width: 250px; }
+        </p>
+      </li>
+
+      <li>
+        <h3>
+          Au lieu d'afficher les images verticalement, on souhaite les afficher horizontalement.
+          Utilisez pour cela l'attribut float. 
+        </h3>
+        <p class="reponse">
+          body > div { float: left; }
+        </p>
+      </li>
+      
+      <li>
+        <h3>Que se passe-t-il si l'on fait varier la taille de la fenêtre du navigateur horizontalement ?</h3>
+        <p class="reponse">
+          Les boîtes flottantes peuvent se repositionner en fonction de l'espace disponible, passant potentiellement à la ligne suivante si la fenêtre est trop étroite.
+        </p>
+      </li>
+
+      <li>
+        <h3>
+          Vérifiez que vous pouvez aussi mettre toutes les images à droite en changeant juste un mot dans la partie CSS du document.<br>
+          Puis remettez les images alignées à gauche.
+        </h3>
+        <p class="reponse">
+          Modifier 'float: left;' en 'float: right;' dans le CSS pour aligner à droite, puis inverser le changement pour aligner à gauche.
+        </p>
+      </li>
+
+      <li>
+        <h3>
+          Faites en sorte que les titres (animal1, animal2, etc.) soient affichés en blanc sur fond noir et soient centrés horizontalement par rapport à la boîte qui les contient.<br>
+          Jouez de plus avec la propriété <b>padding</b> pour avoir un espacement convenable. 
+        </h3>
+        <p class="reponse">
+          div > div { background-color: black; color: white; text-align: center; padding: 5px; }
+        </p>
+      </li>
+    </ol>
+
+    <h2>Exercice 4 - Barre de menu <a href="./exo4.html">exo4.html</a></h2>
+    
+    <ol>
+      <li>
+        <h3>Faites en sorte que la liste ait une position fixe, en haut à gauche de la partie affichage du navigateur.</h3>
+        <p class="reponse">
+          div ul { position: fixed; top: 0; left: 0; }
+        </p>
+      </li>
+      <li>
+        <h3>Retirez le style par défaut des items de liste (avec list-style-type) pour qu'il n'y ait pas de style par défaut.</h3>
+        <p class="reponse">
+          div ul { list-style-type: none; }
+        </p>
+      </li>
+      <li>
+        <h3>Affichez les items en gras et avec une police Courrier (ou sinon serif).</h3>
+        <p class="reponse">
+          div ul li { font-weight: bold; font-family: Courier, serif; }
+        </p>
+      </li>
+      <li>
+        <h3>Faites en sorte que les items soient affichés horizontalement collés à gauche et non plus verticalement.</h3>
+        <p class="reponse">
+          div ul li { display: inline-block; }
+        </p>
+      </li>
+      <li>
+        <h3>Faites en sorte que les items aient une largeur de 120 pixels et ajoutez un espacement d'une dizaine de pixel entre les items.</h3>
+        <p class="reponse">
+          div ul li { width: 120px; margin-right: 10px; }
+        </p>
+      </li>
+      <li>
+        <h3>Changez le fond du menu pour qu'il soit de couleur tomate (tomato), puis en chantant yellow submarine, changez la couleur des items pour qu'ils soient en jaune.</h3>
+        <p class="reponse">
+          div { background-color: tomato; } div ul li { color: yellow; }
+        </p>
+      </li>
+      <li>
+        <h3>Fixez la hauteur (height) du menu à 48 pixels puis faites en sorte que le menu occupe toute la largeur (width).</h3>
+        <p class="reponse">
+          div { height: 48px; width: 100%; }
+        </p>
+      </li>
+      <li>
+        <h3>Faites en sorte d'avoir un item 'Help' soit affiché à droite de la barre de menu.</h3>
+        <p class="reponse">
+          div ul li:last-child { float: right; }
+        </p>
+      </li>
+      <li>
+        <h3>Affichez une ligne de 2 pixels en bas du menu.</h3>
+        <p class="reponse">
+          div { border-bottom: 2px solid black; }
+        </p>
+      </li>
+    </ol>
+
+
+    <h2>Exercice 5 - Faire un sous-menu (Optionnel)</h2>
+    <ol>
+      <li>
+        <h3>Positionnez le sous-menu juste en dessous de l'item web (avec relative/absolute).</h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+      <li>
+        <h3>Utilisez la propriété display pour ne pas afficher le sous-menu par défaut.</h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+      <li>
+        <h3>Faites en sorte d'afficher le sous-menu si l'on passe la souris sur l'item 'Web'.</h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+      <li>
+        <h3>L'astuce est d'avoir un sélecteur CSS qui correspond à la liste à l'intérieur de l'item Web si celui-ci est survolé par la souris et de lui appliquer la propriété display à block.</h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+      <li>
+        <h3>N'oubliez pas de jouer avec la propriété z-index pour mettre le sous menu au-dessus du reste de la page.</h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+      <li>
+        <h3>Vous pouvez maintenant vous amuser à rendre le menu plus beau, par exemple, en mettant une ombre portée, des coins ronds ou d'autres effets de votre choix.</h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+    </ol>
+    <h2>Conclusion personnelle</h2>
+    <p>
+      Ce TP a été une bonne expérience, me permettant de mieux comprendre les subtilités du CSS et son impact sur la mise en page des sites web. J'ai appris à manipuler diverses propriétés CSS, de la position des éléments à l'ajustement des styles pour les listes et les tables, ce qui m'a aidé à développer une meilleure intuition pour le design web. La partie sur les barres de menu et les sous-menus était particulièrement intéressante, car elle a introduit des concepts interactifs plus complexes, tels que le changement de style au survol. Ce TP a renforcé mes compétences en CSS.
+    </p>
+  </body>
+</html>
+

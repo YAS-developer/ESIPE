@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* Faites en sorte que la liste ait une position fixe, en haut à gauche de la partie affichage du navigateur */
+    /* Retirez le style par défaut des items de liste (avec list-style-type) pour qu'il n'y ait pas de style par défaut */
+    div ul {
+      position: fixed;
+      top: 2%;
+      left: 1%;
+      width: 100%;
+      height: 100%;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    
+    /* Affichez les items en gras et avec une police Courrier (ou sinon serif) */
+    li {
+      font-weight: bold;
+      font-family: Courier, serif;
+    }
+
+    /* Faites en sorte que les items soient affichés horizontalement collés à gauche et non plus verticalement */
+    /* Faites en sorte que les items aient une largeur de 120 pixels et ajoutez un espacement d'une dizaine de pixel entre les items */
+    li {
+      display: inline-block;
+      width: 120px;
+      margin-right: 10px;
+      color: yellow;
+    }
+
+
+    /* Changez le fond du menu pour qu'il soit de couleur tomate (tomato), puis changez la couleur des items pour qu'ils soient en jaune */
+    /* Fixez la hauteur (height) du menu à 48 pixels puis faites en sorte que le menu occupe toute la largeur (width) */
+    div {
+      background-color: tomato;
+      height: 48px;
+      width: 100%;
+      border-bottom: 2px solid black;
+    }
+
+    /* Faites en sorte d'avoir un item 'Help' soit affiché à droite de la barre de menu */
+    /* Affichez une ligne de 2 pixels en bas du menu */
+    li:last-child {
+      float: right;
+    }
+    
+    /* Positionner le sous-menu relativement à son parent */
+    li {
+      position: relative;
+    }
+
+    /* Cacher le sous-menu par défaut et le positionner */
+    li ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: tomato;
+      padding: 0;
+      margin: 0;
+      list-style-type: none;
+      z-index: 1000; /* Assure que le sous-menu est au-dessus des autres éléments */
+    }
+
+    /* Afficher le sous-menu lorsque l'item 'Web' est survolé */
+    li:hover ul {
+      display: block;
+    }
+
+    /* Styliser les items du sous-menu */
+    li ul li {
+      display: block;
+      width: 120px;
+      text-align: left;
+      border-bottom: 1px solid black; /* Ajoute une ligne entre les items du sous-menu */
+    }
+
+    /* Ajout d'une ombre portée et des coins arrondis au sous-menu */
+    li ul {
+      box-shadow: 3px 3px 5px #888888;
+      border-radius: 5px;
+    }
+
+    /* Assure que tous les items du sous-menu ont la même hauteur */
+    li ul li {
+      line-height: 48px; 
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <ul>
+      <li>Web
+        <ul>
+          <li>Test1</li>
+          <li>Test2</li>
+        </ul>
+      </li>
+      <li>HTML</li>
+      <li>CCS</li>
+      <li>Help</li>
+    </ul>
+  </div>
+</body>
+</html>
