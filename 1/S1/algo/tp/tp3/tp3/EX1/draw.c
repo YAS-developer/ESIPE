@@ -4,12 +4,12 @@
 #define BACKGROUND_COLOR MLV_COLOR_WHITE
 
 void draw_H(int x, int y, int width) {
-    if (width <= 8) return;  // Condition d'arrêt
+    if (width <= 8) return;  
 
     int half_width = width / 2;
     int quarter_width = width / 4;
 
-    // Points for H
+
     int left_top_x = x - quarter_width;
     int left_top_y = y - half_width;
     int left_bottom_x = x - quarter_width;
@@ -19,12 +19,15 @@ void draw_H(int x, int y, int width) {
     int right_bottom_x = x + quarter_width;
     int right_bottom_y = y + half_width;
 
-    // Dessiner le H
     MLV_draw_line(left_top_x, left_top_y, left_bottom_x, left_bottom_y, LINE_COLOR);
     MLV_draw_line(right_top_x, right_top_y, right_bottom_x, right_bottom_y, LINE_COLOR);
     MLV_draw_line(left_top_x, y, right_top_x, y, LINE_COLOR);
 
-    // Appels récursifs pour les quatre coins du H
+    MLV_actualise_window();
+    
+    
+    MLV_wait_milliseconds(500);
+
     draw_H(left_top_x, left_top_y, half_width);
     draw_H(right_top_x, right_top_y, half_width);
     draw_H(left_bottom_x, left_bottom_y, half_width);
@@ -38,7 +41,7 @@ int main() {
     draw_H(250, 250, 200); // Centre de la fenêtre avec une largeur initiale
 
     MLV_update_window();
-    MLV_wait_seconds(10); // Attendre un peu plus longtemps pour observer le résultat
+    MLV_wait_seconds(10); 
     MLV_free_window();
 
     return 0;

@@ -58,24 +58,25 @@ void add_mines(grid *g, int n) {
         {-1, 1},  {0, 1},  {1, 1}
     };
 
-    // Initialize random number generator
+    // Initialise le générateur de nombres aléatoires
     srand(time(NULL));
 
     while (count < n) {
+        // Génère une position aléatoire pour la mine
         x = rand() % g->x_size;
         y = rand() % g->y_size;
 
-        // Only place a mine if there isn't one there already
+        // Place une mine seulement s'il n'y en a pas déjà une
         if (!g->cells[x][y].mine) {
             g->cells[x][y].mine = 1;
             count++;
 
-            // Increment mine_count of all adjacent cells
+            // Incrémente le compteur de mines des cellules adjacentes
             for (i = 0; i < 8; i++) {
                 int adj_x = x + directions[i][0];
                 int adj_y = y + directions[i][1];
 
-                // Check if adjacent cell is within bounds
+                // Vérifie si la cellule adjacente est dans les limites de la grille
                 if (adj_x >= 0 && adj_x < g->x_size && adj_y >= 0 && adj_y < g->y_size) {
                     g->cells[adj_x][adj_y].mine_count++;
                 }
@@ -85,40 +86,40 @@ void add_mines(grid *g, int n) {
 }
 
 /*
- * Reveal cell c in grid g.
- * Return the total number of revealed cells.
+ * Révèle la cellule c dans la grille g.
+ * Retourne le nombre total de cellules révélées.
  */
 int reveal(grid *g, cell *c) {
     int revealed = 0;
     
-    /* If the cell is already visible or marked, do nothing and return 0 */
+    // Si la cellule est déjà visible ou marquée, ne rien faire et retourner 0
     if (c->visible || c->marked) {
         return 0;
     }
 
-    /* Make the cell visible */
+    // Rend la cellule visible
     c->visible = 1;
-    draw_cell_actualise_window(c);  // Assumes draw_cell_actualise_window is implemented correctly
+    draw_cell_actualise_window(c);  // Supposons que draw_cell_actualise_window est correctement implémentée
 
-    /* If the cell has a mine or is adjacent to mines, return 1 */
+    // Si la cellule contient une mine ou est adjacente à des mines, retourner 1
     if (c->mine || c->mine_count > 0) {
         return 1;
     }
 
-    /* Otherwise, recursively reveal all neighboring cells */
+    // Autrement, révèle récursivement toutes les cellules voisines
     for (int dx = -1; dx <= 1; dx++) {
         for (int dy = -1; dy <= 1; dy++) {
             int new_x = c->x_pos + dx;
             int new_y = c->y_pos + dy;
             
-            /* Check boundaries and skip the current cell */
+            // Vérifie les limites et ignore la cellule actuelle
             if (new_x >= 0 && new_x < g->x_size && new_y >= 0 && new_y < g->y_size && !(dx == 0 && dy == 0)) {
                 cell *neighbor = &g->cells[new_x][new_y];
                 revealed += reveal(g, neighbor);
-                MLV_wait_milliseconds(50);  // Small pause for visualization
+                MLV_wait_milliseconds(50);  // Petite pause pour la visualisation
             }
         }
     }
 
-    return revealed + 1;  // Include the current cell in the count
+    return revealed + 1;  // Inclut la cellule actuelle dans le compte
 }
