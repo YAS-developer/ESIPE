@@ -1,0 +1,156 @@
+1. Installation et démarrage du serveur
+1.1 Installer Apache2
+
+    Étape 1: Ouvrir le terminal.
+    Étape 2: Exécuter les commandes suivantes pour installer Apache2:
+
+    bash
+
+    sudo apt update
+    sudo apt install apache2
+
+    Cette opération télécharge et installe le serveur web Apache2.
+
+1.2 Gérer le service Apache2
+
+    Étape 1: Utiliser des commandes spécifiques pour gérer Apache2. Par exemple, pour vérifier l'état du service, exécuter :
+
+    bash
+
+    systemctl status apache2
+
+    Des commandes similaires existent pour démarrer, arrêter, redémarrer et recharger Apache2.
+
+1.3 Vérifier la connexion HTTP sur le port 80
+
+    Étape 1: Ouvrir le terminal.
+    Étape 2: Exécuter la commande suivante pour vérifier si Apache écoute sur le port 80 :
+
+    bash
+
+    sudo netstat -tnlp | grep :80
+
+1.4 Tester le serveur en local
+
+    Étape 1: Ouvrir un navigateur web.
+    Étape 2: Saisir les adresses suivantes pour tester le serveur :
+        http://127.0.0.1
+        http://[adresse_IP_de_votre_machine]
+        http://localhost
+    Étape 3: Vérifier si la page de Apache2 s'affiche.
+
+2. Présentation des principaux fichiers de configuration du service
+2.1 Connaître les fichiers et répertoires de configuration d'Apache
+
+    Étape 1: Explorer le répertoire /etc/apache2/ qui contient les fichiers de configuration principaux comme apache2.conf, ports.conf, etc.
+    Étape 2: Examiner les répertoires sites-available et sites-enabled pour la gestion des hôtes virtuels.
+
+2.2 Expliquer pourquoi deux valeurs de port sont définies dans ports.conf (Question Moodle)
+
+    Étape 1: Ouvrir et lire le fichier /etc/apache2/ports.conf.
+    Étape 2: Comprendre que différents ports sont utilisés pour différentes raisons, comme le port 80 pour HTTP et éventuellement un autre comme le 443 pour HTTPS.
+
+2.3 Identifier les noms de fichier recherchés dans dir.conf
+
+    Étape 1: Examiner le fichier /etc/apache2/mods-available/dir.conf.
+    Étape 2: Identifier la directive DirectoryIndex qui spécifie les fichiers par défaut que Apache recherche dans un répertoire.
+
+7) Observer et comprendre le fichier 000-default.conf
+
+    Étape 1: Accéder au fichier en ouvrant /etc/apache2/sites-available/000-default.conf (ou default.conf selon la version).
+    Étape 2: Examiner la structure du fichier pour comprendre comment un hôte virtuel est configuré, y compris la directive DocumentRoot, qui indique où se trouvent les fichiers web du site.
+
+8) Création de répertoires pour hôtes virtuels
+
+    Étape 1: Créer les répertoires /var/www/info1 et /var/www/info2 pour abriter les pages web de vos domaines virtuels.
+    Étape 2: Dans chaque répertoire, créer un fichier index.html avec un contenu spécifique pour identifier l'hôte virtuel.
+
+9) Déclarer des hôtes virtuels
+
+    Étape 1: Créer des fichiers info1.conf et info2.conf dans /etc/apache2/sites-available pour déclarer les nouveaux domaines virtuels.
+    Étape 2: Utiliser un modèle de configuration VirtualHost pour chaque fichier, spécifiant les paramètres comme ServerAdmin, ServerName, DocumentRoot, etc.
+
+10) Activer les hôtes virtuels
+
+    Étape 1: Utiliser la commande a2ensite info1.conf et a2ensite info2.conf pour créer des liens symboliques dans /etc/apache2/sites-enabled.
+    Étape 2: Vérifier que les liens ont été créés et recharger la configuration du serveur Apache.
+
+11) Configurer le fichier /etc/hosts pour les hôtes virtuels
+
+    Étape 1: Ouvrir le fichier /etc/hosts avec les privilèges d'administration.
+    Étape 2: Ajouter des entrées pour www.info1.mlv et www.info2.mlv en les associant à votre adresse IP locale.
+
+
+12) Analyse des requêtes et réponses basiques avec Wireshark
+
+    Étape 1: Ouvrir Wireshark et démarrer une capture sur l'interface de loopback de votre machine.
+    Étape 2: Vider le cache de votre navigateur (par exemple, Firefox).
+    Étape 3: Tester la connexion aux hôtes virtuels en utilisant les adresses http://www.info1.mlv et http://www.info2.mlv.
+    Étape 4: Analyser les requêtes et réponses capturées dans Wireshark pour comprendre la communication entre le navigateur et le serveur.
+
+13) Identifier la version du protocole HTTP
+
+    Étape 1: Examiner les captures Wireshark pour identifier les versions du protocole HTTP utilisées par le client et le serveur.
+
+14) Vérifier si le serveur web supporte les connexions persistantes (Question Moodle)
+
+    Étape 1: Examiner les en-têtes des réponses HTTP dans les captures Wireshark.
+    Étape 2: Chercher des indicateurs tels que Connection: keep-alive qui indiquent le support des connexions persistantes.
+
+15) Identifier le champ de la requête HTTP pour l'hôte virtuel (Question Moodle)
+
+    Étape 1: Rechercher dans les captures Wireshark le champ Host dans les requêtes HTTP.
+    Étape 2: Examiner le code de statut renvoyé pour justifier la réponse du serveur.
+
+16) Importance du champ Content-length dans la réponse du serveur (Question Moodle)
+
+    Étape 1: Trouver les réponses du serveur dans les captures Wireshark.
+    Étape 2: Examiner l'en-tête Content-Length pour comprendre son rôle dans la détermination de la taille du contenu envoyé.
+
+17) Identifier les types MIME supportés par le client HTTP (Question Moodle)
+
+    Étape 1: Examiner les requêtes HTTP dans Wireshark pour trouver le champ Accept.
+    Étape 2: Lister les types MIME et sous-types dans l'ordre de préférence du client.
+
+
+18) Analyse avancée des requêtes et réponses HTTP avec Wireshark et Firefox (Question Moodle)
+a) Comprendre le code de statut de la réponse
+
+    Étape 1: Activer une nouvelle capture Wireshark et ouvrir l'outil Réseau dans les outils de développement web de Firefox.
+    Étape 2: Sans vider le cache, se connecter à l’hôte virtuel info1.mlv.
+    Étape 3: Examiner le code de statut de la réponse et les champs de requête correspondants pour comprendre leur interaction.
+
+b) Modifier le champ If-None-Match
+
+    Étape 1: Dans l’outil Réseau de Firefox, sélectionner la requête GET et utiliser l'option "Modifier et renvoyer" pour changer la valeur du champ If-None-Match.
+    Étape 2: Analyser la réponse du serveur pour comprendre son comportement face à cette modification.
+
+c) Modifier le champ If-Modified-Since
+
+    Étape 1: Modifier le champ If-Modified-Since pour tester différentes conditions et observer la réponse du serveur.
+    Étape 2: Comprendre le rôle de ce champ dans la gestion du cache.
+
+19) Mise en place de redirections permanentes (Question Moodle)
+
+    Étape 1: Modifier le fichier info2.conf pour ajouter une directive de redirection permanente vers info1.mlv.
+    Étape 2: Recharger la configuration du serveur et effectuer une capture Wireshark.
+    Étape 3: Se connecter à info2.mlv et analyser le code de statut et le champ de redirection dans la réponse du serveur.
+
+20) Supprimer la redirection
+
+    Étape 1: Retirer la directive de redirection du fichier info2.conf.
+    Étape 2: Recharger la configuration du serveur pour annuler la redirection.
+
+21) Créer un répertoire protégé sur info1.mlv
+
+    Étape 1: Créer le répertoire /var/www/info1/protege.
+    Étape 2: Dans ce répertoire, créer un fichier index.html avec un contenu spécifique pour tester l'authentification.
+
+22) Autoriser l'utilisation du fichier .htaccess
+
+    Étape 1: Modifier le fichier info1.conf pour ajouter des directives permettant l'utilisation du fichier .htaccess dans le répertoire /var/www/info1/protege.
+
+23) Configuration de l'authentification avec .htaccess
+
+    Étape 1: Créer le fichier .htaccess dans le répertoire /var/www/info1/protege avec les directives nécessaires pour l'authentification.
+    Étape 2: Configurer le fichier .htpass pour définir les utilisateurs autorisés.
