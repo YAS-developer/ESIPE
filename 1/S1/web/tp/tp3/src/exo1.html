@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+ <head>
+   <meta charset="utf-8">
+   <script>
+     "use strict";
+   
+     function refresh() {
+       console.log("tick !");
+     }
+     
+
+
+     window.onload = () => {
+        // window.setInterval(refresh, 1000);
+        // window.setInterval(() => console.log(new Date()), 1000);
+        window.setInterval(() => {
+          const date = new Date();
+          console.log(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
+        }, 1000);
+     };
+   </script>
+ </head>
+ <body>
+  <h2>Oh, ma belle horloge !</h2>
+  <canvas id="clock"
+          width="800"
+          height="800">
+  </canvas>
+ </body>
+</html>

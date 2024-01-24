@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Compte Rendu de TP3</title> 
+    <link rel="stylesheet" href="./styles/compte-rendu-tp3.css">
+  </head>
+  <body>
+   <table id="cartouche">
+      <tr>
+        <td class="traitg traitd"></td>
+        <td class="traitd">
+          <h4 class="right">Yassine HAMROUNI</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="traitg traitd">
+          <h4>ESIPE INFO 1</h4>
+        </td>
+        <td class="traitd"></td>
+      </tr>
+      <tr>
+        <td class="traitg lastr">
+          <h4>TP 3 de Programmation Web</h4>
+        </td>
+        <td class="traitd lastr"></td>
+      </tr>
+    </table>
+    <h1 class="centered">Compte Rendu de TP3</h1>
+
+    <h2 >Exercice 1 - Horloge</h2>
+    <ol>
+      <li>
+        <h3>Recopiez la page Web <a href="./exo1.html" target="_blank">exo1.html</a>.
+          Que se passe-t-il lorsque l'on la visualise ?<br>
+          Note: regardez la console !<br>
+          Expliquez ce que fait window.onload = loaded puis window.setTimeout(refresh, 1000) ? Pour cela, chercher dans la documentation sur le <a href="https://developer.mozilla.org/en-US/">Mozilla Developer Network</a>. </h3>
+        <p class="reponse">
+          Des lors ou la page se charge, la fonction refresh est execute au bout de 1 seconde.
+        </p>
+      </li>
+      
+      <li>
+        <h3>Il existe un appel window.setInterval() qui va appeler la fonction prise en paramètre de façon répétée. Transformez le code pour utiliser window.setInterval(). </h3>
+        <p class="reponse">
+          window.onload = () => {
+            window.setInterval(refresh, 1000);
+         };
+        </p>
+      </li>
+      <li>
+        <h3>Transformez le code pour afficher la date courante avec new Date().
+          Puis changez encore le code pour afficher l'heure (getHours()), les minutes (getMinutes()) et les secondes (getSeconds()) sur la console. </h3>
+        <p class="reponse">
+          window.setInterval(() => console.log(new Date()), 1000);<br>
+            window.setInterval(() => {
+              const date = new Date();
+              console.log(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
+            }, 1000);
+        </p>
+      </li>
+      
+      <li>
+        <h3>Dessinez un cercle de rayon radius pixels, centré dans le canvas, avec radius égal à 85% du minimum entre la largeur (canvas.width) et la hauteur canvas.height du canvas (il existe une fonction Math.min). Il servira de cadre à notre horloge (il existe une fonction Math.min). </h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+      
+
+      <li>
+        <h3>Indiquez les formules mathématiques qui permettent pour une valeur de 0 à 60 secondes de trouver les coordonnées x et y du sommet de l'aiguille.  </h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+
+      <li>
+        <h3>Modifiez le code pour faire bouger la trotteuse (nom de l'aiguille des secondes) en fonction des secondes.<br>
+          Note: context.clearRect(...) permet d'effacer le canvas. </h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+      
+      <li>
+        <h3>Modifiez votre code pour afficher la trotteuse en rouge et le cadre en vert clair.
+          Réglez à 3 pixels l'épaisseur du trait du cadre.</h3>
+        <p class="reponse">
+        
+        </p>
+      </li>
+
+      <li>
+        <h3>Affichez en plus de la trotteuse, l'aiguille des minutes (la grande aiguille) en noire.
+          Note: pitié, ne dupliquez pas le code ! </h3>
+        <p class="reponse">
+         
+        </p>
+      </li>
+
+      <li>
+        <h3>Ajoutez l'aiguille des heures, qui doit être d'une longueur inférieure aux deux autres aiguilles (disons 80%), mais plus large, toujours en essayant de 'factoriser' le code.</h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+
+      <li>
+        <h3>On veut que votre nom soit aligné à droite. Commencez par déclarer votre nom entre des balises div puis ajoutez une classe right permettant d'aligner le texte à droite.</h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+
+      <li>
+        <h3>
+          Ajoutez 12 traits de graduation ('ticks') en vert foncé, autour du cadre de l'horloge. Un trait aura une longueur de 3 pixels. 
+        </h3>
+        <p class="reponse">
+          
+        </p>
+      </li>
+    </ol>
+
+    <h2>Exercice 2 - Horloges de différentes tailles</h2>
+    <ol>
+      <li>
+          <h3>
+            Faites en sorte que la taille de l'horloge puisse varier en fonction de la taille du canvas
+            Un canvas a une propriété width et une propriété height.
+            Dans le cas où la largeur et la hauteur d'un canvas n'est pas la même, prenez la valeur minimum entre les deux et laisser des bandes de chaque coté.
+          </h3>
+          <p class="reponse">
+             
+          </p>
+      </li>
+
+      <li>
+          <h3>
+            Faites en sorte d'avoir une fonction startClock qui prend en paramètre l'id d'un canvas qui sert d'unique point d'entrée pour faire fonctionner une horloge.
+            Testez avec l'affichage des 2 horloges de tailles différentes (on est d'accord, on peut en ajouter plus !).
+          </h3>
+          <p class="reponse">
+
+          </p>
+      </li>
+
+      <li>
+          <h3>Question top moumoute, faites en sorte de garantir que les aiguilles des différentes horloges soient synchrones (i.e. misent à jour toutes en même temps).</h3>
+          <p class="reponse">
+              
+          </p>
+      </li>
+    </ol>
+     
+   
+    <h2>Conclusion personnelle</h2>
+    <p>
+      Ce TP a été une bonne expérience, me permettant de mieux comprendre les subtilités du CSS et son impact sur la mise en page des sites web. J'ai appris à manipuler diverses propriétés CSS, de la position des éléments à l'ajustement des styles pour les listes et les tables, ce qui m'a aidé à développer une meilleure intuition pour le design web. La partie sur les barres de menu et les sous-menus était particulièrement intéressante, car elle a introduit des concepts interactifs plus complexes, tels que le changement de style au survol. Ce TP a renforcé mes compétences en CSS.
+    </p>
+  </body>
+</html>
+
