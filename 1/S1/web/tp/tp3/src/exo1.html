@@ -4,26 +4,86 @@
    <meta charset="utf-8">
    <script>
      "use strict";
-   
-     function refresh() {
-       console.log("tick !");
+    
+
+     let clocks = [];
+
+     function drawHand(context, cx, cy, length, angle, color, lineWidth) {
+       const x = cx + length * Math.cos(angle - Math.PI / 2);
+       const y = cy + length * Math.sin(angle - Math.PI / 2);
+
+       context.beginPath();
+       context.moveTo(cx, cy);
+       context.lineTo(x, y);
+       context.strokeStyle = color;
+       context.lineWidth = lineWidth;
+       context.stroke();
+     }
+
+     function refresh(canvas, context) {
+        // console.log("Largeur du canvas: " + canvas.width + ", Hauteur du canvas: " + canvas.height);
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        const radius = Math.min(canvas.width, canvas.height) * 0.85 / 2; 
+        context.beginPath(); 
+        context.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI); 
+        context.strokeStyle = 'lightgreen';
+        context.lineWidth = 3;
+        context.stroke(); 
+
+        for (let i = 0; i < 12; i++) {
+          const angle = (2 * Math.PI / 12) * i;
+          const outerX = canvas.width / 2 + radius * Math.cos(angle);
+          const outerY = canvas.height / 2 + radius * Math.sin(angle);
+          const innerX = canvas.width / 2 + (radius - 3) * Math.cos(angle);
+          const innerY = canvas.height / 2 + (radius - 3) * Math.sin(angle);
+
+          context.beginPath();
+          context.moveTo(outerX, outerY);
+          context.lineTo(innerX, innerY);
+          context.strokeStyle = 'black';
+          context.lineWidth = 3;
+          context.stroke();
+        }
+
+        const currentDate = new Date();
+        const hours = currentDate.getHours();
+        const minutes = currentDate.getMinutes();
+        const seconds = currentDate.getSeconds();
+        const secondAngle = (2 * Math.PI / 60) * seconds;
+        const minuteAngle = (2 * Math.PI / 60) * minutes;
+        const hourAngle = (2 * Math.PI / 12) * (hours % 12 + minutes / 60);
+
+        drawHand(context, canvas.width / 2, canvas.height / 2, radius * 0.9, secondAngle, 'red', 1);
+        drawHand(context, canvas.width / 2, canvas.height / 2, radius * 0.8, minuteAngle, 'black', 2);
+        drawHand(context, canvas.width / 2, canvas.height / 2, radius * 0.6, hourAngle, 'black', 4);
      }
      
 
+    function updateClocks() {
+      clocks.forEach(({ canvas, context }) => refresh(canvas, context));
+    }
 
-     window.onload = () => {
-        // window.setInterval(refresh, 1000);
-        // window.setInterval(() => console.log(new Date()), 1000);
-        window.setInterval(() => {
-          const date = new Date();
-          console.log(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
-        }, 1000);
-     };
+    function startClock(canvasId) {
+      const canvas = document.getElementById(canvasId);
+      const context = canvas.getContext("2d");
+      clocks.push({ canvas, context }); 
+    }
+
+    window.onload = () => {
+    startClock("clock"); // Démarrez la première horloge
+    startClock("clock2"); // Démarrez une deuxième horloge (si elle existe)
+    window.setInterval(updateClocks, 1000);
+    }
    </script>
  </head>
  <body>
   <h2>Oh, ma belle horloge !</h2>
   <canvas id="clock"
+          width="800"
+          height="800">
+  </canvas>
+  <canvas id="clock2"
           width="800"
           height="800">
   </canvas>
