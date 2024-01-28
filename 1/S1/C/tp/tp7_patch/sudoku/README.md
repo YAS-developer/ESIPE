@@ -6,6 +6,7 @@ make:
 Mettre plus de commentaires dans le code de la partie graphique.
 
 Fonctionnalites:
+    Changez la couleur des chiffres que l'utilisateur ajoute.
     Ajout d'un pop up pour prevenir que l'utilisateur a choisi un chiffre que l'on ne peut placer dans la grille.
     Ajout d'un timer avec un thread sur la fonction qui update le timer.
     
