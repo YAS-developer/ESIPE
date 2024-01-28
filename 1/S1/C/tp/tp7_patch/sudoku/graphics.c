@@ -88,6 +88,10 @@ int update_graphics_board(SudokuGame *game){
             if(number == 0){
                 MLV_draw_filled_rectangle(85+addX, 85+addY, 20, 20, MLV_COLOR_CADET_BLUE);
             }
+            else if(number != game->original_grid[i][j]){
+                MLV_draw_filled_rectangle(85+addX, 85+addY, 20, 20, MLV_COLOR_CADET_BLUE);
+                MLV_draw_text(85+addX, 85+addY, str, MLV_COLOR_GREEN);
+            }
             else{
                 MLV_draw_filled_rectangle(85+addX, 85+addY, 20, 20, MLV_COLOR_CADET_BLUE);
                 MLV_draw_text(85+addX, 85+addY, str, MLV_COLOR_ANTIQUE_WHITE);
@@ -124,11 +128,11 @@ void check_coord(SudokuGame *game, int x, int y){
         for (j = 0; j < SIZE; j++) {
             if (x >= currentX && x <= (currentX + 60) && y >= currentY && y <= (currentY + 60)) {
                 if(game->original_grid[i][j] == 0){
+                    game->grid[i][j]=0;
                     game->row = i; game->col = j;
                     MLV_draw_filled_rectangle(currentX+25, currentY+25, 10, 20, MLV_COLOR_CADET_BLUE);
                     MLV_draw_text(currentX+25, currentY+25, "?", MLV_COLOR_GREEN);
                     answer_draw(game);
-                    
                 }
             }
             currentX += 60; 
@@ -160,7 +164,7 @@ void answer_draw(SudokuGame *game){
     }
     MLV_draw_filled_rectangle(750, 440, 180, 60, MLV_COLOR_RED);
     char* txt="Annuler";
-    MLV_draw_text(805, 460, txt, MLV_COLOR_ANTIQUE_WHITE);
+    MLV_draw_text(812, 460, txt, MLV_COLOR_ANTIQUE_WHITE);
 
 
     MLV_actualise_window();
@@ -200,12 +204,12 @@ bool check_coord_answer(SudokuGame *game, int x, int y){
                 else{
                     char error_message[50];
                     sprintf(error_message, "On ne peut pas mettre ce numero: %d", number);
-                    MLV_draw_filled_rectangle(190, 10, 280, 30, MLV_COLOR_RED); /* Dessine un fond rouge pour le message */
-                    MLV_draw_text(200, 20, error_message, MLV_COLOR_WHITE); /* Affiche le message d'erreur en blanc */
-                    MLV_actualise_window(); /* Met à jour la fenêtre pour afficher le nouveau contenu */
-                    MLV_wait_seconds(1); /* Attend 2 secondes avant de continuer */
-                    MLV_draw_filled_rectangle(190, 10, 280, 30, MLV_COLOR_CADET_BLUE); /* Efface le message d'erreur */
-                    MLV_actualise_window(); /* Met à jour la fenêtre après avoir effacé le message */
+                    MLV_draw_filled_rectangle(190, 10, 280, 30, MLV_COLOR_RED); 
+                    MLV_draw_text(200, 20, error_message, MLV_COLOR_WHITE); 
+                    MLV_actualise_window(); 
+                    MLV_wait_seconds(1); 
+                    MLV_draw_filled_rectangle(190, 10, 280, 30, MLV_COLOR_CADET_BLUE); 
+                    MLV_actualise_window(); 
                 }
             }
             currentX += 60; 

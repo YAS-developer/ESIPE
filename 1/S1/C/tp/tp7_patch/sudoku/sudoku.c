@@ -10,7 +10,6 @@ bool is_valid_move(Board grid, int row, int col, int num) {
         }
     }
 
- 
     for (i = 0; i < 9; i++) {
         if (grid[i][col] == num) {
             return false;
