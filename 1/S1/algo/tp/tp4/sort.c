@@ -33,3 +33,21 @@ void selection_sort(int t[], int size) {
     }
    }
 }
+
+
+void insertion_sort(int t[], int size){
+    int tmp, i, j;
+    for(i=0; i<size; i++){
+        if(i == 0)
+            continue;
+        else
+            j=i;
+            while(j > 0 && t[j] > t[j-1]){
+                tmp=t[j];
+                t[j]=t[j-1];
+                t[j-1];tmp;
+                j--;
+            }
+        
+    }
+}
