@@ -66,7 +66,7 @@ SELECT ville, MIN(prixUnit) FROM magasin NATURAL JOIN stocke GROUP BY ville;
 --20 rows
 
 --13. La liste des magasins (idmag, nom) qui ont édité au moins 20 factures, triée par nombre de factures décroissant.
-SELECT m.idmag, m.nom, COUNT(*) AS nombre_de_factures
+SELECT m.idmag, m.nom
 FROM magasin m
 JOIN facture f ON m.idmag = f.idmag
 GROUP BY m.idmag, m.nom
