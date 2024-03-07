@@ -82,11 +82,15 @@ System.out.println("x: "+point.x()+" y: "+point.y());
 
 #### C:
 
+#### real    0m0,084s
+#### user    0m0,067s
+#### sys     0m0,022s
+
 #### java:
 
-#### real    0m0,305s
-#### user    0m0,231s
-#### sys     0m0,070s
+#### real    0m0,087s
+#### user    0m0,048s
+#### sys     0m0,041s
 
 #### Pour comprendre les différences de performances entre un programme écrit en C et son équivalent en Java, il est important de reconnaître les mécanismes sous-jacents à l'exécution de ces deux langages.
 
