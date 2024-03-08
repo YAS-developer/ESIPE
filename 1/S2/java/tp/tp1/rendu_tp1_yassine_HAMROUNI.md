@@ -1,6 +1,6 @@
 # TP1 Java Yassine Hamrouni
 
-## Exercice 2 
+## Exercice 2
 
 ### 1- Que se passe-t-il si l'on ne passe pas d'argument lors de l'exécution du programme ?
 
@@ -30,7 +30,7 @@ for(var arg: args){
 
 ```java
 Scanner scanner = new Scanner(System.in);
-int value = scanner.nextInt(); 
+int value = scanner.nextInt();
 ```
 
 ### 3-  Pourquoi nextInt() n'est pas une fonction ? Qu'est nextInt() alors ?
@@ -45,7 +45,7 @@ int value = scanner.nextInt();
 ### 5- Modifier le programme pour qu'il demande deux entiers et affiche la somme de ceux-ci.
 
 ```java
-int value = scanner.nextInt(); 
+int value = scanner.nextInt();
 int value2 = scanner.nextInt();
 System.out.println("Somme: "+(value+value2));
 ```
@@ -72,7 +72,7 @@ System.out.println("x: "+point.x()+" y: "+point.y());
 ```
 
 
-### 6- Quels sont les paramètres et le type de retour de la méthode distance ? 
+### 6- Quels sont les paramètres et le type de retour de la méthode distance ?
 
 #### Le type de retour de la méthode dimension est un double, Le paramétre est un Point.
 
@@ -82,17 +82,16 @@ System.out.println("x: "+point.x()+" y: "+point.y());
 
 #### C:
 
-#### real    0m0,084s
-#### user    0m0,067s
-#### sys     0m0,022s
+#### real    0m0,496s
+#### user    0m0,461s
+#### sys     0m0,032s
 
 #### java:
 
-#### real    0m0,087s
-#### user    0m0,048s
-#### sys     0m0,041s
+### real	0m0,211s
+### user	0m0,171s
+### sys	0m0,038s
 
-#### Pour comprendre les différences de performances entre un programme écrit en C et son équivalent en Java, il est important de reconnaître les mécanismes sous-jacents à l'exécution de ces deux langages.
 
 #### Le programme C est compilé directement en code machine spécifique à la plateforme sur laquelle il s'exécute. Cela signifie que le code exécutable produit par le compilateur C (comme gcc) est optimisé pour l'architecture cible et s'exécute directement sur le matériel, sans intermédiaire, ce qui conduit généralement à une exécution très rapide.
 

@@ -22,7 +22,7 @@ public class LinkExtractor {
             while (matcher.find()) {
                 String url = matcher.group(1);
                 if (url.toLowerCase().contains("java")) {
-                    System.out.println("===>" + url);
+                    System.out.println("===> " + url);
                 }
             }
         }
