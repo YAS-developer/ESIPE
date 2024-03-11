@@ -2,12 +2,12 @@ import java.util.Objects;
 
 public record Book(String title, String author) {
   public Book {
-    this.title = Objects.requireNonNull(title, "Le titre ne doit pas être null.");
-    this.author = Objects.requireNonNull(author, "L'auteur ne doit pas être null.");
+    Objects.requireNonNull(title, "Le titre ne doit pas être null.");
+    Objects.requireNonNull(author, "L'auteur ne doit pas être null.");
   }
 
   public Book(String title) {
-    this("<no author>", title);
+    this(title, "<no author>");
     Objects.requireNonNull(title, "Le titre ne doit pas être null."); // Cette ligne est en fait redondante ici, car la vérification sera déjà effectuée dans le constructeur canonique.
   }
 

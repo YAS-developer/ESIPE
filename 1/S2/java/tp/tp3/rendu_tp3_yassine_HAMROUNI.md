@@ -197,8 +197,71 @@ public class Book2 {
 
 ### 1- Écrire une méthode swap qui échange les valeurs de deux cases d'un tableau : 
 
+```java
+public static void swap(int[] array, int index1, int index2){
+  var size = array.length;
+  if(index1 <0 || index1 > size || index2 < 0 || index2 < 0 ||
+  index2 > size || index1 > index2){
+    System.out.println("Merci de mettre des indices correctes.");
+  }
+  else{
+    if(index1 != index2){                
+      var tmp = array[index1];
+      array[index1] = array[index2];
+      array[index2] = tmp;  
+    }
+  }
+}
+```
 
 
+### 2-  Écrire une méthode indexOfMin qui renvoie l'indice de la valeur minimale d'un tableau. 
 
+```java
+public static int indexOfMin(int[] tableau) {
+  if (tableau == null || tableau.length == 0){
+    throw new IllegalArgumentException("Le tableau ne peut pas être vide ou nul.");
+  }
 
+  int indiceMin = 0;
+  for (int i = 1; i < tableau.length; i++) {
+    if (tableau[i] < tableau[indiceMin]) {
+        indiceMin = i;
+    }
+  }
+  return indiceMin;
+}
+```
 
+### 3- Modifier la méthode indexOfMin en ajoutant deux indices indiquant que l'on cherche l'indice du minimum, non pas sur tout le tableau, mais sur la partie de tableau entre ces deux indices (le premier inclus, le deuxième exclu).
+
+```java
+public static int indexOfMin(int[] tableau, int start, int end) {
+  if (tableau == null || tableau.length == 0 || start < 0 || end > tableau.length || start >= end) {
+    throw new IllegalArgumentException("Paramètres invalides.");
+  }
+
+  int indiceMin = start;
+  for (int i = start + 1; i < end; i++) {
+    if (tableau[i] < tableau[indiceMin]) {
+      indiceMin = i;
+    }
+  }
+  return indiceMin;
+}
+```
+
+### 4- Écrire la méthode sort qui prend un tableau d'entiers en paramètre et qui trie celui-ci en utilisant pour cela les méthodes indexOfMin et swap. 
+
+```java
+public static void sort(int[] array){
+  if (array == null || array.length == 0){
+      throw new IllegalArgumentException("Le tableau ne peut pas être vide ou nul.");
+  }
+
+  for (int i = 0; i < array.length - 1; i++) {
+      int indiceMin = indexOfMin(array, i, array.length);
+      swap(array, i, indiceMin);
+  }
+}
+```
