@@ -24,4 +24,9 @@ public record Book(String title, String author) {
   public String toString(){
     return this.title+" by "+this.author;
   }
+
+  @Override
+  public int hashCode(){
+    return this.title.hashCode() ^ this.author.hashCode();
+  }
 }
