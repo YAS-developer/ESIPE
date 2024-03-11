@@ -1,9 +1,9 @@
 import java.util.Objects;
 
-public record Book(String author, String title) {
+public record Book(String title, String author) {
   public Book {
-    Objects.requireNonNull(author, "L'auteur ne doit pas être null.");
-    Objects.requireNonNull(title, "Le titre ne doit pas être null.");
+    this.title = Objects.requireNonNull(title, "Le titre ne doit pas être null.");
+    this.author = Objects.requireNonNull(author, "L'auteur ne doit pas être null.");
   }
 
   public Book(String title) {
@@ -13,5 +13,15 @@ public record Book(String author, String title) {
 
   public Book withTitle(String newTitle) {
     return new Book(this.author, newTitle);
+  }
+
+
+  public boolean isFromTheSameAuthor(Book b){
+    return this.author.equals(b.author);
+  }
+
+  @Override
+  public String toString(){
+    return this.title+" by "+this.author;
   }
 }

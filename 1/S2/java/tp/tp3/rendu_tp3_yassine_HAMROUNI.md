@@ -90,3 +90,115 @@ public static void main(String[] args){
 }
 ```
 
+## Exercice 2 - Liberté, Égalité, toString
+
+### 1- Qu'affiche le code ci-dessous ?
+
+```java
+  var b1 = new Book("Da Java Code", "Duke Brown");
+  var b2 = b1;
+  var b3 = new Book("Da Java Code", "Duke Brown");
+
+  System.out.println(b1 == b2);
+  System.out.println(b1 == b3);
+```
+#### System.out.println(b1 == b2); affiche true, parce que b1 et b2 pointent vers la même instance en mémoire. L'opérateur == compare les références (les adresses mémoire) des objets, et dans ce cas, les références sont identiques.
+#### System.out.println(b1 == b3); affiche false, parce que même si b1 et b3 représentent des objets avec les mêmes valeurs de champs (titre et auteur), ils sont deux instances distinctes situées à des adresses mémoire différentes. L'opérateur == compare les références, pas le contenu des objets, donc cette comparaison renvoie false.
+
+### 2- Comment faire pour tester si deux objets ont le même contenu ?
+
+```java
+  var b1 = new Book("Da Java Code", "Duke Brown");
+  var b2 = b1;
+  var b3 = new Book("Da Java Code", "Duke Brown");
+
+  System.out.println(b1.equals(b2));
+  System.out.println(b1.equals(b3));
+```
+
+### 3- Écrire une méthode isFromTheSameAuthor() qui renvoie vrai si deux livres sont du même auteur.
+### Et vérifier avec les deux livres suivants : 
+
+```java
+  var book1 = new Book("Da Vinci Code", "Dan Brown");
+  var book2 = new Book("Angels & Demons", new String("Dan Brown"));
+```
+
+#### Réponse:
+
+```java 
+  public boolean isFromTheSameAuthor(Book b){
+    return this.author.equals(b.author);
+  }
+```
+
+### 4 - Comment faire pour que le code suivant
+
+```java
+  var javaBook = new Book("Da Java Code", "Duke Brown");
+  System.out.println(javaBook);
+```
+
+### Affiche
+####  Da Java Code by Duke Brown
+
+### 5- Utiliser l'annotation @Override (java.lang.Override) sur la méthode ajoutée à Book.
+
+### 6- A quoi sert l'annotation @Override ?
+
+#### Réponse 4, 5, 6: Pour afficher cela, Il faut réecrire avec la notation @Override la méthode toString présent sur tout Object, qui retourne par défaut, l'adresse de l'objet.
+
+```java
+  @Override
+  public String toString(){
+    return this.title+" by "+this.author;
+  }
+```
+## Exercice 3 - Liberté, equals, Fraternité
+
+```java
+public class Book2 {
+  private final String title;
+  private final String author;
+
+  public Book2(String title, String author) {
+    this.title = title;
+    this.author = author;
+  }
+
+  public static void main(String[] args) {
+    var book1 = new Book2("Da Vinci Code", "Dan Brown");
+    var book2 = new Book2("Da Vinci Code", "Dan Brown");
+    System.out.println(book1.equals(book2));
+  }
+}
+```
+
+### 1- Quel est le problème ?
+
+#### Le problème avec le code présenté est que la méthode equals par défaut de la classe Object est utilisée pour comparer les instances de Book2. Cette méthode compare les références (adresses mémoire) des objets, et non pas leur contenu. Puisque book1 et book2 sont deux instances distinctes (même si elles ont les mêmes valeurs pour title et author), la comparaison avec equals retournera false. Ce n'est pas le comportement attendu, car nous voulons comparer les objets basés sur le contenu de leurs attributs, et non pas sur leurs références.
+
+### 2- Comment corriger le problème si on s'entête à utiliser une classe ? 
+
+#### Nous devons surcharger (override) la méthode equals dans notre classe Book2. En surchargeant cette méthode, nous pouvons définir notre propre logique de comparaison qui vérifiera l'égalité des titres et des auteurs des deux livres.
+
+```java
+@Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Book2) {
+      Book2 otherBook = (Book2) obj;
+      return this.title.equals(otherBook.title) && this.author.equals(otherBook.author);
+    }
+    return false;
+  }
+```
+
+## Exercice 4
+
+### 1- Écrire une méthode swap qui échange les valeurs de deux cases d'un tableau : 
+
+
+
+
+
+
