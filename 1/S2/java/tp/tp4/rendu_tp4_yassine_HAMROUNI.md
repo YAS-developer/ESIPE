@@ -123,3 +123,69 @@ public Book findByTitle(String title) {
    return null; 
  }
 ```
+
+### 4- Comment le compilateur compile-t-il une boucle foreach sur une collection ?
+
+#### Lorsqu'une boucle foreach est compilée, le compilateur la transforme en un itérateur à l'aide de la méthode iterator() de la collection, puis utilise cet itérateur pour parcourir la collection.
+
+#### javap -c Library.class: 
+```
+public src.Book findByTitle(java.lang.String);
+  Code:
+      0: aload_0
+      1: getfield      #17                 // Field books:Ljava/util/ArrayList;
+      4: invokevirtual #32                 // Method java/util/ArrayList.iterator:()Ljava/util/Iterator;
+      7: astore_3
+      8: goto          34
+    11: aload_3
+    12: invokeinterface #36,  1           // InterfaceMethod java/util/Iterator.next:()Ljava/lang/Object;
+    17: checkcast     #42                 // class src/Book
+    20: astore_2
+    21: aload_2
+    22: invokevirtual #44                 // Method src/Book.title:()Ljava/lang/String;
+    25: aload_1
+    26: invokevirtual #48                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+    29: ifeq          34
+    32: aload_2
+    33: areturn
+    34: aload_3
+    35: invokeinterface #53,  1           // InterfaceMethod java/util/Iterator.hasNext:()Z
+    40: ifne          11
+    43: aconst_null
+    44: areturn
+```
+
+### 5- Expliquer pourquoi la méthode findByTitle doit renvoier null plutôt que de lever une exception.
+
+### Cela permet à l'utilisateur de gérer le cas où aucun livre n'est trouvé de manière plus souple et plus adaptée à la logique de son application.
+
+
+### 6- Écrire une méthode toString permettant d'afficher les livres de la bibliothèque dans l'ordre d'insertion, un livre par ligne.
+
+```java
+@Override
+	public String toString() {
+		String str = new String();
+		for(Book b: books) {
+			str += b+"\n";
+		}
+		return str;
+	}
+```
+
+
+## Exercice 3 - Librarie 2 (le retour de la vengeance)
+
+### 1-Quelle est la complexité de la méthode findByTitle de la classe Library ?
+
+#### Dans le pire des cas, la complexité de cette méthode est O(n).
+
+
+
+
+#### La classe HashMap utilise des paires clé-valeur pour stocker les éléments. Elle utilise une fonction de hachage pour calculer un index où chaque paire est stockée dans le tableau interne de la classe. 
+
+
+
+
+

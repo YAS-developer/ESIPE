@@ -4,7 +4,10 @@ public class Main {
 	
   public static void main(String[] args){
   	var library = new Library();
-//    library.add(book);
-//    System.out.println(library.findByTitle("Da Vinci Code"));
+  	var book = new Book("Da Vinci Code", "Da firenze");
+    library.add(book);
+    library.add(new Book("Da Vinci Code1212", "Da firenze1213131"));
+    library.add(new Book("Heae", "Rasc"));
+    System.out.println(library.toString());
   }
 }
