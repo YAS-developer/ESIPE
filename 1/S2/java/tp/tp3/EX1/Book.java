@@ -8,7 +8,6 @@ public record Book(String title, String author) {
 
   public Book(String title) {
     this(title, "<no author>");
-    Objects.requireNonNull(title, "Le titre ne doit pas être null."); // Cette ligne est en fait redondante ici, car la vérification sera déjà effectuée dans le constructeur canonique.
   }
 
   public Book withTitle(String newTitle) {
