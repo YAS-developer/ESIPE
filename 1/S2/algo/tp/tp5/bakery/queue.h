@@ -2,7 +2,19 @@
 #define QUEUE_H
 #include "customer.h"
 
-typedef struct _queue queue;
+
+typedef struct _link {
+    customer* c;
+    struct _link* next;
+} link;
+
+
+typedef struct _queue {
+    link* first;
+    link* last;
+    int size;
+} queue;
+
 
 /**
  * Create and return a pointer to a new queue.
@@ -28,5 +40,7 @@ void enqueue_q(queue *q, customer *c);
  * Remove and a return a pointer to the first customer in the queue.
  */
 customer *dequeue_q(queue *q);
+
+void display_q(queue *q);
 
 #endif /* QUEUE_H */

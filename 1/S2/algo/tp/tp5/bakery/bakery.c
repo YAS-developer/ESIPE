@@ -1,104 +1,155 @@
 #include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <time.h>
 #include "event.h"
 #include "customer.h"
 #include "queue.h"
 #include "prioqueue.h"
-#include <stdlib.h>
 
 #define N_VENDORS 3
-#define CLOSING_TIME 
+#define CLOSING_TIME 360
+#define ARRIVAL_RATE (1.0/60)
+#define MEAN_SERVICE_TIME 150
 
-int current_time=0;
 prioqueue*  event_queue;
 queue*      customer_queue;
 customer*   vendor[N_VENDORS];
+int     current_time;
 
-
-void display(){
-    printf("%d | ", current_time);
-    for(int i=0; i<N_VENDORS; i++){
-        if(vendor[i] == NULL){
-            printf("_");
-        }
-        else{
-            printf("X");
-        }
-    }
-    printf(" | ");
-
-    for(int i=0; i<size_q(customer_queue); i++){
-        printf("X");
-    } 
-    printf("\n");
+double normal_delay(double mean) {
+    return -mean*log(1-((double)rand()/RAND_MAX));
 }
 
 void add_customer(customer *c){
-    for(int i=0; i<N_VENDORS; i++){
+    int ok = 0;
+    for(int i = 0; i < N_VENDORS; i++){
         if(vendor[i] == NULL){
+            ok = 1;
             vendor[i] = c;
-            break; 
-        }
-        else if(i == N_VENDORS-1 && vendor[i] != NULL){
-            enqueue_q(customer_queue, c);
+            event* ev = create_departure(current_time + normal_delay(MEAN_SERVICE_TIME), c);
+            insert_pq(event_queue, ev);
+            break;
         }
     }
+
+    if(ok == 0){
+        enqueue_q(customer_queue, c);
+    }
 }
+
+// void remove_customer(customer *c){
+
+//     int k = 0;
+
+//     /* Libérer le vendeur */
+//     for(int i = 0; i < N_VENDORS; i++){
+//         if(vendor[i] == c){
+//             free_customer(vendor[i]);
+//             vendor[i] = NULL;
+//             k = i;
+//             break;
+//         }
+//     }
+
+//     if(size_q(customer_queue) > 0){
+//         customer *c2 = dequeue_q(customer_queue);
+//         vendor[k] = c2; 
+//         event* ev = create_departure(current_time + normal_delay(MEAN_SERVICE_TIME), c2);
+//         insert_pq(event_queue, ev);
+//     }
+    
+
+// }
 
 void process_arrival(event *e) {
     add_customer(e->c);
-    
-    customer *cus= create_customer(current_time+60);
-    event *eve = create_arrival(current_time+60, cus);
-    insert_pq(event_queue, eve);
-
-    free(eve);
-    free(cus);
+    customer* client = create_customer(current_time + normal_delay(1.0/ARRIVAL_RATE));
+    event* ev = create_arrival(current_time + normal_delay(1.0/ARRIVAL_RATE), client);
+    insert_pq(event_queue, ev);
 }
 
-void process_departure(event *e){
+// void process_departure(event *e) {
+//     remove_customer(e->c);
+// }
 
-}
 
 
-void check_pq(){
-    while(size_pq(event_queue) > 0){
-        event * e = remove_min_pq(event_queue);
-        current_time = e->etime;
-        // printf("Heure d'événement: %d\n", current_time);
-
-        if(e->type == EVENT_ARRIVAL){
-            process_arrival(e);
+void afficher(){
+    printf("%d", current_time);
+    printf(" | ");
+    for(int i = 0; i < N_VENDORS; i++){
+        if(vendor[i] != NULL){
+            printf("X");
         }
-        else if(e->type == EVENT_DEPARTURE){
-            process_departure(e);
+        else{
+            printf("_");
         }
-
-        display();
-        free(e);
     }
+    printf(" | ");
+    for(int i = 0; i < size_q(customer_queue); i++){
+        printf("X");
+    }
+    printf("\n");
 }
 
 int main() {
 
-    event_queue = create_pq();
-    customer_queue = create_q();
+    srand(time(NULL));
+
+    // current_time = 0;
+    // event_queue = create_pq();
+    // customer_queue = create_q();
+
+
+    // for(int i = 0; i < N_VENDORS; i++){
+    //     vendor[i] = NULL;
+    // }
+
+    // customer* client1 = create_customer(normal_delay(1.0/ARRIVAL_RATE));
+
+    // event* e1 = create_arrival(normal_delay(1.0/ARRIVAL_RATE), client1);
+    // insert_pq(event_queue, e1);
+
     
+    // while (size_pq(event_queue) > 0 && current_time < CLOSING_TIME)
+    // {
+    //     event* e = remove_min_pq(event_queue);   
+    //     current_time = e->etime;
+    //     if(e->type == EVENT_ARRIVAL){
+    //         process_arrival(e);
+    //     }
+    //     else if(e->type == EVENT_DEPARTURE){
+    //         process_departure(e);
+    //     }
+    //     afficher();
+    //     free_event(e);
+    // }
 
-    customer* c = create_customer(2);
-    event* ev = create_arrival(100, c);
-    insert_pq(event_queue,  ev);
+    // free_pq(event_queue);
+    // for(int i = 0; i < N_VENDORS; i++){
+    //     if(vendor[i] != NULL){
+    //         free_customer(vendor[i]);
+    //     }
+        
+    // }
 
+    // free_q(customer_queue);
 
-    check_pq();
+    queue *q = create_q();
 
-    free_pq(event_queue);
-    free_q(customer_queue);
-    for(int i=0; i<N_VENDORS; i++)
-        free_customer(vendor[i]);
+    customer* client1 = create_customer(13);
 
-    free(c);
-    free(ev);
+    enqueue_q(q, client1);
+    // enqueue_q(q, client1);
+    // enqueue_q(q, client1);
+    // enqueue_q(q, client1);
 
+    printf("%d\n",  q->last->c->atime);
+
+    // display_q(q);
+
+    free(q);
 
     return 0;
 }
