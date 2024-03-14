@@ -180,10 +180,92 @@ public src.Book findByTitle(java.lang.String);
 
 #### Dans le pire des cas, la complexité de cette méthode est O(n).
 
-
+### 2- Regarder la javadoc de la classe java.util.HashMap ainsi que celle de ses méthodes put et get.
+### Quelle est la structure de données algorithmique dont java.util.HashMap est une implantation ? 
 
 
 #### La classe HashMap utilise des paires clé-valeur pour stocker les éléments. Elle utilise une fonction de hachage pour calculer un index où chaque paire est stockée dans le tableau interne de la classe. 
+
+### Sachant que l'on veut améliorer la performance de findByTitle comment peut on utiliser la classe java.util.HashMap pour cela ?
+### Quelle sera alors la complexité de findByTitle ? 
+
+
+
+
+### 3- Commenter entièrement le code de la classe Library (pour ne pas perdre votre travail) et recopier les signatures des méthodes commentées. Pour l'instant, laisser la méthode toString de côté. Modifier les champs afin d'utiliser une java.util.HashMap et implanter les méthodes le constructeur et les méthodes add et findByTitle.
+
+```java
+  public Book findByTitle(String title) {
+    return books.get(title);
+  }
+``` 
+
+#### La complexité de findByTitle avec cette approche est de O(1), c'est-à-dire qu'elle permet une recherche en temps constant.
+
+
+### 4- Expliquer pourquoi, ici, on a préféré utiliser une classe pour représenter Libary plutôt qu'un record. 
+
+#### On a préféré utiliser une classe pour représenter Library plutôt qu'un record pour permettre une modification dynamique de la collection de livres (ajout, recherche par titre, etc.) et pour encapsuler le comportement spécifique à la gestion d'une bibliothèque, ce qui n'est pas directement supporté par la structure immuable et principalement destinée à la modélisation de données simples qu'offre un record.
+
+
+### 5- Pour l'implantation de la méthode toString, quelle méthode de java.util.HashMap doit-on utiliser pour obtenir l'ensemble des valeurs stockées ? Si vous ne savez pas, lisez la javadoc !
+### Écrire la méthode toString. 
+
+```java
+@Override
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    for(Book book : books.values()) {
+        sb.append(book.toString()).append("\n");
+    }
+    return sb.toString();
+}
+```
+### 6-  En fait, la méthode toString ne fait pas exactement ce qui est demandé, car elle ne permet pas d'afficher les éléments dans l'ordre d'insertion. Sachant qu'il existe une classe LinkedHashMap, comment peut-on résoudre ce problème ? 
+
+#### Avec LinkedHashMap, l'ordre dans lequel les livres ont été ajoutés à la bibliothèque sera préservé, et la méthode toString reflétera cet ordre, garantissant ainsi que les éléments sont affichés dans l'ordre d'insertion.
+
+```java
+this.books = new LinkedHashMap<>();
+```
+
+
+### 7- On souhaite ajouter une méthode removeAllBooksFromAuthor qui prend un nom d'auteur en paramètre et supprime tous les livres de cet auteur de la bibliothèque.
+### Sachant qu'il existe une méthode remove dans la classe java.util.LinkedHashMap, écrire une implantation qui parcourt tous les livres avec une boucle for each et supprime ceux de l'auteur avec remove.
+### Pourquoi votre implantation lève-t-elle une exception dans l'exemple suivant ? 
+
+#### L'utilisation d'une boucle for-each pour supprimer des éléments d'une LinkedHashMap directement avec la méthode remove lors du parcours cause une ConcurrentModificationException. Cette exception survient car modifier la collection pendant qu'elle est parcourue est interdit, car cela peut compromettre l'intégrité de l'itérateur utilisé implicitement par la boucle for-each. Pour éviter cela, il faut d'abord collecter les clés des éléments à supprimer dans une liste séparée, puis parcourir cette liste pour supprimer les éléments de la collection originale, évitant ainsi toute modification concurrente.
+
+
+
+### 8- En fait, il existe une méthode remove sur l'interface Iterator qui n'a pas ce problème, car le parcours et la suppression se font sur le même itérateur.
+### Implanter correctement la méthode removeAllBooksFromAuthor. 
+
+```java
+public void removeAllBooksFromAuthor(String author) {
+    List<String> titlesToRemove = new ArrayList<>();
+    
+  
+    for (Map.Entry<String, Book> entry : books.entrySet()) {
+        if (entry.getValue().author().equals(author)) {
+            titlesToRemove.add(entry.getKey());
+        }
+    }
+    
+    for (String title : titlesToRemove) {
+        books.remove(title);
+    }
+}
+```
+
+
+### 9- 
+
+```java
+public void removeAllBooksFromAuthor(String author) {
+  books.values().removeIf(book -> book.author().equals(author));
+}
+```
 
 
 

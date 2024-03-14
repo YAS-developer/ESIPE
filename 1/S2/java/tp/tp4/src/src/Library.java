@@ -30,7 +30,7 @@ public class Library {
     private Map<String, Book> books;
 
     public Library() {
-        this.books = new HashMap<>();
+        this.books = new HashMap<String, Book>();
     }
 
     public void add(Book book) {
@@ -44,10 +44,21 @@ public class Library {
 
 // @Override
 //	public String toString() {
-//		String str = new String();
+//		StringBuilder sb = new StringBuilder();
 //		for(Book b: books) {
-//			str += b+"\n";
+//			sb.append(b).append("\n");
 //		}
-//		return str;
+//		return sb;
 //	}
+    
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(Book book : books.values()) {
+            sb.append(book.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
 }
