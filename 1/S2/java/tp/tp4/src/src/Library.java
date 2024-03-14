@@ -1,36 +1,14 @@
 package src;
 
-//import java.util.ArrayList;
-//
-//public class Library {
-// private ArrayList<Book> books;
-//
-// public Library() {
-//   this.books = new ArrayList<Book>();
-// }
-//
-// public void add(Book book) {
-//	 books.add(book);
-// }
-//
-// public Book findByTitle(String title) {
-//   for (Book book : books) {
-//     if (book.title().equals(title)) {
-//    	 return book;
-//     }
-//   }
-//   return null; 
-// }
-// 
- 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Library {
     private Map<String, Book> books;
 
     public Library() {
-        this.books = new HashMap<String, Book>();
+        this.books = new LinkedHashMap<String, Book>();
     }
 
     public void add(Book book) {
@@ -40,16 +18,26 @@ public class Library {
     public Book findByTitle(String title) {
         return books.get(title);
     }
-
-
-// @Override
-//	public String toString() {
-//		StringBuilder sb = new StringBuilder();
-//		for(Book b: books) {
-//			sb.append(b).append("\n");
-//		}
-//		return sb;
-//	}
+    
+    public void removeAllBooksFromAuthor(String author) {
+        books.values().removeIf(book -> book.author().equals(author));
+    }
+    
+//    public void removeAllBooksFromAuthor(String author) {
+//    	ArrayList<String> titlesToRemove = new ArrayList<>();
+//        
+//     
+//        for (Map.Entry<String, Book> entry : books.entrySet()) {
+//            if (entry.getValue().author().equals(author)) {
+//                titlesToRemove.add(entry.getKey());
+//            }
+//        }
+//        
+//    
+//        for (String title : titlesToRemove) {
+//            books.remove(title);
+//        }
+//    }
     
     
     @Override
@@ -60,5 +48,15 @@ public class Library {
         }
         return sb.toString();
     }
-
+    
+// @Override
+//	public String toString() {
+//		StringBuilder sb = new StringBuilder();
+//		for(Book b: books) {
+//			sb.append(b).append("\n");
+//		}
+//		return sb;
+//	}
+    
+   
 }
