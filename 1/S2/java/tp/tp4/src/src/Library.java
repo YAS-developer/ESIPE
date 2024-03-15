@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Library {
-    private Map<String, Book> books;
+    private final Map<String, Book> books;
 
     public Library() {
         this.books = new LinkedHashMap<String, Book>();
