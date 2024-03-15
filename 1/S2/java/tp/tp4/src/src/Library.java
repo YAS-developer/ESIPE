@@ -42,8 +42,8 @@ public class Library {
     
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for(Book book : books.values()) {
+        var sb = new StringBuilder();
+        for(var book : books.values()) {
             sb.append(book.toString()).append("\n");
         }
         return sb.toString();
@@ -51,8 +51,8 @@ public class Library {
     
 // @Override
 //	public String toString() {
-//		StringBuilder sb = new StringBuilder();
-//		for(Book b: books) {
+//		var sb = new StringBuilder();
+//		for(var b: books) {
 //			sb.append(b).append("\n");
 //		}
 //		return sb;
