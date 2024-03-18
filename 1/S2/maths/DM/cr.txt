@@ -1,0 +1,4 @@
+Exercice 1
+
+Un problème classique pouvant être résolu par un système d'équations linéaires est la répartition des coûts dans un projet collaboratif ou un voyage de groupe. 
+Imaginons que trois amis, Alice, Bob, et Charlie, partent en voyage. Ils paient différents coûts (logement, nourriture, transport) et souhaitent équilibrer leurs dépenses à la fin du voyage de sorte que chacun ait dépensé le même montant total. Les coûts initiaux sont inégaux : Alice a payé 200€, Bob 150€, et Charlie 250€. On peut résoudre ce problème en établissant un système d'équations représentant la différence de coûts et en trouvant combien chaque personne doit donner ou recevoir pour équilibrer les dépenses
