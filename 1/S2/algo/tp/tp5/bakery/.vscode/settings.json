@@ -17,6 +17,5 @@
         "locale": "c",
         "condition_variable": "c",
         "algorithm": "c"
-    },
-    "C_Cpp.errorSquiggles": "Disabled"
+    }
 }

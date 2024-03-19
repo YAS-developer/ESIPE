@@ -1,0 +1,20 @@
+
+6. Indiquer dans le fichier reponse.txt les complexités souhaitées des fonctions
+enqueue_q et dequeue_q et comment vous pouvez vérifier (grossièrement) qu’elles sont
+les bonnes.
+ 
+reponse: la complexite des fonctions enqueue et dequeue est de O(1) car il n'y a pas de boucle. On ne parcourt rien, on fait seulement ajouter ou retirer un element de la liste
+
+
+7. Indiquer dans le fichier reponse.txt les complexités souhaitées des fonctions
+insert_pq et remove_min_pq et comment vous pouvez vérifier (grossièrement) qu’elles
+sont les bonnes.
+
+
+reponse: Idem pour remove_min_pq(prioqueue *q), elle ne depend pas de la taille de la prioqueue. 
+Cependant pour insert_pq(prioqueue *q, event *e), La complexité dépend du nombre d'éléments déjà présents dans la file, car en pire cas, elle pourrait avoir à déplacer chaque élément une fois. Donc, la complexité est dont O(n).
+
+
+2. Essayer des valeurs différentes pour les paramètres N_VENDORS, ARRIVAL_RATE et
+MEAN_SERVICE_TIME et observer les effets sur le temps moyen de réponse. Décrire et
+discuter les observations dans le fichier reponse.txt

@@ -1,8 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
+#include "customer.h"
 
-queue *create_q() {
+typedef struct _link {
+    customer* c;
+    struct _link* next;
+} link;
+
+
+struct _queue {
+    link* first;
+    link* last;
+    int size;
+};
+
+
+queue* create_q() {
     queue *q = (queue*)malloc(sizeof(queue));
     q->first = NULL;
     q->last = NULL;
@@ -11,6 +25,16 @@ queue *create_q() {
 }
 
 void free_q(queue *q) {
+    link *current = q->first;
+    link *next;
+
+    while (current != NULL) {
+        next = current->next; 
+        free_customer(current->c); 
+        free(current);
+        current = next; 
+    }
+
     free(q);
 }
 
@@ -28,58 +52,74 @@ void enqueue_q(queue *q, customer *c){
         q->first = l;
         q->last = l;
     }else{
-        l->next = q->last;
-        q->last=l;
+        q->last->next = l;
+        q->last = l;
     }
     
     q->size++;
-    // printf("%d\n",  q->last->c->atime);
-    free(l);
 }
 
-customer* dequeue(queue* q){
-    // if(q->size == 0){
-    //     return NULL;
-    // }
-    // else if(q->size == 1){
-    //     customer *c  = q -> last;
+customer* dequeue_q(queue *q){
 
-    // }
-    return NULL;
+    if (q == NULL || q->first == NULL) {
+        printf("La file est vide ou non existante.\n");
+        return NULL; 
+    }
+
+    link* head = q->first; 
+    customer* c = head->c; 
+
+    q->first = q->first->next; 
+    if (q->first == NULL) {
+        q->last = NULL; 
+    }
+    q->size--; 
+
+    free(head); 
+
+    return c; 
+    
+
 }
-
-
 
 void display_q(queue *q){
-    link *l=NULL;
-//    l=q->first;
-    if (q->first->c == NULL)
-    {
-    printf("TEST");
+
+    if (q == NULL || q->size == 0) {
+        printf("La file est vide.\n");
+        return;
     }
 
+    link *current = q->first;
 
-/*
-    for(l=q->first; l->next != NULL; l = l->next){
-        printf("%d\n", l->c->atime);
+    while (current != NULL) {
+        printf("Client : %d\n", current->c->atime);  
+        current = current->next;
     }
-*/
 }
 
 // int main(int argc, char const *argv[])
 // {
 //     queue* q = create_q();
-    // customer* client1 = create_customer(60);
-    // customer* client2 = create_customer(60);
-    // customer* client3 = create_customer(60);
-    // customer* client4 = create_customer(60);
-    // customer* client5 = create_customer(60);
+//     customer* c1 = create_customer(35);
+//     customer* c2 = create_customer(67);
+//     customer* c3 = create_customer(45);
+//     customer* c4 = create_customer(24);
+//     customer* c5 = create_customer(60);
 
-    // enqueue_q(q,client1);
-    // enqueue_q(q,client2);
-    // enqueue_q(q,client3);
-    // enqueue_q(q,client4);
-    // enqueue_q(q,client5);
+//     enqueue_q(q,c1);
+//     enqueue_q(q,c2);
+//     enqueue_q(q,c3);
+//     enqueue_q(q,c4);
+//     enqueue_q(q,c5);
+    
+//     display_q(q);
+
+//     customer* t = dequeue_q(q);
+//     free_customer(t);
+//     printf("\n");
+
+//     display_q(q);
+//     free_q(q);
     
 //     return 0;
 // }
