@@ -1,0 +1,48 @@
+
+6. Indiquer dans le fichier reponse.txt les complexités souhaitées des fonctions enqueue_q et dequeue_q et comment vous pouvez vérifier (grossièrement) qu’elles sont les bonnes.
+
+Complexité de enqueue_q : 
+    La complexité souhaité est de O(1)
+
+Complexité de dequeue_q :
+    La complexité souhaité est de O(1)
+
+Pour vérifier grossièrement la complexité, on peut mesurer le temps d'execution de la fonction avec différentes queue de différentes tailles.
+
+
+
+
+
+
+7. Indiquer dans le fichier reponse.txt les complexités souhaitées des fonctions
+insert_pq et remove_min_pq et comment vous pouvez vérifier (grossièrement) qu’elles
+sont les bonnes.
+
+
+Complexité de insert_pq : 
+    La complexité souhaité est de O(n)  (n est le nombre d'élements dans la file priorité).
+
+    Mesurer le temps d'execution de la fonction pour différentes tailles de la file, voir comment il augmente avec la taille. Il devrait augmenter de façon linéaire.
+
+Complexité de remove_min_pq :
+    La complexité souhaité est de O(1)
+
+    Observer le temps d'execution de la fonction, pour différentes taille, il devrait rester constant car c'est de complexité constante
+
+
+
+
+
+
+
+2. Essayer des valeurs différentes pour les paramètres N_VENDORS, ARRIVAL_RATE et
+MEAN_SERVICE_TIME et observer les effets sur le temps moyen de réponse. Décrire et
+discuter les observations dans le fichier reponse.txt
+
+
+    Moins il y a de vendeurs, plus le temps moyen de réponse est élevé. Cela s'explique par le fait que le nombre de vendeurs détermine directement la capacité de traitement des clients à un moment donné. Avec moins de vendeurs disponibles pour servir les clients, ceux-ci doivent attendre plus longtemps avant qu'un vendeur ne soit libre pour les prendre en charge. Cela conduit à des files d'attente plus longues et augmente le temps d'attente global pour les clients. 
+
+    S'il y a beaucoup de vendeurs et que l'ARRIVAL_RATE est faible, cela signifie que les clients arrivent moins fréquemment, ce qui rend l'excès de vendeurs inutile, car tous les vendeurs ne seront jamais occupés simultanément.
+
+    Plus le MEAN_SERVICE_TIME est bas, moins le temps de réponse est élevé, c'est tout à fait normal, car MEAN_SERVICE_TIME représente la moyenne pour servir un client. Un MEAN_SERVICE_TIME plus court signifie que le système peut traiter les clients à un rythme plus rapide,
+
