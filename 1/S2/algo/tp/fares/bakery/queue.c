@@ -29,11 +29,10 @@ void free_q(queue *q) {
     link *next;
 
     while (current != NULL) {
-        next = current->next; // Sauvegarder le pointeur suivant avant de libérer l'actuel
-        // Ici, vous libérez le client et le maillon actuel
+        next = current->next; 
         free_customer(current->c); 
         free(current);
-        current = next; // Passer au prochain maillon
+        current = next; 
     }
 
     free(q);
@@ -64,21 +63,21 @@ customer* dequeue_q(queue *q){
 
     if (q == NULL || q->first == NULL) {
         printf("La file est vide ou non existante.\n");
-        return NULL; // Retourne NULL si la file est vide ou si q est NULL.
+        return NULL; 
     }
 
-    link* head = q->first; // Sauvegarde de la tête de la file pour la libération.
-    customer* c = head->c; // Sauvegarde du client à retourner.
+    link* head = q->first; 
+    customer* c = head->c;
 
-    q->first = q->first->next; // Met à jour la tête de la file.
+    q->first = q->first->next; 
     if (q->first == NULL) {
-        q->last = NULL; // Si la file est maintenant vide, ajuste aussi le dernier élément.
+        q->last = NULL; 
     }
-    q->size--; // Décrémente la taille de la file.
+    q->size--; 
 
-    free(head); // Libère la cellule de la liste, mais pas le client.
+    free(head); 
 
-    return c; // Retourne le client extrait.
+    return c; 
     
 
 }
@@ -93,9 +92,7 @@ void display_q(queue *q){
     link *current = q->first;
 
     while (current != NULL) {
-        // Afficher l'identifiant du client ici
-        // Adaptez cette partie en fonction de la structure de `customer`
-        printf("Client : %d\n", current->c->atime);  // Exemple fictif, remplacez `id` par la propriété appropriée
+        printf("Client : %d\n", current->c->atime);  
         current = current->next;
     }
 }

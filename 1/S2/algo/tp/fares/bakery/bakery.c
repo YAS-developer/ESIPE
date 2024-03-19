@@ -27,10 +27,10 @@ double normal_delay(double mean) {
 }
 
 void add_customer(customer *c){
-    int ok = 0;
+    int customerWithVendor = 0;
     for(int i = 0; i < N_VENDORS; i++){
         if(vendor[i] == NULL){
-            ok = 1;
+            customerWithVendor = 1;
             vendor[i] = c;
             event* ev = create_departure(current_time + normal_delay(MEAN_SERVICE_TIME), c);
             insert_pq(event_queue, ev);
@@ -38,7 +38,7 @@ void add_customer(customer *c){
         }
     }
 
-    if(ok == 0){
+    if(customerWithVendor == 0){
         enqueue_q(customer_queue, c);
     }
 }
@@ -47,7 +47,6 @@ void remove_customer(customer *c){
 
     int k = 0;
 
-    /* Libérer le vendeur */
     for(int i = 0; i < N_VENDORS; i++){
         if(vendor[i] == c){
             free_customer(vendor[i]);
