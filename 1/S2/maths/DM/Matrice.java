@@ -42,16 +42,17 @@ public class Matrice {
 	 * @return somme this + M : tableau n x m
 	 */
 	public Matrice plus(Matrice M) {
-		if (this.lignes != M.lignes || this.colonnes != M.colonnes) {
-			throw new IllegalArgumentException("Les dimensions des matrices ne correspondent pas.");
-		}
-		long[][] somme = new long[this.lignes][this.colonnes];
-		for (int i = 0; i < this.lignes; i++) {
-			for (int j = 0; j < this.colonnes; j++) {
-				somme[i][j] = this.elements[i][j] + M.elements[i][j];
-			}
-		}
-		return new Matrice(somme);
+		if (this.n != M.n || this.m != M.m) {
+        	throw new IllegalArgumentException("Les dimensions des matrices ne correspondent pas.");
+        }
+
+        Rational[][] somme = new Rational[this.n][this.m];
+        for (int i = 0; i < this.n; i++) {
+            for (int j = 0; j < this.m; j++) {
+                somme[i][j] = this.coeff[i][j].plus(M.coeff[i][j]);
+            }
+        }
+        return new Matrice(somme);
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class Matrice {
 				prod[i][j] = Rational.ZERO; // Initialiser chaque élément du produit à 0 (rationnel)
 				for (int k = 0; k < m; k++) {
 					// Accumuler la somme des produits des éléments correspondants
-					prod[i][j] = prod[i][j].plus(elements[i][k].times(M.elements[k][j]));
+					prod[i][j] = prod[i][j].plus(coeff[i][k].times(M.coeff[k][j]));
 				}
 			}
 		}
@@ -90,7 +91,7 @@ public class Matrice {
 		Rational[][] trans = new Rational[m][n];
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < m; j++) {
-				trans[j][i] = elements[i][j];
+				trans[j][i] = coeff[i][j];
 			}
 		}
 		return new Matrice(trans);
@@ -107,9 +108,9 @@ public class Matrice {
 		if (i < 0 || i >= n || j < 0 || j >= n) {
         	throw new IllegalArgumentException("Indices de ligne hors limites");
 		}
-		Rational[] temp = elements[i];
-		elements[i] = elements[j];
-		elements[j] = temp;
+		Rational[] temp = coeff[i];
+		coeff[i] = coeff[j];
+		coeff[j] = temp;
 	}
 
 	/**
@@ -125,7 +126,7 @@ public class Matrice {
 		}
 		for (int k = 0; k < m; k++) {
 			// Pour chaque colonne k, ajouter à l'élément de la ligne j, 'a' fois l'élément correspondant de la ligne i
-			elements[j][k] = elements[j][k].plus(elements[i][k].times(a));
+			coeff[j][k] = coeff[j][k].plus(coeff[i][k].times(a));
 		}
 	}
 
@@ -142,7 +143,7 @@ public class Matrice {
 		}
 		for (int k = 0; k < m; k++) {
 			// Multiplier chaque élément de la ligne i par 'a'
-			elements[i][k] = elements[i][k].times(a);
+			coeff[i][k] = coeff[i][k].times(a);
 		}
 	}
 
@@ -192,16 +193,24 @@ public class Matrice {
 	 */
 	public Matrice inverse() {
 		if (m != n) {
-			throw new IllegalArgumentException("Dimensions incorrectes");
+        	throw new IllegalArgumentException("Dimensions incorrectes");	
 		}
 		Matrice clone = clone();
 		Matrice id = identity();
-		/** Remplir ici le code manquant */
-		/** On suggère très fortement d'utiliser l'algorithme du pivot de Gauss */
-		/** 
-                 *  S'il s'avère que la matrice this n'a pas d'inverse :
-		 *    throw new ArithmeticException("Division par zéro");
-                 */
+
+		// Appliquer l'algorithme du pivot de Gauss à la copie de la matrice d'origine
+
+		// Assurez-vous que chaque ligne de la matrice échelonnée réduite a un élément non nul sur sa diagonale
+		// Sinon, lancer une exception
+		for (int i = 0; i < n; i++) {
+			if (clone.coeff[i][i].equals(Rational.ZERO)) {
+				throw new ArithmeticException("Matrice non inversible");
+			}
+		}
+
+		// Utiliser les opérations de ligne pour transformer la matrice d'identité en l'inverse de la matrice d'origine
+
+		// Retourner la matrice inverse
 		return id;
 	}
 
@@ -214,17 +223,41 @@ public class Matrice {
 	 * @return vecteur colonne a tel que this * a = b : tableau n x 1
 	 */
 	public Matrice resoud(Matrice b) {
-		if (m != b.m) {
+		if (m != b.n) {
 			throw new IllegalArgumentException("Dimensions incorrectes");
 		}
 		Rational[][] a = new Rational[n][1];
-		/** Remplir ici le code manquant */
-		/** 
-                 *  S'il s'avère que l'équation n'a pas de solution :
-		 *    throw new ArithmeticException("Pas de solution");
-		 *  Si elle a plusieurs solutions :
-		 *    on peut renvoyer n'importe quelle solution.
-                 */
+		Matrice augmente = new Matrice(new Rational[n][m + 1]); // Matrice augmentée [this | b]
+
+		// Remplir la matrice augmentée
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				augmente.coeff[i][j] = coeff[i][j];
+			}
+			augmente.coeff[i][m] = b.coeff[i][0]; // La colonne supplémentaire contient les valeurs de b
+		}
+
+		// Appliquer l'algorithme de Gauss-Jordan à la matrice augmentée
+
+		// Vérifiez s'il y a une solution unique en examinant la forme échelonnée réduite
+		for (int i = 0; i < n; i++) {
+			boolean ligneNulle = true;
+			for (int j = 0; j < m; j++) {
+				if (!augmente.coeff[i][j].equals(Rational.ZERO)) {
+					ligneNulle = false;
+					break;
+				}
+			}
+			if (ligneNulle && !augmente.coeff[i][m].equals(Rational.ZERO)) {
+				throw new ArithmeticException("Pas de solution");
+			}
+		}
+
+		// Extrayez les solutions de la matrice résultante
+		for (int i = 0; i < n; i++) {
+			a[i][0] = augmente.coeff[i][m];
+		}
+
 		return new Matrice(a);
 	}
 
