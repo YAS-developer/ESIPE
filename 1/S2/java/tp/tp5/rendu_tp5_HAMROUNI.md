@@ -1,39 +1,170 @@
-# TP4 Java Yassine Hamrouni
+# TP5 Java Yassine Hamrouni
 
-## Exercice 1 - Eclipse
+## Exercice 1 - Manifeste d'un porte conteneur
 
-### 4- Écrire une classe Main qui affiche Hello Eclipse.
+### 1- Écrire le type Container
 
 ```java
-public class Main {
-  public static void main(String[] args){
-  	System.out.println("Hello");
+public record Container(String destination, int weight){
+  public Container{
+    Objects.requireNonNull(destination, "Destination required");
+    if(weight < 0){
+      throw new IllegalArgumentException("Weight must be positive.");
+    }
   }
 }
 ```
 
-### 5-1 Que fait sysout + Ctrl + Space dans un main ?
-
-#### C'est un raccourci pour faire un System.out.println(). 
-
-### 5-2 Que fait toStr + Ctrl + Space dans une classe ?
-
-#### Cela me propose 2 possibilités:
-#### Soit d'Override la méthode toString() de la classe ou de créer directement une méthode de classe nommé toStr()
-
-### 5-3 Définir un champs foo de type int, que fait get + Ctrl + Space, et set + Ctrl + Space .
-
-#### Cela me propose de créer un getter nommée getFoo() qui me permet de récupérer mon champ foo. Par contre pour set, cela ne me propose pas un setter nommé 
-#### setFoo(int newFoo), ce que je trouve bizarre ?
-
-### 5-4 Dans le menu Source, comment générer un constructeur initialisant le champ foo ?
-
-#### Sur le menu Source, il faut cliquer sur "Generate constructor using field"
+### 2- Écrire le type Manifest
 
 ```java
-public Test(int foo) {
-  super();
-  this.foo = foo;
+public class Manifest{
+  private final LinkedList<Container> containerList;
+
+  public Manifest(){
+    this.containerList = new LinkedList<Container>();
+  }
+
+  public void add(Container c){
+    Objects.requireNonNull(c, "Container must be not null");
+    this.containerList.add(c);
+  }
+}
+```
+### 3- On souhaite maintenant pouvoir afficher un manifeste 
+
+```java
+@Override
+public String toString(){
+  int i=1;
+  var sb = new StringBuilder();
+  for(var container: containerList){
+    sb.append(i).append(" ").append(container.destination()).append(" ").append(container.weight()).append(" kg").append("\n");
+    i++;
+  }
+
+  return sb.toString();
+}
+```
+
+### 4 Un porte-conteneur, comme son nom ne l'indique pas, peut aussi transporter des passagers. Un Passenger est défini par une destination uniquement, les passagers ne sont pas assez lourds pour avoir un vrai poids.
+### Dans un premier temps, définir un Passenger afin que l'on puisse créer un passager uniquement avec sa destination. Puis expliquer comment modifier Manifest pour que l'on puisse enregistrer aussi bien des conteneurs que des passagers.
+### Pour l'affichage, un passager affiche la destination ainsi que "(passenger)" entre parenthèse (cf le code plus bas).
+### Écrire le code de Passenger et modifier le code de Manifest de telle façon que le code ci-dessous fonctionne. 
+
+
+#### Interface:
+
+```java
+public interface Transportable{
+    @Override
+    String toString();
+}
+```
+
+#### Passenger:
+
+```java
+public record Passenger(String destination) implements Transportable{
+  public Passenger{
+    Objects.requireNonNull(destination, "Destination required");
+  }
+    
+  @Override 
+  public String toString(){
+    return destination+" [passenger]";
+  }
+}
+```
+
+
+#### Container:
+
+```java
+@Override
+public String toString(){
+  return this.destination+" "+this.weight+" kg";
+}
+```
+
+#### Manifest:
+
+```java
+@Override
+public String toString(){
+  int i=0;
+  var sb = new StringBuilder();
+  for(var transport: TransportableList){ 
+    sb.append(i).append(" ").append(transport.toString()).append("\n");
+    i++;
+  }
+  return sb.toString();
+}
+```
+
+
+
+### 5- On souhaite ajouter une méthode price à Manifest qui calcule le prix pour qu'un conteneur ou qu'un passager soit sur le bateau.
+
+
+#### Interface:
+
+```java
+public interface Transportable{
+  @Override
+  String toString();
+  int price();
+}
+```
+
+#### Passenger:
+
+```java
+@Override
+public int price(){
+  return 10;
+}
+```
+
+
+#### Container:
+
+```java
+@Override
+public int price(){
+  return this.weight*2;
+}
+```
+
+#### Manifest:
+
+```java
+public int price(){
+  int sum=0;
+  for(var transported: TransportableList){ 
+    sum += transported.price();
+  }
+  return sum;
+}
+```
+
+
+
+
+### 6- On veut maintenant rajouter une méthode weight à Manifest qui renvoie le poids total en considérant qu'un passager n'a pas de poids. 
+
+
+
+```java
+public int weight(){
+  int sum=0;
+  for(var transported: TransportableList){
+    if(transported instanceof Container){
+      Container container = (Container) transported;
+      sum += container.weight();
+    }
+  }
+  return sum;
 }
 ```
 
