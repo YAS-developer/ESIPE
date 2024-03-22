@@ -1,6 +1,7 @@
-public interface Transportable{
-    @Override
-    String toString();
-    int price();
+package fr.uge.manisfest;
 
+public interface Transportable{
+    int price();
+    int weight();
+    default boolean isContainer(){return false;}
 }

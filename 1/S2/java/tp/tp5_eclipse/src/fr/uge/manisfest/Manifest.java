@@ -35,22 +35,9 @@ public class Manifest{
         return sum;
     }
 
-    public void removeAllContainersFrom(String dest){
-        LinkedList<Transportable> toRemove = new LinkedList<>();
-        for(var transported: TransportableList){
-            if(transported instanceof Container ){
-                Container container = (Container) transported;
-                if(container.destination().equals(dest)){
-                    toRemove.add(transported);
-                }
-            }
-        }
-        TransportableList.removeAll(toRemove);
-    }
-
     @Override
     public String toString(){
-        int i=1;
+        int i=0;
         var sb = new StringBuilder();
         for(var transported: TransportableList){ 
             sb.append(i).append(" ").append(transported.toString()).append("\n");

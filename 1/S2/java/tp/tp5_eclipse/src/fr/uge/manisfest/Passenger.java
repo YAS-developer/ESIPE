@@ -12,16 +12,9 @@ public record Passenger(String destination) implements Transportable{
     public int price(){
         return 10;
     }
-
-    @Override
-    public int weight(){
-        return 0;
-    }
     
     @Override 
     public String toString(){
         return destination+" (passenger)";
     }
-
-
 }

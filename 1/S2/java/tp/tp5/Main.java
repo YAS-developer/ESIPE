@@ -1,4 +1,4 @@
-// package fr.uge.manifest.main;
+package fr.uge.manifest.main;
 
 
 public class Main{
@@ -34,7 +34,12 @@ public class Main{
         manifest4.add(container9);
         manifest4.add(container10);
         manifest4.add(passenger2);
-        System.out.println(manifest4.weight()); // 775
+        // System.out.println(manifest4.weight()); // 775
+
+        manifest4.removeAllContainersFrom("Russia");
+        System.out.println(manifest4);
+        // 1. China 200kg
+        // 2. Russia (passenger)
     
     }
 }
