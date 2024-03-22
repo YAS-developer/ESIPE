@@ -193,25 +193,50 @@ public class Matrice {
 	 */
 	public Matrice inverse() {
 		if (m != n) {
-        	throw new IllegalArgumentException("Dimensions incorrectes");	
+        throw new IllegalArgumentException("Matrice doit être carrée pour inverser.");
 		}
-		Matrice clone = clone();
-		Matrice id = identity();
 
-		// Appliquer l'algorithme du pivot de Gauss à la copie de la matrice d'origine
+		Matrice inverse = identity(); // La matrice qui deviendra l'inverse
+		Matrice clone = clone(); // Copie de la matrice d'origine pour les opérations
 
-		// Assurez-vous que chaque ligne de la matrice échelonnée réduite a un élément non nul sur sa diagonale
-		// Sinon, lancer une exception
+		// Transformation en forme échelonnée
 		for (int i = 0; i < n; i++) {
+			// Trouver le pivot
 			if (clone.coeff[i][i].equals(Rational.ZERO)) {
-				throw new ArithmeticException("Matrice non inversible");
+				boolean changed = false;
+				for (int j = i + 1; j < n; j++) {
+					if (!clone.coeff[j][i].equals(Rational.ZERO)) {
+						clone.swapRows(i, j);
+						inverse.swapRows(i, j);
+						changed = true;
+						break;
+					}
+				}
+				if (!changed) {
+					throw new ArithmeticException("Matrice non inversible");
+				}
+			}
+
+			// Normaliser le pivot
+			Rational pivot = clone.coeff[i][i];
+			for (int j = 0; j < n; j++) {
+				clone.coeff[i][j] = clone.coeff[i][j].divide(pivot);
+				inverse.coeff[i][j] = inverse.coeff[i][j].divide(pivot);
+			}
+
+			// Annuler les autres éléments de la colonne
+			for (int j = 0; j < n; j++) {
+				if (j != i && !clone.coeff[j][i].equals(Rational.ZERO)) {
+					Rational factor = clone.coeff[j][i].minus();
+					for (int k = 0; k < n; k++) {
+						clone.coeff[j][k] = clone.coeff[j][k].plus(clone.coeff[i][k].times(factor));
+						inverse.coeff[j][k] = inverse.coeff[j][k].plus(inverse.coeff[i][k].times(factor));
+					}
+				}
 			}
 		}
 
-		// Utiliser les opérations de ligne pour transformer la matrice d'identité en l'inverse de la matrice d'origine
-
-		// Retourner la matrice inverse
-		return id;
+    	return inverse;
 	}
 
 	/**
