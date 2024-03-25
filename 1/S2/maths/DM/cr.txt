@@ -1,4 +1,36 @@
 Exercice 1
 
-Un problème classique pouvant être résolu par un système d'équations linéaires est la répartition des coûts dans un projet collaboratif ou un voyage de groupe. 
-Imaginons que trois amis, Alice, Bob, et Charlie, partent en voyage. Ils paient différents coûts (logement, nourriture, transport) et souhaitent équilibrer leurs dépenses à la fin du voyage de sorte que chacun ait dépensé le même montant total. Les coûts initiaux sont inégaux : Alice a payé 200€, Bob 150€, et Charlie 250€. On peut résoudre ce problème en établissant un système d'équations représentant la différence de coûts et en trouvant combien chaque personne doit donner ou recevoir pour équilibrer les dépenses
+Imaginons que nous avons des données issues de trois expériences différentes où chaque expérience comporte quatre mesures. Les données de ces expériences sont représentées par la matrice AA. Notre objectif est de trouver un vecteur de coefficients qui, lorsqu'il est appliqué à ces données, minimise la variance entre les expériences tout en satisfaisant certaines contraintes linéaires représentées par la matrice BB.
+
+EX11
+
+Problème Proposé :
+
+Nous avons des données issues de trois expériences différentes, chacune comportant quatre mesures. Notre objectif est de trouver un vecteur de coefficients qui, lorsqu'il est appliqué à ces données, équilibre les résultats entre les expériences tout en satisfaisant certaines contraintes linéaires.
+Données Numériques :
+
+Les données des trois expériences sont représentées par la matrice AA, et les contraintes linéaires par la matrice BB. Pour cet exemple, supposons que :
+
+    Matrice AA (données des expériences) : [123423453456]⎣
+
+⎡​123​234​345​456​⎦
+
+    ⎤​
+
+    Matrice BB (contraintes linéaires) : Nous utilisons une transformation de AA pour simplifier, par exemple, B=A×ATB=A×AT, bien que dans un scénario réel, BB serait spécifiée par le problème.
+
+Solution Obtenue :
+
+    Calcul de BB: Nous calculons B=A×ATB=A×AT pour obtenir une matrice symétrique représentant les contraintes entre les mesures de nos expériences.
+
+    Détermination de bb: Le vecteur bb représente nos objectifs ou contraintes désirées. Pour cet exemple, nous pourrions définir bb comme souhaitant que l'impact cumulé des coefficients sur chaque expérience soit équivalent, par exemple, un vecteur [1,1,1]T[1,1,1]T.
+
+    Résolution pour xx : En utilisant la fonction resoud de notre programme, nous résolvons l'équation Bx=bBx=b pour trouver notre vecteur de coefficients xx.
+
+Discussion des Solutions :
+
+Le vecteur xx trouvé représente les coefficients qui, appliqués aux données de nos expériences, devraient équilibrer les résultats entre elles conformément à nos contraintes linéaires. Cela signifie que, théoriquement, si nous ajustons nos données d'expérience avec ces coefficients, les contraintes que nous avons définies seront satisfaites.
+
+Cependant, l'interprétation pratique de ce vecteur xx dépend des spécificités de notre problème. Si les contraintes linéaires représentent, par exemple, une nécessité d'équilibrer l'importance des mesures entre les expériences, alors xx nous indique comment pondérer chaque mesure pour atteindre cet équilibre.
+
+Il est important de noter que cet exemple est une simplification pour illustrer l'utilisation du programme. Dans la pratique, la définition précise de BB et bb et l'interprétation des résultats nécessiteraient une compréhension approfondie du contexte spécifique du problème.
