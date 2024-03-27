@@ -34,17 +34,3 @@ Le vecteur xx trouvé représente les coefficients qui, appliqués aux données 
 Cependant, l'interprétation pratique de ce vecteur xx dépend des spécificités de notre problème. Si les contraintes linéaires représentent, par exemple, une nécessité d'équilibrer l'importance des mesures entre les expériences, alors xx nous indique comment pondérer chaque mesure pour atteindre cet équilibre.
 
 Il est important de noter que cet exemple est une simplification pour illustrer l'utilisation du programme. Dans la pratique, la définition précise de BB et bb et l'interprétation des résultats nécessiteraient une compréhension approfondie du contexte spécifique du problème.
-
-
-AUTRE SOLUTION:
-    Initialisation des Données d'Expériences (Matrice A):
-    Les données des trois expériences sont représentées par une matrice AA, où chaque ligne correspond à une expérience et chaque colonne à une mesure spécifique.
-
-    Calcul de la Matrice de Contraintes (Matrice B):
-    Nous utilisons B=A×ATB=A×AT comme une simplification pour représenter nos contraintes. Dans la réalité, BB serait définie par les contraintes spécifiques du problème.
-
-    Définition du Vecteur Objectif (b):
-    Le vecteur bb est défini pour représenter nos objectifs ou contraintes désirées. Dans cet exemple, bb est un vecteur de même taille que le nombre de lignes de AA où chaque élément est 11, symbolisant l'objectif d'équilibrer les résultats des expériences.
-
-    Résolution pour le Vecteur de Coefficients (x):
-    Nous utilisons la méthode resoud pour trouver le vecteur xx qui satisfait l'équation Bx=bBx=b.
