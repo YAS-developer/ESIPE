@@ -13,36 +13,29 @@ public class Main {
 		// 	System.out.println("D n'a pas d'inverse");
 		// }
 
-
-
-
-		// Initialisation de la matrice A avec des données d'exemple
-        long[][] donneesExperiences = {
-            {1, 2, 3, 4},
-            {2, 3, 4, 5},
-            {3, 4, 5, 6}
+		// Vecteur b (différences pour atteindre l'investissement équitable)
+        Rational[][] differences = {
+            {new Rational(30)}, // Alice doit recevoir 30€ pour atteindre 150€
+            {new Rational(0)},  // Bob est déjà à 150€, il ne doit ni donner ni recevoir
+            {new Rational(-30)} // Charlie doit donner 30€ pour atteindre 150€
         };
-        Matrice A = new Matrice(donneesExperiences);
+        Matrice b = new Matrice(differences);
 
-        // Calcul de B comme étant A * A^T pour représenter nos contraintes
-        Matrice B = A.times(A.transpose());
+        // La matrice A dans ce cas simple est juste l'identité, puisque les ajustements sont directs
+        Rational[][] identite = {
+            {new Rational(1), new Rational(0), new Rational(0)},
+            {new Rational(0), new Rational(1), new Rational(0)},
+            {new Rational(0), new Rational(0), new Rational(1)}
+        };
+        Matrice A = new Matrice(identite);
 
-        // Définition du vecteur b, représentant nos objectifs ou contraintes désirées
-        Rational[] objectifs = {new Rational(1), new Rational(1), new Rational(1)};
-        Rational[][] donneesObjectifs = new Rational[objectifs.length][1];
-        for (int i = 0; i < objectifs.length; i++) {
-            donneesObjectifs[i][0] = objectifs[i];
-        }
-        Matrice b = new Matrice(donneesObjectifs);
-
-        // Résolution pour x dans Bx = b
+        // Utilisation de la méthode resoud pour obtenir le vecteur de solutions
         try {
-            Matrice x = B.resoud(b);
-            System.out.println("Vecteur de coefficients x :");
+            Matrice x = A.resoud(b);
+            System.out.println("Solution (x):");
             System.out.println(x);
         } catch (ArithmeticException e) {
-            System.out.println("Le système n'a pas de solution unique ou est indéterminé.");
+            System.out.println("Erreur: " + e.getMessage());
         }
 	}
-
 }

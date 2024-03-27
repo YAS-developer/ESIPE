@@ -193,50 +193,25 @@ public class Matrice {
 	 */
 	public Matrice inverse() {
 		if (m != n) {
-        throw new IllegalArgumentException("Matrice doit être carrée pour inverser.");
+        	throw new IllegalArgumentException("Dimensions incorrectes");	
 		}
+		Matrice clone = clone();
+		Matrice id = identity();
 
-		Matrice inverse = identity(); // La matrice qui deviendra l'inverse
-		Matrice clone = clone(); // Copie de la matrice d'origine pour les opérations
+		// Appliquer l'algorithme du pivot de Gauss à la copie de la matrice d'origine
 
-		// Transformation en forme échelonnée
+		// Assurez-vous que chaque ligne de la matrice échelonnée réduite a un élément non nul sur sa diagonale
+		// Sinon, lancer une exception
 		for (int i = 0; i < n; i++) {
-			// Trouver le pivot
 			if (clone.coeff[i][i].equals(Rational.ZERO)) {
-				boolean changed = false;
-				for (int j = i + 1; j < n; j++) {
-					if (!clone.coeff[j][i].equals(Rational.ZERO)) {
-						clone.swapRows(i, j);
-						inverse.swapRows(i, j);
-						changed = true;
-						break;
-					}
-				}
-				if (!changed) {
-					throw new ArithmeticException("Matrice non inversible");
-				}
-			}
-
-			// Normaliser le pivot
-			Rational pivot = clone.coeff[i][i];
-			for (int j = 0; j < n; j++) {
-				clone.coeff[i][j] = clone.coeff[i][j].divide(pivot);
-				inverse.coeff[i][j] = inverse.coeff[i][j].divide(pivot);
-			}
-
-			// Annuler les autres éléments de la colonne
-			for (int j = 0; j < n; j++) {
-				if (j != i && !clone.coeff[j][i].equals(Rational.ZERO)) {
-					Rational factor = clone.coeff[j][i].minus();
-					for (int k = 0; k < n; k++) {
-						clone.coeff[j][k] = clone.coeff[j][k].plus(clone.coeff[i][k].times(factor));
-						inverse.coeff[j][k] = inverse.coeff[j][k].plus(inverse.coeff[i][k].times(factor));
-					}
-				}
+				throw new ArithmeticException("Matrice non inversible");
 			}
 		}
 
-    	return inverse;
+		// Utiliser les opérations de ligne pour transformer la matrice d'identité en l'inverse de la matrice d'origine
+
+		// Retourner la matrice inverse
+		return id;
 	}
 
 	/**
@@ -248,59 +223,42 @@ public class Matrice {
 	 * @return vecteur colonne a tel que this * a = b : tableau n x 1
 	 */
 	public Matrice resoud(Matrice b) {
-		if (this.m != b.n) {
-			throw new IllegalArgumentException("Dimensions incorrectes pour résoudre le système.");
+		if (m != b.n) {
+			throw new IllegalArgumentException("Dimensions incorrectes");
 		}
-		// Création de la matrice augmentée
-		Rational[][] augmente = new Rational[this.n][this.m + 1];
-		for (int i = 0; i < this.n; i++) {
-			System.arraycopy(this.coeff[i], 0, augmente[i], 0, this.m);
-			augmente[i][this.m] = b.coeff[i][0];
+		Rational[][] a = new Rational[n][1];
+		Matrice augmente = new Matrice(new Rational[n][m + 1]); // Matrice augmentée [this | b]
+
+		// Remplir la matrice augmentée
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				augmente.coeff[i][j] = coeff[i][j];
+			}
+			augmente.coeff[i][m] = b.coeff[i][0]; // La colonne supplémentaire contient les valeurs de b
 		}
 
-		// Application de la méthode de Gauss-Jordan
-		for (int i = 0; i < this.n; i++) {
-			// Recherche du pivot, ici on vérifie simplement s'il n'est pas nul
-			if (augmente[i][i].equals(Rational.ZERO)) {
-				boolean found = false;
-				for (int k = i + 1; k < this.n; k++) {
-					if (!augmente[k][i].equals(Rational.ZERO)) {
-						Rational[] temp = augmente[i];
-						augmente[i] = augmente[k];
-						augmente[k] = temp;
-						found = true;
-						break;
-					}
-				}
-				if (!found) {
-					throw new ArithmeticException("Pas de solution unique ou système indéterminé.");
+		// Appliquer l'algorithme de Gauss-Jordan à la matrice augmentée
+
+		// Vérifiez s'il y a une solution unique en examinant la forme échelonnée réduite
+		for (int i = 0; i < n; i++) {
+			boolean ligneNulle = true;
+			for (int j = 0; j < m; j++) {
+				if (!augmente.coeff[i][j].equals(Rational.ZERO)) {
+					ligneNulle = false;
+					break;
 				}
 			}
-
-			// Normalisation de la ligne pivot pour que le pivot soit 1
-			Rational pivot = augmente[i][i];
-			for (int j = i; j < this.m + 1; j++) {
-				augmente[i][j] = augmente[i][j].divide(pivot);
-			}
-
-			// Élimination des autres éléments de la colonne i
-			for (int k = 0; k < this.n; k++) {
-				if (k != i) {
-					Rational factor = augmente[k][i];
-					for (int j = i; j < this.m + 1; j++) {
-						augmente[k][j] = augmente[k][j].minus(augmente[i][j].times(factor));
-					}
-				}
+			if (ligneNulle && !augmente.coeff[i][m].equals(Rational.ZERO)) {
+				throw new ArithmeticException("Pas de solution");
 			}
 		}
 
-		// Extraction de la solution
-		Rational[][] solution = new Rational[this.n][1];
-		for (int i = 0; i < this.n; i++) {
-			solution[i][0] = augmente[i][this.m];
+		// Extrayez les solutions de la matrice résultante
+		for (int i = 0; i < n; i++) {
+			a[i][0] = augmente.coeff[i][m];
 		}
 
-		return new Matrice(solution);
+		return new Matrice(a);
 	}
 
 	@Override

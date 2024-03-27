@@ -1,36 +1,29 @@
 Exercice 1
 
-Imaginons que nous avons des données issues de trois expériences différentes où chaque expérience comporte quatre mesures. Les données de ces expériences sont représentées par la matrice AA. Notre objectif est de trouver un vecteur de coefficients qui, lorsqu'il est appliqué à ces données, minimise la variance entre les expériences tout en satisfaisant certaines contraintes linéaires représentées par la matrice BB.
+Le problème proposé concerne la répartition des ressources dans un projet de groupe. Trois amis, Alice, Bob et Charlie, travaillent sur un projet et ont chacun investi un montant différent dans le projet. Ils veulent s'assurer que chacun ait investi un montant équivalent à la fin du projet en se remboursant mutuellement la différence. Initialement, Alice a investi 120€, Bob 150€, et Charlie 180€. Le but est de déterminer combien chaque personne doit donner ou recevoir pour équilibrer les investissements.
+Données Numériques
 
-EX11
+    Investissements initiaux : Alice = 120€, Bob = 150€, Charlie = 180€.
+    Montant total investi = 120€ + 150€ + 180€ = 450€.
+    Montant équitable par personne = 450€ / 3 = 150€.
 
-Problème Proposé :
+Exercice 11:
 
-Nous avons des données issues de trois expériences différentes, chacune comportant quatre mesures. Notre objectif est de trouver un vecteur de coefficients qui, lorsqu'il est appliqué à ces données, équilibre les résultats entre les expériences tout en satisfaisant certaines contraintes linéaires.
-Données Numériques :
+Le problème peut être modélisé par le système d'équations suivant, où xx, yy, et zz représentent respectivement les montants que Alice, Bob, et Charlie doivent recevoir ou donner :
 
-Les données des trois expériences sont représentées par la matrice AA, et les contraintes linéaires par la matrice BB. Pour cet exemple, supposons que :
+    x+120 = 150
+    y+150 = 150
+    z+180 = 150
 
-    Matrice AA (données des expériences) : [123423453456]⎣
+Nous résolvons ce système pour trouver les valeurs de x, y, et z.
 
-⎡​123​234​345​456​⎦
 
-    ⎤​
+Discussion
 
-    Matrice BB (contraintes linéaires) : Nous utilisons une transformation de AA pour simplifier, par exemple, B=A×ATB=A×AT, bien que dans un scénario réel, BB serait spécifiée par le problème.
+La solution obtenue indique clairement combien chaque personne doit donner ou recevoir pour équilibrer les investissements. Dans notre cas simplifié :
 
-Solution Obtenue :
+    Alice doit recevoir 30€.
+    Bob ne doit ni donner ni recevoir.
+    Charlie doit donner 30€.
 
-    Calcul de BB: Nous calculons B=A×ATB=A×AT pour obtenir une matrice symétrique représentant les contraintes entre les mesures de nos expériences.
-
-    Détermination de bb: Le vecteur bb représente nos objectifs ou contraintes désirées. Pour cet exemple, nous pourrions définir bb comme souhaitant que l'impact cumulé des coefficients sur chaque expérience soit équivalent, par exemple, un vecteur [1,1,1]T[1,1,1]T.
-
-    Résolution pour xx : En utilisant la fonction resoud de notre programme, nous résolvons l'équation Bx=bBx=b pour trouver notre vecteur de coefficients xx.
-
-Discussion des Solutions :
-
-Le vecteur xx trouvé représente les coefficients qui, appliqués aux données de nos expériences, devraient équilibrer les résultats entre elles conformément à nos contraintes linéaires. Cela signifie que, théoriquement, si nous ajustons nos données d'expérience avec ces coefficients, les contraintes que nous avons définies seront satisfaites.
-
-Cependant, l'interprétation pratique de ce vecteur xx dépend des spécificités de notre problème. Si les contraintes linéaires représentent, par exemple, une nécessité d'équilibrer l'importance des mesures entre les expériences, alors xx nous indique comment pondérer chaque mesure pour atteindre cet équilibre.
-
-Il est important de noter que cet exemple est une simplification pour illustrer l'utilisation du programme. Dans la pratique, la définition précise de BB et bb et l'interprétation des résultats nécessiteraient une compréhension approfondie du contexte spécifique du problème.
+Cela illustre comment un système d'équations linéaires peut être utilisé pour résoudre des problèmes de répartition équitable des ressources ou des coûts dans un projet de groupe. La résolution de ce système avec le code fourni démontre la puissance de l'algèbre linéaire pour trouver des solutions équitables dans des situations financières partagées.
