@@ -18,6 +18,11 @@ public record Passenger(String destination) implements Transportable{
         return 0;
     }
     
+    @Override
+    public String destination(){
+        return this.destination;
+    }
+
     @Override 
     public String toString(){
         return destination+" (passenger)";

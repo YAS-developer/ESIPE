@@ -1,6 +1,9 @@
 package fr.uge.manisfest;
 
 import java.util.Objects;
+
+import fr.uge.manifest.Container;
+
 import java.util.LinkedList;
 
 public class Manifest{
@@ -24,6 +27,8 @@ public class Manifest{
         return sum;
     }
 
+    
+
     public int weight(){
         int sum=0;
         for(var transported: TransportableList){
@@ -36,11 +41,11 @@ public class Manifest{
     }
 
     public void removeAllContainersFrom(String dest){
+        Objects.requireNonNull(dest, "Destination required");
         LinkedList<Transportable> toRemove = new LinkedList<>();
         for(var transported: TransportableList){
-            if(transported instanceof Container ){
-                Container container = (Container) transported;
-                if(container.destination().equals(dest)){
+            if(transported.isContainer()){
+                if(transported.destination().equals(dest)){
                     toRemove.add(transported);
                 }
             }

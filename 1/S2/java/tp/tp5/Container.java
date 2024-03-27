@@ -1,6 +1,9 @@
 package fr.uge.manifest;
 
-import java.util.Objects; 
+import java.util.Objects;
+
+import fr.uge.manisfest.Transportable;
+
 import java.lang.IllegalArgumentException;
 
 public record Container(String destination, int weight) implements Transportable{
@@ -21,6 +24,13 @@ public record Container(String destination, int weight) implements Transportable
         return this.weight;
     }
     
+
+    @Override
+    public String destination(){
+        return this.destination;
+    }
+
+    @Override
     public boolean isContainer(){
         return true;
     } 
