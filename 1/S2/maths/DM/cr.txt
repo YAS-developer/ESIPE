@@ -1,3 +1,9 @@
+NOM PRENOM:
+	- Fares SID ATHMANE
+	- Yassine HAMROUNI
+
+
+
 Exercice 1
 
 Le problème proposé concerne la répartition des ressources dans un projet de groupe. Trois amis, Alice, Bob et Charlie, travaillent sur un projet et ont chacun investi un montant différent dans le projet. Ils veulent s'assurer que chacun ait investi un montant équivalent à la fin du projet en se remboursant mutuellement la différence. Initialement, Alice a investi 120€, Bob 150€, et Charlie 180€. Le but est de déterminer combien chaque personne doit donner ou recevoir pour équilibrer les investissements.

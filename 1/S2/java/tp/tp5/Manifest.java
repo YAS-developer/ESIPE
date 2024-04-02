@@ -18,7 +18,6 @@ public class Manifest{
         this.TransportableList.add(t);
     }
 
-
     public int price(){
         int sum=0;
         for(var transported: TransportableList){ 
@@ -26,8 +25,6 @@ public class Manifest{
         }
         return sum;
     }
-
-    
 
     public int weight(){
         int sum=0;
@@ -42,15 +39,15 @@ public class Manifest{
 
     public void removeAllContainersFrom(String dest){
         Objects.requireNonNull(dest, "Destination required");
-        LinkedList<Transportable> toRemove = new LinkedList<>();
-        for(var transported: TransportableList){
-            if(transported.isContainer()){
-                if(transported.destination().equals(dest)){
-                    toRemove.add(transported);
-                }
+        
+        var iterator = manifest.iterator();
+        while(iterator.hasNext()) {
+            var c = iterator.next();
+            if(c.isContainer() && c.destination().equals(destination)) {
+                iterator.remove();
             }
         }
-        TransportableList.removeAll(toRemove);
+
     }
 
     @Override

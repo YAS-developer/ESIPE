@@ -111,8 +111,7 @@ public String toString(){
 
 ```java
 public interface Transportable{
-  @Override
-  String toString();
+  int weight();
   int price();
 }
 ```
@@ -172,16 +171,15 @@ public int weight(){
 
 ```java
 public void removeAllContainersFrom(String dest){
-  LinkedList<Transportable> toRemove = new LinkedList<>();
-  for(var transported: TransportableList){
-    if(transported instanceof Container){
-      Container container = (Container) transported;
-      if(container.destination().equals(dest)){
-        toRemove.add(transported);
-      }
+  Objects.requireNonNull(dest, "Destination required");
+       
+  var iterator = manifest.iterator();
+  while(iterator.hasNext()) {
+    var c = iterator.next();
+    if(c.isContainer() && c.destination().equals(destination)) {
+      iterator.remove();
     }
   }
-  TransportableList.removeAll(toRemove);
 }
 ```
 
