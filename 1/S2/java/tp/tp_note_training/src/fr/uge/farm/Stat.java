@@ -1,4 +1,4 @@
-package fr.uge.farm;
+// package fr.uge.farm;
 
 public record Stat(int cows, int farmers) {
 	

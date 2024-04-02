@@ -1,4 +1,4 @@
-package fr.uge.farm;
+// package fr.uge.farm;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -45,15 +45,25 @@ public class Farm {
 	}
 	
 	public LinkedHashMap<Integer, LinkedList<Farmable>> residentsByDate() {
-    LinkedHashMap<Integer, LinkedList<Farmable>> mapByDate = new LinkedHashMap<>();
-    
-    for (Farmable resident : farmList) {
-        int residentDate = resident.date();
-        
-        mapByDate.computeIfAbsent(residentDate, k -> new LinkedList<>()).add(resident);
-    }
-    
-	    return mapByDate;
+		LinkedHashMap<Integer, LinkedList<Farmable>> mapByDate = new LinkedHashMap<>();
+		
+		for (Farmable resident : farmList) {
+			int residentDate = resident.date();
+			if(mapByDate.containsKey(residentDate)){
+				LinkedList<Farmable> list = mapByDate.get(residentDate);
+				list.add(resident);
+				mapByDate.replace(residentDate, list);
+			}
+			else{
+				LinkedList<Farmable> list = new LinkedList<Farmable>();
+				list.add(resident);
+				mapByDate.put(residentDate, list);
+			}
+			
+			// mapByDate.computeIfAbsent(residentDate, k -> new LinkedList<>()).add(resident);
+		}
+		
+		return mapByDate;
 	}
 
 	
