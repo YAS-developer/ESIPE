@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Farm {
 	private final LinkedList<Farmable> farmList;
-	private int date;
+	private final int date;
 	public Farm(int date) {
 		if(date < 0) {
 			throw new IllegalArgumentException("la date doit être supérieur ou égale à 0.");
