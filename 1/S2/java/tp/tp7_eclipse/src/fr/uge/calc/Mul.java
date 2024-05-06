@@ -1,16 +1,27 @@
-// fr/uge/calc/Mul.java
 package fr.uge.calc;
 
-public record Mul(Expr left, Expr right) implements Expr {
+public record Mul(Expr left, Expr right) implements BinOp {
+   
+		
+		@Override
+		public Expr left() {
+			// TODO Auto-generated method stub
+			return left;
+		}
+	
+		@Override
+		public Expr right() {
+			// TODO Auto-generated method stub
+			return right;
+		}
+
     @Override
     public int eval() {
         return left.eval() * right.eval();
     }
-    
+
     @Override
     public String toString() {
-      var sb = new StringBuilder();
-      sb.append('(').append(left).append(" + ").append(right).append(")");
-       return (sb.append('(').append(left).append(" * ").append(right).append(")")).toString();
+        return operationToString("*");
     }
 }

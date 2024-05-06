@@ -158,47 +158,13 @@ public String toString(){
 
 
 
-### 5- On souhaite ajouter une méthode price à Manifest qui calcule le prix pour qu'un conteneur ou qu'un passager soit sur le bateau.
+### 5- On souhaite factoriser ce code (on ne le ferait probablement pas dans la vraie vie car il n'y a pas assez de code à partager, mais ce n'est pas la vraie vie, c'est un exercice) en introduisant un type intermédiaire BinOp, sous-type de Expr et super-type de Add, Sub et Mul.
+### Le type BinOp doit-il être un record, une classe ou une interface ?
 
-
-#### Interface:
-
-```java
-public interface Transportable{
-  int weight();
-  int price();
-}
-```
-
-#### Passenger:
+### En faisant de BinOp  une classe sc
 
 ```java
-@Override
-public int price(){
-  return 10;
-}
-```
 
-
-#### Container:
-
-```java
-@Override
-public int price(){
-  return this.weight*2;
-}
-```
-
-#### Manifest:
-
-```java
-public int price(){
-  int sum=0;
-  for(var transported: TransportableList){ 
-    sum += transported.price();
-  }
-  return sum;
-}
 ```
 
 
