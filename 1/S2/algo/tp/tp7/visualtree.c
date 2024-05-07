@@ -54,32 +54,26 @@ void write_right_link(FILE *f, node *n) {
  * REPLACE THE ENTIRE FUNCTION!
 */
 void write_tree_aux(FILE *f, node *t) {
+    if (t == NULL) {
+        return;  // If the node is NULL, do nothing (base case for recursion).
+    }
 
-    node *n0 = create_node(5, NULL, NULL);
-    node *n1 = create_node(7, NULL, NULL);
-    node *n2 = create_node(3, NULL, NULL);
-    node *n3 = create_node(1, NULL, NULL);
+    // Write the current node
+    write_node(f, t);
 
-    n0->left = n1;
-    n0->right = n2;
-    n2->right = n3;
+    // If there is a left child, write the link and recursively call on the left child
+    if (t->left != NULL) {
+        write_left_link(f, t);
+        write_tree_aux(f, t->left);
+    }
 
-    write_node(f,n0);
-    write_left_link(f,n0);
-    write_node(f,n1);
-    write_right_link(f,n0);
-    write_node(f,n2);
-    write_right_link(f,n2);
-    write_node(f,n3);
-
-    free(n0);
-    free(n1);
-    free(n2);
-    free(n3);
-
-    /* **** */
-
+    // If there is a right child, write the link and recursively call on the right child
+    if (t->right != NULL) {
+        write_right_link(f, t);
+        write_tree_aux(f, t->right);
+    }
 }
+
 /*********************************************************/
 /*********************************************************/
 /*********************************************************/
