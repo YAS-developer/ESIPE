@@ -2,10 +2,12 @@ package info.esiee.main;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import info.esiee.tp8.Actor;
 import info.esiee.tp8.Lambdas;
 
 
@@ -22,8 +24,18 @@ public class Main {
 //    System.out.println("After: " + mutableWords)
 
     
-    List<String> list = List.of("foo", "bar", "foo");
-    Map<String, Integer> result = Lambdas.occurrences(list);
-    System.out.println(result);  // Output: {foo=2, bar=1}
-}
+//    List<String> list = List.of("foo", "bar", "foo");
+//    Map<String, Integer> result = Lambdas.occurrences(list);
+//    System.out.println(result);  
+    
+    var actors = new ArrayList<Actor>();
+    
+    actors.add(new Actor("Toto", "ZAEAE"));
+    actors.add(new Actor("Toto", "MAMAEEEOOO"));
+    actors.add(new Actor("Kiki", "Loaze"));
+    actors.add(new Actor("Baril", "gneugneu"));
+  
+    
+    System.out.println(Actor.actorGroupByFirstName(actors));
+	}
 }

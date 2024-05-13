@@ -16,7 +16,7 @@
 
 ```java
 List<String> list = Arrays.asList("Bonjour", "monde");
-list.replaceAll(s -> s.toUpperCase(Locale.ENGLISH));
+list.replaceAll(s -> s.toUpperCase(Locale.ROOT));
 ```
 
 ### 3- À quel type de fonction cela correspond-il ? Autrement dit, que prend la fonction en argument et que renvoie-t-elle ?
@@ -82,7 +82,7 @@ public class Lambdas {
 
 ```java
 public static Map<String, Integer> occurrences(List<String> strings) {
-  Map<String, Integer> occurrences = new HashMap<>();
+  var occurrences = new HashMap<String, Integer>();
   strings.forEach(string -> occurrences.put(string, occurrences.getOrDefault(string, 0) + 1));
   return occurrences;
 }
@@ -141,10 +141,31 @@ public class Lambdas {
 
 ```java
 public static Map<String, Integer> occurrences(List<String> strings) {
+  Objects.requireNonNull(strings);
   Map<String, Integer> occurrences = new HashMap<>();
   strings.forEach(string -> occurrences.merge(string, 1, Integer::sum));
   return occurrences;
 }
 ```
+
+
+## Exercice 3 - groupBy
+
+### 1 - Quel est le type de paramètre de actorGroupByFirstName ? Quel est le type de retour de actorGroupByFirstName ?
+
+
+#### Le paramètres est une liste<<Actors> et le retour est un Map<String, Actor>
+
+###  2 -  Rappeler comment marche la méthode Map.computeIfAbsent. Son second paramètre est une interface fonctionnelle, à quel type de fonction correspond-elle ? Expliquer à quoi correspondent le premier paramètre et le second paramètre de Map.computeIfAbsent, puis comment on peut l'utiliser pour grouper les acteurs selon leur prénom. 
+
+#### Le premier paramètre correspond à la clé, et le second est une interface Interface Function<T,R>, qui prend un argument et peut renvoyer n'importe quoi.
+
+
+
+
+
+#### computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction)
+#### le premier paramètre est une clé, le deuxi
+
 
 
