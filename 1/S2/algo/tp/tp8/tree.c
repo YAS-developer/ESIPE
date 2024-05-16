@@ -1,6 +1,7 @@
 #include "tree.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 node *create_node(int data, node *left, node *right) {
     node *n = (node *)malloc(sizeof(node));
@@ -81,6 +82,96 @@ int height(node *t) {
     int left_height = height(t->left);
     int right_height = height(t->right);
     return 1 + (left_height > right_height ? left_height : right_height);  // Return the greater height
+}
+
+node *find_bst(node *t, int elt) {
+    if (t == NULL) {
+        return NULL; // Element not found
+    }
+    if (elt == t->data) {
+        return t; // Element found
+    } else if (elt < t->data) {
+        return find_bst(t->left, elt); // Search in the left subtree
+    } else {
+        return find_bst(t->right, elt); // Search in the right subtree
+    }
+
+
+    //  while (t != NULL) {
+    //     if (elt == t->data) {
+    //         return t; // Element found
+    //     } else if (elt < t->data) {
+    //         t = t->left; // Move to the left subtree
+    //     } else {
+    //         t = t->right; // Move to the right subtree
+    //     }
+    // }
+    // return NULL; // Element not found
+}
+
+
+node *insert_bst(node *t, int elt) {
+    if (t == NULL) {
+        // If the tree is empty, create a new node and return it
+        return create_node(elt, NULL, NULL);
+    }
+
+    if (elt < t->data) {
+        // Insert in the left subtree
+        t->left = insert_bst(t->left, elt);
+    } else if (elt > t->data) {
+        // Insert in the right subtree
+        t->right = insert_bst(t->right, elt);
+    }
+    // If elt is equal to t->data, do nothing (no duplicates in BST)
+    return t;
+}
+
+
+
+int is_bst_helper(node *t, int min, int max) {
+    if (t == NULL) {
+        return 1;  // void tree is BST
+    }
+    if (t->data <= min || t->data >= max) {
+        return 0;  // not BST
+    }
+    return is_bst_helper(t->left, min, t->data) && is_bst_helper(t->right, t->data, max);
+}
+
+int is_bst(node *t) {
+    return is_bst_helper(t, INT_MIN, INT_MAX);
+}
+
+void fill_random_permutation(int *array, int size) {
+    for (int i = 0; i < size; i++) {
+        array[i] = i + 1;
+    }
+    for (int i = size - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+node* insert_random_elements(int N) {
+    int *array = (int *)malloc(N * sizeof(int));
+    fill_random_permutation(array, N);
+    node *root = NULL;
+    for (int i = 0; i < N; i++) {
+        root = insert_bst(root, array[i]);
+    }
+    free(array);
+    return root;
+}
+
+node* insert_sequential_elements(int N) {
+    node *root = NULL;
+    for (int i = 1; i <= N; i++) {
+        root = insert_bst(root, i);
+    }
+    return root;
 }
 
 

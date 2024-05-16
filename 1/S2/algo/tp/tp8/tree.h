@@ -40,6 +40,21 @@ int count_only_children(node *t);
 int height(node *t);
 
 
+/* Find an element in the binary search tree */
+node *find_bst(node *t, int elt);
+
+
+/* Insert an element into the binary search tree */
+node *insert_bst(node *t, int elt);
+
+
+/*Check if the tree is BST*/
+int is_bst(node *t);  
+
+node* insert_random_elements(int N);
+
+node* insert_sequential_elements(int N);
+
 
 void free_tree(node *t);
 
