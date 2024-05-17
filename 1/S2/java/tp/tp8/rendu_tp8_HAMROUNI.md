@@ -158,14 +158,106 @@ public static Map<String, Integer> occurrences(List<String> strings) {
 
 ###  2 -  Rappeler comment marche la méthode Map.computeIfAbsent. Son second paramètre est une interface fonctionnelle, à quel type de fonction correspond-elle ? Expliquer à quoi correspondent le premier paramètre et le second paramètre de Map.computeIfAbsent, puis comment on peut l'utiliser pour grouper les acteurs selon leur prénom. 
 
-#### Le premier paramètre correspond à la clé, et le second est une interface Interface Function<T,R>, qui prend un argument et peut renvoyer n'importe quoi.
+#### La méthode Map.computeIfAbsent tente de trouver une valeur associée à une clé spécifique. Si cette clé n'existe pas dans la map, elle utilise la fonction fournie (second paramètre) pour créer une nouvelle valeur, la place dans la map et la retourne.
+
+#### Type de fonction : Function<? super K, ? extends V>
+#### Premier paramètre : La clé à rechercher dans la map.
+#### Second paramètre : Une fonction qui fournit une valeur par défaut si la clé n'est pas présente.
+
+
+### 3- Dans notre cas, quel doit être le type de la lambda passée en second paramètre de computeIfAbsent ?
+
+
+#### Type de la lambda : Function<String, List<Actor>>
+
+
+### 4- Écrire la méthode actorGroupByFirstName()
+
+
+```java
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class ActorGrouping {
+
+    public record Actor(String firstName, String lastName) {
+        public Actor {
+            Objects.requireNonNull(firstName);
+            Objects.requireNonNull(lastName);
+        }
+    }
+
+    public static Map<String, List<Actor>> actorGroupByFirstName(List<Actor> actors) {
+        return actors.stream()
+                     .collect(Collectors.groupingBy(Actor::firstName));
+    }
+}
+
+
+```
+
+
+### 5- Si on veut maintenant grouper les acteurs par rapport à leur nom (lastName) au lieu du prénom, on va écrire à peu près le même code. On veut généraliser le code en écrivant une méthode actorGroupBy qui prend en paramètre une liste d'acteurs ainsi qu'une fonction qui, étant donné un acteur, renvoie la valeur par laquelle il va être groupé.
+
+
+```java
+
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class Actor {
+
+    // Méthode pour grouper les acteurs par prénom
+    public static Map<String, List<Actor>> actorGroupByFirstName(List<Actor> actors) {
+        return actors.stream()
+                     .collect(Collectors.groupingBy(Actor::firstName));
+    }
+
+    // Méthode générique pour grouper les acteurs par une fonction donnée
+    public static Map<String, List<Actor>> actorGroupBy(List<Actor> actors, Function<Actor, String> groupByFunction) {
+        return actors.stream()
+                     .collect(Collectors.groupingBy(groupByFunction));
+    }
+}
+
+```
+### Quelle doit être le type fonction du second paramètre de actorGroupBy ?
+#### Type fonction : Function<Actor, String>
+
+### Quelle est l'interface fonctionnelle correspondante ?
+#### Interface fonctionnelle : Function
+ 
+### Quelle doit être le type du second paramètre de actorGroupBy ? 
+#### Type du second paramètre : Function<Actor, String>
 
 
 
 
+###  Écrire la méthode actorGroupBy.
 
-#### computeIfAbsent(K key, Function<? super K,? extends V> mappingFunction)
-#### le premier paramètre est une clé, le deuxi
+```java 
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
+public class Actor {
 
+    // Méthode pour grouper les acteurs par prénom
+    public static Map<String, List<Actor>> actorGroupByFirstName(List<Actor> actors) {
+        return actors.stream()
+                     .collect(Collectors.groupingBy(Actor::firstName));
+    }
+
+    // Méthode générique pour grouper les acteurs par une fonction donnée
+    public static Map<String, List<Actor>> actorGroupBy(List<Actor> actors, Function<Actor, String> groupByFunction) {
+        return actors.stream()
+                     .collect(Collectors.groupingBy(groupByFunction));
+    }
+}
+
+```
 

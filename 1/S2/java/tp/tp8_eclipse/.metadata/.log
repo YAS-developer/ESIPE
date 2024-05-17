@@ -1,0 +1,13 @@
+!SESSION 2024-05-17 17:44:50.588 -----------------------------------------------
+eclipse.buildId=4.31.0.20240307-1200
+java.version=21.0.2
+java.vendor=Private Build
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_GB
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2024-05-17 17:44:53.582
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-05-17 17:45:14.567
+!MESSAGE Logback config file: /home/yas/Desktop/ESIPE/1/S2/java/tp/tp8_eclipse/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.0.20240217-1525.xml
