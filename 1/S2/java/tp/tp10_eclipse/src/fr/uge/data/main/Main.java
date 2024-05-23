@@ -1,5 +1,4 @@
 package fr.uge.data.main;
-//import fr.uge.data.*;
 
 import fr.uge.data.LinkedLink;
 
