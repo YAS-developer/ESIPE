@@ -1,0 +1,9 @@
+import java.util.List;
+import java.util.Locale;
+
+public class Lambda {
+
+    public static void upperCaseAll(List<String> list) {
+        list.replaceAll(s -> s.toUpperCase(Locale.ENGLISH));
+    }
+}

@@ -1,0 +1,31 @@
+package info.esiee.tp8;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+public class Lambdas {
+
+  public static void upperCaseAll(List<String> list) {
+      list.replaceAll(s -> s.toUpperCase(Locale.ENGLISH));
+  }
+    
+//  public static Map<String, Integer> occurrences(List<String> strings) {
+//    Map<String, Integer> occurrences = new HashMap<>();
+//    strings.forEach(string -> occurrences.put(string, occurrences.getOrDefault(string, 0) + 1));
+//    return occurrences;
+//  }
+  
+//  public static Map<String, Integer> occurrences(List<String> strings) {
+//    Map<String, Integer> occurrences = new HashMap<>();
+//    strings.forEach(string -> occurrences.merge(string, 1, (oldValue, value) -> oldValue + value));
+//    return occurrences;
+//  }
+  
+  public static Map<String, Integer> occurrences(List<String> strings) {
+    Map<String, Integer> occurrences = new HashMap<>();
+    strings.forEach(string -> occurrences.merge(string, 3, Integer::sum));
+    return occurrences;
+  }
+}

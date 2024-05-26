@@ -1,0 +1,13 @@
+import java.util.List;
+import java.util.Locale;
+
+public class Lambdas {
+
+    /**
+     * Converts all strings in the provided list to upper case.
+     * @param list the list of strings to convert to upper case
+     */
+    public static void upperCaseAll(List<String> list) {
+        list.replaceAll(s -> s.toUpperCase(Locale.ENGLISH));
+    }
+}
