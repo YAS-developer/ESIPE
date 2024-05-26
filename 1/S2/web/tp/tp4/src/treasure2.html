@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      div.row {
+        clear: both;
+      }
+      div.row div {
+        padding: 5px;
+        margin: 2px;
+        width: 20px;
+        background-color: lightgray;
+        float: left;
+        background-size: cover;
+      }
+    </style>
+    <script>
+      "use strict";
+
+      class GameState {
+        constructor() {
+          this.treasures = this.createTreasures();
+        }
+
+        createTreasures() {
+          let treasures = {};
+          for (let i = 0; i < 10; i++) {
+            let row = Math.floor(Math.random() * 8);
+            let col = Math.floor(Math.random() * 8);
+            treasures[`${row}x${col}`] = true;
+          }
+          return treasures;
+        }
+
+        findTreasure(x, y) {
+          return !!this.treasures[`${y}x${x}`];
+        }
+      }
+
+      window.onload = function() {
+        let game = document.getElementById("game");
+        let gameState = new GameState();
+
+        function createGrid(rows, cols) {
+          for (let y = 0; y < rows; y++) {
+            let row = document.createElement("div");
+            row.classList.add("row");
+            for (let x = 0; x < cols; x++) {
+              let cell = document.createElement("div");
+              cell.classList.add("cell");
+              cell.style.backgroundImage = "url('../res/ressand.png')";
+              row.appendChild(cell);
+              cell.onclick = () => {
+                let hasTreasure = gameState.findTreasure(x, y);
+                console.log("Cell (" + x + ", " + y + "): ", hasTreasure);
+                cell.style.backgroundImage = hasTreasure ? "url('../res/sand-chest.png')" : "url('../res/sand-hole.png')";
+                cell.onclick = null; // Disable further clicks
+              };
+            }
+            game.appendChild(row);
+          }
+        }
+
+        createGrid(8, 8);
+      };
+    </script>
+  </head>
+  <body>
+    <h2>Treasure Map (2)</h2>
+    <div id="game">
+    </div>
+  </body>
+</html>

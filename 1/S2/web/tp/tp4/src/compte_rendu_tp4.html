@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Compte Rendu de TP4</title> 
+    <link rel="stylesheet" href="./styles/compte-rendu-tp4.css">
+  </head>
+  <body>
+    <table id="cartouche">
+      <tr>
+        <td class="traitg traitd"></td>
+        <td class="traitd">
+          <h4 class="right">Yassine HAMROUNI</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="traitg traitd">
+          <h4>ESIPE INFO 1</h4>
+        </td>
+        <td class="traitd"></td>
+      </tr>
+      <tr>
+        <td class="traitg lastr">
+          <h4>TP 4 de Programmation Web</h4>
+        </td>
+        <td class="traitd lastr"></td>
+      </tr>
+    </table>
+    <h1 class="centered">Compte Rendu de TP4</h1>
+
+    <h2>Exercice 1 - Treasure Map</h2>
+    <ol>
+      <li>
+        <h3>Recopiez la page Web <a href="./treasure1.html" target="_blank">treasure1.html</a>. Qu'affiche le jeu sur la console ? Est-ce le résultat attendu ? Comment corriger ce problème ?</h3>
+        <p class="reponse">
+          Le jeu affiche "null" car l'élément avec l'id "game" n'est pas encore défini au moment où le script est exécuté. Pour corriger ce problème, il faut déplacer le script à la fin de la balise body ou utiliser window.onload pour s'assurer que l'élément est chargé avant d'y accéder.
+        </p>
+      </li>
+      <li>
+        <h3>Écrire le code qui affiche dans la console le div de chaque case ainsi que sa position en x et y en utilisant deux boucles avec des index.</h3>
+        <p class="reponse">
+          <pre>
+          var rows = game.children;
+          for (var y = 0; y < rows.length; y++) {
+            var cells = rows[y].children;
+            for (var x = 0; x < cells.length; x++) {
+              console.log("Cell (" + x + ", " + y + "): ", cells[x]);
+            }
+          }
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Expliquer pourquoi on ne peut pas utiliser la méthode forEach sur les children de game. Pour résoudre ce problème, on va utiliser Array.from().</h3>
+        <p class="reponse">
+          La méthode forEach n'est pas définie pour les HTMLCollection et NodeList, car ce ne sont pas des véritables tableaux. Array.from() convertit ces collections en tableaux, ce qui permet d'utiliser forEach.
+        </p>
+      </li>
+      <li>
+        <h3>Réécrivez le code en utilisant forEach et affichez la case et les coordonnées uniquement si l'utilisateur clique sur la case.</h3>
+        <p class="reponse">
+          <pre>
+          Array.from(game.children).forEach((row, y) => {
+            Array.from(row.children).forEach((cell, x) => {
+              cell.onclick = () => {
+                console.log("Cell (" + x + ", " + y + "): ", cell);
+              };
+            });
+          });
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Modifier votre code en utilisant IIFE pour résoudre le problème de portée des variables avec var.</h3>
+        <p class="reponse">
+          <pre>
+          var rows = game.children;
+          for (var y = 0; y < rows.length; y++) {
+            var cells = rows[y].children;
+            for (var x = 0; x < cells.length; x++) {
+              (function(x, y, cell) {
+                cell.onclick = function() {
+                  console.log("Cell (" + x + ", " + y + "): ", cell);
+                };
+              })(x, y, cells[x]);
+            }
+          }
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Réécrire le code en utilisant let à la place de var et des lambdas pour les fonctions anonymes.</h3>
+        <p class="reponse">
+          <pre>
+          let rows = game.children;
+          for (let y = 0; y < rows.length; y++) {
+            let cells = rows[y].children;
+            for (let x = 0; x < cells.length; x++) {
+              let cell = cells[x];
+              cell.onclick = () => {
+                console.log("Cell (" + x + ", " + y + "): ", cell);
+              };
+            }
+          }
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Créer les fonctions createTreasures et findTreasure et afficher le résultat de findTreasure lorsqu'un utilisateur clique sur une case.</h3>
+        <p class="reponse">
+          <pre>
+          function createTreasures() {
+            let treasures = [];
+            for (let i = 0; i < 10; i++) {
+              treasures.push({
+                row: Math.floor(Math.random() * 8),
+                col: Math.floor(Math.random() * 8)
+              });
+            }
+            return treasures;
+          }
+
+          function findTreasure(treasures, x, y) {
+            return treasures.some(t => t.row === y && t.col === x);
+          }
+
+          let treasures = createTreasures();
+          Array.from(game.children).forEach((row, y) => {
+            Array.from(row.children).forEach((cell, x) => {
+              cell.onclick = () => {
+                let hasTreasure = findTreasure(treasures, x, y);
+                console.log("Cell (" + x + ", " + y + "): ", hasTreasure);
+                cell.style.backgroundColor = hasTreasure ? "green" : "red";
+                cell.onclick = null; // Disable further clicks
+              };
+            });
+          });
+          </pre>
+        </p>
+      </li>
+    </ol>
+
+    <h2>Exercice 2 - Treasure Map (2)</h2>
+    <ol>
+      <li>
+        <h3>Modifier le code pour générer dynamiquement l'ensemble des DIVs sous game.</h3>
+        <p class="reponse">
+          <pre>
+          function createGrid(rows, cols) {
+            let game = document.getElementById("game");
+            for (let y = 0; y < rows; y++) {
+              let row = document.createElement("div");
+              row.classList.add("row");
+              for (let x = 0; x < cols; x++) {
+                let cell = document.createElement("div");
+                cell.classList.add("cell");
+                row.appendChild(cell);
+              }
+              game.appendChild(row);
+            }
+          }
+
+          createGrid(8, 8);
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Créer une classe GameState pour gérer les trésors.</h3>
+        <p class="reponse">
+          <pre>
+          class GameState {
+            constructor() {
+              this.treasures = this.createTreasures();
+            }
+
+            createTreasures() {
+              let treasures = {};
+              for (let i = 0; i < 10; i++) {
+                let row = Math.floor(Math.random() * 8);
+                let col = Math.floor(Math.random() * 8);
+                treasures[`${row}x${col}`] = true;
+              }
+              return treasures;
+            }
+
+            findTreasure(x, y) {
+              return !!this.treasures[`${y}x${x}`];
+            }
+          }
+
+          let gameState = new GameState();
+          Array.from(game.children).forEach((row, y) => {
+            Array.from(row.children).forEach((cell, x) => {
+              cell.onclick = () => {
+                let hasTreasure = gameState.findTreasure(x, y);
+                console.log("Cell (" + x + ", " + y + "): ", hasTreasure);
+                cell.style.backgroundColor = hasTreasure ? "green" : "red";
+                cell.onclick = null; // Disable further clicks
+              };
+            });
+          });
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Utiliser une table de hachage pour stocker les trésors plutôt qu'un tableau.</h3>
+        <p class="reponse">
+          <pre>
+          class GameState {
+            constructor() {
+              this.treasures = this.createTreasures();
+            }
+
+            createTreasures() {
+              let treasures = {};
+              for (let i = 0; i < 10; i++) {
+                let row = Math.floor(Math.random() * 8);
+                let col = Math.floor(Math.random() * 8);
+                treasures[`${row}x${col}`] = true;
+              }
+              return treasures;
+            }
+
+            findTreasure(x, y) {
+              return !!this.treasures[`${y}x${x}`];
+            }
+          }
+
+          let gameState = new GameState();
+          Array.from(game.children).forEach((row, y) => {
+            Array.from(row.children).forEach((cell, x) => {
+              cell.onclick = () => {
+                let hasTreasure = gameState.findTreasure(x, y);
+                console.log("Cell (" + x + ", " + y + "): ", hasTreasure);
+                cell.style.backgroundColor = hasTreasure ? "green" : "red";
+                cell.onclick = null; // Disable further clicks
+              };
+            });
+          });
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Utiliser des images pour améliorer l'aspect visuel du jeu.</h3>
+        <p class="reponse">
+          <pre>
+          Array.from(game.children).forEach((row, y) => {
+            Array.from(row.children).forEach((cell, x) => {
+              cell.style.backgroundImage = "url('sand.png')";
+              cell.style.backgroundSize = "cover";
+              cell.onclick = () => {
+                let hasTreasure = gameState.findTreasure(x, y);
+                console.log("Cell (" + x + ", " + y + "): ", hasTreasure);
+                cell.style.backgroundImage = hasTreasure ? "url('sand-chest.png')" : "url('sand-hole.png')";
+                cell.style.backgroundSize = "cover";
+                cell.onclick = null; // Disable further clicks
+              };
+            });
+          });
+          </pre>
+        </p>
+      </li>
+    </ol>
+
+    <h2>Conclusion personnelle</h2>
+    <p>
+      Ce TP a été très instructif, renforçant ma compréhension de JavaScript et son interaction avec le HTML pour créer des éléments dynamiques. La réalisation d'un jeu de recherche de trésor m'a permis d'explorer la manipulation du DOM, la gestion des événements et l'utilisation des images pour améliorer l'aspect visuel.
+    </p>
+  </body>
+</html>
+

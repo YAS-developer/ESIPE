@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Compte Rendu de TP3</title> 
+    <link rel="stylesheet" href="./styles/compte-rendu-tp3.css">
+  </head>
+  <body>
+   <table id="cartouche">
+      <tr>
+        <td class="traitg traitd"></td>
+        <td class="traitd">
+          <h4 class="right">Yassine HAMROUNI</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="traitg traitd">
+          <h4>ESIPE INFO 1</h4>
+        </td>
+        <td class="traitd"></td>
+      </tr>
+      <tr>
+        <td class="traitg lastr">
+          <h4>TP 3 de Programmation Web</h4>
+        </td>
+        <td class="traitd lastr"></td>
+      </tr>
+    </table>
+    <h1 class="centered">Compte Rendu de TP3</h1>
+
+    <h2 >Exercice 1 - Horloge</h2>
+    <ol>
+      <li>
+        <h3>Recopiez la page Web <a href="./exo1.html" target="_blank">exo1.html</a>.
+          Que se passe-t-il lorsque l'on la visualise ?<br>
+          Note: regardez la console !<br>
+          Expliquez ce que fait window.onload = loaded puis window.setTimeout(refresh, 1000) ? Pour cela, chercher dans la documentation sur le <a href="https://developer.mozilla.org/en-US/">Mozilla Developer Network</a>. </h3>
+        <p class="reponse">
+          Des lors ou la page se charge, la fonction refresh est execute au bout de 1 seconde.
+        </p>
+      </li>
+      
+      <li>
+        <h3>Il existe un appel window.setInterval() qui va appeler la fonction prise en paramètre de façon répétée. Transformez le code pour utiliser window.setInterval(). </h3>
+        <p class="reponse">
+          window.onload = () => {
+            window.setInterval(refresh, 1000);
+         };
+        </p>
+      </li>
+      <li>
+        <h3>Transformez le code pour afficher la date courante avec new Date().
+          Puis changez encore le code pour afficher l'heure (getHours()), les minutes (getMinutes()) et les secondes (getSeconds()) sur la console. </h3>
+        <p class="reponse">
+          window.setInterval(() => console.log(new Date()), 1000);<br>
+            window.setInterval(() => {
+              const date = new Date();
+              console.log(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
+            }, 1000);
+        </p>
+      </li>
+      
+      <li>
+        <h3>Dans la fonction flèche associer à window.onload, récupérer le canvas à partir de son id et récupérer le context associé.<br>
+          Passer le canvas et le context en paramètre de la fonction refresh et dans refresh afficher sur la console la largeur (width) et la hauteur (height) du canvas.<br>
+          Enfin, modifier la fonction refresh pour afficher une aiguille indiquant midi (ou 0 minute, ou 0 seconde). </h3>
+        <p class="reponse">
+          function refresh(canvas, context) { <br>
+            &nbsp;&nbsp;console.log("Largeur du canvas: " + canvas.width + ", Hauteur du canvas: " + canvas.height); <br>
+            &nbsp;&nbsp;context.beginPath(); <br>
+            &nbsp;&nbsp;context.moveTo(canvas.width / 2, canvas.height / 2); <br>
+            &nbsp;&nbsp;context.lineTo(canvas.width / 2, 0); <br>
+            &nbsp;&nbsp;context.stroke(); <br>
+          } <br>
+          window.onload = () => { <br>
+          &nbsp;&nbsp;const canvas = document.getElementById("clock"); <br>
+          &nbsp;&nbsp;const context = canvas.getContext("2d"); <br>
+          &nbsp;&nbsp;window.setInterval(() => { <br>
+          &nbsp;&nbsp;&nbsp;refresh(canvas, context); <br>
+          &nbsp;&nbsp;}, 1000); <br>
+          };
+        </p>
+      </li>
+      
+
+      <li>
+        <h3>Dessinez un cercle de rayon radius pixels, centré dans le canvas, avec radius égal à 85% du minimum entre la largeur (canvas.width) et la hauteur canvas.height du canvas (il existe une fonction Math.min). Il servira de cadre à notre horloge (il existe une fonction Math.min).</h3>
+        <p class="reponse">
+          const radius = Math.min(canvas.width, canvas.height) * 0.85 / 2;<br> 
+          context.beginPath();<br>  
+          context.arc(canvas.width / 2, canvas.height / 2, radius, 0, 2 * Math.PI);<br>  
+          context.stroke();<br>  
+        </p>
+      </li>
+
+      <li>
+        <h3>
+          Indiquez les formules mathématiques qui permettent pour une valeur de 0 à 60 secondes de trouver les coordonnées x et y du sommet de l'aiguille. </h3>
+        <p class="reponse">
+          const seconds = new Date().getSeconds();<br>    
+          const angle = (2 * Math.PI / 60) * seconds;<br>   
+          const r = Math.min(canvas.width, canvas.height) * 0.85 / 2;<br>   
+          const x = canvas.width / 2 + r * Math.cos(angle - Math.PI / 2);<br>   
+          const y = canvas.height / 2 + r * Math.sin(angle - Math.PI / 2);<br>    
+        </p>
+      </li>
+      
+      <li>
+        <h3>Modifiez le code pour faire bouger la trotteuse (nom de l'aiguille des secondes) en fonction des secondes.<br>
+          Note: context.clearRect(...) permet d'effacer le canvas. </h3>
+        <p class="reponse">
+          context.clearRect(0, 0, canvas.width, canvas.height);
+        </p>
+      </li>
+
+      <li>
+        <h3>Modifiez votre code pour afficher la trotteuse en rouge et le cadre en vert clair.
+          Réglez à 3 pixels l'épaisseur du trait du cadre.</h3>
+        <p class="reponse">
+          Pour la trotteuse:<br>
+          context.strokeStyle = 'red';<br>
+          context.lineWidth = 1;<br><br>
+          Pour le cadre:<br>
+          context.strokeStyle = 'lightgreen';<br>
+          context.lineWidth = 3;
+        </p>
+      </li>
+
+      <li>
+        <h3>Affichez en plus de la trotteuse, l'aiguille des minutes (la grande aiguille) en noire.
+          Note: pitié, ne dupliquez pas le code ! </h3>
+        <p class="reponse">
+          function drawHand(context, cx, cy, length, angle, color, lineWidth) {<br>
+          &nbsp;&nbsp;const x = cx + length * Math.cos(angle - Math.PI / 2);<br>
+          &nbsp;&nbsp;const y = cy + length * Math.sin(angle - Math.PI / 2);<br>
+    
+          &nbsp;&nbsp;context.beginPath();<br>
+          &nbsp;&nbsp;context.moveTo(cx, cy);<br>
+          &nbsp;&nbsp;context.lineTo(x, y);
+          &nbsp;&nbsp;context.strokeStyle = color;<br>
+          &nbsp;&nbsp;context.lineWidth = lineWidth;<br>
+          &nbsp;&nbsp;context.stroke();<br>
+          }
+        </p>
+      </li>
+
+      <li>
+        <h3>Ajoutez l'aiguille des heures, qui doit être d'une longueur inférieure aux deux autres aiguilles (disons 80%), mais plus large, toujours en essayant de 'factoriser' le code.</h3>
+        <p class="reponse">
+          const hourAngle = (2 * Math.PI / 12) * (hours % 12 + minutes / 60);<br>
+          drawHand(context, canvas.width / 2, canvas.height / 2, radius * 0.6, hourAngle, 'black', 4);
+        </p>
+      </li>
+
+
+      <li>
+        <h3>
+          Ajoutez 12 traits de graduation ('ticks') en vert foncé, autour du cadre de l'horloge. Un trait aura une longueur de 3 pixels.
+        </h3>
+        <p class="reponse">
+          for (let i = 0; i &#60; 12; i++) {<br>
+            &nbsp;&nbsp;const angle = (2 * Math.PI / 12) * i;<br>
+            &nbsp;&nbsp;const outerX = canvas.width / 2 + radius * Math.cos(angle);<br>
+            &nbsp;&nbsp;const outerY = canvas.height / 2 + radius * Math.sin(angle);<br>
+            &nbsp;&nbsp;const innerX = canvas.width / 2 + (radius - 3) * Math.cos(angle);<br>
+            &nbsp;&nbsp;const innerY = canvas.height / 2 + (radius - 3) * Math.sin(angle);<br>
+            <br>
+            &nbsp;&nbsp;context.beginPath();<br>
+            &nbsp;&nbsp;context.moveTo(outerX, outerY);<br>
+            &nbsp;&nbsp;context.lineTo(innerX, innerY);<br>
+            &nbsp;&nbsp;context.strokeStyle = 'darkgreen';<br>
+            &nbsp;&nbsp;context.lineWidth = 1;<br>
+            &nbsp;&nbsp;context.stroke();<br>
+          }
+        </p>
+      </li>
+
+      
+    </ol>
+
+    <h2>Exercice 2 - Horloges de différentes tailles</h2>
+    <ol>
+      <li>
+          <h3>
+            Faites en sorte que la taille de l'horloge puisse varier en fonction de la taille du canvas
+            Un canvas a une propriété width et une propriété height.
+            Dans le cas où la largeur et la hauteur d'un canvas n'est pas la même, prenez la valeur minimum entre les deux et laisser des bandes de chaque coté.
+          </h3>
+          <p class="reponse">
+            Le rayon de l'horloge est défini en fonction de la plus petite dimension du canvas, permettant ainsi à l'horloge de s'adapter à la taille du canvas. La ligne de code suivante assure cette adaptation :<br><br>
+            const radius = Math.min(canvas.width, canvas.height) * 0.85 / 2;<br><br>
+            Cette formule calcule le rayon comme 85% de la moitié de la plus petite dimension du canvas. Ainsi, l'horloge reste centrée et proportionnelle, quelle que soit la taille du canvas.
+          </p>
+      </li>
+
+      <li>
+          <h3>
+            Faites en sorte d'avoir une fonction startClock qui prend en paramètre l'id d'un canvas qui sert d'unique point d'entrée pour faire fonctionner une horloge.
+            Testez avec l'affichage des 2 horloges de tailles différentes (on est d'accord, on peut en ajouter plus !).
+          </h3>
+          <p class="reponse">
+            function startClock(canvasId) {<br>
+            &nbsp;&nbsp;const canvas = document.getElementById(canvasId);<br>
+            &nbsp;&nbsp;const context = canvas.getContext("2d");<br>
+            &nbsp;&nbsp;window.setInterval(() => {<br>
+            &nbsp;&nbsp;&nbsp;refresh(canvas, context);<br>
+            &nbsp;&nbsp;}, 1000); // Mettre à jour toutes les secondes<br>
+            };
+          </p>
+      </li>
+
+      <li>
+          <h3>Question top moumoute, faites en sorte de garantir que les aiguilles des différentes horloges soient synchrones (i.e. misent à jour toutes en même temps).</h3>
+          <p class="reponse">
+            On cree tout d'abord une variable globale:<br><br>
+            let clocks = [];<br><br>
+            Cette derniere va permettre d'enregistrer les differentes horloges avec la fonction startClock:<br><br>
+            function startClock(canvasId) {<br>
+              &nbsp;const canvas = document.getElementById(canvasId);<br>
+              &nbsp;const context = canvas.getContext("2d");<br>
+              &nbsp;clocks.push({ canvas, context });<br>
+            }<br><br>
+            Ensuite on juste a appeler la startClock pour chaque horloge, et puis mettre un setInterval pour la fonction d'update qui va elle parcourir la variable clocks:<br><br>
+
+            function updateClocks() {<br>
+            &nbsp; &nbsp;clocks.forEach(({ canvas, context }) => refresh(canvas, context));<br>
+            }<br><br>
+
+            window.onload = () => {<br>
+              startClock("clock"); // Démarrez la première horloge<br>
+              startClock("clock2"); // Démarrez une deuxième horloge (si elle existe)<br>
+              window.setInterval(updateClocks, 1000);<br>
+              }
+          </p>
+      </li>
+    </ol>
+     
+   
+    <h2>Conclusion personnelle</h2>
+    <p>
+      Ce TP a été très instructif, renforçant ma compréhension de JavaScript et son interaction avec le HTML pour créer des éléments dynamiques. La réalisation d'une horloge interactive m'a permis d'explorer les animations avec canvas et la gestion du temps. 
+    </p>
+  </body>
+</html>
+
