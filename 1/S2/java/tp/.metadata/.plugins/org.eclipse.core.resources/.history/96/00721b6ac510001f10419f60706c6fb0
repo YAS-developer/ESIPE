@@ -1,0 +1,17 @@
+package info.esiee.main;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
+public class Main {
+	public static void main(String[] args) {
+//		String txt = "Hello World";
+//		System.out.println(txt.toUpperCase(Locale.ENGLISH));
+		
+		
+		List<String> list = Arrays.asList("Bonjour", "monde");
+		list.replaceAll(s -> s.toUpperCase(Locale.ENGLISH));
+		System.out.println(list);
+	}
+}

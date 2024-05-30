@@ -1,0 +1,23 @@
+package info.esiee.main;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+
+import info.esiee.tp8.Lambdas;
+
+
+public class Main {
+	public static void main(String[] args) {
+    // Example usage of the upperCaseAll method
+    List<String> words = List.of("hello", "world", "java", "programming");
+    System.out.println("Before: " + words);
+    
+    // Make a mutable copy of the list since List.of returns an immutable list
+    List<String> mutableWords = new ArrayList<>(words);
+    Lambdas.upperCaseAll(mutableWords);
+   
+    System.out.println("After: " + mutableWords);
+}
+}

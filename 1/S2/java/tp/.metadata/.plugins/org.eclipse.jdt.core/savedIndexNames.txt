@@ -1,0 +1,5 @@
+INDEX VERSION 1.134+/home/yas/Desktop/ESIPE/1/S2/java/tp/.metadata/.plugins/org.eclipse.jdt.core
+900586112.index
+1865797976.index
+2417249902.index
+1336771007.index

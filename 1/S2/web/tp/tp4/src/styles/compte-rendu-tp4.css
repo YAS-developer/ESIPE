@@ -1,0 +1,20 @@
+.reponse{
+    color: green;
+}
+
+#cartouche td{
+    border-top: 1px dashed;
+    width: 100%; 
+}
+
+.traitd{
+    border-right: 1px solid ;
+}
+
+.traitg{
+    border-left: 1px solid ;
+}
+
+.lastr{
+    border-bottom: 1px dashed; 
+}

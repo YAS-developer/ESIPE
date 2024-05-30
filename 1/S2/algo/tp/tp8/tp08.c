@@ -1,157 +1,67 @@
 #include "tree.h"
-#include "visualtree.h"  
+#include "visualtree.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <limits.h>
 
-
 void display_menu() {
     printf("Choix possibles:\n");
-    printf("s : construire un nouvel arbre à partir d’une suite d’entiers\n");
-    printf("a : construire un arbre avec un nombre d’entiers aléatoires\n");
-    printf("i : insérer un élément dans l’arbre\n");
+    printf("s : construire un nouvel arbre à partir d’une suite de mots\n");
+    printf("a : construire un arbre avec un nombre de mots aléatoires\n");
+    printf("i : insérer un mot dans l’arbre\n");
     printf("f : faire une recherche dans l’arbre\n");
-    printf("d : afficher les entiers de l’arbre en ordre croissant\n");
-    printf("b : verifie si c'est un arbre binaire de recherche\n");
-    printf("r : insérer N entiers aléatoires et distincts\n");
+    printf("d : afficher les mots de l’arbre en ordre lexicographique\n");
+    printf("r : afficher les mots entre deux mots donnés\n");
+    printf("b : verifier si c'est un arbre binaire de recherche\n");
+    // printf("h : comparer la hauteur de l'arbre avec la hauteur idéale\n");
+    printf("m : supprimer le plus petit mot de l'arbre\n");
+    printf("x : supprimer un mot de l'arbre\n");
+    printf("u : trouver les mots uniques entre deux fichiers\n");
     printf("q : terminer le programme\n");
 }
 
-node* build_random_tree(int num_nodes) {
-    node *root = NULL;
-    srand(time(NULL));
-    for (int i = 0; i < num_nodes; i++) {
-        int value = rand() % 1000; // Random values between 0 and 999
-        root = insert_bst(root, value);
-    }
-    return root;
-}
-
-
-void measure_insertion_time(int N, int is_random) {
-    node *root = NULL;
-    clock_t start, end;
-    double time_used;
-
-    if (is_random) {
-        printf("Inserting %d random elements:\n", N);
-        start = clock();
-        root = insert_random_elements(N);
-        end = clock();
-    } else {
-        printf("Inserting %d sequential elements:\n", N);
-        start = clock();
-        root = insert_sequential_elements(N);
-        end = clock();
-    }
-
-    time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-    int tree_height = height(root);
-    printf("Time used: %.2f seconds\n", time_used);
-    printf("Tree height: %d\n", tree_height);
-    free_tree(root);
-}
-
-void measure_insertions() {
-    int N_values[] = {10000, 20000, 30000, 40000, 50000};
-    int num_tests = sizeof(N_values) / sizeof(N_values[0]);
-
-    for (int i = 0; i < num_tests; i++) {
-        measure_insertion_time(N_values[i], 1); // Random elements
-        measure_insertion_time(N_values[i], 0); // Sequential elements
-    }
-}
-
 int main() {
-
-    // printf("Please enter the pre-order tree sequence (0 for NULL nodes):\n");
-    // node *root = scan_tree();
-
-
-    // Optionally, use the visualtree functions to visualize the constructed tree
-    // if (root == NULL) {
-    //     fprintf(stderr, "L'arbre n'a pas ete cree");
-    //     exit(EXIT_FAILURE);
-    // } 
-
-    // // Test the find_bst function
-    // int i;
-    // for (i = 0; i < 100; i++) {
-    //     if (find_bst(root, i)) {
-    //         printf("%d ", i);
-    //     }
-    // }
-    // printf("\n");
-
-
-    // Insert new elements into the BST
-    // int elements_to_insert[] = {10, 5, 15, 3, 8, 12, 18};
-    // int num_elements = sizeof(elements_to_insert) / sizeof(elements_to_insert[0]);
-    // for (int i = 0; i < num_elements; i++) {
-    //     root = insert_bst(root, elements_to_insert[i]);
-    // }
-
-
-
-
-    // Display the tree in-order to verify the insertion
-    // printf("Tree in-order after insertions:\n");
-    // display_infix(root);
-    // printf("\n");
-
-  
-
-
-    // Freeing the tree to avoid memory leaks
-    // free_tree(root);
-
     node *root = NULL;
     char choice;
-    int value;
+    char word[MAX_WORD_LENGTH + 1];
 
-   
+    FILE *f = fopen("text.txt", "r");
+    if (f == NULL) {
+        fprintf(stderr, "Could not open file.\n");
+        return 1;
+    }
+
+    while (fscanf(f, "%s", word) != EOF) {
+        root = insert_bst(root, word);
+    }
+    fclose(f);
+
+    // int n = count_nodes(root);
+
     while (1) {
         display_menu();
         printf("Entrez votre choix: ");
         scanf(" %c", &choice);
 
         switch (choice) {
-            case 's':
-                printf("Entrez la suite d'entiers pour construire l'arbre (terminée par 0 pour NULL):\n");
-                root = scan_tree();
-                write_tree(root);
-                break;
-
-            case 'a':
-                printf("Entrez le nombre d'entiers aléatoires: ");
-                int num_nodes;
-                scanf("%d", &num_nodes);
-                root = build_random_tree(num_nodes);
-                write_tree(root);
-                break;
-
-            case 'i':
-                printf("Entrez l'élément à insérer: ");
-                scanf("%d", &value);
-                root = insert_bst(root, value);
-                write_tree(root);
-                break;
-
-            case 'f':
-                printf("Entrez l'élément à rechercher: ");
-                scanf("%d", &value);
-                if (find_bst(root, value)) {
-                    printf("L'élément %d est présent dans l'arbre.\n", value);
-                } else {
-                    printf("L'élément %d n'est pas présent dans l'arbre.\n", value);
-                }
-                break;
-
             case 'd':
-                printf("Arbre en ordre croissant: ");
+                printf("Arbre en ordre lexicographique: ");
                 display_infix(root);
                 printf("\n");
+                break;
+
+            case 'r':
+                {
+                    char start[MAX_WORD_LENGTH + 1], end[MAX_WORD_LENGTH + 1];
+                    printf("Entrez le premier mot: ");
+                    scanf("%s", start);
+                    printf("Entrez le deuxième mot: ");
+                    scanf("%s", end);
+                    printf("Mots entre %s et %s: ", start, end);
+                    display_range(root, start, end);
+                    printf("\n");
+                }
                 break;
 
             case 'b':
@@ -162,8 +72,46 @@ int main() {
                 }
                 break;
 
-            case 'r':
-                measure_insertions();
+            // case 'h':
+            //     compare_height(root, n);
+            //     break;
+
+            case 'm':
+                {
+                    node *min_node = NULL;
+                    root = extract_min_bst(root, &min_node);
+                    if (min_node != NULL) {
+                        printf("Noeud minimum extrait: %s\n", min_node->word);
+                        free(min_node);
+                    } else {
+                        printf("L'arbre est vide.\n");
+                    }
+                    write_tree(root);
+                }
+                break;
+
+            case 'x':
+                printf("Entrez le mot à supprimer: ");
+                scanf("%s", word);
+                root = remove_bst(root, word);
+                write_tree(root);
+                break;
+
+            case 'u':
+                {
+                    char file1[MAX_WORD_LENGTH + 1], file2[MAX_WORD_LENGTH + 1];
+                    printf("Entrez le premier fichier: ");
+                    scanf("%s", file1);
+                    printf("Entrez le deuxième fichier: ");
+                    scanf("%s", file2);
+                    node *root1 = read_file_to_bst(file1);
+                    node *root2 = read_file_to_bst(file2);
+                    printf("Mots dans %s mais pas dans %s: ", file1, file2);
+                    find_unique_words(root1, root2);
+                    printf("\n");
+                    free_tree(root1);
+                    free_tree(root2);
+                }
                 break;
 
             case 'q':
@@ -176,8 +124,6 @@ int main() {
                 break;
         }
     }
-
-
 
     return 0;
 }

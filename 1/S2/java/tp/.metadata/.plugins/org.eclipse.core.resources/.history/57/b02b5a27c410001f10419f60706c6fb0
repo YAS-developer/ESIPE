@@ -1,0 +1,10 @@
+package info.esiee.main;
+
+import java.util.Locale;
+
+public class Main {
+	public static void main(String[] args) {
+		String txt = "Hello World";
+		System.out.println(txt.toUpperCase(Locale.FRANCE));
+	}
+}
