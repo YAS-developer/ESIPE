@@ -1,0 +1,11 @@
+Exercice 1 : 
+
+1) Predicate, elle prend un E (String dans notre cas) et retourne un boolean.
+
+2) Function, 
+
+
+
+
+Ex 2) max est mieux car pas de sort
+
