@@ -2,17 +2,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <time.h>
 
+/* Create a new node */
 node *create_node(int elt, node *left, node *right) {
     node *n = (node *)malloc(sizeof(node));
     assert(n != NULL);
     n->data = elt;
-    n->height = 0;
+    n->height = 0;  // Initialize height to 0 for new nodes (leaves)
     n->left = left;
     n->right = right;
     return n;
 }
 
+/* Free the tree */
 void free_tree(node *t) {
     if (t != NULL) {
         free_tree(t->left);
@@ -21,8 +24,7 @@ void free_tree(node *t) {
     }
 }
 
-/* SEARCH */
-
+/* Find an element in the AVL tree */
 node *find_avl(node *t, int elt) {
     node *ptr = t;
     while (ptr != NULL && ptr->data != elt) {
@@ -36,13 +38,16 @@ node *find_avl(node *t, int elt) {
 
 /* Update height of a node */
 void update_height(node *t) {
-    int left_height = (t->left) ? t->left->height : -1;
-    int right_height = (t->right) ? t->right->height : -1;
-    t->height = (left_height > right_height ? left_height : right_height) + 1;
+    if (t != NULL) {
+        int left_height = (t->left) ? t->left->height : -1;
+        int right_height = (t->right) ? t->right->height : -1;
+        t->height = (left_height > right_height ? left_height : right_height) + 1;
+    }
 }
 
 /* Compute balance factor */
 int compute_balance(node *t) {
+    if (t == NULL) return 0;
     int left_height = (t->left) ? t->left->height : -1;
     int right_height = (t->right) ? t->right->height : -1;
     return left_height - right_height;
@@ -96,6 +101,7 @@ node *rebalance(node *t) {
         }
         t = rotate_left(t);
     }
+    update_height(t); // Ensure the height is updated after rebalancing
     return t;
 }
 
@@ -112,6 +118,52 @@ node *insert_avl(node *t, int elt) {
     } else {
         // Élément déjà présent, pas d'insertion nécessaire
         return t;
+    }
+
+    return rebalance(t);
+}
+
+/* Find the minimum node in the AVL tree */
+node *find_min(node *t) {
+    while (t->left != NULL) {
+        t = t->left;
+    }
+    return t;
+}
+
+/* Remove the minimum node from the AVL tree */
+node *remove_min(node *t) {
+    if (t->left == NULL) {
+        return t->right;
+    }
+    t->left = remove_avl(t->left, t->data);
+    return rebalance(t);
+}
+
+/* Remove an element from the AVL tree */
+node *remove_avl(node *t, int elt) {
+    if (t == NULL) {
+        return NULL;
+    }
+
+    if (elt < t->data) {
+        t->left = remove_avl(t->left, elt);
+    } else if (elt > t->data) {
+        t->right = remove_avl(t->right, elt);
+    } else {
+        if (t->left == NULL) {
+            node *right_child = t->right;
+            free(t);
+            return right_child;
+        } else if (t->right == NULL) {
+            node *left_child = t->left;
+            free(t);
+            return left_child;
+        } else {
+            node *min_right_subtree = find_min(t->right);
+            t->data = min_right_subtree->data;
+            t->right = remove_min(t->right);
+        }
     }
 
     return rebalance(t);
@@ -143,9 +195,15 @@ int is_avl(node *t) {
     return is_avl(t->left) && is_avl(t->right);
 }
 
-/* Additional helper functions */
-node *remove_avl(node *t, int elt) {
-    // Placeholder for AVL tree removal function
-    // Implementation can be added based on specific requirements
-    return t;
+/* Fill an array with a random permutation of 1, 2, ..., n */
+void fill_random_permutation(int *array, int n) {
+    for (int i = 0; i < n; i++) {
+        array[i] = i + 1;
+    }
+    for (int i = n - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
