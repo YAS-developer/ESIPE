@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8"> 
+    <title>Compte Rendu de TP5</title> 
+    <link rel="stylesheet" href=".//styles/compte-rendu-tp5.css">
+  </head>
+  <body>
+    <table id="cartouche">
+      <tr>
+        <td class="traitg traitd"></td>
+        <td class="traitd">
+          <h4 class="right">[Votre Nom]</h4>
+        </td>
+      </tr>
+      <tr>
+        <td class="traitg traitd">
+          <h4>ESIPE INFO 1</h4>
+        </td>
+        <td class="traitd"></td>
+      </tr>
+      <tr>
+        <td class="traitg lastr">
+          <h4>TP 5 de Programmation Web</h4>
+        </td>
+        <td class="traitd lastr"></td>
+      </tr>
+    </table>
+    <h1 class="centered">Compte Rendu de TP5</h1>
+
+    <h2>Exercice 1 - Stock Tickers</h2>
+    <ol>
+      <li>
+        <h3>Créer le bouton "Refresh" et le champ texte dans le fichier HTML</h3>
+        <p class="reponse">
+          <pre>
+          &lt;div&gt;
+            &lt;button id="refreshButton"&gt;Refresh&lt;/button&gt;
+            &lt;input type="text" id="markText" placeholder="Enter threshold value"&gt;
+          &lt;/div&gt;
+          &lt;table id="stockTable"&gt;&lt;/table&gt;
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Configurer le serveur Java</h3>
+        <p class="reponse">
+          Exécutez le fichier <code>JExpress.java</code> avec la commande :
+          <pre>
+          java JExpress.java
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Implémenter le script JavaScript</h3>
+        <p class="reponse">
+          <pre>
+          document.getElementById('refreshButton').onclick = function() {
+            fetch('/api/ticker')
+              .then(response =&gt; response.json())
+              .then(tickers =&gt; {
+                console.log(tickers);
+                // Pour l'instant, affichons simplement les tickers
+                populateTable(tickers);
+              });
+          };
+
+          function populateTable(tickers) {
+            const table = document.getElementById('stockTable');
+            table.innerHTML = ''; // Réinitialiser la table
+            tickers.forEach(ticker =&gt; {
+              const row = document.createElement('tr');
+              const cell = document.createElement('td');
+              cell.textContent = ticker;
+              row.appendChild(cell);
+              table.appendChild(row);
+            });
+          }
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Explication de async et await</h3>
+        <p class="reponse">
+          Les mots-clés <code>async</code> et <code>await</code> simplifient la gestion des promesses en JavaScript. <code>async</code> permet de déclarer une fonction qui retourne une promesse, et <code>await</code> permet d'attendre la résolution d'une promesse de manière asynchrone.
+          <pre>
+          document.getElementById('refreshButton').onclick = async function() {
+            try {
+              const response = await fetch('/api/ticker');
+              const tickers = await response.json();
+              console.log(tickers);
+              populateTable(tickers);
+            } catch (error) {
+              console.error('Error fetching tickers:', error);
+            }
+          };
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Ajouter les quotations à la table</h3>
+        <p class="reponse">
+          <pre>
+          async function fetchTickers() {
+            const response = await fetch('/api/ticker');
+            return response.json();
+          }
+
+          async function fetchStocks() {
+            const response = await fetch('/api/stock', { method: 'POST' });
+            return response.json();
+          }
+
+          async function refreshData() {
+            try {
+              const tickers = await fetchTickers();
+              const stocks = await fetchStocks();
+              const stockTable = document.getElementById('stockTable');
+              stockTable.innerHTML = '';
+              tickers.forEach(ticker =&gt; {
+                const row = document.createElement('tr');
+                const tickerCell = document.createElement('td');
+                const stockCell = document.createElement('td');
+                tickerCell.textContent = ticker;
+                stockCell.textContent = stocks[ticker] || '-';
+                row.appendChild(tickerCell);
+                row.appendChild(stockCell);
+                stockTable.appendChild(row);
+              });
+            } catch (error) {
+              console.error('Error:', error);
+            }
+          }
+
+          document.getElementById('refreshButton').onclick = refreshData;
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Affichage des quotations en fonction du seuil</h3>
+        <p class="reponse">
+          <pre>
+          function highlightStocks(threshold) {
+            const rows = document.querySelectorAll('#stockTable tr');
+            rows.forEach(row =&gt; {
+              const value = parseInt(row.children[1].textContent, 10);
+              if (!isNaN(value) && value &lt; threshold) {
+                row.children[1].style.color = 'green';
+              } else {
+                row.children[1].style.color = 'black';
+              }
+            });
+          }
+
+          document.getElementById('markText').onkeyup = function() {
+            const threshold = parseInt(this.value, 10);
+            if (!isNaN(threshold)) {
+              highlightStocks(threshold);
+            }
+          };
+
+          async function refreshData() {
+            try {
+              const tickers = await fetchTickers();
+              const stocks = await fetchStocks();
+              const stockTable = document.getElementById('stockTable');
+              stockTable.innerHTML = '';
+              tickers.forEach(ticker =&gt; {
+                const row = document.createElement('tr');
+                const tickerCell = document.createElement('td');
+                const stockCell = document.createElement('td');
+                tickerCell.textContent = ticker;
+                stockCell.textContent = stocks[ticker] || '-';
+                row.appendChild(tickerCell);
+                row.appendChild(stockCell);
+                stockTable.appendChild(row);
+              });
+              const threshold = parseInt(document.getElementById('markText').value, 10);
+              if (!isNaN(threshold)) {
+                highlightStocks(threshold);
+              }
+            } catch (error) {
+              console.error('Error:', error);
+            }
+          }
+
+          document.getElementById('refreshButton').onclick = refreshData;
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Gérer les requêtes multiples</h3>
+        <p class="reponse">
+          <pre>
+          let refreshTimeout;
+
+          async function refreshData() {
+            clearTimeout(refreshTimeout); // Clear previous timeout to avoid multiple triggers
+            try {
+              const tickers = await fetchTickers();
+              const stocks = await fetchStocks();
+              const stockTable = document.getElementById('stockTable');
+              stockTable.innerHTML = '';
+              tickers.forEach(ticker =&gt; {
+                const row = document.createElement('tr');
+                const tickerCell = document.createElement('td');
+                const stockCell = document.createElement('td');
+                tickerCell.textContent = ticker;
+                stockCell.textContent = stocks[ticker] || '-';
+                row.appendChild(tickerCell);
+                row.appendChild(stockCell);
+                stockTable.appendChild(row);
+              });
+              const threshold = parseInt(document.getElementById('markText').value, 10);
+              if (!isNaN(threshold)) {
+                highlightStocks(threshold);
+              }
+              refreshTimeout = setTimeout(refreshData, 1000);
+            } catch (error) {
+              console.error('Error:', error);
+            }
+          }
+
+          document.getElementById('refreshButton').onclick = refreshData;
+          </pre>
+        </p>
+      </li>
+      <li>
+        <h3>Pourquoi utiliser POST pour /api/stock</h3>
+        <p class="reponse">
+          Une requête POST a été choisie pour <code>/api/stock</code> car elle permet de modifier l'état du serveur ou de mettre à jour les ressources, contrairement à GET qui est censé être utilisé uniquement pour obtenir des données sans effets secondaires.
+        </p>
+      </li>
+    </ol>
+
+    <h2>Conclusion personnelle</h2>
+    <p>
+      Ce TP a été très instructif, renforçant ma compréhension de JavaScript et son interaction avec le HTML pour créer des éléments dynamiques. Nous avons vu comment manipuler les requêtes AJAX, gérer les promesses avec <code>async</code>/<code>await</code>, et dynamiser une application web avec des données simulées. La gestion des seuils et le rafraîchissement périodique des données nous ont permis d'explorer les fonctionnalités avancées du JavaScript.
+    </p>
+  </body>
+</html>
+
