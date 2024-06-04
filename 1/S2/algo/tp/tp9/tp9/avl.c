@@ -136,7 +136,7 @@ node *remove_min(node *t) {
     if (t->left == NULL) {
         return t->right;
     }
-    t->left = remove_avl(t->left, t->data);
+    t->left = remove_min(t->left);
     return rebalance(t);
 }
 

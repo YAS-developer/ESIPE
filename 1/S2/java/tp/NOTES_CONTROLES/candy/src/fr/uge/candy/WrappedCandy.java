@@ -15,10 +15,7 @@ public record WrappedCandy(String flavor, boolean light) implements Treat {
   
   @Override
   public double sugarLevel() {
-    if (light) {
-      return 0.2;
-    }
-    return 0.7;
+    return light ? 0.2 :0.7;
   }
   
   @Override
