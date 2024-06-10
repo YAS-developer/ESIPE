@@ -45,12 +45,66 @@ async function deleteMovie(id, setMovies) {
   }
 }
 
+async function addMovie(movie, setMovies) {
+  try {
+    await fetch('/api/movie', {
+      method: 'POST',
+      body: JSON.stringify(movie),
+    });
+    fetchMovies(setMovies);
+  } catch (error) {
+    console.error('Error adding movie:', error);
+  }
+}
+
 function MovieDelete({ id, setMovies }) {
   return <button onClick={() => deleteMovie(id, setMovies)}>X</button>;
 }
 
 function Filter({ setFilter }) {
   return <input type="text" onChange={(e) => setFilter(e.target.value)} />;
+}
+
+function MovieForm({ setMovies }) {
+  const [title, setTitle] = React.useState('');
+  const [company, setCompany] = React.useState('');
+  const [gross, setGross] = React.useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newMovie = { title, company, gross };
+    addMovie(newMovie, setMovies);
+    setTitle('');
+    setCompany('');
+    setGross('');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Company"
+        value={company}
+        onChange={(e) => setCompany(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Gross"
+        value={gross}
+        onChange={(e) => setGross(e.target.value)}
+        required
+      />
+      <button type="submit">Add Movie</button>
+    </form>
+  );
 }
 
 function App() {
@@ -69,6 +123,7 @@ function App() {
     <>
       <h1>Movie Database</h1>
       <Filter setFilter={setFilter} />
+      <MovieForm setMovies={setMovies} />
       <ul>
         {filteredMovies.map(movie => (
           <li key={movie.id}>
@@ -86,4 +141,3 @@ window.onload = () => {
   let root = ReactDOM.createRoot(appDOM);
   root.render(<App />);
 };
-
