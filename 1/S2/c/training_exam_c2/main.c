@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 
-typedef struct {
+typedef struct people {
     char *firstname;
     char *lastname;
     int age;
