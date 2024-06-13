@@ -111,8 +111,8 @@ public class Main{
 
 
 // averagingDouble : Calcule la moyenne des éléments.
-
-// Collectors.averagingDouble(e -> e.getValue());
+e
+// Collectors.averagingDouble(e -> e.getValu());
 
 
 
