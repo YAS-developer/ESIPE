@@ -405,172 +405,172 @@ public class DOMNodeTest {
       assertThrows(NullPointerException.class, () -> node.appendChild(null));
     }
   }
-//
-//
-//  @Nested
-//  public class Q6 {
-//    @Test
-//    public void appendChildText() {
-//      var document = new DOMDocument();
-//      var parent = document.createElement("foo");
-//      var child = document.createElement("bar");
-//      parent.appendChild(child);
-//
-//      assertEquals(
-//          """
-//           <foo><bar></bar></foo>\
-//           """,
-//          "" + parent);
-//    }
-//
-//    @Test
-//    public void appendChildrenText() {
-//      var document = new DOMDocument();
-//      var parent = document.createElement("foo");
-//      var child1 = document.createElement("bar");
-//      parent.appendChild(child1);
-//      var child2 = document.createElement("bar");
-//      parent.appendChild(child2);
-//
-//      assertEquals(
-//          """
-//           <foo><bar></bar><bar></bar></foo>\
-//           """,
-//          "" + parent);
-//    }
-//
-//    @Test
-//    public void appendChildrenWithAttributesText() {
-//      var document = new DOMDocument();
-//      var parent = document.createElement("foo");
-//      var child1 = document.createElement("bar", Map.of("baz", "3"));
-//      parent.appendChild(child1);
-//      var child2 = document.createElement("bar", Map.of("baz", "7"));
-//      parent.appendChild(child2);
-//
-//      assertEquals(
-//          """
-//           <foo><bar baz="3"></bar><bar baz="7"></bar></foo>\
-//           """,
-//          "" + parent);
-//    }
-//  }
-//
-//  @Nested
-//  public class Q7 {
-//    @Test
-//    public void textRepresentationIsCached() {
-//      var document = new DOMDocument();
-//      var node = document.createElement("foo");
-//
-//      var text = node.toString();
-//      var text2 = node.toString();
-//      assertSame(text, text2);
-//    }
-//
-//    @Test
-//    public void childParentTextRepresentationIsCached() {
-//      var document = new DOMDocument();
-//      var parent = document.createElement("foo");
-//      var child = document.createElement("bar");
-//      parent.appendChild(child);
-//
-//      assertAll(
-//          () -> assertSame(child.toString(), child.toString()),
-//          () -> assertSame(parent.toString(), parent.toString())
-//      );
-//    }
-//  }
-//
-//
-//  @Nested
-//  public class Q8 {
-//    @Test
-//    public void appendChildRemoveItFromPreviousParent() {
-//      var document = new DOMDocument();
-//      var parent1 = document.createElement("foo");
-//      var child = document.createElement("bar");
-//      parent1.appendChild(child);
-//
-//      var parent2 = document.createElement("baz");
-//      parent2.appendChild(child);
-//
-//      assertAll(
-//          () -> assertEquals(List.of(), parent1.children()),
-//          () -> assertEquals(List.of(child), parent2.children())
-//      );
-//    }
-//  }
-//
-//
-//  @Nested
-//  public class Q9 {
-//    @Test
-//    public void appendChildDoestNotCreateLoop() {
-//      var document = new DOMDocument();
-//      var node = document.createElement("foo");
-//
-//      assertTimeoutPreemptively(Duration.ofMillis(1_000), () -> {
-//        assertThrows(IllegalStateException.class, () -> node.appendChild(node));
-//      });
-//    }
-//
-//    @Test
-//    public void appendChildDoestNotCreateLoop2() {
-//      var document = new DOMDocument();
-//      var node = document.createElement("foo");
-//      var child = document.createElement("bar");
-//      node.appendChild(child);
-//
-//      assertTimeoutPreemptively(Duration.ofMillis(1_000), () -> {
-//        assertThrows(IllegalStateException.class, () -> child.appendChild(node));
-//      });
-//    }
-//
-//    @Test
-//    public void appendChildInvalidCacheCorrectly() {
-//      var document = new DOMDocument();
-//      var parent1 = document.createElement("foo");
-//      var child = document.createElement("bar");
-//      parent1.appendChild(child);
-//      parent1.toString();
-//
-//      var parent2 = document.createElement("baz");
-//      parent2.toString();
-//      parent2.appendChild(child);
-//
-//      assertAll(
-//          () ->
-//              assertEquals(
-//                  """
-//                   <foo></foo>\
-//                   """,
-//                  parent1.toString()),
-//          () ->
-//              assertEquals(
-//                  """
-//                   <baz><bar></bar></baz>\
-//                   """,
-//                  parent2.toString()));
-//    }
-//
-//    @Test
-//    public void appendChildInvalidCacheOfParentsCorrectly() {
-//      var document = new DOMDocument();
-//      var node1 = document.createElement("foo");
-//      var node2 = document.createElement("bar");
-//      node1.appendChild(node2);
-//      var node3 = document.createElement("baz");
-//      node2.appendChild(node3);
-//
-//      var anotherNode = document.createElement("whizz");
-//      anotherNode.appendChild(node3);
-//
-//      assertEquals(
-//          """
-//           <foo><bar></bar></foo>\
-//           """,
-//          node1.toString());
-//    }
-//  }
+
+
+  @Nested
+  public class Q6 {
+    @Test
+    public void appendChildText() {
+      var document = new DOMDocument();
+      var parent = document.createElement("foo");
+      var child = document.createElement("bar");
+      parent.appendChild(child);
+
+      assertEquals(
+          """
+           <foo><bar></bar></foo>\
+           """,
+          "" + parent);
+    }
+
+    @Test
+    public void appendChildrenText() {
+      var document = new DOMDocument();
+      var parent = document.createElement("foo");
+      var child1 = document.createElement("bar");
+      parent.appendChild(child1);
+      var child2 = document.createElement("bar");
+      parent.appendChild(child2);
+
+      assertEquals(
+          """
+           <foo><bar></bar><bar></bar></foo>\
+           """,
+          "" + parent);
+    }
+
+    @Test
+    public void appendChildrenWithAttributesText() {
+      var document = new DOMDocument();
+      var parent = document.createElement("foo");
+      var child1 = document.createElement("bar", Map.of("baz", "3"));
+      parent.appendChild(child1);
+      var child2 = document.createElement("bar", Map.of("baz", "7"));
+      parent.appendChild(child2);
+
+      assertEquals(
+          """
+           <foo><bar baz="3"></bar><bar baz="7"></bar></foo>\
+           """,
+          "" + parent);
+    }
+  }
+
+  @Nested
+  public class Q7 {
+    @Test
+    public void textRepresentationIsCached() {
+      var document = new DOMDocument();
+      var node = document.createElement("foo");
+
+      var text = node.toString();
+      var text2 = node.toString();
+      assertSame(text, text2);
+    }
+
+    @Test
+    public void childParentTextRepresentationIsCached() {
+      var document = new DOMDocument();
+      var parent = document.createElement("foo");
+      var child = document.createElement("bar");
+      parent.appendChild(child);
+
+      assertAll(
+          () -> assertSame(child.toString(), child.toString()),
+          () -> assertSame(parent.toString(), parent.toString())
+      );
+    }
+  }
+
+
+  @Nested
+  public class Q8 {
+    @Test
+    public void appendChildRemoveItFromPreviousParent() {
+      var document = new DOMDocument();
+      var parent1 = document.createElement("foo");
+      var child = document.createElement("bar");
+      parent1.appendChild(child);
+
+      var parent2 = document.createElement("baz");
+      parent2.appendChild(child);
+
+      assertAll(
+          () -> assertEquals(List.of(), parent1.children()),
+          () -> assertEquals(List.of(child), parent2.children())
+      );
+    }
+  }
+
+
+  @Nested
+  public class Q9 {
+    @Test
+    public void appendChildDoestNotCreateLoop() {
+      var document = new DOMDocument();
+      var node = document.createElement("foo");
+
+      assertTimeoutPreemptively(Duration.ofMillis(1_000), () -> {
+        assertThrows(IllegalStateException.class, () -> node.appendChild(node));
+      });
+    }
+
+    @Test
+    public void appendChildDoestNotCreateLoop2() {
+      var document = new DOMDocument();
+      var node = document.createElement("foo");
+      var child = document.createElement("bar");
+      node.appendChild(child);
+
+      assertTimeoutPreemptively(Duration.ofMillis(1_000), () -> {
+        assertThrows(IllegalStateException.class, () -> child.appendChild(node));
+      });
+    }
+
+    @Test
+    public void appendChildInvalidCacheCorrectly() {
+      var document = new DOMDocument();
+      var parent1 = document.createElement("foo");
+      var child = document.createElement("bar");
+      parent1.appendChild(child);
+      parent1.toString();
+
+      var parent2 = document.createElement("baz");
+      parent2.toString();
+      parent2.appendChild(child);
+
+      assertAll(
+          () ->
+              assertEquals(
+                  """
+                   <foo></foo>\
+                   """,
+                  parent1.toString()),
+          () ->
+              assertEquals(
+                  """
+                   <baz><bar></bar></baz>\
+                   """,
+                  parent2.toString()));
+    }
+
+    @Test
+    public void appendChildInvalidCacheOfParentsCorrectly() {
+      var document = new DOMDocument();
+      var node1 = document.createElement("foo");
+      var node2 = document.createElement("bar");
+      node1.appendChild(node2);
+      var node3 = document.createElement("baz");
+      node2.appendChild(node3);
+
+      var anotherNode = document.createElement("whizz");
+      anotherNode.appendChild(node3);
+
+      assertEquals(
+          """
+           <foo><bar></bar></foo>\
+           """,
+          node1.toString());
+    }
+  }
 }
