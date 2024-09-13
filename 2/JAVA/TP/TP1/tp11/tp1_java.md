@@ -60,9 +60,12 @@ public sealed interface DOMNode permits DOMElement {
 
 
 ```java
-
-
-
+@Override
+public String toString() {
+    return attributes.entrySet().stream()
+        .map(entry -> entry.getKey() + "=\"" + entry.getValue() + "\"")
+        .collect(Collectors.joining(" ", "<" + name + " ", "></" + name + ">"));
+}
 ```
 
 #### 4 - On souhaite ajouter une méthode getElementById qui renvoie un nœud par son id.
@@ -167,31 +170,24 @@ public final class DOMDocument {
 
 #### 6 - Modification de l'affichage pour inclure les enfants
 
-Pour prendre en compte les enfants dans l'affichage des nœuds, j'ai modifié la méthode `toString()` de la classe `DOMElement`. Voici l'implémentation :
 
 ```java
 @Override
 public String toString() {
-    var builder = new StringBuilder();
-    builder.append('<').append(name);
-    
-    attributes.forEach((key, value) -> 
-        builder.append(' ').append(key).append("=\"").append(value).append('"'));
-    
-    builder.append('>');
-    
-    children.forEach(child -> builder.append(child.toString()));
-    
-    builder.append("</").append(name).append('>');
-    
-    return builder.toString();
+    return Stream.of(
+        Stream.of("<" + name),
+        attributes.entrySet().stream()
+            .map(entry -> " " + entry.getKey() + "=\"" + entry.getValue() + "\""),
+        Stream.of(">"),
+        children.stream().map(DOMNode::toString),
+        Stream.of("</" + name + ">")
+    ).flatMap(s -> s).collect(Collectors.joining());
 }
-
+```
 
 
 #### 7 - Mise en cache de la représentation textuelle
 
-Pour améliorer les performances lors de l'affichage répété des nœuds, j'ai implémenté un système de mise en cache de la représentation textuelle. Voici les modifications apportées à la classe `DOMElement` :
 
 ```java
 final class DOMElement implements DOMNode {
@@ -201,9 +197,13 @@ final class DOMElement implements DOMNode {
     @Override
     public String toString() {
         if (cache == null) {
-            var builder = new StringBuilder();
-            // ...
-            cache = builder.toString();
+            cache = Stream.concat(
+                attributes.entrySet().stream()
+                    .map(entry -> " " + entry.getKey() + "=\"" + entry.getValue() + "\""),
+                Stream.of(">", 
+                    children.stream().map(DOMNode::toString).collect(Collectors.joining()),
+                    "</" + name + ">")
+            ).collect(Collectors.joining("", "<" + name, ""));
         }
         return cache;
     }
@@ -211,8 +211,6 @@ final class DOMElement implements DOMNode {
 ```
 
 #### 8 - Correction du bug dans appendChild et gestion des documents différents
-
-J'ai corrigé un bug dans l'implémentation de `appendChild` qui permettait à un nœud d'appartenir à plusieurs parents et j'ai ajouté une vérification pour s'assurer que les nœuds appartiennent au même document. Voici les modifications apportées :
 
 ```java
 final class DOMElement implements DOMNode {
@@ -242,21 +240,9 @@ final class DOMElement implements DOMNode {
         }
     }
 }
+```
 
-
-#### 9 - Prévention des cycles et invalidation intelligente du cache
-
-J'ai apporté deux améliorations majeures à l'implémentation :
-
-1. Prévention des cycles :
-   - La méthode `wouldCreateCycle` vérifie si l'ajout d'un enfant créerait un cycle dans l'arbre DOM.
-   - Elle parcourt les parents du nœud potentiel parent pour s'assurer que le nœud enfant n'est pas déjà un ancêtre.
-
-2. Invalidation intelligente du cache :
-   - La méthode `invalidateParentCaches` invalide le cache du nœud modifié et de tous ses parents.
-   - Cela garantit que seuls les caches nécessaires sont invalidés lors de modifications de l'arbre.
-
-Voici les principales modifications dans la méthode `appendChild` :
+#### 9-Prévention des cycles et invalidation intelligente du cache
 
 ```java
 @Override
@@ -298,3 +284,4 @@ private void invalidateParentCaches(DOMElement node) {
         node = node.parent;
     }
 }
+```

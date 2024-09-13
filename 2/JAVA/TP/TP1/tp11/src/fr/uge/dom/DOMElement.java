@@ -2,6 +2,7 @@ package fr.uge.dom;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 final class DOMElement implements DOMNode {
     private final String name;
@@ -58,25 +59,7 @@ final class DOMElement implements DOMNode {
 //        }
 //    }
 //    
-//    @Override
-//    public String toString() {
-//        if (cache == null) {
-//            var builder = new StringBuilder();
-//            builder.append('<').append(name);
-//            
-//            attributes.forEach((key, value) -> 
-//                builder.append(' ').append(key).append("=\"").append(value).append('"'));
-//            
-//            builder.append('>');
-//            
-//            children.forEach(child -> builder.append(child.toString()));
-//            
-//            builder.append("</").append(name).append('>');
-//            
-//            cache = builder.toString();
-//        }
-//        return cache;
-//    }
+
     
     
     @Override
@@ -104,7 +87,7 @@ final class DOMElement implements DOMNode {
         if (potentialParent == potentialChild) {
             return true;
         }
-        DOMElement current = potentialParent.parent;
+        var current = potentialParent.parent;
         while (current != null) {
             if (current == potentialChild) {
                 return true;
@@ -121,20 +104,17 @@ final class DOMElement implements DOMNode {
         }
     }
 
+   
     @Override
     public String toString() {
         if (cache == null) {
-            StringBuilder builder = new StringBuilder();
-            builder.append('<').append(name);
-            for (Map.Entry<String, Object> entry : attributes.entrySet()) {
-                builder.append(' ').append(entry.getKey()).append("=\"").append(entry.getValue()).append('"');
-            }
-            builder.append('>');
-            for (DOMNode child : children) {
-                builder.append(child.toString());
-            }
-            builder.append("</").append(name).append('>');
-            cache = builder.toString();
+            cache = Stream.concat(
+                attributes.entrySet().stream()
+                    .map(entry -> " " + entry.getKey() + "=\"" + entry.getValue() + "\""),
+                Stream.of(">", 
+                    children.stream().map(DOMNode::toString).collect(Collectors.joining()),
+                    "</" + name + ">")
+            ).collect(Collectors.joining("", "<" + name, ""));
         }
         return cache;
     }

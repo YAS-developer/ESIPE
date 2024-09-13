@@ -61,18 +61,18 @@ public final class DOMDocument {
         return idNodeMap.get(id);
     }
 
+    
     private void addNodeId(DOMNode node) {
         Objects.requireNonNull(node);
         var id = node.attributes().get("id");
-        if (id instanceof String s) {
-            if (s.isEmpty()) {
-                throw new IllegalArgumentException("ID cannot be empty");
+        switch (id) {
+            case String s -> {
+                if (s.isEmpty()) {
+                    throw new IllegalArgumentException("Ne peut pas être empty");
+                }
+                idNodeMap.putIfAbsent(s, node);
             }
-            idNodeMap.putIfAbsent(s, node);
-        } else {
-            throw new IllegalArgumentException("ID must be a non-empty string");
+            default -> throw new IllegalArgumentException("Unexpected value: " + id);
         }
     }
-    
-    
 }
