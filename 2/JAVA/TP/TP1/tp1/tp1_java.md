@@ -214,7 +214,6 @@ final class DOMElement implements DOMNode {
 
 ```java
 final class DOMElement implements DOMNode {
-    // ... autres champs et méthodes ...
 
     @Override
     public void appendChild(DOMNode child) {
@@ -233,9 +232,12 @@ final class DOMElement implements DOMNode {
     private void removeChildFromCurrentParent(DOMNode child) {
         for (DOMNode node : document.getAllNodes()) {
             if (node != this && node.children().contains(child)) {
-                ((DOMElement) node).children.remove(child);
-                ((DOMElement) node).cache = null;  // Invalider le cache du parent précédent
-                break;
+                switch(node){
+                    case DOMElement nodeElement ->{
+                        nodeElement.children.remove(child);
+                        nodeElement.cache = null; // Invalider le cache du parent précédent
+                    }
+                }
             }
         }
     }
@@ -247,21 +249,26 @@ final class DOMElement implements DOMNode {
 ```java
 @Override
 public void appendChild(DOMNode child) {
-    // ... vérifications initiales ...
-    
+    Objects.requireNonNull(child, "Child node cannot be null");
+    if (!document.containsNode(child)) {
+        throw new IllegalStateException("Child node must be from the same document");
+    }
     if (wouldCreateCycle(this, child)) {
         throw new IllegalStateException("Adding this child would create a cycle");
     }
     
-    DOMElement childElement = (DOMElement) child;
-    if (childElement.parent != null) {
-        childElement.parent.children.remove(child);
-        invalidateParentCaches(childElement.parent);
-    }
     
-    childElement.parent = this;
-    children.add(child);
-    invalidateParentCaches(this);
+    switch(child) {
+        case DOMElement childElement -> {
+            if (childElement.parent != null) {
+                childElement.parent.children.remove(child);
+                invalidateParentCaches(childElement.parent);
+            }
+            childElement.parent = this;
+            children.add(child);
+            invalidateParentCaches(this);
+        }	
+    }  
 }
 
 private boolean wouldCreateCycle(DOMElement potentialParent, DOMNode potentialChild) {
