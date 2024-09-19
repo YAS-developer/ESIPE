@@ -1,8 +1,13 @@
 package sed.uge.fr;
 
-record LowerCaseTransformer() implements Transformer{
-	@Override
-	public String transform(String line) {
-		return line.toLowerCase();
-	}
-}
+//import java.util.Locale;
+
+//record LowerCaseTransformer() implements Transformer{
+//	@Override
+//	public String transform(String line) {
+//		return line.toLowerCase(Locale.ROOT);
+//	}
+//}
+
+
+record LowerCaseTransformer(int res) {}
