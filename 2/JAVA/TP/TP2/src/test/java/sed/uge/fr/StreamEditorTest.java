@@ -406,19 +406,19 @@ public class StreamEditorTest {
       assertEquals("HeLLo\n", writer.toString());
     }
   }
-//
-//
-//  @Nested
-//  public class Q6 {
-//    @Test
-//    public void parserClass() throws IOException {
-//      assertAll(
-//          () -> assertTrue(StreamEditor.Parser.class.accessFlags().contains(AccessFlag.STATIC)),
-//          () -> assertTrue(StreamEditor.Parser.class.accessFlags().contains(AccessFlag.FINAL))
-//      );
-//    }
-//  }
-//
+
+
+  @Nested
+  public class Q6 {
+    @Test
+    public void parserClass() throws IOException {
+      assertAll(
+          () -> assertTrue(StreamEditor.ParseResult.class.accessFlags().contains(AccessFlag.STATIC)),
+          () -> assertTrue(StreamEditor.ParseResult.class.accessFlags().contains(AccessFlag.FINAL))
+      );
+    }
+  }
+
 //
 //  @Nested
 //  public class Q8 {

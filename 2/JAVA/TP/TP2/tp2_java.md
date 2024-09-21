@@ -337,6 +337,71 @@ private static ParseResult parse(String command, int index) {
 	
 
 ```
+#### 6- En fait, le code précédent est la façon fonctionnelle de voir la décomposition en transformer, on peut aussi écrire une version plus objet des choses. En POO, on va encapsuler les mutations, ici, la mutation est l'index qui nous indique là où décoder/parser le prochain transformer dans la commande. Encapsuler la mutation revient donc à déclarer une classe Parser avec un champ mutable qui va être modifié à chaque fois que l'on décode une transformation.
+
+#### Classe `ParseResult` interne à la classe `StreamEditor` qui encapsule la logique de parsing des commandes. Voici l'implémentation :
+
+```java
+public final class StreamEditor {
+    // ... autres méthodes et champs ...
+
+    static final class ParseResult {
+        private final String commands;
+        private int index;
+
+        ParseResult(String commands) {
+            this.commands = Objects.requireNonNull(commands);
+            this.index = 0;
+        }
+
+        boolean canParse() {
+            return index < commands.length();
+        }
+
+        Transformer parse(Transformer t) {
+            if (!canParse()) {
+                return t;
+            }
+
+            char c = commands.charAt(index);
+            switch (c) {
+                case 'u':
+                    index++;
+                    return line -> t.transform(line).toUpperCase(Locale.ROOT);
+                case 'l':
+                    index++;
+                    return line -> t.transform(line).toLowerCase(Locale.ROOT);
+                case '*':
+                    if (index + 1 >= commands.length()) {
+                        throw new IllegalArgumentException("Invalid star command at index " + index);
+                    }
+                    int repeat = Character.getNumericValue(commands.charAt(index + 1));
+                    index += 2;
+                    return line -> {
+                        String transformed = t.transform(line);
+                        return repeat == 0 ? transformed.replace("*", "") : transformed.replace("*", "*".repeat(repeat));
+                    };
+                default:
+                    throw new IllegalArgumentException("Invalid command '" + c + "' at index " + index);
+            }
+        }
+
+        public static Transformer createTransformer(String command) {
+            Objects.requireNonNull(command, "command must be not null");
+
+            var parser = new ParseResult(command);
+            Transformer transformer = line -> line; // Identity transformer
+
+            while (parser.canParse()) {
+                transformer = parser.parse(transformer);
+            }
+
+            return transformer;
+        }
+    }
+}
+
+
 
 
 

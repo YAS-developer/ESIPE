@@ -101,21 +101,21 @@ public final class StreamEditor{
 	
 
 // Q5   
-    private static ParseResult parse(String command, int index) {
+    private static Parser parse(String command, int index) {
         if (index >= command.length()) {
-            return new ParseResult(line -> line, index);
+            return new Parser(line -> line, index);
         }
         
         var c = command.charAt(index);
         return switch(c) {
-            case 'u' -> new ParseResult(UPPER_CASE_TRANSFORMER, index + 1);
-            case 'l' -> new ParseResult(LOWER_CASE_TRANSFORMER, index + 1);
+            case 'u' -> new Parser(UPPER_CASE_TRANSFORMER, index + 1);
+            case 'l' -> new Parser(LOWER_CASE_TRANSFORMER, index + 1);
             case '*' -> {
                 if (index + 1 >= command.length()) {
                     throw new IllegalArgumentException("Invalid star command at index " + index);
                 }
                 var repeat = Character.getNumericValue(command.charAt(index + 1));
-                yield new ParseResult(
+                yield new Parser(
                     line -> repeat == 0 ? line.replace("*", "") : line.replace("*", "*".repeat(repeat)),
                     index + 2
                 );
@@ -148,6 +148,61 @@ public final class StreamEditor{
             }
             return result;
         };
+    }
+    
+    //    q6
+    static final class ParseResult {
+        private final String commands;
+        private int index;
+
+        ParseResult(String commands) {
+            this.commands = Objects.requireNonNull(commands);
+            this.index = 0;
+        }
+
+        boolean canParse() {
+            return index < commands.length();
+        }
+
+        Transformer parse(Transformer t) {
+            if (!canParse()) {
+                return t;
+            }
+
+            char c = commands.charAt(index);
+            switch (c) {
+                case 'u':
+                    index++;
+                    return line -> t.transform(line).toUpperCase(Locale.ROOT);
+                case 'l':
+                    index++;
+                    return line -> t.transform(line).toLowerCase(Locale.ROOT);
+                case '*':
+                    if (index + 1 >= commands.length()) {
+                        throw new IllegalArgumentException("Invalid star command at index " + index);
+                    }
+                    int repeat = Character.getNumericValue(commands.charAt(index + 1));
+                    index += 2;
+                    return line -> {
+                        String transformed = t.transform(line);
+                        return repeat == 0 ? transformed.replace("*", "") : transformed.replace("*", "*".repeat(repeat));
+                    };
+                default:
+                    throw new IllegalArgumentException("Invalid command '" + c + "' at index " + index);
+            }
+        }
+        public static Transformer createTransformer(String command) {
+            Objects.requireNonNull(command, "command must be not null");
+
+            var parser = new ParseResult(command);
+            Transformer transformer = line -> line; // Identity transformer
+
+            while (parser.canParse()) {
+                transformer = parser.parse(transformer);
+            }
+
+            return transformer;
+        }
     }
 	
 	
