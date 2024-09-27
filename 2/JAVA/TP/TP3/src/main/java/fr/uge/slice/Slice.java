@@ -41,10 +41,12 @@ public interface Slice<E> {
             }
             @Override
             public String toString() {
-                return IntStream.range(0, size())
-                    .mapToObj(i -> get(i))
-                    .map(e -> e == null ? "null" : e.toString())
-                    .collect(Collectors.joining(", ", "[", "]"));
+                return Arrays.stream(Slice.this.elements, Slice.this.from, Slice.this.to)
+                        .map(e -> e == null ? "null" : e.toString())
+                        .toList()
+                        .reversed()
+                        .stream()
+                        .collect(Collectors.joining(", ", "[", "]"));
             }
         };
     }
@@ -93,9 +95,7 @@ public interface Slice<E> {
 
         @Override
         public String toString() {
-            return Arrays.stream(elements, from, to)
-                    .map(e -> e == null ? "null" : e.toString())
-                    .collect(Collectors.joining(", ", "[", "]"));
+            return Arrays.stream(elements, from, to).toList().toString();
         }
     }
 }

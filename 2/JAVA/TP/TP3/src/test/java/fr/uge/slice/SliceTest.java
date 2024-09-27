@@ -663,5 +663,5 @@ public class SliceTest {
 //      var slice2 = Slice.of(array);
 //      assertSame(slice.getClass(), slice2.getClass());
 //    }
-  }
+//  }
 }

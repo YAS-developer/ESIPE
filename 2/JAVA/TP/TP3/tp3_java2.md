@@ -25,9 +25,7 @@ public interface Slice<E> {
 
         @Override
         public String toString() {
-            return Arrays.stream(elements, from, to)
-                    .map(e -> e == null ? "null" : e.toString())
-                    .collect(Collectors.joining(", ", "[", "]"));
+            return Arrays.stream(elements, from, to).toList().toString();
         }
     }
 }
@@ -218,37 +216,27 @@ public interface Slice<E> {
 ### 6 - On souhaite maintenant implanter la méthode subSlice(from, to) quand le Slice est reversed. Implanter la méthode subSlice(from, to) dans la classe anonyme dans la méthode reversed(). 
 
 ```java
-
-
+@Override
+public Slice<E> subSlice(int from, int to) {
+    Objects.checkFromToIndex(from, to, size());
+    return Slice.this.subSlice(size() - to, size() - from).reversed();
+}
 
 ```
 
 
 
-### 7- 
+### 7- méthode d'affichage dans le cas où le Slice est reversed(). 
 
 
 ```java
 
-public interface Slice<E> {
-    // ... autres méthodes existantes ...
 
-    default Slice<E> reversed() {
-        return new Slice<>() {
-            // ... autres méthodes existantes ...
-
-            @Override
-            public String toString() {
-                return IntStream.range(0, size())
-                    .mapToObj(i -> get(i))
-                    .map(e -> e == null ? "null" : e.toString())
-                    .collect(Collectors.joining(", ", "[", "]"));
-            }
-        };
-    }
-
-    // ... reste de l'interface inchangé ...
+ @Override
+public String toString() {
+  return IntStream.range(0, size()).mapToObj(i -> get(i)).toList().toString();
 }
+
 
 ```
 
