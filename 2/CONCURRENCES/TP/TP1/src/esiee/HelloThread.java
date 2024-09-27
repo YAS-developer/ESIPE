@@ -1,6 +1,8 @@
 package esiee;
 
 public class HelloThread {
+	
+	
 	private static int N = 5000;
 	public static void main(String[] args) throws InterruptedException {
 		var th1 = Thread.ofPlatform().start(() ->{

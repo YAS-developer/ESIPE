@@ -38,6 +38,17 @@ public class HelloThreadJoin {
 		System.out.println("Le programme est fini");
 	}
 	
+	
+	
+/**
+3. Observer l'évolution du nombre de threads. Que devient le thread main ? Quand est-ce que la JVM s'éteint ?
+
+
+Le thread main : Le thread main exécute ses instructions, à savoir attendre 15 secondes avec Thread.sleep(15_000), puis afficher "Go!", créer les threads pour chaque tortue, et enfin se terminer. Une fois que toutes ces actions sont terminées, le thread main meurt, car il a terminé l'exécution de son code.
+
+La JVM s'éteint : La JVM ne s'éteint pas immédiatement lorsque le thread main meurt. La JVM attend que tous les threads non-daemon (c'est-à-dire les threads utilisateurs) aient terminé leur exécution. Dans ce cas, chaque thread Turtle doit exécuter son sleep() et afficher son message avant que la JVM ne puisse s'arrêter. Une fois que tous ces threads ont terminé, la JVM s'éteint.
+ * **/	
+	
 }
 
 
