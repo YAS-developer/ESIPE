@@ -106,7 +106,7 @@ public void forEach(Consumer<Object> action) {
 
 
 
-#### 6- 
+#### 6- il faut dire que le type des éléments que l'on ajoute avec add et le type des éléments que l'on reçoit dans la lambda du forEach est le même. Pour cela, il faut déclarer HashTableSet comme un type paramétré.Rappeler pourquoi en Java, il n'est pas possible de créer un tableau de type paramétré ? Quel est le work around ? Pourquoi celui-ci génère-t-il un warning ? Et dans quel cas et comment peut-on supprimer ce warning ? Mettez en commentaire votre ancien code, puis dupliquez-le pour faire les changements qui permettent d'avoir un ensemble paramétré par le type des ses éléments. 
 
 
 ```java
