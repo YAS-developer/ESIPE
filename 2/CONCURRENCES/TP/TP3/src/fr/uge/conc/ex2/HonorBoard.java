@@ -1,4 +1,7 @@
-package fr.uge.conc;
+package fr.uge.conc.ex2;
+
+
+//EX2
 
 public class HonorBoard {
   private String firstName;

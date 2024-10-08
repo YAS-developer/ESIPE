@@ -1,4 +1,4 @@
-package fr.uge.conc;
+package fr.uge.conc.ex1;
 
 import java.util.ArrayList;
 import java.util.List;
