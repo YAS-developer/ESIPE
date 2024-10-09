@@ -11,14 +11,14 @@ public class StupidRendezVous<V> {
       Objects.requireNonNull(value);
       synchronized (lock) {
           this.value = value;
-          lock.notifyAll();
+          
       }
   }
 
   public V get() throws InterruptedException {
       synchronized (lock) {
           while (value == null) {
-              lock.wait();
+           
           }
           return value;
       }
