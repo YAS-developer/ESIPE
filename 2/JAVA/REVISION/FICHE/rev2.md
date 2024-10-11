@@ -100,17 +100,41 @@ System.out.println(addition.operate(5, 3)); // 8
 ```java
 List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
 names.forEach(System.out::println);
+
+names.forEach((name) -> {
+    String upperCase = name.toUpperCase();
+    System.out.println("Name: " + upperCase);
+});
+
 ```
 
 ### 2.3 Streams
 
 ```java
-List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-List<Integer> evenSquares = numbers.stream()
-    .filter(n -> n % 2 == 0)
-    .map(n -> n * n)
-    .collect(Collectors.toList());
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class CollectorsJoiningExample {
+    public static void main(String[] args) {
+        List<String> fruits = Arrays.asList("pomme", "banane", "orange", "kiwi", "fraise");
+
+        String result = fruits.stream()
+            .filter(fruit -> fruit.length() > 4)  // Filtrer les fruits avec plus de 4 lettres
+            .map(String::toUpperCase)             // Convertir en majuscules
+            .collect(Collectors.joining(
+                " | ",    // délimiteur
+                "{ ",     // préfixe
+                " }"      // suffixe
+            ));
+
+        System.out.println(result);
+    }
+}
 ```
+
+
+
 
 ## 3. Collections
 

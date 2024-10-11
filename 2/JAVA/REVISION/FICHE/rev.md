@@ -42,6 +42,23 @@ Classes finales
 Getters/setters
 Copie défensive
 
+Utilisez List.copyOf() quand vous voulez une copie immuable et indépendante de la liste originale.
+
+Utilisez Collections.unmodifiableList() quand vous voulez une vue non modifiable qui reflète les changements de la liste originale.
+
+
+
+
+Quand on modifie la liste originale, cela :
+
+Ne modifie PAS la liste créée par List.copyOf()
+Modifie la vue créée par Collections.unmodifiableList()
+
+Aussi pour les maps:
+
+Map.copyOf(original);
+Collections.unmodifiableMap(original);
+
 5.4 API de Collections
 
 Implémentation de AbstractList
