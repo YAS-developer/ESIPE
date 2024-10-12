@@ -1,10 +1,20 @@
 package fr.uge.sorted;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.lang.reflect.AccessFlag;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.Nested;
@@ -67,7 +77,7 @@ public class SortedVecTest {
     }
   }
 
-  /*
+ 
   @Nested
   public class Q2 {
     @Test
@@ -209,7 +219,7 @@ public class SortedVecTest {
     }
   }
 
-
+  /*
   @Nested
   public class Q3 {
     @Test
