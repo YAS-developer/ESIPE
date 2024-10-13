@@ -321,6 +321,7 @@ public final class DedupVec<T> extends AbstractList<T> implements RandomAccess {
             return set.contains(key) ? (E) key : null;
         }
 
+        @SuppressWarning("unchecked")
         @Override
         public E getOrDefault(Object key, E defaultValue) {
             if (key == null) {
