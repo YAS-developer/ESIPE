@@ -5,36 +5,38 @@ import java.util.concurrent.locks.Condition;
 class Bid {
     private final AtomicIntegerArray bids;
     private final ReentrantLock lock;
-    private final Condition[] conditions;
+    private final Condition condition;
     private int smallestBidder;
     private boolean allBidsPlaced;
 
     public Bid(int numThreads) {
         this.bids = new AtomicIntegerArray(numThreads);
         this.lock = new ReentrantLock();
-        this.conditions = new Condition[numThreads];
-        for (int i = 0; i < numThreads; i++) {
-            conditions[i] = lock.newCondition();
-        }
+        this.condition = lock.newCondition();
         this.smallestBidder = -1;
         this.allBidsPlaced = false;
     }
 
     public boolean placeBid(int threadId, int value) {
-        if (bids.get(threadId) == 0) {
-            bids.set(threadId, value);
-            lock.lock();
-            try {
-                if (smallestBidder == -1 || value < bids.get(smallestBidder)) {
-                    smallestBidder = threadId;
-                }
-                checkAllBidsPlaced();
-            } finally {
-                lock.unlock();
+        lock.lock();
+        try {
+            if (bids.get(threadId) != 0) {
+                return false;
             }
+            for (int i = 0; i < bids.length(); i++) {
+                if (i != threadId && bids.get(i) == value) {
+                    return false;
+                }
+            }
+            bids.set(threadId, value);
+            if (smallestBidder == -1 || value < bids.get(smallestBidder)) {
+                smallestBidder = threadId;
+            }
+            checkAllBidsPlaced();
             return true;
+        } finally {
+            lock.unlock();
         }
-        return false;
     }
 
     private void checkAllBidsPlaced() {
@@ -42,16 +44,20 @@ class Bid {
             if (bids.get(i) == 0) return;
         }
         allBidsPlaced = true;
-        conditions[smallestBidder].signal();
+        condition.signalAll();
     }
 
-    public int waitForTurn(int threadId) throws InterruptedException {
+    public BidResult waitForTurn(int threadId) throws InterruptedException {
         lock.lock();
         try {
             while (!allBidsPlaced || threadId != smallestBidder) {
-                conditions[threadId].await();
+                condition.await();
             }
-            return calculateAverage();
+            if (threadId == smallestBidder) {
+                return new BidResult(true, calculateAverage());
+            } else {
+                return new BidResult(false, 0);
+            }
         } finally {
             lock.unlock();
         }
@@ -66,11 +72,11 @@ class Bid {
     }
 
     public void updateBid(int threadId, int newValue) {
-        bids.set(threadId, newValue);
         lock.lock();
         try {
+            bids.set(threadId, newValue);
             updateSmallestBidder();
-            conditions[smallestBidder].signal();
+            condition.signalAll();
         } finally {
             lock.unlock();
         }
@@ -86,12 +92,13 @@ class Bid {
         smallestBidder = newSmallest;
     }
 
-    public void signalRejection(int threadId) {
-        lock.lock();
-        try {
-            conditions[threadId].signal();
-        } finally {
-            lock.unlock();
+    public static class BidResult {
+        public final boolean isSmallest;
+        public final int average;
+
+        public BidResult(boolean isSmallest, int average) {
+            this.isSmallest = isSmallest;
+            this.average = average;
         }
     }
 }

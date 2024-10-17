@@ -54,7 +54,7 @@ public class CyclicExchanger<T> {
 
         for (int i = 0; i < NB_THREADS; i++) {
             final var threadId = i;
-            new Thread(() -> {
+            Thread.ofPlatform().start(() -> {
                 try {
                     // Attendre i secondes
                     Thread.sleep(threadId * 1000);
@@ -65,9 +65,9 @@ public class CyclicExchanger<T> {
                     // Afficher le résultat
                     System.out.println("Thread " + threadId + " a échangé " + threadId + " et reçu " + result);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    throw new AssertionError(e);
                 }
-            }).start();
+            });
         }
     }
 }
