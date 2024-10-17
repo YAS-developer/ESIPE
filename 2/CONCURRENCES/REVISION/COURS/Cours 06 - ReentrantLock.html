@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en" data-darkreader-mode="dynamic" data-darkreader-scheme="dark"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, img.Wirisformula {
+    filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
+}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}
+[data-darkreader-inline-stopcolor] {
+  stop-color: var(--darkreader-inline-stopcolor) !important;
+}
+[data-darkreader-inline-bg] {
+  background: var(--darkreader-inline-bg) !important;
+}
+[data-darkreader-inline-invert] {
+    filter: invert(100%) hue-rotate(180deg);
+}</style><style class="darkreader darkreader--variables" media="screen">:root {
+   --darkreader-neutral-background: #181a1b;
+   --darkreader-neutral-text: #e8e6e3;
+   --darkreader-selection-background: #004daa;
+   --darkreader-selection-text: #e8e6e3;
+}</style><style class="darkreader darkreader--root-vars" media="screen"></style><style class="darkreader darkreader--user-agent" media="screen">@layer {
+html {
+    background-color: #181a1b !important;
+}
+html {
+    color-scheme: dark !important;
+}
+iframe {
+    color-scheme: dark !important;
+}
+html, body {
+    background-color: #181a1b;
+}
+html, body {
+    border-color: #736b5e;
+    color: #e8e6e3;
+}
+a {
+    color: #3391ff;
+}
+table {
+    border-color: #545b5e;
+}
+mark {
+    color: #e8e6e3;
+}
+::placeholder {
+    color: #b2aba1;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: #404400 !important;
+    color: #e8e6e3 !important;
+}
+* {
+    scrollbar-color: #454a4d #202324;
+}
+::selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+::-moz-selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+}</style>
+<meta charset="utf-8">
+
+<title>Cours 06 - ReentrantLock </title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="Cours%2006%20-%20ReentrantLock_files/reveal.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="Cours%2006%20-%20ReentrantLock_files/reveal-override.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="Cours%2006%20-%20ReentrantLock_files/white.css" id="theme"><style class="darkreader darkreader--cors" media="screen">section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
+  color: #fff; }
+
+
+body {
+  background: #fff;
+  background-color: #fff; }
+
+.reveal {
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: normal;
+  color: #222; }
+
+::selection {
+  color: #fff;
+  background: #98bdef;
+  text-shadow: none; }
+
+.reveal .slides > section, .reveal .slides > section > section {
+  line-height: 1.3;
+  font-weight: inherit; }
+
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  margin: 0 0 20px 0;
+  color: #222;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+.reveal h1 {
+  margin: 0 0 20px 0;
+  color: #222;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+
+.reveal h1 {
+  font-size: 2.5em; }
+
+.reveal h2 {
+  font-size: 1.6em; }
+
+.reveal h3 {
+  font-size: 1.3em; }
+
+.reveal h4 {
+  font-size: 1em; }
+
+.reveal h1 {
+  text-shadow: none; }
+
+
+
+.reveal span.blue,.reveal p.blue {
+  color: steelblue;
+}
+
+.reveal span.red,.reveal p.red {
+  color: orangered;
+}
+
+.reveal span.green,.reveal p.green {
+  color: seagreen;
+}
+
+.reveal p {
+  margin: 20px 0;
+  line-height: 1.3; }
+
+
+.reveal img, .reveal video, .reveal iframe {
+  max-width: 95%;
+  max-height: 95%; }
+
+.reveal strong, .reveal b {
+  font-weight: bold; }
+
+.reveal em {
+  font-style: italic; }
+
+.reveal ul {
+  display: block;
+  text-align: left;
+  padding-left: 1.5em;
+}
+
+.reveal ol, .reveal dl {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em; }
+
+.reveal ol {
+  list-style-type: decimal; }
+
+.reveal ul {
+  list-style-type: disc; }
+
+.reveal ul ul {
+  list-style-type: square; }
+
+.reveal ul ul ul {
+  list-style-type: circle; }
+
+.reveal ul ul, .reveal ul ol, .reveal ol ol, .reveal ol ul {
+  display: block;
+  margin-left: 40px; }
+
+.reveal dt {
+  font-weight: bold; }
+
+.reveal dd {
+  margin-left: 40px; }
+
+.reveal q, .reveal blockquote {
+  quotes: none; }
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: 20px auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }
+
+.reveal blockquote p:first-child, .reveal blockquote p:last-child {
+  display: inline-block; }
+
+.reveal q {
+  font-style: italic; }
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: 'Courier', monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+
+.reveal code {
+  font-family: 'Courier', monospace;
+  font-size: 100%;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+  background: #3F3F3F;
+  color: #DCDCDC; }
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.reveal table th {
+  font-weight: bold; }
+
+.reveal table th, .reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid; }
+
+.reveal table tr:last-child td {
+  border-bottom: none; }
+
+.reveal sup {
+  vertical-align: super; }
+
+.reveal sub {
+  vertical-align: sub; }
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top; }
+
+.reveal small * {
+  vertical-align: top; }
+
+.authorsList:before {
+  content: "C. Pivoteau et P. Rotondo";
+}
+
+
+.reveal a {
+  color: #2a76dd;
+  text-decoration: none;
+  -webkit-transition: color 0.15s ease;
+  -moz-transition: color 0.15s ease;
+  transition: color 0.15s ease; }
+
+.reveal a:hover {
+  color: #6ca2e8;
+  text-shadow: none;
+  border: none; }
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #1a54a1; }
+
+
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 4px solid #222;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+
+.reveal a img {
+  -webkit-transition: all 0.15s linear;
+  -moz-transition: all 0.15s linear;
+  transition: all 0.15s linear; }
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #2a76dd;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+
+.reveal .controls div.navigate-left, .reveal .controls div.navigate-left.enabled {
+  border-right-color: #2a76dd; }
+
+.reveal .controls div.navigate-right, .reveal .controls div.navigate-right.enabled {
+  border-left-color: #2a76dd; }
+
+.reveal .controls div.navigate-up, .reveal .controls div.navigate-up.enabled {
+  border-bottom-color: #2a76dd; }
+
+.reveal .controls div.navigate-down, .reveal .controls div.navigate-down.enabled {
+  border-top-color: #2a76dd; }
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #6ca2e8; }
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #6ca2e8; }
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #6ca2e8; }
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #6ca2e8; }
+
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2); }
+
+.reveal .progress span {
+  background: #2a76dd;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+
+.reveal .slide-number {
+  color: #2a76dd; }</style><style class="darkreader darkreader--sync" media="screen"></style>
+
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="Cours%2006%20-%20ReentrantLock_files/zenburn.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link href="Cours%2006%20-%20ReentrantLock_files/prettify.css" type="text/css" rel="stylesheet"><style class="darkreader darkreader--sync" media="screen"></style>
+<!-- Printing and PDF exports -->
+<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script><link rel="stylesheet" type="text/css" href="Cours%2006%20-%20ReentrantLock_files/paper.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<script type="text/javascript" src="Cours%2006%20-%20ReentrantLock_files/prettify.js"></script><meta name="darkreader" content="399264ab58c24f8b8e4c52ee4980f1ce"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+    background-color: #684b00 !important;
+    border-color: #9e7e00 !important;
+    color: #d7d4cf !important;
+}
+#vimvixen-console-frame {
+    color-scheme: light !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+#edge-translate-panel-body,
+.MuiTypography-body1,
+.nfe-quote-text {
+    color: var(--darkreader-neutral-text) !important;
+}
+gr-main-header {
+    background-color: #1b4958 !important;
+}
+.tou-z65h9k,
+.tou-mignzq,
+.tou-1b6i2ox,
+.tou-lnqlqk {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.tou-75mvi {
+    background-color: #0f3a47 !important;
+}
+.tou-ta9e87,
+.tou-1w3fhi0,
+.tou-1b8t2us,
+.tou-py7lfi,
+.tou-1lpmd9d,
+.tou-1frrtv8,
+.tou-17ezmgn {
+    background-color: #1e2021 !important;
+}
+.tou-uknfeu {
+    background-color: #432c09 !important;
+}
+.tou-6i3zyv {
+    background-color: #245d70 !important;
+}
+div.mermaid-viewer-control-panel .btn {
+    background-color: var(--darkreader-neutral-background);
+    fill: var(--darkreader-neutral-text);
+}
+svg g rect.er {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.entityBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxOdd {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxEven {
+    fill: var(--darkreader-selection-background);
+    fill-opacity: 0.8 !important;
+}
+svg rect.er.relationshipLabelBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g g.nodes rect,
+svg g g.nodes polygon {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.task {
+    fill: var(--darkreader-selection-background) !important;
+}
+svg line.messageLine0,
+svg line.messageLine1 {
+    stroke: var(--darkreader-neutral-text) !important;
+}
+div.mermaid .actor {
+    fill: var(--darkreader-neutral-background) !important;
+}
+mitid-authenticators-code-app > .code-app-container {
+    background-color: white !important;
+    padding-top: 1rem;
+}
+iframe#unpaywall[src$="unpaywall.html"] {
+    color-scheme: light !important;
+}
+embed[type="application/pdf"] { filter: invert(100%) contrast(90%); }</style>
+<style type="text/css">
+.reveal h2 {
+	color: steelblue;
+}
+
+.reveal h1 {
+	color: steelblue;
+}
+
+.reveal p {
+	text-align: left;
+}
+
+pre {-moz-tab-size: 4;} /* Firefox */
+pre {tab-size: 4;}
+
+</style><style class="darkreader darkreader--sync" media="screen"></style>
+
+<style type="text/css">
+.flex-container {
+  display: flex;
+}
+.div1 {
+    width: 100px;
+}
+</style><style class="darkreader darkreader--sync" media="screen"></style>
+<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body onload="prettyPrint()">
+
+	<div class="reveal slide center has-dark-background" role="application" data-transition-speed="default" data-background-transition="fade">
+
+<div class="footer"><p>
+    <a href="https://igm.univ-mlv.fr/coursconcurrenceinfo2/index.html"><img src="Cours%2006%20-%20ReentrantLock_files/home.png" width="30em"></a></p>
+</div>
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides" style="width: 960px; height: 700px; inset: 50% auto auto 50%; transform: translate(-50%, -50%) scale(0.907714);">
+			<section style="top: 169.5px; display: block;" class="has-dark-background present">
+
+				<h1>Concurrence</h1>
+				
+				<h2>ReentrantLock</h2>			
+	
+	<br> <span class="authorsList"></span>
+
+			</section>
+
+			<section style="top: 73px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+			<h2>L'API <code>java.util.concurrent.locks</code></h2>	
+
+<p>Il existe <span class="red">un autre mécanisme</span> permettant de définir des sections critiques introduit en Java 5 :</p>
+<ul>
+	<li>
+		Une interface <span class="blue"><code>Lock</code>
+			</span></li>
+	<li>
+		Une classe qui l'implémente : <span class="blue"><code>ReentrantLock</code></span>
+	</li>
+	<li>
+		Quel intérêt ?
+		<ul>
+			<li>
+				C'est un "vrai" objet avec des méthodes et un peu plus de flexibilité (utilisation avancée) ;
+			</li>
+			<li>
+				Plusieurs signaux différents sur un même lock (<span class="blue"><code>Condition</code></span>).
+			</li>
+		</ul>
+	</li>
+</ul>
+
+			</section>
+
+			<section style="top: 94.5px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2><code>ReentrantLock</code></h2>
+<p>C'est également un <span class="blue">mécanisme de verrou</span> (appelé aussi mutex). 
+Un objet <code>ReentrantLock</code>  a deux méthodes principales :
+ </p>
+<ul>
+	<li>
+		<span class="blue"><code>lock()</code></span> qui permet de <span class="blue">prendre le verrou</span> ;
+	</li>
+	<li>
+		<span class="blue"><code>unlock()</code></span> qui permet de <span class="blue">rendre le verrou</span>.
+	</li>
+</ul>
+<p>Un appel à <code>lock()</code> <span class="red">doit toujours être suivi</span> d'un appel à <code>unlock()</code>.
+Le code entre les deux est une <span class="blue">section critique</span>.</p>
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>
+					Section critique et exception
+				</h2>
+
+<p>En Java, beaucoup de lignes de codes sont susceptibles de lever une <span class="red">exception</span>...</p>
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">StupidLockDemo</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ReentrantLock</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ReentrantLock</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> increment</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">lock</span><span class="pun">.</span><span class="kwd">lock</span><span class="pun">();</span><span class="pln">
+			</span><span class="com">// do anything </span><span class="pln">
+		</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">unlock</span><span class="pun">();</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>	
+<p>... par conséquent, le code ci-dessus est <span class="red">faux</span>, car l'appel à <code>unlock()</code> pourrait ne pas être effectué.</p>
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>
+					Solution
+				</h2>
+
+<p>Il faut <span class="red"><b>obligatoirement</b></span> utiliser un bloc <code>try/finally</code> pour verrouiller avec un <code>ReentrantLock</code></p>
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">StupidLockDemo</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ReentrantLock</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ReentrantLock</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> increment</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">lock</span><span class="pun">.</span><span class="kwd">lock</span><span class="pun">();</span><span class="pln"> </span><span class="com">// en dehors du try :)</span><span class="pln">
+		</span><mark><span class="kwd">try</span><span class="pun">{</span></mark><span class="pln">
+			</span><span class="com">// do anything</span><span class="pln">
+		</span><mark><span class="pun">}</span><span class="pln"> </span><span class="kwd">finally</span><span class="pln"> </span><span class="pun">{</span></mark><span class="pln">
+			</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">unlock</span><span class="pun">();</span><span class="pln">
+		</span><mark><span class="pun">}</span></mark><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>	
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2><code>Garanties de la section critique</code></h2>
+<br>
+<p>Les garanties offertes par la section critique des <code>ReentrantLock</code> <b>sont les mêmes</b> qu'avec un bloc <code>synchronized</code> :</p>
+
+<ul>
+	<li><span class="blue">Atomicité (exclusion mutuelle) de la section</span> grâce au verrou.</li>
+	<li><span class="blue">Barrière en mémoire</span>.</li>
+</ul>
+
+<p>À condition de les utliser correctementm bien sûr :)</p>
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Équité (<i>fairness</i>)</h2>
+<p>Il existe deux versions de <code>ReentrantLock</code> : l'une <span class="blue">équitable</span> (<i>fair</i>) et l'autre non (celle par défaut).
+</p>
+<ul>
+	<li>
+		La version <span class="blue">équitable</span> garantit que si plusieurs threads sont en attente sur un verrou c'est <span class="blue">celui qui attend depuis le plus longtemps</span> qui le prend (sinon c'est un thread au hasard). Elle est donnée par <code>ReentrantLock(true)</code>. 
+	</li>
+	<li>
+		Le constructeur sans paramètre <code>ReentranLock()</code> donne la version <span class="blue">non équitable</span>. C'est équivalent à <code>ReentrantLock(false)</code>.
+	</li>
+	<li>
+En termes d'efficacité, <b>la version équitable est plus lente</b>.
+	</li>
+	<li>
+L'équité n'a rien à voir avec la priorité que le scheduler associe au thread :
+ce n'est pas le thread le plus prioritaire qui gagne, mais celui qui a attendu le plus longtemps.
+	</li>
+</ul>
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Des méthodes en plus avec  <code>ReentrantLock</code>...</h2>
+
+<p>Un <code>ReentrantLock</code> possède, par exemple, les méthodes d'instance :</p>
+<ul>
+	<li>
+		<code>tryLock()</code> qui permet d’acquérir un verrou (comme <code>lock()</code>) mais qui renvoie <code>false</code> au lieu de bloquer si un autre thread possède déjà le verrou&nbsp;; c'est une opération atomique.
+	</li>
+	<br>
+	<li>
+		<code>lockInterruptibly() throws InterruptedException</code> qui 
+permet de prendre un verrou  (comme <code>lock()</code>) mais qui peut être interrompue (<span class="blue">voir cours suivant</span>) si le thread est bloqué (parce qu'un autre thread possède déjà le verrou).
+	</li>
+</ul>			
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Signaux (et <code>Condition</code>)</h2>
+
+<p><span class="red">Attention</span>, on ne peut pas utiliser <code>lock.wait()</code> et <code>lock.notify()</code> car cela suppose qu'on est dans un bloc <code>synchronized(lock)</code> !</p>
+
+<p> On utilise <span class="blue">un objet <code>Condition</code></span> fourni par le <code>ReentrantLock</code> :
+</p><pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ReentrantLock</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ReentrantLock</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Condition</span><span class="pln"> condition </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">newCondition</span><span class="pun">();</span></pre>	
+<p>On peut ensuite utiliser :</p>
+<font size="5">
+<ul>
+	<li><code>condition.await()</code> (à la place de <code>wait</code>)</li>
+	<li><code>condition.signal()</code> (à la place de <code>notify</code>)</li>
+	<li><code>condition.signalAll()</code> (à la place de <code>notifyAll</code>)</li>
+</ul></font>
+
+<p><span class="red">Ces méthodes fonctionnent exactement comme leurs équivalents ...</span>
+<br>
+avec le mêmes problèmes, notamment, le risque de <i>spurious wake-up</i>.</p>
+			</section>
+
+
+			<section style="top: 0px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Exemple</h2>
+<pre class="prettyprint prettyprinted" style="font-size: 16px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln">
+	</span><mark><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ReentrantLock</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ReentrantLock</span><span class="pun">();</span></mark><span class="pln">
+	</span><mark><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Condition</span><span class="pln"> condition </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">newCondition</span><span class="pun">();</span></mark><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> init</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">lock</span><span class="pun">.</span><span class="kwd">lock</span><span class="pun">();</span><span class="pln">
+		</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">12</span><span class="pun">;</span><span class="pln">
+			</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+			</span><mark><span class="pln">condition</span><span class="pun">.</span><span class="pln">signal</span><span class="pun">();</span></mark><span class="pln">
+		</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">finally</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">unlock</span><span class="pun">();</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> display</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">lock</span><span class="pun">.</span><span class="kwd">lock</span><span class="pun">();</span><span class="pln">
+		</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+				</span><mark><span class="pln">condition</span><span class="pun">.</span><span class="pln">await</span><span class="pun">();</span></mark><span class="pln">
+			</span><span class="pun">}</span><span class="pln">
+			</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">value</span><span class="pun">);</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">finally</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">unlock</span><span class="pun">();</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+			</section>
+
+
+
+			<section style="top: 109.5px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2><code>Condition</code> multiples</h2>
+
+
+	<p>... et petit bonus : l'API des <code>Conditions</code> permet de créer <span class="blue">plusieurs conditions</span> pour un même <code>ReentrantLock</code>.
+C'est pratique pour utiliser des conditions différentes liées à un même champs.</p>
+
+<p> Lorsque l'on souhaite pouvoir réveiller/endormir un thread pour deux raisons différentes, il suffit d'associer une <code>Condition</code> à chaque raison (voir exercice de TP).</p>
+			</section>
+
+			<section style="top: 13.5px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+<h2>En résumé ...</h2>
+
+<p>Tout ce que l'on faisait avec un block <span class="blue">synchronized</span> peut être fait avec un <code>ReentrantLock</code>.</p>
+
+<p>Il ne faut <b>jamais oublier le <span class="blue">try ... finally</span> !</b></p>
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="pln">	</span><span class="kwd">lock</span><span class="pun">.</span><span class="kwd">lock</span><span class="pun">();</span><span class="pln"> </span><span class="com">// en dehors du try :)</span><span class="pln">
+	</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="com">// do anything</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">finally</span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">unlock</span><span class="pun">();</span><span class="pln">
+	</span><span class="pun">}</span></pre>
+
+<p>On peut utiliser des <code>Condition</code> différentes pour accorder les paires d'appels aux méthodes <code>await/signal</code>.</p>
+
+<p><span class="red">Attention : Ne jamais faire <span class="blue"><code>wait</code></span> et <span class="blue"><code>notify</code></span> sur une <span class="blue"><code>Condition</code></span> !</span></p>		
+			</section>
+
+			<!-- <section>
+				<h2>Pourquoi un <code>while</code> et pas un <code>if</code>?</h2>
+
+<div class="flex-container">
+<div style="flex-basis: 200px">
+<pre class="prettyprint" style="font-size: 16px;" >
+public class Holder {
+	private int value; 
+	private boolean done; 
+	private final Object lock = new Object();
+
+	private void init() {
+		synchronized (lock) {
+			value = 12;
+			done = true;
+			lock.notify();
+		}
+	}
+
+	private void display() throws InterruptedException {
+		synchronized (lock) {
+			<mark>while (!done) {</mark> 
+				lock.wait();
+			}
+			System.out.println(value); 
+		}
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+		var holder = new Holder();
+		new Thread(holder::init).start();
+		holder.display();
+	}
+}	
+</pre>				
+</div>
+<div style="flex-shrink: 0.85">
+	<span class="fragment">
+	<div style="font-size: 27px;" ><p>
+Pour se protéger du <span class="red">spurious wake-up</span>!
+	</p>
+<span class="fragment"><p>Lorsque l'on sort du <code>wait()</code>, on doit à nouveau tester la condition, pour être sûr que c'est bien la raison qui nous a fait sortir du <code>wait()</code>.</p></span>
+</div></span>
+
+</div>
+</div> 			
+			</section> -->
+	
+
+		</div>
+
+	<div class="backgrounds"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><div class="navigate-left"></div><div class="navigate-right enabled"></div><div class="navigate-up"></div><div class="navigate-down"></div></aside><div class="slide-number"></div><div class="pause-overlay"></div><div style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);" id="aria-status-div" aria-live="polite" aria-atomic="true">
+
+				Concurrence
+				
+				ReentrantLock			
+	
+	 
+
+			</div></div>
+
+
+
+	<script src="Cours%2006%20-%20ReentrantLock_files/head.min.js"></script>
+	<script src="Cours%2006%20-%20ReentrantLock_files/reveal.js"></script>
+
+	<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script><script type="text/javascript" src="Cours%2006%20-%20ReentrantLock_files/zoom.js"></script><script type="text/javascript" src="Cours%2006%20-%20ReentrantLock_files/notes.js"></script>
+
+
+
+</body></html>

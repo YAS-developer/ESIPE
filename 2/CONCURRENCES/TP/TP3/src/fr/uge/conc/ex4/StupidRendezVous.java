@@ -10,15 +10,15 @@ public class StupidRendezVous<V> {
   public void set(V value) {
       Objects.requireNonNull(value);
       synchronized (lock) {
-          this.value = value;
-          
+        this.value = value;
+        lock.notify(); 
       }
   }
 
   public V get() throws InterruptedException {
       synchronized (lock) {
           while (value == null) {
-           
+            lock.wait();
           }
           return value;
       }

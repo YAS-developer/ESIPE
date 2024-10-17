@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en" data-darkreader-mode="dynamic" data-darkreader-scheme="dark"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, img.Wirisformula {
+    filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
+}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}
+[data-darkreader-inline-stopcolor] {
+  stop-color: var(--darkreader-inline-stopcolor) !important;
+}
+[data-darkreader-inline-bg] {
+  background: var(--darkreader-inline-bg) !important;
+}
+[data-darkreader-inline-invert] {
+    filter: invert(100%) hue-rotate(180deg);
+}</style><style class="darkreader darkreader--variables" media="screen">:root {
+   --darkreader-neutral-background: #181a1b;
+   --darkreader-neutral-text: #e8e6e3;
+   --darkreader-selection-background: #004daa;
+   --darkreader-selection-text: #e8e6e3;
+}</style><style class="darkreader darkreader--root-vars" media="screen"></style><style class="darkreader darkreader--user-agent" media="screen">@layer {
+html {
+    background-color: #181a1b !important;
+}
+html {
+    color-scheme: dark !important;
+}
+iframe {
+    color-scheme: dark !important;
+}
+html, body {
+    background-color: #181a1b;
+}
+html, body {
+    border-color: #736b5e;
+    color: #e8e6e3;
+}
+a {
+    color: #3391ff;
+}
+table {
+    border-color: #545b5e;
+}
+mark {
+    color: #e8e6e3;
+}
+::placeholder {
+    color: #b2aba1;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: #404400 !important;
+    color: #e8e6e3 !important;
+}
+* {
+    scrollbar-color: #454a4d #202324;
+}
+::selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+::-moz-selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+}</style>
+<meta charset="utf-8">
+
+<title>Cours 04 - Signaux</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="Cours%2004%20-%20Signaux_files/reveal.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="Cours%2004%20-%20Signaux_files/reveal-override.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="Cours%2004%20-%20Signaux_files/white.css" id="theme"><style class="darkreader darkreader--cors" media="screen">section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
+  color: #fff; }
+
+
+body {
+  background: #fff;
+  background-color: #fff; }
+
+.reveal {
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: normal;
+  color: #222; }
+
+::selection {
+  color: #fff;
+  background: #98bdef;
+  text-shadow: none; }
+
+.reveal .slides > section, .reveal .slides > section > section {
+  line-height: 1.3;
+  font-weight: inherit; }
+
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  margin: 0 0 20px 0;
+  color: #222;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+.reveal h1 {
+  margin: 0 0 20px 0;
+  color: #222;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+
+.reveal h1 {
+  font-size: 2.5em; }
+
+.reveal h2 {
+  font-size: 1.6em; }
+
+.reveal h3 {
+  font-size: 1.3em; }
+
+.reveal h4 {
+  font-size: 1em; }
+
+.reveal h1 {
+  text-shadow: none; }
+
+
+
+.reveal span.blue,.reveal p.blue {
+  color: steelblue;
+}
+
+.reveal span.red,.reveal p.red {
+  color: orangered;
+}
+
+.reveal span.green,.reveal p.green {
+  color: seagreen;
+}
+
+.reveal p {
+  margin: 20px 0;
+  line-height: 1.3; }
+
+
+.reveal img, .reveal video, .reveal iframe {
+  max-width: 95%;
+  max-height: 95%; }
+
+.reveal strong, .reveal b {
+  font-weight: bold; }
+
+.reveal em {
+  font-style: italic; }
+
+.reveal ul {
+  display: block;
+  text-align: left;
+  padding-left: 1.5em;
+}
+
+.reveal ol, .reveal dl {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em; }
+
+.reveal ol {
+  list-style-type: decimal; }
+
+.reveal ul {
+  list-style-type: disc; }
+
+.reveal ul ul {
+  list-style-type: square; }
+
+.reveal ul ul ul {
+  list-style-type: circle; }
+
+.reveal ul ul, .reveal ul ol, .reveal ol ol, .reveal ol ul {
+  display: block;
+  margin-left: 40px; }
+
+.reveal dt {
+  font-weight: bold; }
+
+.reveal dd {
+  margin-left: 40px; }
+
+.reveal q, .reveal blockquote {
+  quotes: none; }
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: 20px auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }
+
+.reveal blockquote p:first-child, .reveal blockquote p:last-child {
+  display: inline-block; }
+
+.reveal q {
+  font-style: italic; }
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: 'Courier', monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+
+.reveal code {
+  font-family: 'Courier', monospace;
+  font-size: 100%;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+  background: #3F3F3F;
+  color: #DCDCDC; }
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.reveal table th {
+  font-weight: bold; }
+
+.reveal table th, .reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid; }
+
+.reveal table tr:last-child td {
+  border-bottom: none; }
+
+.reveal sup {
+  vertical-align: super; }
+
+.reveal sub {
+  vertical-align: sub; }
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top; }
+
+.reveal small * {
+  vertical-align: top; }
+
+.authorsList:before {
+  content: "C. Pivoteau et P. Rotondo";
+}
+
+
+.reveal a {
+  color: #2a76dd;
+  text-decoration: none;
+  -webkit-transition: color 0.15s ease;
+  -moz-transition: color 0.15s ease;
+  transition: color 0.15s ease; }
+
+.reveal a:hover {
+  color: #6ca2e8;
+  text-shadow: none;
+  border: none; }
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #1a54a1; }
+
+
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 4px solid #222;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+
+.reveal a img {
+  -webkit-transition: all 0.15s linear;
+  -moz-transition: all 0.15s linear;
+  transition: all 0.15s linear; }
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #2a76dd;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+
+.reveal .controls div.navigate-left, .reveal .controls div.navigate-left.enabled {
+  border-right-color: #2a76dd; }
+
+.reveal .controls div.navigate-right, .reveal .controls div.navigate-right.enabled {
+  border-left-color: #2a76dd; }
+
+.reveal .controls div.navigate-up, .reveal .controls div.navigate-up.enabled {
+  border-bottom-color: #2a76dd; }
+
+.reveal .controls div.navigate-down, .reveal .controls div.navigate-down.enabled {
+  border-top-color: #2a76dd; }
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #6ca2e8; }
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #6ca2e8; }
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #6ca2e8; }
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #6ca2e8; }
+
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2); }
+
+.reveal .progress span {
+  background: #2a76dd;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+
+.reveal .slide-number {
+  color: #2a76dd; }</style><style class="darkreader darkreader--sync" media="screen"></style>
+
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="Cours%2004%20-%20Signaux_files/zenburn.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link href="Cours%2004%20-%20Signaux_files/prettify.css" type="text/css" rel="stylesheet"><style class="darkreader darkreader--sync" media="screen"></style>
+<!-- Printing and PDF exports -->
+<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script><link rel="stylesheet" type="text/css" href="Cours%2004%20-%20Signaux_files/paper.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<script type="text/javascript" src="Cours%2004%20-%20Signaux_files/prettify.js"></script><meta name="darkreader" content="9870a7f1f4234fbc93b3ad6b30b6036b"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+    background-color: #684b00 !important;
+    border-color: #9e7e00 !important;
+    color: #d7d4cf !important;
+}
+#vimvixen-console-frame {
+    color-scheme: light !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+#edge-translate-panel-body,
+.MuiTypography-body1,
+.nfe-quote-text {
+    color: var(--darkreader-neutral-text) !important;
+}
+gr-main-header {
+    background-color: #1b4958 !important;
+}
+.tou-z65h9k,
+.tou-mignzq,
+.tou-1b6i2ox,
+.tou-lnqlqk {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.tou-75mvi {
+    background-color: #0f3a47 !important;
+}
+.tou-ta9e87,
+.tou-1w3fhi0,
+.tou-1b8t2us,
+.tou-py7lfi,
+.tou-1lpmd9d,
+.tou-1frrtv8,
+.tou-17ezmgn {
+    background-color: #1e2021 !important;
+}
+.tou-uknfeu {
+    background-color: #432c09 !important;
+}
+.tou-6i3zyv {
+    background-color: #245d70 !important;
+}
+div.mermaid-viewer-control-panel .btn {
+    background-color: var(--darkreader-neutral-background);
+    fill: var(--darkreader-neutral-text);
+}
+svg g rect.er {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.entityBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxOdd {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxEven {
+    fill: var(--darkreader-selection-background);
+    fill-opacity: 0.8 !important;
+}
+svg rect.er.relationshipLabelBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g g.nodes rect,
+svg g g.nodes polygon {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.task {
+    fill: var(--darkreader-selection-background) !important;
+}
+svg line.messageLine0,
+svg line.messageLine1 {
+    stroke: var(--darkreader-neutral-text) !important;
+}
+div.mermaid .actor {
+    fill: var(--darkreader-neutral-background) !important;
+}
+mitid-authenticators-code-app > .code-app-container {
+    background-color: white !important;
+    padding-top: 1rem;
+}
+iframe#unpaywall[src$="unpaywall.html"] {
+    color-scheme: light !important;
+}
+embed[type="application/pdf"] { filter: invert(100%) contrast(90%); }</style>
+<style type="text/css">
+.reveal h2 {
+	color: steelblue;
+}
+
+.reveal h1 {
+	color: steelblue;
+}
+
+.reveal p {
+	text-align: left;
+}
+
+pre {-moz-tab-size: 4;} /* Firefox */
+pre {tab-size: 4;}
+
+</style><style class="darkreader darkreader--sync" media="screen"></style>
+<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body onload="prettyPrint()">
+
+	<div class="reveal slide center has-dark-background" role="application" data-transition-speed="default" data-background-transition="fade">
+
+<div class="footer"><p>
+    <a href="https://igm.univ-mlv.fr/coursconcurrenceinfo2/index.html"><img src="Cours%2004%20-%20Signaux_files/home.png" width="30em"></a></p>
+</div>
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides" style="width: 960px; height: 700px; inset: 50% auto auto 50%; transform: translate(-50%, -50%) scale(0.907714);">
+			<section style="top: 169.5px; display: block;" class="has-dark-background present">
+
+				<h1>Concurrence</h1>
+				
+				<h2>Signaux</h2>			
+	
+	<br> <span class="authorsList"></span>
+
+			</section>
+
+<section style="top: 269.5px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+
+				<h2>Correction du maximum thread-safe</h2>			
+	
+
+			</section>
+
+
+			<section style="top: 79.5px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+			<h2>Le problème du rendez-vous</h2>	
+
+<p>(voir dernier exercice du TP précédent)</p>
+
+<p>Supposons que deux threads veulent <span class="blue">s'échanger des données</span>...</p>
+
+<ul>
+	<li>Ces données vont devoir transiter par le tas (en RAM), via les champs des objets, dans une classe <i>thread-safe</i>.
+	</li>
+	<li>
+	Il va utiliser une ou plusieurs <span class="blue">sections critiques</span> pour éviter les états incohérents...
+	</li>
+	<li>
+... <span class="red">mais ce n'est pas suffisant</span> : il faut aussi que le thread qui veut recevoir des données <span class="red">attende</span> que ces données soient arrivées.
+	</li>
+</ul>	
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> Repartons d'un exemple simple </h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">});</span><span class="pln">
+		
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p><span class="blue">Que va afficher ce programme ?</span></p>
+<p><span class="fragment" data-fragment-index="0"> Parfois OK... </span>	
+<span class="fragment" data-fragment-index="1"> et parfois KO. </span></p>				
+
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> Essayons de faire les choses dans l'ordre </h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+			holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">});</span><span class="pln">
+		</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="com">// ne rien faire !</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p> <span class="fragment" data-fragment-index="0"> <span class="red">Qu'est-ce qui pose problème ici ?</span></span>
+</p>				
+
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> On a toujours une data-race... </h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+			holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">});</span><span class="pln">
+		</span><mark><span class="com">// le code peut être optimisé pour utiliser une variable locale...</span></mark><span class="pln">
+		</span><mark><span class="kwd">var</span><span class="pln"> tmp </span><span class="pun">=</span><span class="pln"> holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pln"> </span></mark><span class="pln">
+		</span><mark><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">tmp</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></mark><span class="pln">
+			</span><span class="com">// ne rien faire !</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p> Qu'est-ce qui pose problème ici ?
+</p>				
+
+			</section>
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> On a toujours une data-race... </h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+			</span><mark><span class="pln"> </span><span class="com">// les deux affectations peuvent être échangées...</span></mark><span class="pln">
+			</span><mark><span class="pln">holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></mark><span class="pln">
+			</span><mark><span class="pln">holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span></mark><span class="pln">
+		</span><span class="pun">});</span><span class="pln">
+		</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+			</span><span class="com">// ne rien faire !</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre> 
+<p> Qu'est-ce qui pose problème ici ?
+</p>				
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> Et on fait de l'attente active ! </h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+			holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">});</span><span class="pln">
+		</span><mark><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="pln">holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">  </span><span class="com">// là!!!</span></mark><span class="pln">
+		</span><mark><span class="pln">	</span><span class="com">// ne rien faire ! </span></mark><span class="pln">
+		</span><mark><span class="pun">}</span></mark><span class="pln">
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p><span class="red"> Important : </span> l'<span class="blue">attente active</span>
+ consiste à vérifier périodiquement l'état d'un objet jusqu'à observer 
+le changement d'état désiré. Cela produit une boucle qui consomme 
+énormément de ressources CPU. Il faut absolument éviter ce comportement.
+</p>				
+
+			</section>
+
+<style type="text/css">
+	.flex-container {
+  display: flex;
+}
+.div1 {
+    width: 100px;
+}
+</style><style class="darkreader darkreader--sync" media="screen"></style>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Commençons par éviter toute data-race...</h2>
+<div class="flex-container">
+<div style="flex-basis: 2000px">
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><mark><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></mark><span class="pln">
+				holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+				holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+			</span><mark><span class="pun">}</span></mark><span class="pln">
+		</span><span class="pun">});</span><span class="pln">
+		
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(;;)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><mark><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></mark><span class="pln">
+				</span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+					</span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+				</span><span class="pun">}</span><span class="pln">
+			</span><mark><span class="pun">}</span></mark><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		
+		</span><mark><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></mark><span class="pln">
+			</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">.</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln">
+		</span><mark><span class="pun">}</span></mark><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>				
+</div>
+<div style="flex-shrink: 1.2">
+	<p>Pourquoi est-ce que le <b>dernier</b> bloc <code>synchronized</code> est nécessaire ?</p>
+	<span class="fragment" data-fragment-index="0">
+	<div style="font-size: 24px;"><p>
+
+		Parce que, sans lui, on n'a <span class="red">aucune garantie</span> que la variable <code>value</code> est <span class="blue">relue en mémoire</span>.
+ Comme c'est un autre thread qui fait l'écriture, elle pourrait très 
+bien être simplement relue dans le cache et pas dans la RAM.
+	</p></div></span>
+	<span class="fragment" data-fragment-index="1"><p>
+		<span class="red">Ça ne résout pas le problème de l'attente active !</span>
+	</p></span>
+
+</div>
+</div> 
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Et les bonnes pratiques, alors !?</h2>
+<pre class="prettyprint prettyprinted" style="font-size: 16px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> init</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+			</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> display</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(;;)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">// c'est toujours de l'attente active...</span><span class="pln">
+			</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+				</span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+					</span><span class="kwd">break</span><span class="pun">;</span><span class="pln"> 
+				</span><span class="pun">}</span><span class="pln"> 
+			</span><span class="pun">}</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+			</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln"> 
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">::</span><span class="pln">init</span><span class="pun">);</span><span class="pln">
+		holder</span><span class="pun">.</span><span class="pln">display</span><span class="pun">();</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">				</span></pre>
+</section>
+
+<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Comment empêcher l'attente active</h2>
+
+<p>On <span class="blue">voudrait</span> un mécanisme qui :</p>
+<ul>
+	<li>
+		permet de <span class="blue">mettre en pause un thread</span> (on veut que le thread en attente soit dé-schédulé) ;
+	</li>
+	<li>
+		permet de <span class="blue">réveiller un thread</span> qui est en pause (et donc de le re-scéduler) ;
+	</li>
+	<li>
+		fonctionne correctement avec les sections critiques (sinon on va avoir les problèmes de data-race classiques).
+	</li>
+</ul>
+
+<p>En Java, c'est la paire de méthodes <span class="blue"><code>wait()</code></span> et <span class="blue"><code>notify()</code></span> du lock qui permet de faire ça.</p>
+
+</section>
+
+
+<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>On ne fait plus d'attente active !</h2>
+<pre class="prettyprint prettyprinted" style="font-size: 16px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln"> 
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln"> 
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> init</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+			</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+			</span><mark><span class="kwd">lock</span><span class="pun">.</span><span class="pln">notify</span><span class="pun">();</span></mark><span class="pln"> </span><span class="com">// réveille un thread s'il est en pause (sinon, ne fait rien)</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> display</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">  
+				</span><mark><span class="kwd">lock</span><span class="pun">.</span><span class="pln">wait</span><span class="pun">();</span></mark><span class="pln"> </span><span class="com">// demande de mettre le thread en pause</span><span class="pln">
+			</span><span class="pun">}</span><span class="pln">
+			</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln"> 
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">::</span><span class="pln">init</span><span class="pun">);</span><span class="pln">
+		holder</span><span class="pun">.</span><span class="pln">display</span><span class="pun">();</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">				</span></pre>
+<p> <span class="fragment" data-fragment-index="0"> <span class="red">Pourquoi garder le booléen ?</span> </span> <span class="fragment" data-fragment-index="1"> <span class="red">Pourquoi le tester dans une boucle ?</span> </span>
+</p>
+</section>
+
+<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Ce que fait <code>lock.wait()</code></h2>
+<p>Lorsque <span class="blue">la méthode est appelée</span> :</p>
+<ul>
+	<li>
+		elle demande à <span class="red">mettre le thread courant en pause</span> : il est dé-schedulé ;
+	</li>
+	<li>
+		elle redonne le jeton du verrou <code>lock</code>,
+	</li>
+</ul>
+<br>
+<p>Lorsque <span class="blue">le thread est réveillé</span> (après l'appel à <code>wait</code>) :
+</p><ul>
+	<li>
+	ça demande la <span class="red">reprise de l’exécution du thread</span> : celui-ci peut être  re-schédulé.
+	</li>	
+	<li>	
+	le thread reprend le jeton du <code>lock</code> (quand il est disponible) ;
+	</li>
+</ul>
+
+<br>
+<p><b>Les appels à <code>lock.wait()</code> doivent donc obligatoirement être faits à l’intérieur d'un bloc  <code>synchronized(<span class="red">lock</span>)</code> !</b></p>
+</section>
+
+<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Ce que font <code>notify()</code> et <code>notifyAll()</code></h2>
+
+<ul>
+	<li><code>lock.notify()</code> : demande le réveil d'<span class="red">un thread</span> en attente sur le <code>lock</code> (à cause d'un appel <code>lock.wait()</code>).
+		<ul>
+	<li>
+S'il y en a plusieurs, le scheduler en choisit un arbitrairement.
+		</li>
+	<li>
+Si aucun thread n'est en attente, le <code>notify()</code> est perdu et il ne se passe rien.
+	</li>
+</ul>
+	</li><li>
+		<code>lock.notifyAll()</code> : demande le réveil de <span class="red">touts les threads</span> en attente sur le <code>lock</code> (à cause d'un appel à <code>lock.wait()</code>).
+
+	</li>
+	<li>
+		<span class="red"><b>Important</b> : ces méthodes ne provoquent pas la sortie immédiate du bloc <code>synchronized</code>.</span>
+	</li>
+</ul>	
+
+<br>
+<p>
+	<b>Les appels à <code>lock.notify()</code> ou <code>lock.notifyAll()</code> doivent être faits à l’intérieur d'un bloc <code>synchronized(lock)</code> 
+	</b>(nous avons allons voir pourquoi rapidement).
+</p>
+			</section>
+
+			
+
+<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Conditions de réveil</h2>
+
+
+<p>Comment un thread peut être réveillé d'un appel à <code>lock.wait()</code> ?</p>
+<ul>
+	<li>	
+Si un autre thread appelle <code>lock.notify()</code> ou <code>lock.notifyAll()</code>.
+	</li>
+	<li>
+Si un autre thread interrompt le thread courant avec <code>interrupt()</code>
+<small>(dans ce cas <code>lock.wait()</code> lève <code>InterruptedException</code>, on verra ça dans un prochain cours).</small> 
+	</li>
+	<li>
+Sans raison apparente : on appelle celà un <i>spurious wake-up</i>.	
+	</li>
+</ul>
+
+</section>
+
+<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Pourquoi est-ce qu'on garde le test du booléen ?</h2>
+
+<div class="flex-container">
+<div style="flex-basis: 200px">
+<pre class="prettyprint prettyprinted" style="font-size: 16px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln"> 
+	</span><mark><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span></mark><span class="pln"> 
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> init</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+			</span><mark><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span></mark><span class="pln"> 
+			</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">notify</span><span class="pun">();</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> display</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(</span><mark><span class="pun">!</span><span class="kwd">done</span></mark><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+				</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">wait</span><span class="pun">();</span><span class="pln">
+			</span><span class="pun">}</span><span class="pln">
+			</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln"> 
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">::</span><span class="pln">init</span><span class="pun">);</span><span class="pln">
+		holder</span><span class="pun">.</span><span class="pln">display</span><span class="pun">();</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">	</span></pre>				
+</div>
+<div style="flex-shrink: 0.87">
+	<span class="fragment" data-fragment-index="0">
+	<div style="font-size: 27px;"><p>
+Supposons qu'on enlève le booléen <code>done</code>. 
+<br>
+<br>
+Si l'autre thread exécute le <code>notify()</code> avant que le thread <code>main</code> soit dans le <code>wait()</code>, 
+<br>
+<span class="red">le <code>notify()</code> sera perdu</span>... et le <code>wait()</code> attendra indéfiniment !
+<br> 
+<br>
+	 
+Donc l'appel à <code>lock.notify()</code> est fait à l’intérieur d'un bloc <code>synchronized(lock)</code> qui met à jour la condition associée au <code>wait()</code>.</p>
+
+</div></span>
+
+</div>
+</div> 			
+</section>
+
+<section style="top: 56px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Notifications perdues</h2>
+
+
+<p>Pour éviter les notifications perdues... et donc une attente infinie dans un  <code>wait()</code> :</p>
+<ul>
+	<li>
+		Il <span class="blue">faut utiliser une condition</span> (un champs booléen, par exemple) qui change au moment où l'on appelle un <code>notify</code>.
+	</li>
+	<li>
+		Ainsi,  on peut utiliser cette condition pour savoir s'il faut faire le <code>wait()</code> ou pas.
+	</li>
+	<li>
+		Bien sûr, cette <b>condition doit impérativement être modifiée dans le bloc <code>synchronized</code></b> contenant le <code>notify</code> associé (sinon, on retrouve tous les problèmes liés à la non atomicité des instructions).
+
+	</li>
+</ul>
+
+
+</section>
+
+<section style="top: 0px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Pourquoi un <code>while</code> et pas un <code>if</code> ?</h2>
+
+<div class="flex-container">
+<div style="flex-basis: 200px">
+<pre class="prettyprint prettyprinted" style="font-size: 16px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Holder</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln"> 
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> </span><span class="kwd">done</span><span class="pun">;</span><span class="pln"> 
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> init</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+			</span><span class="kwd">done</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+			</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">notify</span><span class="pun">();</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> display</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><mark><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="kwd">done</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span></mark><span class="pln"> 
+				</span><span class="kwd">lock</span><span class="pun">.</span><span class="pln">wait</span><span class="pun">();</span><span class="pln">
+			</span><span class="pun">}</span><span class="pln">
+			</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">value </span><span class="pun">==</span><span class="pln"> </span><span class="lit">42</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> </span><span class="str">"OK"</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="str">"KO"</span><span class="pun">);</span><span class="pln"> 
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> holder </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Holder</span><span class="pun">();</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(</span><span class="pln">holder</span><span class="pun">::</span><span class="pln">init</span><span class="pun">);</span><span class="pln">
+		holder</span><span class="pun">.</span><span class="pln">display</span><span class="pun">();</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">	</span></pre>				
+</div>
+<div style="flex-shrink: 0.85">
+	<span class="fragment" data-fragment-index="0">
+	<div style="font-size: 27px;">
+<p> Pour se protéger du <span class="red">spurious wake-up</span> ! </p>
+
+<span class="fragment" data-fragment-index="1"><p>Lorsque l'on sort du <code>wait()</code>, on doit à nouveau tester la condition, pour être sûr que c'est bien la raison qui nous a fait sortir du <code>wait()</code>.</p></span>
+</div></span>
+
+</div>
+</div> 			
+</section>
+
+<section style="top: 0px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Conclusion</h2>
+	 <br>
+<p><b><span class="red">Un <code>wait()</code> n'est jamais tout seul !</span></b></p>
+
+<p>L'appel à <code>wait()</code> doit toujours :</p>
+<ul>
+	<li> être à l’intérieur d'un bloc <code>synchronized</code> ;</li>
+	<li> se trouver dans une boucle <code>while</code> ;</li>
+	<li>qui teste la condition qui a permis de faire le <code>notify</code>.</li>
+</ul>
+<p>L'appel à <code>notify()</code> est toujours :</p>
+<ul>
+	<li> à l’intérieur d'un bloc <code>synchronized</code> <br>(sur le même verrou que le bloc qui contient l'appel à <code>wait()</code>) ;</li>
+	<li> qui met à jour la condition associée au <code>wait()</code>.</li>
+</ul>
+
+			</section>		
+
+		</div>
+
+	<div class="backgrounds"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><div class="navigate-left"></div><div class="navigate-right enabled"></div><div class="navigate-up"></div><div class="navigate-down"></div></aside><div class="slide-number"></div><div class="pause-overlay"></div><div style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);" id="aria-status-div" aria-live="polite" aria-atomic="true">
+
+				Concurrence
+				
+				Signaux			
+	
+	 
+
+			</div></div>
+
+
+
+	<script src="Cours%2004%20-%20Signaux_files/head.min.js"></script>
+	<script src="Cours%2004%20-%20Signaux_files/reveal.js"></script>
+
+	<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script><script type="text/javascript" src="Cours%2004%20-%20Signaux_files/zoom.js"></script><script type="text/javascript" src="Cours%2004%20-%20Signaux_files/notes.js"></script>
+
+
+
+</body></html>

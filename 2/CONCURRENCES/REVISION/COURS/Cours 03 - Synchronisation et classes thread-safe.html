@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en" data-darkreader-mode="dynamic" data-darkreader-scheme="dark"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, img.Wirisformula {
+    filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
+}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}
+[data-darkreader-inline-stopcolor] {
+  stop-color: var(--darkreader-inline-stopcolor) !important;
+}
+[data-darkreader-inline-bg] {
+  background: var(--darkreader-inline-bg) !important;
+}
+[data-darkreader-inline-invert] {
+    filter: invert(100%) hue-rotate(180deg);
+}</style><style class="darkreader darkreader--variables" media="screen">:root {
+   --darkreader-neutral-background: #181a1b;
+   --darkreader-neutral-text: #e8e6e3;
+   --darkreader-selection-background: #004daa;
+   --darkreader-selection-text: #e8e6e3;
+}</style><style class="darkreader darkreader--root-vars" media="screen"></style><style class="darkreader darkreader--user-agent" media="screen">@layer {
+html {
+    background-color: #181a1b !important;
+}
+html {
+    color-scheme: dark !important;
+}
+iframe {
+    color-scheme: dark !important;
+}
+html, body {
+    background-color: #181a1b;
+}
+html, body {
+    border-color: #736b5e;
+    color: #e8e6e3;
+}
+a {
+    color: #3391ff;
+}
+table {
+    border-color: #545b5e;
+}
+mark {
+    color: #e8e6e3;
+}
+::placeholder {
+    color: #b2aba1;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: #404400 !important;
+    color: #e8e6e3 !important;
+}
+* {
+    scrollbar-color: #454a4d #202324;
+}
+::selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+::-moz-selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+}</style>
+<meta charset="utf-8">
+
+<title>Cours 03 - Synchronisation et classes thread-safe</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/reveal.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/reveal-override.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/white.css" id="theme"><style class="darkreader darkreader--cors" media="screen">section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
+  color: #fff; }
+
+
+body {
+  background: #fff;
+  background-color: #fff; }
+
+.reveal {
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: normal;
+  color: #222; }
+
+::selection {
+  color: #fff;
+  background: #98bdef;
+  text-shadow: none; }
+
+.reveal .slides > section, .reveal .slides > section > section {
+  line-height: 1.3;
+  font-weight: inherit; }
+
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  margin: 0 0 20px 0;
+  color: #222;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+.reveal h1 {
+  margin: 0 0 20px 0;
+  color: #222;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+
+.reveal h1 {
+  font-size: 2.5em; }
+
+.reveal h2 {
+  font-size: 1.6em; }
+
+.reveal h3 {
+  font-size: 1.3em; }
+
+.reveal h4 {
+  font-size: 1em; }
+
+.reveal h1 {
+  text-shadow: none; }
+
+
+
+.reveal span.blue,.reveal p.blue {
+  color: steelblue;
+}
+
+.reveal span.red,.reveal p.red {
+  color: orangered;
+}
+
+.reveal span.green,.reveal p.green {
+  color: seagreen;
+}
+
+.reveal p {
+  margin: 20px 0;
+  line-height: 1.3; }
+
+
+.reveal img, .reveal video, .reveal iframe {
+  max-width: 95%;
+  max-height: 95%; }
+
+.reveal strong, .reveal b {
+  font-weight: bold; }
+
+.reveal em {
+  font-style: italic; }
+
+.reveal ul {
+  display: block;
+  text-align: left;
+  padding-left: 1.5em;
+}
+
+.reveal ol, .reveal dl {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em; }
+
+.reveal ol {
+  list-style-type: decimal; }
+
+.reveal ul {
+  list-style-type: disc; }
+
+.reveal ul ul {
+  list-style-type: square; }
+
+.reveal ul ul ul {
+  list-style-type: circle; }
+
+.reveal ul ul, .reveal ul ol, .reveal ol ol, .reveal ol ul {
+  display: block;
+  margin-left: 40px; }
+
+.reveal dt {
+  font-weight: bold; }
+
+.reveal dd {
+  margin-left: 40px; }
+
+.reveal q, .reveal blockquote {
+  quotes: none; }
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: 20px auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }
+
+.reveal blockquote p:first-child, .reveal blockquote p:last-child {
+  display: inline-block; }
+
+.reveal q {
+  font-style: italic; }
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: 'Courier', monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+
+.reveal code {
+  font-family: 'Courier', monospace;
+  font-size: 100%;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+  background: #3F3F3F;
+  color: #DCDCDC; }
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.reveal table th {
+  font-weight: bold; }
+
+.reveal table th, .reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid; }
+
+.reveal table tr:last-child td {
+  border-bottom: none; }
+
+.reveal sup {
+  vertical-align: super; }
+
+.reveal sub {
+  vertical-align: sub; }
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top; }
+
+.reveal small * {
+  vertical-align: top; }
+
+.authorsList:before {
+  content: "C. Pivoteau et P. Rotondo";
+}
+
+
+.reveal a {
+  color: #2a76dd;
+  text-decoration: none;
+  -webkit-transition: color 0.15s ease;
+  -moz-transition: color 0.15s ease;
+  transition: color 0.15s ease; }
+
+.reveal a:hover {
+  color: #6ca2e8;
+  text-shadow: none;
+  border: none; }
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #1a54a1; }
+
+
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 4px solid #222;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+
+.reveal a img {
+  -webkit-transition: all 0.15s linear;
+  -moz-transition: all 0.15s linear;
+  transition: all 0.15s linear; }
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #2a76dd;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+
+.reveal .controls div.navigate-left, .reveal .controls div.navigate-left.enabled {
+  border-right-color: #2a76dd; }
+
+.reveal .controls div.navigate-right, .reveal .controls div.navigate-right.enabled {
+  border-left-color: #2a76dd; }
+
+.reveal .controls div.navigate-up, .reveal .controls div.navigate-up.enabled {
+  border-bottom-color: #2a76dd; }
+
+.reveal .controls div.navigate-down, .reveal .controls div.navigate-down.enabled {
+  border-top-color: #2a76dd; }
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #6ca2e8; }
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #6ca2e8; }
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #6ca2e8; }
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #6ca2e8; }
+
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2); }
+
+.reveal .progress span {
+  background: #2a76dd;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+
+.reveal .slide-number {
+  color: #2a76dd; }</style><style class="darkreader darkreader--sync" media="screen"></style>
+
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/zenburn.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link href="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/prettify.css" type="text/css" rel="stylesheet"><style class="darkreader darkreader--sync" media="screen"></style>
+<!-- Printing and PDF exports -->
+<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script><link rel="stylesheet" type="text/css" href="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/paper.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<script type="text/javascript" src="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/prettify.js"></script><meta name="darkreader" content="46d600bbbcd24dc1a4ccdad233736e13"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+    background-color: #684b00 !important;
+    border-color: #9e7e00 !important;
+    color: #d7d4cf !important;
+}
+#vimvixen-console-frame {
+    color-scheme: light !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+#edge-translate-panel-body,
+.MuiTypography-body1,
+.nfe-quote-text {
+    color: var(--darkreader-neutral-text) !important;
+}
+gr-main-header {
+    background-color: #1b4958 !important;
+}
+.tou-z65h9k,
+.tou-mignzq,
+.tou-1b6i2ox,
+.tou-lnqlqk {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.tou-75mvi {
+    background-color: #0f3a47 !important;
+}
+.tou-ta9e87,
+.tou-1w3fhi0,
+.tou-1b8t2us,
+.tou-py7lfi,
+.tou-1lpmd9d,
+.tou-1frrtv8,
+.tou-17ezmgn {
+    background-color: #1e2021 !important;
+}
+.tou-uknfeu {
+    background-color: #432c09 !important;
+}
+.tou-6i3zyv {
+    background-color: #245d70 !important;
+}
+div.mermaid-viewer-control-panel .btn {
+    background-color: var(--darkreader-neutral-background);
+    fill: var(--darkreader-neutral-text);
+}
+svg g rect.er {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.entityBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxOdd {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxEven {
+    fill: var(--darkreader-selection-background);
+    fill-opacity: 0.8 !important;
+}
+svg rect.er.relationshipLabelBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g g.nodes rect,
+svg g g.nodes polygon {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.task {
+    fill: var(--darkreader-selection-background) !important;
+}
+svg line.messageLine0,
+svg line.messageLine1 {
+    stroke: var(--darkreader-neutral-text) !important;
+}
+div.mermaid .actor {
+    fill: var(--darkreader-neutral-background) !important;
+}
+mitid-authenticators-code-app > .code-app-container {
+    background-color: white !important;
+    padding-top: 1rem;
+}
+iframe#unpaywall[src$="unpaywall.html"] {
+    color-scheme: light !important;
+}
+embed[type="application/pdf"] { filter: invert(100%) contrast(90%); }</style>
+<style type="text/css">
+.reveal h2 {
+	color: steelblue;
+}
+
+.reveal h1 {
+	color: steelblue;
+}
+
+.reveal p {
+	text-align: left;
+}
+
+pre {-moz-tab-size: 4;} /* Firefox */
+pre {tab-size: 4;}
+
+</style><style class="darkreader darkreader--sync" media="screen"></style>
+<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body onload="prettyPrint()">
+
+	<div class="reveal slide center has-dark-background" role="application" data-transition-speed="default" data-background-transition="fade">
+
+<div class="footer"><p>
+    <a href="https://igm.univ-mlv.fr/coursconcurrenceinfo2/index.html"><img src="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/home.png" width="30em"></a></p>
+</div>
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides" style="width: 960px; height: 700px; inset: 50% auto auto 50%; transform: translate(-50%, -50%) scale(0.907714);">
+			<section style="top: 169.5px; display: block;" class="has-dark-background present">
+
+				<h1>Concurrence</h1>
+				
+				<h2>Synchronisation et classes thread-safe</h2>			
+	
+	<br> <span class="authorsList"></span>
+
+			</section>
+
+			<section style="top: 0px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> Avant de commencer : retour sur le TP2, exo 3</h2>
+<img src="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/addALot.png" alt="addALot" width="800"> 
+
+			</section>
+
+	<section style="top: 0px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> Retour sur le TP2 : exo 3, le code de <tt>add</tt> </h2>
+<p>
+Dans la classe <code>ArrayList</code> : 
+</p><pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="pln">  </span><span class="kwd">private</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">[]</span><span class="pln"> elementData</span><span class="pun">;</span><span class="pln"> 
+  </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> size</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">...</span><span class="pln">
+  </span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> add</span><span class="pun">(</span><span class="pln">E e</span><span class="pun">,</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">[]</span><span class="pln"> elementData</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> s</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">s </span><span class="pun">==</span><span class="pln"> elementData</span><span class="pun">.</span><span class="pln">length</span><span class="pun">)</span><span class="pln">
+          elementData </span><span class="pun">=</span><span class="pln"> grow</span><span class="pun">();</span><span class="pln"> </span><span class="com">// renvoie un tab. plus grand</span><span class="pln">
+      elementData</span><span class="pun">[</span><span class="pln">s</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> e</span><span class="pun">;</span><span class="pln">
+      size </span><span class="pun">=</span><span class="pln"> s </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+  
+  </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">boolean</span><span class="pln"> add</span><span class="pun">(</span><span class="pln">E e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      modCount</span><span class="pun">++;</span><span class="pln">
+      add</span><span class="pun">(</span><span class="pln">e</span><span class="pun">,</span><span class="pln"> elementData</span><span class="pun">,</span><span class="pln"> size</span><span class="pun">);</span><span class="pln">
+      </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">;</span><span class="pln">
+  </span><span class="pun">}</span></pre>
+<p></p>
+<p><span class="" style="font-size: 26px;">
+	Dans le cas où la capacité initiale est fixée et assez grande, <code>grow()</code> n'est jamais appelée.</span></p>
+				
+<p>À partir de là, on peut donner un scénario pour que la taille ne soit pas 20 000.</p>
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+
+				<h2>Synchronisation</h2>
+				
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> Le problème de l'atomicité des instructions </h2>
+<p>
+</p><pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> addALot</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pln">_000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> value </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln"> </span><span class="com">// ce n'est pas une opération atomique!</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> counter </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Counter</span><span class="pun">();</span><span class="pln">
+		
+		</span><span class="kwd">var</span><span class="pln"> thread1 </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(</span><span class="pln">counter</span><span class="pun">::</span><span class="pln">addALot</span><span class="pun">);</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> thread2 </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(</span><span class="pln">counter</span><span class="pun">::</span><span class="pln">addALot</span><span class="pun">);</span><span class="pln">
+		
+		thread1</span><span class="pun">.</span><span class="pln">join</span><span class="pun">();</span><span class="pln">
+		thread2</span><span class="pun">.</span><span class="pln">join</span><span class="pun">();</span><span class="pln">
+
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">counter</span><span class="pun">.</span><span class="pln">value</span><span class="pun">);</span><span class="pln"> </span><span class="com">// :(</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p></p>				
+
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Section critique : "fabriquer" de l'atomicité</h2>
+<p>On voudrait s'assurer que  <span class="blue">2 threads différents</span> <b>ne puissent pas être en train d’exécuter</b> le code qui correspond à l'instruction <code>value = value + 1</code> <span class="blue">en même temps</span>.</p>
+
+<p> Et on voudrait aussi garantir qu'on ne va <span class="blue">pas essayer de lire la valeur de <code>value</code> avant que l'écriture précédente soit finie</span> (c'est à dire répercutée en RAM et pas juste gardée dans une variable locale ou en cache).</p>	
+
+<br>
+<p> <b>C'est ce à quoi sert une <span class="red">section critique</span>.</b></p>
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Section critique</h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> addALot</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pln">_000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><mark><span class="com">// début section critique</span></mark><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> value </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+			</span><mark><span class="com">// fin section critique</span></mark><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>		
+<p><b><span class="blue">Un seul thread à la fois</span></b> peut être en train d’exécuter le code de la section critique !</p>
+
+<p><span class="green" style="font-size: 26px;">Attention, ça ne veut PAS dire que le thread ne peut pas être de-schédulé s'il est dans la section critique. </span>
+</p>
+
+<p>
+<span class="fragment" data-fragment-index="0"> Est-ce que c'est une garantie suffisante? </span>
+<span class="fragment" data-fragment-index="1"><br> <span class="red">Non... il faut aussi que ça assure que la <b>RAM est mise à jour</b> correctement! </span></span>
+</p>
+         	
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Section critique</h2>
+<p>On veut pouvoir "protéger" plusieurs portions de code différentes :</p>
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> addALot</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pln">_000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><mark><span class="com">// début section critique</span></mark><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> value </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+			</span><mark><span class="com">// fin section critique</span></mark><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> add42</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><mark><span class="com">// début section critique</span></mark><span class="pln">
+		</span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">value </span><span class="pun">!=</span><span class="pln"> </span><span class="lit">13</span><span class="pun">){</span><span class="pln">
+			value </span><span class="pun">=</span><span class="pln"> value </span><span class="pun">+</span><span class="pln"> </span><span class="lit">42</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		</span><mark><span class="com">// fin section critique</span></mark><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>	
+			</section>
+
+
+<!-- 			<section>
+				<h2>Section critique</h2>
+<p>On veut aussi pouvoir "protéger" <span class="red"><i>indépendamment</i></span> certaines portions de code :</p>
+<pre class="prettyprint" style="font-size: 18px;" >
+public class Counter {
+	private int value1;
+	private int value2;
+
+	public void inc1() {
+		<mark>// début section critique n&#176;1</mark>
+		value1++;
+		<mark>// fin section critique n&#176;1</mark>
+	}
+
+	public void inc2() {
+		<mark>// début section critique n&#176;2</mark>
+		value2++;
+		<mark>// fin section critique n&#176;2</mark>
+	}
+}
+</pre>	
+			</section> -->
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Sections critiques en Java : blocs <code>synchronized</code> et <code>lock</code></h2>
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><mark><b><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span></b></mark><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> addALot</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pln">_000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><mark><b><span class="kwd">synchronized</span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">){</span></b></mark><span class="pln"> 
+				value </span><span class="pun">=</span><span class="pln"> value </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+			</span><mark><b><span class="pun">}</span></b></mark><span class="pln"> 
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>	
+<p>C'est important que l'objet qui sert de <i>lock</i> (on dit aussi <i>moniteur</i>) soit <span class="red">privé et final</span>, on verra bientôt pourquoi.</p>
+			</section>
+			
+		<!-- 	<section>
+				<h2>Sections critiques multiples en Java</h2>
+				<p>On peut utiliser plusieurs locks <b>différents</b>.</p>
+<pre class="prettyprint" style="font-size: 18px;" >
+public class Counter {
+	private int value1;
+	private int value2;
+	private final Object <mark>lock1</mark> = new Object();
+	private final Object <mark>lock2</mark> = new Object();
+
+	public void inc1() {
+		synchronized(<mark>lock1</mark>){
+			value1++;
+		}
+	}
+
+	public void dec1() {
+		synchronized(<mark>lock1</mark>){
+			value1--;
+		}
+	}
+
+	public void inc2() {
+		synchronized(<mark>lock2</mark>){
+			value2++;
+		}
+	}
+}
+</pre>	
+			</section> -->
+
+ 
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Les propriétés du bloc <code>synchronized </code></h2>
+<p>C'est un <span class="blue"><b>verrou</b></span> : quand un thread entre dans un bloc <code>synchronized</code>, il <span class="red">prend un jeton</span> associé à l'objet lock et lorsqu'il sort du bloc <code>synchronized</code>, il <span class="red">rend le jeton</span>.</p>
+
+<ul>
+<li>
+	<span class="red">Un seul thread</span> peut avoir le jeton (associé au même lock) à la fois !
+</li>
+<br>
+<li>
+	Un thread peut être <span class="blue">dé-schédulé</span> alors qu'il a le jeton. Mais dans ce cas, <span class="red">il le garde </span> et aucun autre thread ne peut le prendre (et donc entrer dans un bloc synchronisé utilisant le même lock).
+</li>
+</ul>					
+
+			</section>
+
+
+			
+
+ 
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Les propriétés du bloc <code>synchronized </code></h2>
+
+
+		<p>C'est une <span class="blue"><b>barrière en mémoire</b></span> <span class="red">entre le blocs synchronisés sur le même lock</span> :</p>
+<ul>
+	<li>
+L'acquisition (<i>acquire</i>) d'un verrou force la <span class="blue">relecture des champs depuis la RAM </span>(valeurs en cache invalidées).
+	</li>
+	<li>
+Le relâchement (<i>release</i>) d'un verrou force <span class="blue">l'écriture des champs modifiés vers la RAM</span>.
+	</li>
+	<li>
+		<span class="green">Attention, ça ne garantit rien pour l'accès à ces champs en dehors d'un bloc <code>synchronized</code> (sur le même verrou).</span>
+	</li>
+
+</ul>
+			</section>
+			
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Les propriétés du bloc <code>synchronized</code> (précisions)</h2>
+
+<ul>
+	<li>
+L'entrée ou la sortie d'un bloc <code>synchronized</code> <span class="blue">impose que l'optimiseur de code/JIT</span>
+ne déplace pas des instructions <span class="red">hors du bloc</span>.
+	<ul>
+	<li>
+		Mais, à l'intérieur d'un bloc <code>synchronized</code> les instructions peuvent être ré-organisées sans problème.
+
+	</li>
+</ul>
+</li>
+<br>
+	<li>
+		L'entrée d'un bloc <code>synchronized</code> invalide les registres ; sa sortie oblige la <span class="blue">ré-écriture</span> des registres vers la RAM ;
+	<ul>
+	
+	<li>
+		Mais un bloc <code>synchronized</code> n’empêche pas la RAM d'être dans un état incohérent au milieu du bloc...
+	</li>
+	<li>
+		... par contre, cela empêche un autre thread de voir ces états 
+incohérents (à condition qu'il utilise aussi le verrou, bien sûr).
+	</li>
+</ul>
+</li>
+</ul>
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Les propriétés d'un lock</h2>
+<ul>
+<li class="fragment" data-fragment-index="0">
+	C'est un objet : ça <b>ne</b> peut être ni <span class="red">un primitif</span>, ni <span class="red"><code>null</code>;
+</span></li>
+<br>
+<li class="fragment" data-fragment-index="1">
+	C'est un objet Java qui n'utilise pas d'<i>interning</i> ;
+</li>
+<br>
+<li class="fragment" data-fragment-index="2">
+	On ne veut pas que n'importe qui puisse l'utiliser comme lock (au risque de créer des blocages).
+</li>
+<br>
+<li class="fragment" data-fragment-index="3">
+	Cet objet sert de <span class="red">référence commune</span>, de point de rendez-vous !
+</li>
+</ul>
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>On choisit comme lock... un objet Java qui n'utilise pas d'<i>interning</i></h2>
+
+
+<p> L'<i>interning</i> est une technique utilisée pour éviter d'allouer plusieurs fois un objet représentant la même chose. Il y en a notamment dans :</p>
+<ul>
+	<li>Les chaînes constantes (<i>String literals</i>) comme "foo".</li>
+	<li>Les <code>java.lang.Integer</code> avec <code>Integer.valueOf</code> ou auto-boxing.
+	Par exemple :
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="typ">Object</span><span class="pln"> o </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pun">;</span><span class="pln"> </span><span class="com">// appelle implicitement Integer.valueOf(3)</span></pre>
+</li>
+	<li>Les classes <code>java.lang.Class</code> avec <code>".class"</code> ou <code>Class.forName()</code>
+</li>
+</ul>
+<p>On n'utilise pas ces objets en tant que lock pour éviter que le même objet serve de verrou pour des besoins différents.</p>
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>On choisit comme lock... un objet qui n'est pas accessible par n'importe qui.</h2>
+<p>On empêche que les locks soient visibles hors du code nécessaire et on on utilise le <span class="red">principe d'encapsulation</span> de la POO :</p>
+<ul>
+	<li>les objets qui servent de lock sont déclarés comme des champs <span class="red"><code>private</code></span> ;</li>
+	<li>l'objet doit être créé dans le constructeur de la classe.</li>
+	<li>on ne fournit <span class="red">pas d'accesseur</span> sur ces champs ;</li>
+</ul>
+	<p>Ces objets ne doivent pas pouvoir servir de verrou en dehors de votre code !</p>
+	<p>Enfin, on évite de prendre un objet qui est peut déjà être utlisé comme lock (comme <code>System.out</code>, par exemple)</p>
+			</section>
+			
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>On choisit comme lock... un objet <code>final</code>.</h2>
+<p>L'objet qui sert de lock doit être <b><span class="red">final</span></b> car on ne veut pas que la référence de l'objet puisse changer.</p>
+
+<p>Ça ne suffit pas ! Il faut qu'il soit <b><span class="red">déclaré <code>final</code></span></b>.
+ Sinon, il est possible pour un thread de le voir alors qu'il n'est pas 
+encore initialisé (c'est lié au problème de publication que nous verrons
+ plus tard) et dans ce cas l'objet est <code>null</code>.</p>
+
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Foo</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+	</span><span class="pun">...</span><span class="pln">
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> bar</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">){</span><span class="pln">
+			</span><span class="pun">...</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>En java, les verrous sont ré-entrants</h2>
+<p><span class="blue">Un même thread</span> peut prendre plusieurs fois le même lock :</p>
+<pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Foo</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> setValue</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> reset</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			setValue</span><span class="pun">(</span><span class="lit">0</span><span class="pun">);</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>				
+			</section>
+
+<!-- 
+			<section>
+			 <h2>Ré-Entrance</h2>
+<p>En Java, les locks sont toujours ré-entrants<p>
+<br/>
+<p>En pratique:</p>
+<ul>
+	<li>
+		La VM maintien un <span class="blue">compteur</span> associé à chaque verrou.
+
+	</li>
+	<li>
+		Lors de l'entrée dans un bloc <code>synchronized</code>, on <span class="blue">incrémente</span> le compteur.
+
+	</li>
+	<li>
+		Lors de la sortie dans un bloc <code>synchronized</code>, on <span class="blue">décrémente</span> le compteur.
+	</li>
+</ul>
+
+			</section> -->
+
+			<!-- <section>
+synchronized sur les méthodes?
+
+ Synchronized sur les méthodes
+En Java, on peut déclarer une méthode 'synchronized'
+Pour une méthode d'instance, c'est équivalent à un synchronized(this) { ... } sur le corps de la méthode
+Pour une méthode statique, c'est équivalent à un synchronized(TheCurrentClass.class) { ... } sur le corps de la méthode
+
+ Synchronized sur les méthodes
+Dans les deux cas, cela pose problème, car c'est référence sont trop visible (attention au deadlocks) !
+“this” est trop visible, car connu de l'extérieur de la classe
+La référence à une classe (TheCurrentClass.class) est visible de n'importe quel endroit du code
+On ne déclare pas une méthode synchronized !
+			</section> -->
+
+
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Donc on peut corriger le TP... ?</h2>
+<pre class="prettyprint prettyprinted" style=""><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">HelloListFixed</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> nbThreads </span><span class="pun">=</span><span class="pln"> </span><span class="lit">4</span><span class="pun">;</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> threads </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">[</span><span class="pln">nbThreads</span><span class="pun">];</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> list </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;();</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+		</span><span class="typ">IntStream</span><span class="pun">.</span><span class="pln">range</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> nbThreads</span><span class="pun">).</span><span class="pln">forEach</span><span class="pun">(</span><span class="pln">j </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		  threads</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			  </span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">5000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			    </span><mark><span class="kwd">synchronized</span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">){</span></mark><span class="pln">
+			    </span><mark><span class="pln">  list</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span></mark><span class="pln">
+			    </span><mark><span class="pun">}</span></mark><span class="pln">
+			  </span><span class="pun">}</span><span class="pln">
+		  </span><span class="pun">});</span><span class="pln">
+		</span><span class="pun">});</span><span class="pln">		
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">:</span><span class="pln"> threads</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+				thread</span><span class="pun">.</span><span class="pln">join</span><span class="pun">();</span><span class="pln">
+			</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">InterruptedException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+				</span><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AssertionError</span><span class="pun">();</span><span class="pln">
+			</span><span class="pun">}</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"taille de la liste : "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> list</span><span class="pun">.</span><span class="pln">size</span><span class="pun">());</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<span class="fragment" data-fragment-index="0"> NON ! Qu'est-ce qui ne va pas dans ce code ? </span>
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Classe <b>thread-safe</b></h2>
+<p>On appelle <span class="blue"><i>thread-safe</i></span> une classe qui <b>peut être utilisée par plusieurs threads sans avoir d'états incohérents</b>.</p>
+
+<p>Cette définition est nécessairement un peu floue car cela dépend du contrat spécifié par la classe.</p>
+
+<p><span class="green">Remarque :</span> Un record ou une classe non-mutable est par définition thread-safe (par exemple: <code>java.lang.String</code>).</p>
+
+<p>En ce qui concerne l'API Java :</p>
+<ul>
+	<li> <span class="red">Par défaut, une classe n'est pas thread-safe</span> (par exemple : <code>java.util.HashMap</code>), sauf si c'est explicitement spécifié dans la javadoc (par exemple : <code>java.util.Random</code>).</li>
+	<li> Les classes de <code>java.util.concurrent</code> sont toutes thread-safe.</li>
+			</ul></section>
+
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Liste <b>thread-safe</b></h2>
+<pre class="prettyprint prettyprinted" style=""><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">ThreadSafeList</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;</span><span class="pln"> list </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;&gt;();</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> add</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			list</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">value</span><span class="pun">);</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> size</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">return</span><span class="pln"> list</span><span class="pun">.</span><span class="pln">size</span><span class="pun">();</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p>Attention à ne pas oublier le bloc <code>synchronized</code> dans <code>size()</code>. Par exemple, il est nécessaire pour que les modifications du <code>add</code> soient bien relues en RAM.</p>
+			</section>
+
+
+			<section style="top: 0px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Utilisation de la liste <b>thread-safe</b></h2>
+<pre class="prettyprint prettyprinted" style=""><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">HelloListBetter</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">){</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> nbThreads </span><span class="pun">=</span><span class="pln"> </span><span class="lit">4</span><span class="pun">;</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> threads </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">[</span><span class="pln">nbThreads</span><span class="pun">];</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> list </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ThreadSafeList</span><span class="pun">();</span><span class="pln">
+
+		</span><span class="typ">IntStream</span><span class="pun">.</span><span class="pln">range</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> nbThreads</span><span class="pun">).</span><span class="pln">forEach</span><span class="pun">(</span><span class="pln">j </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			threads</span><span class="pun">[</span><span class="pln">j</span><span class="pun">]</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+				</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">5000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+					list</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+				</span><span class="pun">}</span><span class="pln">
+			</span><span class="pun">});</span><span class="pln">
+		</span><span class="pun">});</span><span class="pln">
+
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">:</span><span class="pln"> threads</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+				thread</span><span class="pun">.</span><span class="pln">join</span><span class="pun">();</span><span class="pln">
+			</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">InterruptedException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+				</span><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AssertionError</span><span class="pun">();</span><span class="pln">
+			</span><span class="pun">}</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"taille de la liste : "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> list</span><span class="pun">.</span><span class="pln">size</span><span class="pun">());</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+			</section>
+
+
+			<section style="top: 165.5px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Utilisation d'une classe thread-safe</h2>
+<p>Attention, une classe thread-safe, c'est un <span class="blue"><i>contrat</i></span> qui vous garantit le comportement des méthodes de cette classe ....</p>
+
+<p>... par contre, l'utilisation d'une classe thread-safe <b>ne garantit pas</b> que le code qui l'utilise est correct en termes de concurrence !</p>
+
+			</section>
+
+			<section style="top: 0px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Quel est le problème ?</h2>
+<pre class="prettyprint prettyprinted" style=""><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">ThreadSafeList</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;</span><span class="pln"> list </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;&gt;();</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">final</span><span class="pln"> </span><span class="typ">Object</span><span class="pln"> </span><span class="kwd">lock</span><span class="pln"> </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Object</span><span class="pun">();</span><span class="pln">
+
+	</span><span class="pun">...</span><span class="pln">
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> removeFirst</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">lock</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			list</span><span class="pun">.</span><span class="pln">removeFirst</span><span class="pun">();</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+		
+<pre class="prettyprint prettyprinted" style=""><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> list </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ThreadSafeList</span><span class="pun">();</span><span class="pln">
+
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> j </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> j </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><span class="pln"> j</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+				</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">100</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+					</span><span class="kwd">if</span><span class="pln"> </span><span class="pun">(</span><span class="pln">list</span><span class="pun">.</span><span class="pln">size</span><span class="pun">()</span><span class="pln"> </span><span class="pun">!=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+						list</span><span class="pun">.</span><span class="pln">removeFirst</span><span class="pun">();</span><span class="pln">
+					</span><span class="pun">}</span><span class="pln">
+				</span><span class="pun">}</span><span class="pln">
+			</span><span class="pun">});</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">200</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			list</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(</span><span class="pln">i</span><span class="pun">);</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span></pre>
+			</section>
+
+<!-- 
+			<section>
+				<h2></h2>
+			
+				<lu>
+				<li>
+        </li>
+        <br/>
+				<li>
+        </li>
+        <br/>
+				<li>
+        </li>
+				</lu>
+
+			</section>
+			 -->
+			
+
+		</div>
+
+	<div class="backgrounds"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><div class="navigate-left"></div><div class="navigate-right enabled"></div><div class="navigate-up"></div><div class="navigate-down"></div></aside><div class="slide-number"></div><div class="pause-overlay"></div><div style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);" id="aria-status-div" aria-live="polite" aria-atomic="true">
+
+				Concurrence
+				
+				Synchronisation et classes thread-safe			
+	
+	 
+
+			</div></div>
+
+
+
+	<script src="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/head.min.js"></script>
+	<script src="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/reveal.js"></script>
+
+	<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script><script type="text/javascript" src="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/zoom.js"></script><script type="text/javascript" src="Cours%2003%20-%20Synchronisation%20et%20classes%20thread-safe_files/notes.js"></script>
+
+
+
+</body></html>

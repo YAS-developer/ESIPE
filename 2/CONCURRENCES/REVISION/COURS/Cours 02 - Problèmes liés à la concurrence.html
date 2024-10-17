@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en" data-darkreader-mode="dynamic" data-darkreader-scheme="dark"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style class="darkreader darkreader--fallback" media="screen"></style><style class="darkreader darkreader--text" media="screen"></style><style class="darkreader darkreader--invert" media="screen">.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_text > img[src^="https://www.gstatic.com/images/branding/googlelogo"], span[data-href^="https://www.hcaptcha.com/"] > #icon, img.Wirisformula {
+    filter: invert(100%) hue-rotate(180deg) contrast(90%) !important;
+}</style><style class="darkreader darkreader--inline" media="screen">[data-darkreader-inline-bgcolor] {
+  background-color: var(--darkreader-inline-bgcolor) !important;
+}
+[data-darkreader-inline-bgimage] {
+  background-image: var(--darkreader-inline-bgimage) !important;
+}
+[data-darkreader-inline-border] {
+  border-color: var(--darkreader-inline-border) !important;
+}
+[data-darkreader-inline-border-bottom] {
+  border-bottom-color: var(--darkreader-inline-border-bottom) !important;
+}
+[data-darkreader-inline-border-left] {
+  border-left-color: var(--darkreader-inline-border-left) !important;
+}
+[data-darkreader-inline-border-right] {
+  border-right-color: var(--darkreader-inline-border-right) !important;
+}
+[data-darkreader-inline-border-top] {
+  border-top-color: var(--darkreader-inline-border-top) !important;
+}
+[data-darkreader-inline-boxshadow] {
+  box-shadow: var(--darkreader-inline-boxshadow) !important;
+}
+[data-darkreader-inline-color] {
+  color: var(--darkreader-inline-color) !important;
+}
+[data-darkreader-inline-fill] {
+  fill: var(--darkreader-inline-fill) !important;
+}
+[data-darkreader-inline-stroke] {
+  stroke: var(--darkreader-inline-stroke) !important;
+}
+[data-darkreader-inline-outline] {
+  outline-color: var(--darkreader-inline-outline) !important;
+}
+[data-darkreader-inline-stopcolor] {
+  stop-color: var(--darkreader-inline-stopcolor) !important;
+}
+[data-darkreader-inline-bg] {
+  background: var(--darkreader-inline-bg) !important;
+}
+[data-darkreader-inline-invert] {
+    filter: invert(100%) hue-rotate(180deg);
+}</style><style class="darkreader darkreader--variables" media="screen">:root {
+   --darkreader-neutral-background: #181a1b;
+   --darkreader-neutral-text: #e8e6e3;
+   --darkreader-selection-background: #004daa;
+   --darkreader-selection-text: #e8e6e3;
+}</style><style class="darkreader darkreader--root-vars" media="screen"></style><style class="darkreader darkreader--user-agent" media="screen">@layer {
+html {
+    background-color: #181a1b !important;
+}
+html {
+    color-scheme: dark !important;
+}
+iframe {
+    color-scheme: dark !important;
+}
+html, body {
+    background-color: #181a1b;
+}
+html, body {
+    border-color: #736b5e;
+    color: #e8e6e3;
+}
+a {
+    color: #3391ff;
+}
+table {
+    border-color: #545b5e;
+}
+mark {
+    color: #e8e6e3;
+}
+::placeholder {
+    color: #b2aba1;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    background-color: #404400 !important;
+    color: #e8e6e3 !important;
+}
+* {
+    scrollbar-color: #454a4d #202324;
+}
+::selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+::-moz-selection {
+    background-color: #004daa !important;
+    color: #e8e6e3 !important;
+}
+}</style>
+<meta charset="utf-8">
+
+<title>Cours 02 - Problèmes liés à la concurrence</title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/reveal.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/reveal-override.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link rel="stylesheet" href="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/white.css" id="theme"><style class="darkreader darkreader--cors" media="screen">section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
+  color: #fff; }
+
+
+body {
+  background: #fff;
+  background-color: #fff; }
+
+.reveal {
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: normal;
+  color: #222; }
+
+::selection {
+  color: #fff;
+  background: #98bdef;
+  text-shadow: none; }
+
+.reveal .slides > section, .reveal .slides > section > section {
+  line-height: 1.3;
+  font-weight: inherit; }
+
+
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  margin: 0 0 20px 0;
+  color: #222;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+.reveal h1 {
+  margin: 0 0 20px 0;
+  color: #222;
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-shadow: none;
+  word-wrap: break-word; }
+
+
+.reveal h1 {
+  font-size: 2.5em; }
+
+.reveal h2 {
+  font-size: 1.6em; }
+
+.reveal h3 {
+  font-size: 1.3em; }
+
+.reveal h4 {
+  font-size: 1em; }
+
+.reveal h1 {
+  text-shadow: none; }
+
+
+
+.reveal span.blue,.reveal p.blue {
+  color: steelblue;
+}
+
+.reveal span.red,.reveal p.red {
+  color: orangered;
+}
+
+.reveal span.green,.reveal p.green {
+  color: seagreen;
+}
+
+.reveal p {
+  margin: 20px 0;
+  line-height: 1.3; }
+
+
+.reveal img, .reveal video, .reveal iframe {
+  max-width: 95%;
+  max-height: 95%; }
+
+.reveal strong, .reveal b {
+  font-weight: bold; }
+
+.reveal em {
+  font-style: italic; }
+
+.reveal ul {
+  display: block;
+  text-align: left;
+  padding-left: 1.5em;
+}
+
+.reveal ol, .reveal dl {
+  display: inline-block;
+  text-align: left;
+  margin: 0 0 0 1em; }
+
+.reveal ol {
+  list-style-type: decimal; }
+
+.reveal ul {
+  list-style-type: disc; }
+
+.reveal ul ul {
+  list-style-type: square; }
+
+.reveal ul ul ul {
+  list-style-type: circle; }
+
+.reveal ul ul, .reveal ul ol, .reveal ol ol, .reveal ol ul {
+  display: block;
+  margin-left: 40px; }
+
+.reveal dt {
+  font-weight: bold; }
+
+.reveal dd {
+  margin-left: 40px; }
+
+.reveal q, .reveal blockquote {
+  quotes: none; }
+
+.reveal blockquote {
+  display: block;
+  position: relative;
+  width: 70%;
+  margin: 20px auto;
+  padding: 5px;
+  font-style: italic;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }
+
+.reveal blockquote p:first-child, .reveal blockquote p:last-child {
+  display: inline-block; }
+
+.reveal q {
+  font-style: italic; }
+
+.reveal pre {
+  display: block;
+  position: relative;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
+  font-size: 0.55em;
+  font-family: 'Courier', monospace;
+  line-height: 1.2em;
+  word-wrap: break-word;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+
+.reveal code {
+  font-family: 'Courier', monospace;
+  font-size: 100%;
+}
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+  background: #3F3F3F;
+  color: #DCDCDC; }
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.reveal table th {
+  font-weight: bold; }
+
+.reveal table th, .reveal table td {
+  text-align: left;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  border-bottom: 1px solid; }
+
+.reveal table tr:last-child td {
+  border-bottom: none; }
+
+.reveal sup {
+  vertical-align: super; }
+
+.reveal sub {
+  vertical-align: sub; }
+
+.reveal small {
+  display: inline-block;
+  font-size: 0.6em;
+  line-height: 1.2em;
+  vertical-align: top; }
+
+.reveal small * {
+  vertical-align: top; }
+
+.authorsList:before {
+  content: "C. Pivoteau et P. Rotondo";
+}
+
+
+.reveal a {
+  color: #2a76dd;
+  text-decoration: none;
+  -webkit-transition: color 0.15s ease;
+  -moz-transition: color 0.15s ease;
+  transition: color 0.15s ease; }
+
+.reveal a:hover {
+  color: #6ca2e8;
+  text-shadow: none;
+  border: none; }
+
+.reveal .roll span:after {
+  color: #fff;
+  background: #1a54a1; }
+
+
+.reveal section img {
+  margin: 15px 0px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 4px solid #222;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
+
+.reveal a img {
+  -webkit-transition: all 0.15s linear;
+  -moz-transition: all 0.15s linear;
+  transition: all 0.15s linear; }
+
+.reveal a:hover img {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #2a76dd;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.55); }
+
+
+.reveal .controls div.navigate-left, .reveal .controls div.navigate-left.enabled {
+  border-right-color: #2a76dd; }
+
+.reveal .controls div.navigate-right, .reveal .controls div.navigate-right.enabled {
+  border-left-color: #2a76dd; }
+
+.reveal .controls div.navigate-up, .reveal .controls div.navigate-up.enabled {
+  border-bottom-color: #2a76dd; }
+
+.reveal .controls div.navigate-down, .reveal .controls div.navigate-down.enabled {
+  border-top-color: #2a76dd; }
+
+.reveal .controls div.navigate-left.enabled:hover {
+  border-right-color: #6ca2e8; }
+
+.reveal .controls div.navigate-right.enabled:hover {
+  border-left-color: #6ca2e8; }
+
+.reveal .controls div.navigate-up.enabled:hover {
+  border-bottom-color: #6ca2e8; }
+
+.reveal .controls div.navigate-down.enabled:hover {
+  border-top-color: #6ca2e8; }
+
+
+.reveal .progress {
+  background: rgba(0, 0, 0, 0.2); }
+
+.reveal .progress span {
+  background: #2a76dd;
+  -webkit-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  -moz-transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985);
+  transition: width 800ms cubic-bezier(0.26, 0.86, 0.44, 0.985); }
+
+
+.reveal .slide-number {
+  color: #2a76dd; }</style><style class="darkreader darkreader--sync" media="screen"></style>
+
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/zenburn.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<link href="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/prettify.css" type="text/css" rel="stylesheet"><style class="darkreader darkreader--sync" media="screen"></style>
+<!-- Printing and PDF exports -->
+<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script><meta name="darkreader" content="a6511a6f9cab43ac8623cf554456b90b"><style class="darkreader darkreader--override" media="screen">.vimvixen-hint {
+    background-color: #684b00 !important;
+    border-color: #9e7e00 !important;
+    color: #d7d4cf !important;
+}
+#vimvixen-console-frame {
+    color-scheme: light !important;
+}
+::placeholder {
+    opacity: 0.5 !important;
+}
+#edge-translate-panel-body,
+.MuiTypography-body1,
+.nfe-quote-text {
+    color: var(--darkreader-neutral-text) !important;
+}
+gr-main-header {
+    background-color: #1b4958 !important;
+}
+.tou-z65h9k,
+.tou-mignzq,
+.tou-1b6i2ox,
+.tou-lnqlqk {
+    background-color: var(--darkreader-neutral-background) !important;
+}
+.tou-75mvi {
+    background-color: #0f3a47 !important;
+}
+.tou-ta9e87,
+.tou-1w3fhi0,
+.tou-1b8t2us,
+.tou-py7lfi,
+.tou-1lpmd9d,
+.tou-1frrtv8,
+.tou-17ezmgn {
+    background-color: #1e2021 !important;
+}
+.tou-uknfeu {
+    background-color: #432c09 !important;
+}
+.tou-6i3zyv {
+    background-color: #245d70 !important;
+}
+div.mermaid-viewer-control-panel .btn {
+    background-color: var(--darkreader-neutral-background);
+    fill: var(--darkreader-neutral-text);
+}
+svg g rect.er {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.entityBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxOdd {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.er.attributeBoxEven {
+    fill: var(--darkreader-selection-background);
+    fill-opacity: 0.8 !important;
+}
+svg rect.er.relationshipLabelBox {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g g.nodes rect,
+svg g g.nodes polygon {
+    fill: var(--darkreader-neutral-background) !important;
+}
+svg g rect.task {
+    fill: var(--darkreader-selection-background) !important;
+}
+svg line.messageLine0,
+svg line.messageLine1 {
+    stroke: var(--darkreader-neutral-text) !important;
+}
+div.mermaid .actor {
+    fill: var(--darkreader-neutral-background) !important;
+}
+mitid-authenticators-code-app > .code-app-container {
+    background-color: white !important;
+    padding-top: 1rem;
+}
+iframe#unpaywall[src$="unpaywall.html"] {
+    color-scheme: light !important;
+}
+embed[type="application/pdf"] { filter: invert(100%) contrast(90%); }</style><link rel="stylesheet" type="text/css" href="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/paper.css"><style class="darkreader darkreader--sync" media="screen"></style>
+<script type="text/javascript" src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/prettify.js"></script>
+<style type="text/css">
+.reveal h2 {
+	color: steelblue;
+}
+
+.reveal h1 {
+	color: steelblue;
+}
+
+.reveal p {
+	text-align: left;
+}
+
+pre {-moz-tab-size: 4;} /* Firefox */
+pre {tab-size: 4;}
+</style><style class="darkreader darkreader--sync" media="screen"></style>
+<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body onload="prettyPrint()">
+
+	<div class="reveal slide center has-dark-background" role="application" data-transition-speed="default" data-background-transition="fade">
+
+<div class="footer"><p>
+    <a href="https://igm.univ-mlv.fr/coursconcurrenceinfo2/index.html"><img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/home.png" width="30em"></a></p>
+</div>
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides" style="width: 960px; height: 700px; inset: 50% auto auto 50%; transform: translate(-50%, -50%) scale(1.5);">
+			<section style="top: 169.5px; display: none;" class="has-dark-background past" hidden="" aria-hidden="true">
+
+				<h1>Concurrence</h1>
+				
+				<h2>Problèmes liés à la concurrence</h2>			
+	
+	<br> <span class="authorsList"></span>
+
+			</section>
+
+
+
+			<section style="top: 0px; display: block;" class="has-dark-background past" hidden="" aria-hidden="true">
+				<h2>Problème d'affichage</h2>
+
+				<p> La semaine dernière, en TP :</p>
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/probleme-affichage.png" alt="exercice avec les deux versions de println" width="700"> 	
+			</section>
+
+		<!--
+
+			<section>
+				<h2>Ce que vous avez observé ...</h2>
+
+<ul>
+	<li> Les threads peuvent être dé-schedulés pendant l'appel à la fonction <span class="blue"><code>println</code></span> re-codée dans la classe fournie.
+	</li>
+
+	<li> Cela ne peut <span class="red">jamais</span> se produire avec la méthode <span class="blue"><code>System.out.println</code></span> grâce à un mécanisme de <span class="red">synchronisation</span>.
+
+<pre class="prettyprint">
+	public void println(String x) {
+	    ...
+        synchronized (this) {
+            print(x);
+            newLine();
+        }
+    }
+</pre>
+
+	La fonction prend un <span class="red">verrou</span> sur <span class="blue"><code>this</code></span> (c'est à dire <span class="blue"><code>System.out</code></span>) qu'elle ne lâche qu'après avoir affiché tout la chaîne (on expliquera ce mécanisme dans le cous suivant).
+
+	</li>
+</ul>
+			</section>
+-->
+
+<section style="top: 60px; display: block;" class="has-dark-background past" hidden="" aria-hidden="true">
+				<h2>Ce que vous avez observé ... (1/2)</h2>
+
+<ul>
+	<li> Les threads peuvent être dé-schedulés pendant l'appel à la fonction <span class="blue"><code>println</code></span> re-codée dans la classe fournie et un autre thread peut commencer une écriture au milieu de celle d'un autre thread.
+	</li>
+
+	<li> Cela ne peut <span class="red">jamais</span> se produire avec la méthode <span class="blue"><code>System.out.println</code></span> grâce à un mécanisme de <span class="red">synchronisation</span>.
+
+<pre class="prettyprint prettyprinted" style=""><span class="pln">	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> println</span><span class="pun">(</span><span class="typ">String</span><span class="pln"> x</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	    </span><span class="pun">...</span><span class="pln">
+        </span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">this</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">x</span><span class="pun">);</span><span class="pln">
+            newLine</span><span class="pun">();</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+    </span><span class="pun">}</span></pre>
+
+ </li>
+
+</ul>
+</section>
+
+<section style="top: 25px; display: block;" class="has-dark-background present">
+				<h2>Ce que vous avez observé ... (2/2)</h2>
+
+<pre class="prettyprint prettyprinted" style=""><span class="pln">	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> println</span><span class="pun">(</span><span class="typ">String</span><span class="pln"> x</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	    </span><span class="pun">...</span><span class="pln">
+        </span><span class="kwd">synchronized</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">this</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+            </span><span class="kwd">print</span><span class="pun">(</span><span class="pln">x</span><span class="pun">);</span><span class="pln">
+            newLine</span><span class="pun">();</span><span class="pln">
+        </span><span class="pun">}</span><span class="pln">
+    </span><span class="pun">}</span></pre>
+
+<ul>
+<li>
+	La fonction prend un <span class="red">verrou</span> sur <span class="blue"><code>this</code></span> (c'est à dire <span class="blue"><code>System.out</code></span>). Elle le lâche uniquement après avoir affiché toute la chaîne (on expliquera ce mécanisme dans le cours suivant). </li>
+
+<li>
+	Même si le thread peut être dé-schédulé pendant l'appel à <span class="blue"><code>System.out.println</code></span>, il ne lâche pas le verrou sur <span class="blue"><code>System.out</code></span>. Aucun autre thread ne peut entrer dans l'appel à <span class="blue"><code>System.out.println</code></span> tant que le thread qui détient le verrou n'a pas terminé.
+
+	</li>
+</ul>
+			</section>
+
+			<section style="top: 196.5px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Le scheduler entrelace les threads</h2>
+				
+				<p>L'exemple précédent permet  de constater qu'<b>une instruction écrite en Java n'est pas <span class="blue">atomique</span></b> : le thread dans lequel elle s’exécute peut être "dé-schedulé" n'importe quand, même au milieu de son exécution.</p>
+
+
+			</section>
+			 
+
+			<section style="top: 0px; display: block;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Quand la mémoire s'en mêle...</h2>
+				
+				<p>Rappel : lorsque plusieurs threads coexistent, ils partagent la même mémoire (le tas).</p>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/memoire-simple.png" alt="schéma simplifié de la mémoire avec 2 Threads et un Runnable" width="800"> 
+
+			</section>
+
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>... les problèmes sérieux commencent</h2>
+				
+				<p>L'utilisation d'opérations non atomiques, combinées au partage de la mémoire entraîne un certain nombre de problèmes...</p>
+
+				<ul>
+				<li class="fragment" data-fragment-index="0"> ... liés aux <span class="red">accès</span> (lecture ou écriture) <span class="red">entrelacés</span> à la mémoire partagée,
+        </li>
+				<li class="fragment" data-fragment-index="1"> ... liés à l'<span class="red">architecture du processeur</span> (multi-cœurs, utilisation des caches, ...),
+        </li>
+				<li class="fragment" data-fragment-index="2"> ... liés aux <span class="red">optimisations du code</span> par le JIT.
+        </li>
+
+				</ul> 
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Le problème de la non atomicité des instructions</h2>
+				
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> Un exemple qui paraît simple </h2>
+				
+<p>
+</p><pre class="prettyprint prettyprinted" style="font-size: 18px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">class</span><span class="pln"> </span><span class="typ">Counter</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">private</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> value</span><span class="pun">;</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> addALot</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pln">_000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">value</span><span class="pun">++;</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+
+	</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> counter </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">Counter</span><span class="pun">();</span><span class="pln">
+		
+		</span><span class="kwd">var</span><span class="pln"> thread1 </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(</span><span class="pln">counter</span><span class="pun">::</span><span class="pln">addALot</span><span class="pun">);</span><span class="pln">
+		</span><span class="kwd">var</span><span class="pln"> thread2 </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(</span><span class="pln">counter</span><span class="pun">::</span><span class="pln">addALot</span><span class="pun">);</span><span class="pln">
+		
+		thread1</span><span class="pun">.</span><span class="pln">join</span><span class="pun">();</span><span class="pln">
+		thread2</span><span class="pun">.</span><span class="pln">join</span><span class="pun">();</span><span class="pln">
+
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">counter</span><span class="pun">.</span><span class="pln">value</span><span class="pun">);</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+<p></p>
+
+<p><b>Ce code présente une <span class="red">data race</span> : deux threads accèdent à une même zone mémoire (ici, le champs <code>value</code> de l'objet <code>counter</code>).</b></p>
+
+</section>
+
+<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+
+	<p>Exécutez le code sur vos machines !</p>
+
+				<p>Pour comprendre le comportement, il faut examiner deux choses : le <span class="blue">byte code</span> et la <span class="blue">mémoire.</span></p>
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2> Le byte code </h2>
+<p>
+	L'instruction Java extraite du code précédent :
+</p>
+<pre class="prettyprint prettyprinted" style="font-size: 24px;"><span class="kwd">this</span><span class="pun">.</span><span class="pln">value</span><span class="pun">++;</span></pre>
+<p>
+	peut se traduire en byte code ainsi :
+</p>
+<pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="pln">aload </span><span class="lit">0</span><span class="pln">                  </span><span class="com">// mettre this sur la pile (pour l'écriture)</span><span class="pln">
+aload </span><span class="lit">0</span><span class="pln">                  </span><span class="com">// mettre this sur la pile (pour la lecture)</span><span class="pln">
+getfield </span><span class="typ">Counter</span><span class="pun">.</span><span class="pln">value   </span><span class="com">// stocker la valeur à la place de this</span><span class="pln">
+iconst </span><span class="lit">1</span><span class="pln">                 </span><span class="com">// stocker la valeur 1 sur la pile</span><span class="pln">
+iadd                     </span><span class="com">// additionner les deux valeurs au sommet de la pile</span><span class="pln">
+                         </span><span class="com">// et mettre le résultat à la place de la 1ère</span><span class="pln">
+putfield </span><span class="typ">Counter</span><span class="pun">.</span><span class="pln">value   </span><span class="com">// mettre ce résultat dans le champs value</span></pre>
+
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				... lorsque ce code est exécuté avec un seul thread :
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter1Thread-00.png" alt="schéma simplifié de la mémoire avec 1 Thread et Counter" width="800"> 
+
+			</section>
+
+
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				... lorsque ce code est exécuté avec un seul thread :
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter1Thread-0.png" alt="schéma simplifié de la mémoire avec 1 Thread et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">	
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				... lorsque ce code est exécuté avec un seul thread :
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter1Thread-1.png" alt="schéma simplifié de la mémoire avec 1 Thread et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">	
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				... lorsque ce code est exécuté avec un seul thread :
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter1Thread-2.png" alt="schéma simplifié de la mémoire avec 1 Thread et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				... lorsque ce code est exécuté avec un seul thread :
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter1Thread-3.png" alt="schéma simplifié de la mémoire avec 1 Thread et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				... lorsque ce code est exécuté avec un seul thread :
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter1Thread-4.png" alt="schéma simplifié de la mémoire avec 1 Thread et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				... lorsque ce code est exécuté avec un seul thread :
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter1Thread-5.png" alt="schéma simplifié de la mémoire avec 1 Thread et Counter" width="800"> 
+
+			</section>
+
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				<p>... lorsque ce code est exécuté avec <span class="blue">deux threads</span> (pour l'instant, c'est le thread rouge qui est schédulé) :</p>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter2Threads-0.png" alt="schéma simplifié de la mémoire avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				<p>... lorsque ce code est exécuté avec <span class="blue">deux threads</span> (c'est encore le thread rouge qui est schédulé) :</p>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter2Threads-1.png" alt="schéma simplifié de la mémoire avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				<p>... lorsque ce code est exécuté avec <span class="blue">deux threads</span> (thread bleu prend la main) :</p>
+				<br>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter2Threads-2.png" alt="schéma simplifié de la mémoire avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				<p>... lorsque ce code est exécuté avec <span class="blue">deux threads</span> (encore le thread bleu) :            </p>
+				<br>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter2Threads-3.png" alt="schéma simplifié de la mémoire avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				<p>... lorsque ce code est exécuté avec <span class="blue">deux threads</span> (toujours le thread bleu) :</p>
+				<br>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter2Threads-4.png" alt="schéma simplifié de la mémoire avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				
+				<p>... lorsque ce code est exécuté avec <span class="blue">deux threads</span> (le thread rouge repart) :</p>
+				<br>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter2Threads-5.png" alt="schéma simplifié de la mémoire avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... </h2>
+				
+				<p>... lorsque ce code est exécuté avec <span class="blue">deux threads</span> (le thread rouge finit son tour de boucle) :</p>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/Counter2Threads-6.png" alt="schéma simplifié de la mémoire avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+
+			
+			
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>La morale de l'histoire</h2>
+				
+				<ul>
+				<li>Les thread peuvent être schedulés et dé-schedulés n'importe quand.
+        </li>
+				<li>Même une instruction qui parait aussi simple que
+<pre class="prettyprint prettyprinted" style="font-size: 24px;"><span class="kwd">this</span><span class="pun">.</span><span class="pln">value</span><span class="pun">++</span></pre>
+				 n'est probablement PAS <span class="blue">atomique</span>.
+        </li><br>
+				<li>Pour partager correctement la mémoire, il va falloir prendre des
+ précautions : on aimerait bien avoir un peu plus de contrôle sur les 
+instructions (puisqu'on ne peut pas en avoir sur le scheduler).
+        </li><br>
+        		<li>Et attention : même avec plusieurs CPUs, le tas est partagé....
+        </li>
+				</ul>
+
+			</section>
+
+ 		<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<p>Attention, le scheduler n'est pas le seul facteur de "perturbation"...</p>
+
+			</section>
+			
+
+			<!-- <section data-transition="fast">
+				<h2>Avec deux CPUs différents</h2>
+			
+				<p>On a 2 threads (rouge et bleu) qui s'exécutent sur des CPUs différents.</p>
+
+				<img src="figures/deux-cpu-0.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Avec deux CPUs différents</h2>
+				
+				<p>Les CPUs sont différents, mais le TAS est toujours partagé.</p>
+
+				<img src="figures/deux-cpu-1.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Avec deux CPUs différents</h2>
+				
+				<p>C'est le thread rouge, puis le bleu, lisent en mémoire.</p>
+
+				<img src="figures/deux-cpu-2.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Avec deux CPUs différents</h2>
+				
+				<p>On suppose que l’incrémentation est atomique (dans un registre)</p>
+
+				<img src="figures/deux-cpu-3.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Avec deux CPUs différents</h2>
+				
+				<p>On suppose que l’incrémentation est atomique (dans un registre)</p>
+
+				<img src="figures/deux-cpu-4.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Avec deux CPUs différents</h2>
+				
+				<p>On suppose que l’incrémentation est atomique (dans un registre)</p>
+
+				<img src="figures/deux-cpu-5.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Avec deux CPUs différents</h2>
+				
+				<p>On suppose que l’incrémentation est atomique (dans un registre)</p>
+
+				<img src="figures/deux-cpu-6.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section> -->
+
+			<!-- <section>
+				<h2>Et si un thread était capable de faire la lecture-incrémentation-écriture sans être dé-schedulé?</h2>
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+
+				<p>On ne devrait plus être embêté par le scheduler...</p>
+				<br/>
+				
+				<img src="figures/memoire-cache-0.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+
+				<p> Le moment où l'écriture est effective dans la RAM dépend de l'algorithme de mise à jour du cache...</p> 
+				
+				<img src="figures/memoire-cache-1.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+
+				<p>... on n'a aucune garantie sur le moment où l'écriture en RAM est effectuée</p>
+				
+				<img src="figures/memoire-cache-2.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+				
+				<p> Le thread bleu se termine</p>
+				<br/>
+
+				<img src="figures/memoire-cache-3.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+
+				
+				<p>On a perdu une des deux incrémentations</p>
+				<br/>
+
+				<img src="figures/memoire-cache-4.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section> -->
+
+			<!-- <section>
+				<h2>Vous n'êtes toujours convaincus ?</h2>
+
+				
+				<p>Vous vous dites qu'il suffirait de travailler avec un seul CPU, sans mémoire cache et avec des opérations "atomiques" ?</p>
+
+
+			</section> -->
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Les optimisations du code (1/3)</h2>
+
+				
+			<p>Le code que l'on écrit dans un langage de haut niveau (C, Java, Python,&nbsp;...) est rarement celui qui est exécuté.
+			Le <span class="blue">code peut être optimisé</span> (par un compilateur, par le JIT, ...), c'est à dire transformé pour qu'il soit plus efficace, tout en ayant le même effet.</p>
+
+			<p>Par exemple :</p>
+
+<pre class="prettyprint prettyprinted" style="font-size: 24px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> addALot</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+	</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pln">_000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">value</span><span class="pun">++;</span><span class="pln"> 
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></pre>
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Les optimisations du code (1/3)</h2>
+
+				
+			<p>... peut devenir :</p>
+
+<pre class="prettyprint prettyprinted" style="font-size: 24px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> addALot</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+	</span><span class="kwd">var</span><span class="pln"> localValue </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">10</span><span class="pln">_000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		localValue</span><span class="pun">++;</span><span class="pln"> 
+	</span><span class="pun">}</span><span class="pln">
+	</span><span class="kwd">this</span><span class="pun">.</span><span class="pln">value </span><span class="pun">=</span><span class="pln"> localValue</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span></pre>
+
+<p>La lecture-écriture en RAM n'est faite qu'<b>une seule fois</b> !</p>
+
+			</section>
+
+			<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Les optimisations du JIT (2/3)</h2>
+
+		
+<p>Plus généralement, l'optimisation peut consister à <i>réécrire</i> votre code en n'importe quel <span class="blue">code équivalent</span>.</p>		
+			
+
+<pre class="prettyprint prettyprinted" style=""><span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> a </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> c </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> d </span><span class="pun">=</span><span class="pln"> a </span><span class="pun">*</span><span class="pln"> a</span><span class="pun">;</span></pre>
+
+<p>Ici, en faisant attention aux dépendances, ce code peut, par exemple, être <i>réécrit</i> en :</p>
+
+<pre class="prettyprint prettyprinted" style=""><span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> c </span><span class="pun">=</span><span class="pln"> </span><span class="lit">3</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> d </span><span class="pun">=</span><span class="pln"> a </span><span class="pun">*</span><span class="pln"> a</span><span class="pun">;</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> a </span><span class="pun">+</span><span class="pln"> </span><span class="lit">2</span><span class="pun">;</span></pre>
+
+
+
+
+
+			</section>
+
+
+
+<section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+	<h2>Les optimisations du code (3/3)</h2>
+
+
+<pre class="prettyprint prettyprinted" style="font-size: 24px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> run</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">var</span><span class="pln"> a </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">value</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> i </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">1000</span><span class="pun">;</span><span class="pln"> i</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		a </span><span class="pun">=</span><span class="pln"> a </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+	</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"Done"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span></pre>
+
+<p>Comme <code>a</code> n'est jamais utilisé, ce code
+peut être <i>réécrit</i> en :</p>
+<pre class="prettyprint prettyprinted" style="font-size: 24px;"><span class="kwd">public</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> run</span><span class="pun">(){</span><span class="pln"> 
+	</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"Done"</span><span class="pun">);</span><span class="pln">    
+</span><span class="pun">}</span></pre>
+
+</section>
+
+
+            <section style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Les problèmes d'accès à la mémoire</h2>
+
+<p>Imaginons qu'un thread soit capable de faire la 
+lecture-incrémentation-écriture sans être dé-schedulé... est-ce qu'il 
+n'y a plus de problème ?</p>
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+
+				<p>On ne devrait plus être embêté par le scheduler...</p>
+				<br>
+				
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/memoire-cache-0.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+
+				<p> Le moment où l'écriture est effective dans la RAM dépend de l'algorithme de mise à jour du cache...</p> 
+				
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/memoire-cache-1.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 330px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+
+				<p>... on n'a aucune garantie sur le moment où l'écriture en RAM est effectuée</p>
+				<br>
+				
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/memoire-cache-2.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 0px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+				
+				<p> Le thread bleu se termine</p>
+				<br>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/memoire-cache-3.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section data-transition="fast" style="top: 0px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>Ce qui se passe en mémoire... cache</h2>
+
+				
+				<p>On a perdu une des deux incrémentations</p>
+				<br>
+
+				<img src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/memoire-cache-4.png" alt="schéma simplifié de la mémoire cache avec 2 Threads et Counter" width="800"> 
+
+			</section>
+
+			<section style="top: 79px; display: none;" class="has-dark-background future" hidden="" aria-hidden="true">
+				<h2>En résumé</h2>
+			
+				<ul>
+				<li>Par défaut, une instruction ou un morceau de code ne s'exécute pas de façon atomique.
+        </li>
+        <br>
+				<li>Le code d'un thread s'exécute sans connaissance de l'état d'exécution des autres threads.
+        </li>
+        <br>
+				<li>Si on a plusieurs threads, avec au moins une lecture/écriture 
+sur le tas, on peut voir les effets de bords de cette non atomicité... 
+pour tout un tas de raisons différentes.
+        </li>
+				</ul>
+
+			</section>
+			
+			
+
+		</div>
+
+	<div class="backgrounds"><div class="slide-background past" style="display: none;" data-loaded="true"></div><div class="slide-background past" style="display: block;" data-loaded="true"></div><div class="slide-background past" style="display: block;" data-loaded="true"></div><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div></div><div class="progress" style="display: block;"><span style="width: 201.892px;"></span></div><aside class="controls" style="display: block;"><div class="navigate-left enabled"></div><div class="navigate-right enabled"></div><div class="navigate-up"></div><div class="navigate-down"></div></aside><div class="slide-number"></div><div class="pause-overlay"></div><div style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);" id="aria-status-div" aria-live="polite" aria-atomic="true">
+				Ce que vous avez observé ... (2/2)
+
+	public void println(String x) {
+	    ...
+        synchronized (this) {
+            print(x);
+            newLine();
+        }
+    }
+
+
+
+	La fonction prend un verrou sur this (c'est à dire System.out). Elle le
+ lâche uniquement après avoir affiché toute la chaîne (on expliquera ce 
+mécanisme dans le cours suivant). 
+
+
+	Même si le thread peut être dé-schédulé pendant l'appel à 
+System.out.println, il ne lâche pas le verrou sur System.out. Aucun 
+autre thread ne peut entrer dans l'appel à System.out.println tant que 
+le thread qui détient le verrou n'a pas terminé.
+
+	
+
+			</div></div>
+
+
+
+	<script src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/head.min.js"></script>
+	<script src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/reveal.js"></script>
+
+	<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script><script type="text/javascript" src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/zoom.js"></script><script type="text/javascript" src="Cours%2002%20-%20Probl%C3%A8mes%20li%C3%A9s%20%C3%A0%20la%20concurrence_files/notes.js"></script>
+
+
+
+</body></html>
