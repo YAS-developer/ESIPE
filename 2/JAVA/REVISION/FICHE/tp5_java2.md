@@ -85,36 +85,35 @@ public boolean contains(Object elementToCheck){
 ```java
 
 static <E> Map<E, E> newMapFromSet(Set<E> baseSet){
-    return new AbstractMap<E, E>() { //On doit renvoyer une AbstractMap = Map anonyme
-      @Override
-      public Set<Entry<E, E>> entrySet() {
+    return new AbstractMap<E, E>() { 
+        @Override
+        public Set<Entry<E, E>> entrySet() {
         return new AbstractSet<Entry<E, E>>() {
-
-          @Override
-          public Iterator<Entry<E, E>> iterator() {
+            @Override
+            public Iterator<Entry<E, E>> iterator() {
             var iterator = baseSet.iterator();
             return new Iterator<Entry<E, E>>() {
-              @Override
-              public boolean hasNext() {
+                @Override
+                public boolean hasNext() {
                 return iterator.hasNext();
-              }
+                }
 
-              @Override
-              public Entry<E, E> next() {
+                @Override
+                public Entry<E, E> next() {
                 var next = iterator.next();
                 return Map.entry(next, next);
-              }
+                }
             };
-          }
+            }
 
-          @Override
-          public int size() {
+            @Override
+            public int size() {
             return baseSet.size();
-          }
+            }
         };
-      }
+        }
     };
-  }
+}
 
 
 ```
