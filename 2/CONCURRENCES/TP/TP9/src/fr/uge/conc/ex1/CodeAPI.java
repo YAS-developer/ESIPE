@@ -3,13 +3,13 @@ package fr.uge.conc.ex1;
 import java.util.Random;
 
 public class CodeAPI {
-    public static String receive() throws InterruptedException {
+    public static String receive() throws InterruptedException { // Chercher les msg
         var rng = new Random();
         Thread.sleep(100);
         return "Coded : " + rng.nextInt(10000);
     }
 
-    public static String decode(String codedMsg) throws InterruptedException {
+    public static String decode(String codedMsg) throws InterruptedException { // Décoder
         Thread.sleep(300);
         if (!codedMsg.startsWith("Coded : ")) {
             throw new IllegalArgumentException("decode can only be applied to coded messages");
@@ -21,7 +21,7 @@ public class CodeAPI {
         return "Decoded : " + number;
     }
 
-    public static void archive(String decodedMsg) throws InterruptedException {
+    public static void archive(String decodedMsg) throws InterruptedException { // Stocker
         Thread.sleep(50);
         System.out.println("Archiving : "+decodedMsg);
     }

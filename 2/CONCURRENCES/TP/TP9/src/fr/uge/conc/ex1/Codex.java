@@ -1,73 +1,63 @@
 package fr.uge.conc.ex1;
 
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
+
+
 
 public class Codex {
-  private static final int CODED_QUEUE_CAPACITY = 100;
-  private static final int DECODED_QUEUE_CAPACITY = 100;
-  
-  public static void main(String[] args) throws InterruptedException {
-    // Files d'attente pour les messages codés et décodés
-    BlockingQueue<String> codedMessages = new ArrayBlockingQueue<>(CODED_QUEUE_CAPACITY);
-    BlockingQueue<String> decodedMessages = new ArrayBlockingQueue<>(DECODED_QUEUE_CAPACITY);
-    
-    // 3 threads pour recevoir les messages
-    for (int i = 0; i < 3; i++) {
-      final int id = i;
-      Thread receiverThread = new Thread(() -> {
-        try {
-          while (!Thread.interrupted()) {
-            String codedMsg = CodeAPI.receive();
-            System.out.println("Receiver " + id + " received: " + codedMsg);
-            codedMessages.put(codedMsg);
-          }
-        } catch (InterruptedException e) {
-          return;
-        }
-      });
-      receiverThread.start();
-    }
-    
-    // 2 threads pour décoder les messages
-    for (int i = 0; i < 2; i++) {
-      final int id = i;
-      Thread decoderThread = new Thread(() -> {
-        try {
-          while (!Thread.interrupted()) {
-            String codedMsg = codedMessages.take();
-            System.out.println("Decoder " + id + " processing: " + codedMsg);
-            try {
-              String decodedMsg = CodeAPI.decode(codedMsg);
-              System.out.println("Decoder " + id + " decoded: " + decodedMsg);
-              decodedMessages.put(decodedMsg);
-            } catch (IllegalArgumentException e) {
-              System.out.println("Decoder " + id + " failed to decode message: " + codedMsg);
-              // On ignore les messages qui ne peuvent pas être décodés
-            }
-          }
-        } catch (InterruptedException e) {
-          return;
-        }
-      });
-      decoderThread.start();
-    }
-    
-    // 1 thread pour archiver les messages
-    Thread archiverThread = new Thread(() -> {
-      try {
-        while (!Thread.interrupted()) {
-          String decodedMsg = decodedMessages.take();
-          System.out.println("Archiver processing: " + decodedMsg);
-          CodeAPI.archive(decodedMsg);
-        }
-      } catch (InterruptedException e) {
-        return;
-      }
-    });
-    archiverThread.start();
-    
-    // Le programme continue indéfiniment
-    Thread.sleep(Long.MAX_VALUE);
-  }
+	public static void main(String[] args) {
+		var size = 10;
+		var toDecodeQueue = new ArrayBlockingQueue<String>(size);
+		var toArchiveQueue = new ArrayBlockingQueue<String>(size);
+
+		var nbrDecodeThreads = 2;
+		var nbrArchiveThreads = 1;
+		var nbrAllThreads = nbrArchiveThreads + nbrDecodeThreads;
+
+		for (var i = 0; i < nbrDecodeThreads; i++) {
+			Thread.ofPlatform().name("Thread-" + i).start(() -> {
+				for(;;) {
+					try {
+						var value = CodeAPI.receive();
+						System.out.println(Thread.currentThread().getName() + " collects value: " + value);
+						toDecodeQueue.put(value);
+					} catch (InterruptedException e) {
+						// return; // If we want to interrupt them
+						throw new AssertionError(); // Ignore, i'm not supposed to be here
+					}
+				}
+			});
+		}
+		
+		for (var i = 0; i < nbrArchiveThreads; i++) {
+			Thread.ofPlatform().name("Thread-" + i).start(() -> {
+				for(;;) {
+					try {
+						var encodedValue = toDecodeQueue.take();
+						System.out.println(Thread.currentThread().getName() + " take value: " + encodedValue);
+						toArchiveQueue.put(CodeAPI.decode(encodedValue));
+					} catch (InterruptedException e) {
+						throw new AssertionError(); // Ignore, i'm not supposed to be here
+					} catch (IllegalArgumentException e) {
+						// do nothing
+					}
+				}
+			});
+		}
+		
+		for (var i = 0; i < nbrAllThreads; i++) {
+			Thread.ofPlatform().name("Thread-" + i).start(() -> {
+				for(;;) {
+					try {
+						var archivedValue = toArchiveQueue.take();
+						System.out.println(Thread.currentThread().getName() + " take archived value: " + archivedValue);
+						CodeAPI.archive(archivedValue);
+					} catch (InterruptedException e) {
+						throw new AssertionError(); // Ignore, i'm not supposed to be here
+					}
+				}
+			});
+		}
+		
+	}
 }
