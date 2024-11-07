@@ -27,7 +27,7 @@ public class CheapestPooled {
         List<Future<Optional<Answer>>> futures = executorService.invokeAll(tasks);
 
         Optional<Answer> cheapest = Optional.empty();
-        for (Future<Optional<Answer>> future : futures) {
+        for (var future : futures) {
             try {
                 Optional<Answer> answer = future.get();
                 if (answer.isPresent()) {

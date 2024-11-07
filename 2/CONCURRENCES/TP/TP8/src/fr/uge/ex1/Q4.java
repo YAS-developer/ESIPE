@@ -3,7 +3,7 @@ package fr.uge.ex1;
 public class Q4 {
 	public static void main(String[] args) {
 	    // Crée et démarre le thread, en gardant sa référence
-	    Thread sleepingThread = Thread.ofPlatform().start(() -> {
+	    var sleepingThread = Thread.ofPlatform().start(() -> {
 	        for (var i = 1;; i++) {
 	            try {
 	                Thread.sleep(1_000);

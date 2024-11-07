@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+
+<title>Cours 07 - Interruptions et Exceptions </title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/reveal.css">
+<link rel="stylesheet" href="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/reveal-override.css">
+<link rel="stylesheet" href="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/white.css" id="theme">
+
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/zenburn.css">
+<link href="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/prettify.css" type="text/css" rel="stylesheet">
+<!-- Printing and PDF exports -->
+<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script><link rel="stylesheet" type="text/css" href="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/paper.css">
+<script type="text/javascript" src="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/prettify.js"></script>
+<style type="text/css">
+.reveal h2 {
+	color: steelblue;
+}
+
+.reveal h1 {
+	color: steelblue;
+}
+
+.reveal p {
+	text-align: left;
+}
+
+pre {-moz-tab-size: 4;} /* Firefox */
+pre {tab-size: 4;}
+
+</style>
+
+<style type="text/css">
+.flex-container {
+  display: flex;
+}
+.div1 {
+    width: 100px;
+}
+</style>
+<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body onload="prettyPrint()">
+
+	<div class="reveal slide center" role="application" data-transition-speed="default" data-background-transition="fade">
+
+<div class="footer"><p>
+    <a href="http://igm.univ-mlv.fr/coursconcurrenceinfo2/index.html"><img src="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/home.png" width="30em"></a></p>
+</div>
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides" style="width: 960px; height: 700px; inset: 50% auto auto 50%; transform: translate(-50%, -50%) scale(1.44386);">
+			<section style="top: 169.5px; display: block;" class="present">
+
+				<h1>Concurrence</h1>
+				
+				<h2>Interruptions et Exceptions</h2>
+				
+						
+	
+	<br> <span class="authorsList"></span>
+			</section>
+
+			<section style="top: 68px; display: block;" class="future" hidden="" aria-hidden="true">
+ 			<h2>Exceptions</h2>
+<p>En Java, il y a deux façon de sortir d'un appel de méthode : 
+par un <span class="blue"><code>return</code></span> (explicite ou implicite), ou par la <span class="blue">levée d'une exception</span>.</p>
+
+<p>Il existe deux sortes d'exceptions : </p>
+<ul>
+	<li>Les exceptions <span class="red"><i>unchecked</i> (les erreurs du programmeur)</span> : <code>NullPointerException</code>,  <code>ArrayIndexOutOfBoundsException</code>, ... </li>
+	<li>Les exceptions <span class="red"><i>checked</i> (dues à une action extérieure)</span> : <code>IOException</code>,  <code>InterruptedException</code>, ... et pour lesquelles <b>on doit "agir"</b>.</li>
+</ul>
+			</section>
+
+
+			<section style="top: 166px; display: block;" class="future" hidden="" aria-hidden="true">
+ 			<h2>Arrêter un thread</h2>
+<p>En Java, <span class="red">il n'est pas possible de <b>forcer</b> un thread à s'arrêter</span> (autrement dit, de le tuer).</p>
+
+<p> La seule façon d'arrêter un thread est de lui demander... gentiment, en lui <span class="red">signalant</span> que l'on souhaiterait qu'il s'arrête.</p>
+			</section>
+
+			<section style="top: 46.5px; display: none;" class="future" hidden="" aria-hidden="true">
+ 			<h2>Mécanisme de signalisation</h2>
+<p>Un thread peut envoyer un signal d'interruption à un autre thread :
+<code>autreThread.interrupt()</code>.
+
+</p><p>L'autre thread peut recevoir le signal de 2 façon différentes :</p>
+<ul>
+<li><span class="red">statut d'interruption</span> : un (flag) booléen est positionné. 
+	<ul><li>Et on peut tester sa valeur avec <code>Thread.interrupted()</code>. Cette méthode est vraiment mal nommée et devrait s'appeler <code>interruptedAndClear()</code>, car <span class="red">elle repositionne  également le statut d'interruption à <code>false</code> après son appel !</span></li></ul>
+</li><li> voir la suite...
+</li>
+</ul>
+			</section>
+
+<!-- 
+			<section>
+ 			<h2>Statut d'interruption</h2>
+
+<p>  <span class="blue">Si le thread n'est pas dans un appel bloquant</span>, <code>thread.interrupt()</code> positionne le statut d'interruption à <code>true</code>.</p>
+
+<p> <span class="blue">Si le thread est dans un appel de méthode bloquant, ou si un appel bloquant arrive après</span> : l'appel lève une <code>InterruptedException</code>... et probalement (il faut vérifier la doc de la méthode), <b><span class="red">le statut est repositionné à <code>false</code> !</span></b></p>
+<p><span class="blue">Sinon</span>, on vérifie le statut d'interruption avec <code>Thread.interrupted()</code> </span></p>
+			</section>
+ -->
+
+
+			<section style="top: 141.5px; display: none;" hidden="" aria-hidden="true" class="future">
+ 			<h2>Exemple (1/2)</h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> l </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> l </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">1_000_000_000L</span><span class="pun">;</span><span class="pln"> l</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="com">// ici, on fait un calcul plus ou moins lent</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">
+thread</span><span class="pun">.</span><span class="pln">interrupt</span><span class="pun">();</span><span class="pln">	</span></pre>
+<p>Dans ce cas, le programme ne sait pas qu'il a été interrompu...</p>
+
+			</section>
+
+			<section style="top: 141.5px; display: none;" hidden="" aria-hidden="true" class="future">
+ 			<h2>Exemple  (2/2)</h2>
+<p>Il faut tester le <b>statut d'interruption</b> !</p>
+<pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> l </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln"> l </span><span class="pun">&lt;</span><span class="pln"> </span><span class="lit">1_000_000_000L</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> </span><mark><span class="pun">!</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">interrupted</span><span class="pun">()</span></mark><span class="pun">;</span><span class="pln"> l</span><span class="pun">++)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="com">// ici, on fait un calcul plus ou moins lent</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">
+thread</span><span class="pun">.</span><span class="pln">interrupt</span><span class="pun">();</span><span class="pln">	</span></pre>
+
+			</section>
+
+
+
+			<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+<h2>Appel de méthode bloquant</h2>
+
+<p>Un <span class="blue">appel de méthode est bloquant</span> s'il met le thread courant en attente.</p>
+
+<p>Par exemple :</p>
+<ul>
+	<li>les appels systèmes pour faire des <span class="blue">entrées/sorties</span>,</li>
+	<li>l'<span class="blue">attente d'un certain temps</span> avec <code>Thread.sleep()</code>,</li>
+	<li>ou l'<span class="blue">attente</span> dans un appel à <code>wait()</code>.</li>
+</ul>
+
+<p>Ces méthodes devraient déclarer une <code>(IO)InterruptedException</code>... Mais il faut vérifier la doc. Par exemple, les méthodes de <code>Scanner</code> ne le font pas.</p>
+<p></p>
+
+			</section>
+
+
+
+			<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+ 			<h2>Mécanisme de signalisation</h2>
+<p>Un thread peut envoyer un signal d'interruption à un autre thread :
+<code>autreThread.interrupt()</code>.
+
+</p><p>L'autre thread peut recevoir le signal de 2 façon différentes :</p>
+<ul>
+	
+<li>Si le thread n'est <span class="blue">pas dans un appel bloquant</span> : <span class="red">un (flag) booléen est positionné</span>. Et on peut tester sa valeur avec <code>Thread.interrupted()</code>.
+</li>
+<li>Si le thread est <span class="blue">dans un appel bloquant</span>, ou si un appel bloquant arrive après : <span class="red">l'exception (<i>checked</i>) <code>InteruptedException</code> est levée</span> (et le statut est positionné à <code>false</code>).
+</li>
+</ul>
+			</section>
+
+
+			<!-- <section>
+ 			<h2>Statut d'interruption</h2>
+
+<p>  <span class="blue">Si le thread n'est pas dans un appel bloquant</span>, <code>thread.interrupt()</code> positionne le statut d'interruption à <code>true</code>.</p>
+
+<p> <span class="blue">Si le thread est dans un appel de méthode bloquant, ou si un appel bloquant arrive après</span> : l'appel lève une <code>InterruptedException</code>... et probablement (il faut vérifier la doc de la méthode), <b><span class="red">le statut est repositionné à <code>false</code> !</span></b></p>
+<p><span class="blue">Sinon</span>, on vérifie le statut d'interruption avec <code>Thread.interrupted()</code> (cette méthode est vraiment mal nommée et devrait s'appeler <code>interruptedAndClear()</code>, car <span class="red">elle repositionne  également le statut d'interruption à <code>false</code> après son appel !</span></p>
+			</section> -->
+
+			<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+ 			<h2>Exemple avec un appel bloquant (1/2)</h2>
+
+<p>L'appel à <code>sleep</code> peut provoquer une <code>InterruptedException</code> qui est une exception <i>checked</i>, il faut dont obligatoirement la gérer. Et comme on est dans une lambda, on ne peut pas faire de <code>throws</code>.</p>
+<pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">for</span><span class="pun">(;;){</span><span class="pln">
+	  </span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	    </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">sleep</span><span class="pun">(</span><span class="lit">5_000</span><span class="pun">);</span><span class="pln"> </span><span class="com">// méthode bloquante</span><span class="pln">
+	  </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">InterruptedException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="com">// ici, il faut IMPÉRATIVEMENT traiter l'exception </span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">
+thread</span><span class="pun">.</span><span class="pln">interrupt</span><span class="pun">();</span></pre>
+
+<p>Attention, un <code>catch</code> qui ne fait rien, cela veut dire que l'on ne pourra jamais arrêter le thread. <b>Donc ce code est mauvais !</b></p>
+
+			</section>
+
+			<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+ 			<h2>Exemple avec un appel bloquant (2/2)</h2>
+
+<p>Il y a deux façon de traiter cette <code>InterruptedException</code> :
+</p>
+<ul>
+	<li>Sortir du <code>main</code> ou de <code>runnable.run()</code> avec un <code>return</code>; </li>
+	<li>Lever une <i>unchecked</i> exception pour sortir de la méthode <code>run()</code> du <code>Runnable</code>.</li>
+</ul>
+<pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">for</span><span class="pun">(;;){</span><span class="pln">
+	 </span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">sleep</span><span class="pun">(</span><span class="lit">5_000</span><span class="pun">);</span><span class="pln"> </span><span class="com">// méthode bloquante</span><span class="pln">
+	 </span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">InterruptedException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">return</span><span class="pun">;</span><span class="pln"> </span><span class="com">// ou lever une exception runtime...</span><span class="pln">
+	 </span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">
+thread</span><span class="pun">.</span><span class="pln">interrupt</span><span class="pun">();</span></pre>
+
+			</section>
+
+			<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+ 		<h2>Avec et sans appel bloquant</h2>
+<p>Avec un appel bloquant suivi d'un calcul lent :</p>
+
+<pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">var</span><span class="pln"> sum </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">interrupted</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+		</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">sleep</span><span class="pun">(</span><span class="lit">5_000</span><span class="pun">);</span><span class="pln"> </span><span class="com">// méthode bloquante</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">InterruptedException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">return</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		sum </span><span class="pun">+=</span><span class="pln"> findPrime</span><span class="pun">();</span><span class="pln"> </span><span class="com">// calcul sans appel bloquant mais lent	</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+	</span><mark><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">sum</span><span class="pun">);</span></mark><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">
+thread</span><span class="pun">.</span><span class="pln">interrupt</span><span class="pun">();</span></pre>
+<p>Selon le moment où l'interruption est reçue, le comportement n'est pas le même...
+
+			</p></section>
+
+			<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+			<h2>S'interrompre soi-même</h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">var</span><span class="pln"> sum </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">interrupted</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+		</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">sleep</span><span class="pun">(</span><span class="lit">5_000</span><span class="pun">);</span><span class="pln"> </span><span class="com">// méthode bloquante</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">InterruptedException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><mark><span class="typ">Thread</span><span class="pun">.</span><span class="pln">currentThread</span><span class="pun">().</span><span class="pln">interrupt</span><span class="pun">();</span></mark><span class="pln">
+			</span><span class="kwd">continue</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+		sum </span><span class="pun">+=</span><span class="pln"> findPrime</span><span class="pun">();</span><span class="pln"> </span><span class="com">// calcul sans appel bloquant mais lent	</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+	</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">sum</span><span class="pun">);</span><span class="pln"> 
+</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">
+thread</span><span class="pun">.</span><span class="pln">interrupt</span><span class="pun">();</span></pre>
+<p> Ré-interrompre le thread dans le <code>catch</code> permet de faire en sorte qu'on ne puisse sortir de la boucle que d'une seule façon.</p>
+<p>Remarque : ici, un <code>break</code> aurait eu le même effet.</p>
+			</section>
+
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+			<h2>Dans l'autre sens...</h2>
+
+<pre class="prettyprint prettyprinted" style="font-size: 20px;"><span class="kwd">var</span><span class="pln"> thread </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">ofPlatform</span><span class="pun">().</span><span class="pln">start</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">var</span><span class="pln"> sum </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(!</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">interrupted</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 		
+		sum </span><span class="pun">+=</span><span class="pln"> findPrime</span><span class="pun">();</span><span class="pln"> </span><span class="com">// calcul sans appel bloquant mais lent	</span><span class="pln">
+		</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="typ">Thread</span><span class="pun">.</span><span class="pln">sleep</span><span class="pun">(</span><span class="lit">5_000</span><span class="pun">);</span><span class="pln"> </span><span class="com">// méthode bloquante</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">InterruptedException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+			</span><span class="kwd">break</span><span class="pun">;</span><span class="pln">
+		</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+	</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">sum</span><span class="pun">);</span><span class="pln"> 
+</span><span class="pun">});</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">
+thread</span><span class="pun">.</span><span class="pln">interrupt</span><span class="pun">();</span></pre>
+<p> Si l'interruption survient lors du calcul de <code>findPrime</code>, le prochain appel bloquant à <code>sleep()</code> lève immédiatement une <code>InterruptedException</code></p>
+			</section>
+		
+
+			<section style="top: 30px; display: block;" hidden="" aria-hidden="true" class="future">
+			<h2>Opérations d'entrée/sortie</h2>
+
+<p>Une partie des opérations d’entrée/sortie sont des appels bloquants : <code>Reader.read()</code>, <code>OutputStream.write()</code>, ... </p>
+<ul>
+	<li>Ils lèvent des <code>IOException</code>;</li>
+	<li>ne lèvent <span class="red">pas d'<code>InterruptedException</code></span>;</li>
+	<li><span class="blue">lèvent des <code>IOInterruptedException</code></span> (sous-classe de <code>IOException</code>);</li>
+</ul>
+<p>Donc, il ne faut pas oublier de les traiter, et lorsqu'on reçoit une <code>IOInterruptedException</code>, il faut tout fermer et arrêter le thread (ou pour un serveur, arrêter la connexion avec le client, etc..)</p><p>
+
+			</p></section>
+
+			<section style="top: 114.5px; display: block;" hidden="" aria-hidden="true" class="future">
+			<h2>L'entrée d'un bloc <code style="font-size: 46px">synchronized</code></h2>
+<p>Essayer d'<b>entrer dans un bloc <code>synchronized</code> est une opération bloquante</b> si un autre thread a déjà pris le jeton associé au lock de ce bloc. Attention, elle <span class="red">ne lève pas d'InterruptedException...</span></p>
+
+<p>S'il y a un risque d'attente (en cas de forte contention, par 
+exemple) et que l'on veut permettre l'interruption de l'entrée dans une 
+section critique, il faut utiliser des <code>ReentrantLock</code> et la méthode <code>lockInterruptibly()</code>.</p>
+			</section>
+
+				<section style="top: 6.5px; display: block;" hidden="" aria-hidden="true" class="future">
+ 			<h2>En résumé...</h2>
+
+<p>Habituellement, appeler <code>interrupt()</code> sur un thread veut dire qu'on lui demande de s'arrêter.</p>
+<p>Mais ce n'est qu'une convention, le code du thread peut faire ce que 
+bon lui semble (pourvu que cela soit écrit dans la javadoc).</p>
+
+<p>Donc <span class="red">l’interruption d'un thread se fait de façon coopérative</span> : le code du thread doit être écrit pour qu'il puisse s'interrompre <span class="green">(et ne rien faire, ou appeler <code>printStackTrace</code> n'est jamais la bonne solution !)</span>.</p>
+
+<p>On distingue deux cas :</p> 
+<ul>
+	<li><span class="red">Appel de méthode bloquant</span> : levée d'une <span class="blue"><code>InterruptedException.</code></span></li>
+	<li><span class="red">Sinon</span> : vérification du statut avec  <span class="blue"><code>Thread.interrupted()</code></span>.</li>
+</ul>
+
+
+			</section>
+
+		</div>
+
+	<div class="backgrounds"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><div class="navigate-left"></div><div class="navigate-right enabled"></div><div class="navigate-up"></div><div class="navigate-down"></div></aside><div class="slide-number"></div><div class="pause-overlay"></div><div style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);" id="aria-status-div" aria-live="polite" aria-atomic="true">
+
+				Concurrence
+				
+				Interruptions et Exceptions
+				
+						
+	
+	 
+			</div></div>
+
+
+
+	<script src="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/head.min.js"></script>
+	<script src="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/reveal.js"></script>
+
+	<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script><script type="text/javascript" src="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/zoom.js"></script><script type="text/javascript" src="Cours%2007%20-%20Interruptions%20et%20Exceptions_files/notes.js"></script>
+
+
+
+</body></html>
