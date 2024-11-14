@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+
+<title>Cours 09 - ExecutorService </title>
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+<link rel="stylesheet" href="Cours%2009%20-%20ExecutorService_files/reveal.css">
+<link rel="stylesheet" href="Cours%2009%20-%20ExecutorService_files/reveal-override.css">
+<link rel="stylesheet" href="Cours%2009%20-%20ExecutorService_files/white.css" id="theme">
+
+<!-- Code syntax highlighting -->
+<link rel="stylesheet" href="Cours%2009%20-%20ExecutorService_files/zenburn.css">
+<link href="Cours%2009%20-%20ExecutorService_files/prettify.css" type="text/css" rel="stylesheet">
+<!-- Printing and PDF exports -->
+<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script><link rel="stylesheet" type="text/css" href="Cours%2009%20-%20ExecutorService_files/paper.css">
+<script type="text/javascript" src="Cours%2009%20-%20ExecutorService_files/prettify.js"></script>
+<style type="text/css">
+.reveal h2 {
+	color: steelblue;
+}
+
+.reveal h1 {
+	color: steelblue;
+}
+
+.reveal p {
+	text-align: left;
+}
+
+pre {-moz-tab-size: 4;} /* Firefox */
+pre {tab-size: 4;}
+
+</style>
+
+<style type="text/css">
+.flex-container {
+  display: flex;
+}
+.div1 {
+    width: 100px;
+}
+</style>
+<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body onload="prettyPrint()">
+
+	<div class="reveal slide center" role="application" data-transition-speed="default" data-background-transition="fade">
+
+<div class="footer"><p>
+    <a href="https://igm.univ-mlv.fr/coursconcurrenceinfo2/index.html"><img src="Cours%2009%20-%20ExecutorService_files/home.png" width="30em"></a></p>
+</div>
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides" style="width: 960px; height: 700px; inset: 50% auto auto 50%; transform: translate(-50%, -50%) scale(1.44386);">
+			<section style="top: 169.5px; display: block;" class="present">
+
+				<h1>Concurrence</h1>
+				
+				<h2>ExecutorService</h2>				
+	
+	<br> <span class="authorsList"></span>
+
+			</section>
+
+<section style="top: 0px; display: block;" hidden="" aria-hidden="true" class="future">
+<h2>Problématique</h2>
+
+<p>On cherche à effectuer en parallèle des tâches
+indépendantes (requêtes BdD, requêtes Web, traitement d'images, ...).</p>
+
+<p style="margin: 0;"><span class="red">Problèmes : </span></p>
+
+<ul>
+   <li><code>thread.start()</code> est <span class="red">lente</span> pour les threads <i>plateform</i>,</li>
+   <li>c'est compliqué de <span class="red">récupérer</span> une valeur calculée par un thread.</li>
+</ul>
+
+<p><span class="red">Solution : </span><b>réutiliser</b> les threads pour des tâches qui ont une valeur de retour.</p>
+<ul>
+    <li>Les tâches deviennent des <code>Callable&lt;T&gt;</code> :
+<pre class="prettyprint prettyprinted" style=""><span class="lit">@FunctionalInterface</span><span class="pln">
+</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">interface</span><span class="pln"> </span><span class="typ">Callable</span><span class="pun">&lt;</span><span class="pln">T</span><span class="pun">&gt;</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    T call</span><span class="pun">()</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">Exception</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">    </span></pre>
+    </li>
+    <li>Un objet de la classe <code>Future&lt;T&gt;</code> est renvoyé au moment
+    de la soumission de la tâche. Il permettra d'obtenir le résultat (de type <code>T</code>).</li>
+</ul>
+
+</section>
+
+
+
+<section style="top: 53.5px; display: block;" hidden="" aria-hidden="true" class="future">
+	<h2>ExecutorService</h2>
+
+<img src="Cours%2009%20-%20ExecutorService_files/executorservice-idea.png" style="border:0;box-shadow:none" width="840">
+
+</section>
+
+
+
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+	<h2>Construction d'un <code>ExecutorService</code></h2>
+
+<p>On construit généralement les ExecutorService avec les méthodes <i>factory</i> de la classe <code>Executor<b>s</b> </code> :</p>
+
+<ul>
+<li><span class="blue"><code>Executors.newFixedThreadPool(int poolSize)</code></span> démarre <code>poolSize</code> <i>worker-threads</i> qui ne sont jamais arrêtés.</li>
+<li><span class="blue"><code>Executors.newCachedThreadPool()</code></span> démarre autant de  <i>worker-threads</i> que nécessaire, en essayant de réutiliser les threads déjà démarrés. Les <i>worker-threads</i> inactifs depuis 1 minute sont arrêtés.</li>
+<li><span class="blue"><code>Executors.newSingleThreadPool()</code></span> démarre un seul thread qui n'est jamais arrêté.</li>
+</ul>
+
+<p>Dans ces 3 cas, la <code>BlockingQueue</code> qui stocke les tâches est <span class="red">non-bornée</span>.</p>
+
+
+</section>
+
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+    <h2>Plus de finesse avec <code style="font-size: 46px;">ThreadPoolExecutor</code></h2>
+
+<p>Le constructeur de <span class="blue"><code>ThreadPoolExecutor</code></span> prend 5 paramètres:</p>
+<ul>
+  <li><span class="blue"><code>int corePoolSize</code></span> : nombre de threads qu'on s'attend à devoir utiliser en régime de croisière.
+  	<!-- Quand une tâche arrive et qu'il y a moins de threads qui existent (même s'il y en a qui ne travaillent pas), un nouveau thread est créé pour cette tâche. Par contre, s'il y a en déjà au moins autant, si possible (c'est à dire s'il reste de la place dans la file des tâches), on n'en crée pas de nouveau. -->
+  </li>
+  <li><span class="blue"><code>int maximumPoolSize</code></span> : le nombre maximum de threads vivants.
+  </li>
+  <li><span class="blue"><code>long keepAliveTime</code></span> : si il y a plus de <code>corePoolSize</code> threads vivants, ceux en trop sont terminés au bout de <code>keepAliveTime</code> unités de temps d'inactivité.
+  </li>
+  <li><span class="blue"><code>TimeUnit unit</code> </span> : l'unité de temps d'inactivité.
+  </li>
+  <li><span class="blue"><code>BlockingQueue&lt;Runnable&gt; workQueue</code></span> : la file pour stocker les tâches si tous les <i>worker-threads</i> travaillent.
+  </li>
+  </ul>
+</section>
+
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+<h2>Principe de fonctionnement</h2>
+
+<p>On peut ajouter une tâche à effectuer avec la méthode <code>submit</code>.</p>
+<pre class="prettyprint prettyprinted" style=""><span class="tag">&lt;T&gt;</span><span class="pln"> Future</span><span class="tag">&lt;T&gt;</span><span class="pln"> submit(Callable</span><span class="tag">&lt;T&gt;</span><span class="pln"> callable)
+// ou
+Future</span><span class="pun">&lt;?&gt;</span><span class="pln"> submit</span><span class="pun">(</span><span class="typ">Runnable</span><span class="pln"> run</span><span class="pun">)</span><span class="pln"> </span><span class="com">// le Future n'a pas de type car un Runnable ne renvoie rien.</span></pre>
+
+<p>Cette méthode n'est pas bloquante. Elle renvoie directement un objet de la classe <code>Future&lt;T&gt;</code> qui permettra de récupérer la valeur renvoyée par le <code>Callable&lt;T&gt;</code>.</p>
+</section>
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+  <h2>java.util.concurrent.Future 1/2</h2>
+  <p>Permet de demander un résultat et de contrôler l'exécution de la tâche.</p>
+
+  <h3>Récupérer la valeur</h3>
+  <ul>
+    <li> <code>future.get()</code> <span class="red">bloque</span> jusqu'à ce que le <code>Callable</code> correspondant ait été exécuté et <span class="red">renvoie</span> la valeur calculée par le <code>Callable</code>.</li>
+    <li> Si le <code>Callable</code> lève une <span class="blue">exception</span>, l'appel à <code>future.get()</code> lèvera l'exception <code>ExecutionException</code>.</li>
+    <li> <code>future.resultNow()</code> renvoie la valeur à condition que le calcul soit fini.</li>
+  </ul>
+</section>
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+  <h2>java.util.concurrent.Future 2/2</h2>
+
+  <h3>Etat de la tâche</h3>
+    <ul>
+	  <li>La méthode <code>state()</code> permet d'avoir l'état de la tâche (RUNNING, SUCCESS, CANCELED, FAILED)</li>
+	  <ul>
+	  	<li><code>RUNNING</code> :  en cours d'exécution ou dans la file,</li>
+	  	<li><code>SUCCESS</code>  : tâche terminée sans avoir levé d'exception,</li>
+	  	<li><code>FAILED</code> : tâche terminée par une exception,</li>
+	  	<li><code>CANCELLED</code> : tâche annulée par la méthode  <code>cancel</code>.</li>
+	  </ul>
+	 <!--<li>La méthode <code>isDone()</code> permet de savoir si le calcul a fini</li> -->
+	  <li>La méthode <code>cancel(boolean interrupt)</code> permet de demander l'arrêt de l'exécution d'une tâche</li>
+	</ul>
+</section>
+
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+<h2>Exemple de get()</h2>
+<pre class="prettyprint prettyprinted" style=""><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> bigComputation</span><span class="pun">(</span><span class="kwd">int</span><span class="pln"> j</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="com">// Syracuse</span><span class="pln">
+	</span><span class="kwd">var</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">0</span><span class="pun">;</span><span class="pln">
+	</span><span class="kwd">while</span><span class="pln"> </span><span class="pun">(</span><span class="pln">j </span><span class="pun">&gt;</span><span class="pln"> </span><span class="lit">1</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		j </span><span class="pun">=</span><span class="pln"> j </span><span class="pun">%</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">==</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> </span><span class="pun">?</span><span class="pln"> j </span><span class="pun">=</span><span class="pln"> j </span><span class="pun">/</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">:</span><span class="pln"> </span><span class="lit">3</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> j </span><span class="pun">+</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+		i</span><span class="pun">++;</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+	</span><span class="kwd">return</span><span class="pln"> i</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+</span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">throws</span><span class="pln"> </span><span class="typ">InterruptedException</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">var</span><span class="pln"> executorService </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Executors</span><span class="pun">.</span><span class="pln">newFixedThreadPool</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span><span class="pln">
+	</span><span class="kwd">var</span><span class="pln"> future </span><span class="pun">=</span><span class="pln"> executorService</span><span class="pun">.</span><span class="pln">submit</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> bigComputation</span><span class="pun">(</span><span class="lit">3333</span><span class="pun">));</span><span class="pln">
+	</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">future</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">());</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">ExecutionException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+		</span><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AssertionError</span><span class="pun">(</span><span class="pln">e</span><span class="pun">.</span><span class="pln">getCause</span><span class="pun">());</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+	</span><span class="pun">...</span><span class="pln">
+</span><span class="pun">}</span></pre>
+</section>
+
+<!-- <section>
+<h2>Exemple de get()</h2>
+<pre class="prettyprint">
+public static int bigComputation(int j) { // Syracuse
+	...
+}
+
+public static void main(String[] args) throws InterruptedException {
+	var executorService = Executors.newFixedThreadPool(2);
+	var future = executorService.submit(() -> bigComputation(3333));
+	try {
+		System.out.println(future.get());
+	} catch (ExecutionException e) {
+		throw new AssertionError(e.getCause());
+	}
+	...
+}
+</pre>
+</section> -->
+
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+    <h2><code style="font-size: 50px;">invokeAll()</code> et <code style="font-size: 50px;">invokeAny()</code></h2>
+<p>En pratique, on utilise souvent l'une des deux méthodes suivantes d'un <code>ExecutorService</code> :</p>
+<ul>
+<li><span class="blue"><code>invokeAll</code></span> qui prend une collection de <code>Callable&lt;T&gt;</code>, <span class="red">bloque</span> jusqu'à ce qu'ils aient <span class="red">tous</span> été exécutés (quel que soit le résultat de l’exécution). Elle renvoie la liste des <code>Future&lt;T&gt;</code> associées.
+</li>
+<li>
+<span class="blue"><code>invokeAny</code></span> qui prend une collection de <code>Callable&lt;T&gt;</code>, <span class="red">bloque</span> jusqu'à ce que <span class="red">l'un d'entre eux</span> ait été exécuté <span class="blue">(sans lever d'exception)</span> et renvoie la valeur renvoyée par le <code>Callable&lt;T&gt;</code> <span class="green">(ici, on n'a pas besoin d'un <code>Future&lt;T&gt;</code> pour gérer l'exception éventuelle, puisque l'on sait que le <code>Callable</code> s'est terminé correctement)</span>.</li>
+</ul>
+
+</section>
+
+<section style="top: 330px; display: none;" hidden="" aria-hidden="true" class="future">
+<h2>Exemple avant Java 19 (1/2)</h2> 
+<pre class="prettyprint prettyprinted" style="font-size: 19px;"><span class="kwd">var</span><span class="pln"> executorService </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Executors</span><span class="pun">.</span><span class="pln">newFixedThreadPool</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> callables </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Callable</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;&gt;();</span><span class="pln">
+
+</span><span class="typ">IntStream</span><span class="pun">.</span><span class="pln">range</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">).</span><span class="pln">forEach</span><span class="pun">(</span><span class="pln">i </span><span class="pun">-&gt;</span><span class="pln"> callables</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> bigComputation</span><span class="pun">(</span><span class="pln">i</span><span class="pun">)));</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> futures </span><span class="pun">=</span><span class="pln"> executorService</span><span class="pun">.</span><mark><span class="pln">invokeAll</span></mark><span class="pun">(</span><span class="pln">callables</span><span class="pun">);</span><span class="pln">
+
+</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> future </span><span class="pun">:</span><span class="pln"> futures</span><span class="pun">){</span><span class="pln">
+		</span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">future</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">());</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">ExecutionException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AssertionError</span><span class="pun">(</span><span class="pln">e</span><span class="pun">.</span><span class="pln">getCause</span><span class="pun">());</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">...</span></pre>   
+</section>
+
+<section style="top: 62.5px; display: block;" hidden="" aria-hidden="true" class="future">
+<h2>Exemple après Java 19 (1/2)</h2> 
+<pre class="prettyprint prettyprinted" style="font-size: 19px;"><span class="kwd">var</span><span class="pln"> executorService </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Executors</span><span class="pun">.</span><span class="pln">newFixedThreadPool</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> callables </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Callable</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;&gt;();</span><span class="pln">
+
+</span><span class="typ">IntStream</span><span class="pun">.</span><span class="pln">range</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="pln"> </span><span class="lit">100</span><span class="pun">).</span><span class="pln">forEach</span><span class="pun">(</span><span class="pln">i </span><span class="pun">-&gt;</span><span class="pln"> callables</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> bigComputation</span><span class="pun">(</span><span class="pln">i</span><span class="pun">)));</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> futures </span><span class="pun">=</span><span class="pln"> executorService</span><span class="pun">.</span><mark><span class="pln">invokeAll</span></mark><span class="pun">(</span><span class="pln">callables</span><span class="pun">);</span><span class="pln">
+
+</span><span class="kwd">for</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> future </span><span class="pun">:</span><span class="pln"> futures</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+	</span><span class="kwd">switch</span><span class="pln"> </span><span class="pun">(</span><span class="pln">future</span><span class="pun">.</span><span class="pln">state</span><span class="pun">())</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+      </span><span class="kwd">case</span><span class="pln"> RUNNING </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AssertionError</span><span class="pun">(</span><span class="str">"should not be there"</span><span class="pun">);</span><span class="pln">
+      </span><span class="kwd">case</span><span class="pln"> SUCCESS </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">future</span><span class="pun">.</span><span class="pln">resultNow</span><span class="pun">());</span><span class="pln">
+      </span><span class="kwd">case</span><span class="pln"> FAILED </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">future</span><span class="pun">.</span><span class="pln">exceptionNow</span><span class="pun">());</span><span class="pln">
+      </span><span class="kwd">case</span><span class="pln"> CANCELLED </span><span class="pun">-&gt;</span><span class="pln"> </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="str">"cancelled"</span><span class="pun">);</span><span class="pln">
+	</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="pun">...</span></pre>   
+</section>
+
+<section style="top: 131px; display: block;" hidden="" aria-hidden="true" class="future">
+<h2>Exemple (2/2)</h2> 
+<pre class="prettyprint prettyprinted" style="font-size: 19px;"><span class="kwd">var</span><span class="pln"> executorService </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Executors</span><span class="pun">.</span><span class="pln">newFixedThreadPool</span><span class="pun">(</span><span class="lit">2</span><span class="pun">);</span><span class="pln">
+
+</span><span class="kwd">var</span><span class="pln"> callables </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">ArrayList</span><span class="pun">&lt;</span><span class="typ">Callable</span><span class="pun">&lt;</span><span class="typ">Integer</span><span class="pun">&gt;&gt;();</span><span class="pln">
+
+</span><span class="typ">IntStream</span><span class="pun">.</span><span class="pln">range</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="lit">100</span><span class="pun">).</span><span class="pln">forEach</span><span class="pun">(</span><span class="pln">i </span><span class="pun">-&gt;</span><span class="pln"> callables</span><span class="pun">.</span><span class="pln">add</span><span class="pun">(()</span><span class="pln"> </span><span class="pun">-&gt;</span><span class="pln"> bigComputation</span><span class="pun">(</span><span class="pln">i</span><span class="pun">)));</span><span class="pln">
+
+</span><span class="kwd">try</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">executorService</span><span class="pun">.</span><mark><span class="pln">invokeAny</span></mark><span class="pun">(</span><span class="pln">callables</span><span class="pun">));</span><span class="pln">
+</span><span class="pun">}</span><span class="pln"> </span><span class="kwd">catch</span><span class="pln"> </span><span class="pun">(</span><span class="typ">ExecutionException</span><span class="pln"> e</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">throw</span><span class="pln"> </span><span class="kwd">new</span><span class="pln"> </span><span class="typ">AssertionError</span><span class="pun">(</span><span class="pln">e</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span></pre>   
+</section>
+
+
+<section style="top: 148.5px; display: block;" hidden="" aria-hidden="true" class="future">
+<h2>Fermeture de l'<code style="font-size: 50px;">ExecutorService</code></h2>
+
+<ul>
+<li>Un appel à la méthode <span class="blue"><code>shutdown()</code></span> interdit la soumission de nouvelles tâches et arrête les threads quand toutes les tâches ont été
+traitées.</li>
+<li>Un appel à la méthode <span class="blue"><code>shutdown<b>Now</b>()</code></span> essaie d'interrompre tous les <i>worker-threads</i>. Si les tâches ne répondent pas à l'<code>interrupt()</code>, alors les <i>worker-threads</i> ne seront jamais arrêtés.</li>
+</ul>
+</section>
+
+		</div>
+	<div class="backgrounds"><div class="slide-background present" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: none;"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div><div class="slide-background future" style="display: block;" data-loaded="true"></div></div><div class="progress" style="display: block;"><span style="width: 0px;"></span></div><aside class="controls" style="display: block;"><div class="navigate-left"></div><div class="navigate-right enabled"></div><div class="navigate-up"></div><div class="navigate-down"></div></aside><div class="slide-number"></div><div class="pause-overlay"></div><div style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px);" id="aria-status-div" aria-live="polite" aria-atomic="true">
+
+				Concurrence
+				
+				ExecutorService				
+	
+	 
+
+			</div></div>
+
+
+
+	<script src="Cours%2009%20-%20ExecutorService_files/head.min.js"></script>
+	<script src="Cours%2009%20-%20ExecutorService_files/reveal.js"></script>
+
+	<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script><script type="text/javascript" src="Cours%2009%20-%20ExecutorService_files/zoom.js"></script><script type="text/javascript" src="Cours%2009%20-%20ExecutorService_files/notes.js"></script>
+
+
+
+</body></html>

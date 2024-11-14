@@ -12,7 +12,7 @@ int main(int argc, char** argv){
         return EXIT_FAILURE;
     }
 
-    int fd = try(open("toto.txt", O_CREAT | O_WRONLY | O_TRUNC), 0642);
+    int fd = try(open("toto.txt", O_CREAT | O_WRONLY | O_TRUNC, 0642));
     if(fd == -1){
         perror("Erreur ");
         return EXIT_FAILURE;

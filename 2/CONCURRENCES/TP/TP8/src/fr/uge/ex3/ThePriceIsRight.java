@@ -69,7 +69,7 @@ public class ThePriceIsRight {
         if (!proposals.isEmpty()) {
           lock.notifyAll();  // Débloque les autres threads
         }
-        throw e;
+        return false;
       }
     }
   }
