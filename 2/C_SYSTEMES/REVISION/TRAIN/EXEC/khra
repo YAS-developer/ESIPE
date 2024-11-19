@@ -1,0 +1,7 @@
+total 36
+drwxrwxr-x 2 yas yas  4096 nov.  19 18:44 .
+drwxrwxr-x 6 yas yas  4096 nov.  19 18:04 ..
+-rwxrwxr-x 1 yas yas 19584 nov.  19 18:44 a.out
+-rw-rw-r-- 1 yas yas   478 nov.  19 18:43 ex1.c
+-rw-r--r-- 1 yas yas     0 nov.  19 18:44 khra
+-rw-r--r-- 1 yas yas  3050 nov.  19 18:43 output.txt

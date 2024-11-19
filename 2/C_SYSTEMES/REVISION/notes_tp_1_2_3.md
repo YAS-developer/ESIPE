@@ -98,67 +98,6 @@ int fd_write = open("output.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 int fd_append = open("log.txt", O_WRONLY | O_CREAT | O_APPEND, 0644);
 ```
 
-## 4. Gestion des répertoires
-
-### opendir/readdir/closedir
-```c
-DIR *opendir(const char *name);
-struct dirent *readdir(DIR *dirp);
-int closedir(DIR *dirp);
-```
-
-**Structure dirent** :
-```c
-struct dirent {
-    ino_t          d_ino;       // Numéro d'inode
-    char           d_name[256]; // Nom du fichier
-    // ... autres champs
-};
-```
-
-**Exemple** :
-```c
-DIR *dir = opendir(".");
-if (dir) {
-    struct dirent *entry;
-    while ((entry = readdir(dir)) != NULL) {
-        // Ignorer . et ..
-        if (strcmp(entry->d_name, ".") != 0 && 
-            strcmp(entry->d_name, "..") != 0) {
-            printf("%s\n", entry->d_name);
-        }
-    }
-    closedir(dir);
-}
-```
-
-### scandir
-```c
-int scandir(const char *dirp, struct dirent ***namelist,
-            int (*filter)(const struct dirent *),
-            int (*compar)(const struct dirent **, const struct dirent **));
-```
-
-**Exemple avec tri** :
-```c
-struct dirent **entries;
-int count = scandir(".", &entries, NULL, alphasort);
-if (count >= 0) {
-    for (int i = 0; i < count; i++) {
-        printf("%s\n", entries[i]->d_name);
-        free(entries[i]);
-    }
-    free(entries);
-}
-```
-
-## 5. Informations sur les fichiers
-
-### stat/lstat
-```c
-int stat(const char *pathname, struct stat *statbuf);
-int lstat(const char *pathname, struct stat *statbuf);
-```
 
 **Structure stat importante** :
 ```c
