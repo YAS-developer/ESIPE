@@ -1,4 +1,4 @@
- package fr.uge.net.buffers;
+package fr.uge.net.buffers.ex1;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
