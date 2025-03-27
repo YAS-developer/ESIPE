@@ -1,4 +1,4 @@
-package fr.uge.net.buffers.ex2;
+	package fr.uge.net.buffers.ex2;
 
 
 import java.io.IOException;
