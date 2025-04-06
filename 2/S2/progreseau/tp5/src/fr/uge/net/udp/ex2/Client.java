@@ -1,7 +1,6 @@
 package fr.uge.net.udp.ex2;
 
-import java.io.ObjectInputStream.GetField;
-import java.net.SocketAddress;
+
 import java.util.BitSet;
 
 
@@ -9,10 +8,12 @@ import java.util.BitSet;
 final class Client{
 	private final BitSet nbOpBitSet;
 	private final int TotOper;
-	private int opValue;
+	private long opValue;
 	
 	
-	public Client(int nbOp, int TotOper, int opValue) {
+	
+	
+	public Client(int nbOp, int TotOper, long opValue) {
 		this.TotOper = TotOper;
 		this.nbOpBitSet = new BitSet(TotOper);
 		this.nbOpBitSet.set(nbOp);
@@ -51,7 +52,7 @@ final class Client{
 		this.opValue+=newValue;
 	}
 	
-	public int getOpvalue() {
+	public long getOpvalue() {
 		return this.opValue;
 	}
 }

@@ -8,27 +8,41 @@ import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.logging.Logger;
 
 public class ServerEchoRepeat {
     private static final Logger logger = Logger.getLogger(ServerEchoRepeat.class.getName());
-
+    private static final Charset UTF8 = StandardCharsets.UTF_8;
     private final DatagramChannel dc;
     private final int BUFFER_SIZE = 1024;
     private final ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
+    private ByteBuffer data;
     private final Selector selector;
     private int port;
+    
+    private SocketAddress sender;
+    private int iter;
+    private int rep;
+    
 
     public ServerEchoRepeat(int port) throws IOException {
-        this.port = port;
+        
+    	this.port = port;
         selector = Selector.open();
         dc = DatagramChannel.open();
         dc.bind(new InetSocketAddress(port));
         
+        
+        iter=0;
         // TODO set dc in non-blocking mode and register it to the selector
         dc.configureBlocking(false);
         dc.register(selector, SelectionKey.OP_READ);
+        
     }
 
     public void serve() throws IOException {
@@ -54,23 +68,39 @@ public class ServerEchoRepeat {
 
     private void doRead(SelectionKey key) throws IOException {
         // TODO
-    	
+
+
     	var dc1 = (DatagramChannel)key.channel();
-    	
-    	var sender = dc1.receive(buffer);
     	buffer.clear();
-    	if(sender == null) {
-    		logger.warning("Selector ");
+    	sender = dc1.receive(buffer);
+    	
+    	if(sender == null || buffer.remaining() >= BUFFER_SIZE) {
+    		logger.warning("");
     		return;
     	}
     	buffer.flip();
-    	var rep = buffer.getInt(); 
-    	int content = 
     	
+    	if(data == null) {
+    		rep = buffer.getInt(); 
+    		iter=0;
+        	data = ByteBuffer.allocateDirect(BUFFER_SIZE-4);
+        	data.put(buffer);
+        	data.flip();
+        	key.interestOps(SelectionKey.OP_WRITE);
+    	}  	
     }
 
     private void doWrite(SelectionKey key) throws IOException {
-        // TODO
+    	if(iter>=rep) {
+    		data=null;
+    		key.interestOps(SelectionKey.OP_READ);
+    		return;
+    	}
+    	var dc1 = (DatagramChannel)key.channel();
+    
+    	dc1.send(data, sender);
+    	data.rewind();
+    	iter++;
     }
 
     public static void usage() {

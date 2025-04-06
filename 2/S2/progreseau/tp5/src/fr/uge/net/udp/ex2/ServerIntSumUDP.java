@@ -40,12 +40,12 @@ final class ServerIntSumUDP {
 		while(true) {
 			buffer.clear();
 			var sender = dc.receive(buffer);
-			if(sender == null | buffer.remaining() < PACKET_SIZE) {
+			if(sender == null || buffer.remaining() < PACKET_SIZE) {
 				continue;
 			}
 			
 			
-			byte bytee = buffer.get();
+			var bytee = buffer.get();
 			
 			switch (bytee) {
 				case (byte)1 -> {
@@ -69,7 +69,7 @@ final class ServerIntSumUDP {
 						var sendBuffer2 = ByteBuffer.allocateDirect(BUFFER_SIZE);
 						sendBuffer2.put((byte) 2);
 						sendBuffer2.putLong(sessionId);
-						sendBuffer2.putInt(client.getOpvalue());
+						sendBuffer2.putInt(idPosOper);
 						sendBuffer2.flip();
 						logger.info("Server sending" + sendBuffer2.remaining()+ "bytes to " + sender.toString());
 						
@@ -80,12 +80,12 @@ final class ServerIntSumUDP {
 						var sendBuffer3 = ByteBuffer.allocateDirect(BUFFER_SIZE);
 						sendBuffer3.put((byte) 3);
 						sendBuffer3.putLong(sessionId);
-						sendBuffer3.putInt(client.getOpvalue());
+						sendBuffer3.putLong(client.getOpvalue());
 						
 						sendBuffer3.flip();
 						logger.info("Server sending" + sendBuffer3.remaining()+ "bytes to " + sender.toString());
-						
 						dc.send(sendBuffer3, sender);
+						clients.remove(sessionId);
 					}
 					
 				}
