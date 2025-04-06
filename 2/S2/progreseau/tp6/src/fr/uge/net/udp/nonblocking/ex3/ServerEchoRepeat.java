@@ -1,4 +1,4 @@
-package fr.uge.net.udp.ex3;
+package fr.uge.net.udp.nonblocking.ex3;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -8,16 +8,10 @@ import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Random;
 import java.util.logging.Logger;
 
 public class ServerEchoRepeat {
     private static final Logger logger = Logger.getLogger(ServerEchoRepeat.class.getName());
-    private static final Charset UTF8 = StandardCharsets.UTF_8;
     private final DatagramChannel dc;
     private final int BUFFER_SIZE = 1024;
     private final ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
