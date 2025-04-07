@@ -108,7 +108,7 @@ final class ServerIntSumUDP {
 
         var port = Integer.parseInt(args[0]);
 
-        if (!(port >= 1024) & port <= 65535) {
+        if (!(port >= 1024) && port <= 65535) {
             logger.severe("The port number must be between 1024 and 65535");
             return;
         }
