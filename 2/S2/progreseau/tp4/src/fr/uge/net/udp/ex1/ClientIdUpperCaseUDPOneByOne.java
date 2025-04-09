@@ -64,9 +64,7 @@ public class ClientIdUpperCaseUDPOneByOne {
             		var id = buffer.getLong();
             		var message = UTF8.decode(buffer).toString();
                 	buffer.clear();
-       
-                	var rep = new Response(id, message); 
-                	queue.put(rep);
+                	queue.put(new Response(id, message));
             	}
         }
         } catch ( AsynchronousCloseException | InterruptedException e) {
