@@ -1,6 +1,7 @@
 package fr.uge.concurrence.exo1;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.locks.Condition;
@@ -10,7 +11,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 class TreasureSafe {
 	
-	private final LinkedBlockingDeque<Integer> deque = new LinkedBlockingDeque(); 
+	private final ArrayList<Integer> deque = new ArrayList(); 
 	private final int total;
 	private final ReentrantLock lock = new ReentrantLock();
 	private final Condition condition1 = lock.newCondition();
@@ -18,14 +19,10 @@ class TreasureSafe {
 	private int waitSum;
 	
 	public TreasureSafe(int total) {
-		lock.lock();
-		try {
-			this.total = total;
-			waitSum=0;
-		}
-		finally {
-			lock.unlock();
-		}
+	
+		this.total = total;
+		waitSum=0;
+		
 	}
 	
 	public void putTreasure(int value) throws InterruptedException {
@@ -40,7 +37,7 @@ class TreasureSafe {
 				condition1.await();
 				waitSum-=value;
 			}
-			deque.put(value);
+			deque.add(value);
 			condition2.signal();
 		}
 		finally {
@@ -59,8 +56,8 @@ class TreasureSafe {
 				}
 				condition2.await();
 			}
-			var lastTreasure = deque.pop(); 
-			condition1.signal();
+			var lastTreasure = deque.removeLast(); 
+			condition1.signalAll();
 			return lastTreasure;
 		}
 		finally {
