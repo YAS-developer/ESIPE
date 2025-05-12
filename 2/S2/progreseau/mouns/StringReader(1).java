@@ -1,17 +1,11 @@
-package fr.uge.net.tcp.nonblocking.ex32;
+package fr.uge.net.tcp.nonblocking;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
 
-
-
 public class StringReader implements Reader<String> {
 
-	public StringReader() {
-		
-	}
-	
 	private enum State {
 		DONE, WAITING_FOR_SIZE, WAITING_FOR_CONTENT, ERROR
 	};
@@ -30,7 +24,7 @@ public class StringReader implements Reader<String> {
 
 		if (state == State.WAITING_FOR_SIZE) {
 			var status = intReader.process(bb);
-			if (status == status.REFILL) {
+			if (status == ProcessStatus.REFILL) {
 				return ProcessStatus.REFILL;
 			}
 			size = intReader.get();
@@ -38,9 +32,9 @@ public class StringReader implements Reader<String> {
 				state = State.ERROR;
 				return ProcessStatus.ERROR;
 			}
+			internalBuffer.clear();
 			internalBuffer.limit(size);
 			state = State.WAITING_FOR_CONTENT;
-			
 		}
 
 		if (state == State.WAITING_FOR_CONTENT) {
@@ -62,11 +56,11 @@ public class StringReader implements Reader<String> {
 				return ProcessStatus.REFILL;
 			}
 			
-			value = StandardCharsets.UTF_8.decode(internalBuffer).toString();
+			internalBuffer.flip();
+			value= StandardCharsets.UTF_8.decode(internalBuffer).toString();
 			state = State.DONE;
 			return ProcessStatus.DONE;
 		}
-		
 		return ProcessStatus.ERROR;
 	}
 
@@ -80,6 +74,7 @@ public class StringReader implements Reader<String> {
 
 	@Override
 	public void reset() {
+		intReader.reset();
 		state = State.WAITING_FOR_SIZE;
 		internalBuffer.clear();
 	}
