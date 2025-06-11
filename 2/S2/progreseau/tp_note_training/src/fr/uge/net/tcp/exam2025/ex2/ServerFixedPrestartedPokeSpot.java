@@ -21,7 +21,7 @@ public class ServerFixedPrestartedPokeSpot {
 	    
 	    private void mergePokemonInfo(String pokemon) {
 	    	synchronized (lock) {
-	    		pokemonMap.merge(pokemon,1, Integer::sum);
+	    		pokemonMap.merge(pokemon, 1, Integer::sum);
 			}
 	    }
 	    
