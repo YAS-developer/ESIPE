@@ -1,0 +1,10 @@
+9
+g1 false
+g2 true
+g3 true
+g4 true
+g5 false
+g6 true
+g7 false
+g8 true
+g9 true
