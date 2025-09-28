@@ -3,7 +3,7 @@ package fr.uge.info2.algoadv;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphAlgo {
+public class GraphAlgoFares {
 
   public static boolean hasSource(Graph g) {
     /* */

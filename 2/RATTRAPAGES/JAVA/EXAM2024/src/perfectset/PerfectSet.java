@@ -5,7 +5,7 @@ import java.util.function.ToIntFunction;
 
 
 final class PerfectSet<T> {
-	private  int capacity;
+	private int capacity;
 	private int size;
 	private final ToIntFunction<T> function;
 	private T tab[];
