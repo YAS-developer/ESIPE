@@ -5,8 +5,8 @@ import java.util.AbstractSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,15 +23,11 @@ public final class DedupVec<T> {
 	public void add(T item) {
 		Objects.requireNonNull(item);
 		
-		var val = map.putIfAbsent(item, item);
+		// cle existante -> renvoie la value
+		// cle inexistante -> renvoie la nouvelle value 
+		var val = map.computeIfAbsent(item, _ -> item);
+		list.add(val);
 		
-		
-		if(val == null) {
-			list.add(item);
-		}
-		else {
-			list.add(val);
-		}
 	}
 	
 	/*
@@ -85,21 +81,23 @@ public final class DedupVec<T> {
 					@Override
 					public Iterator<Entry<T, T>> iterator() {
 						return new Iterator<Map.Entry<T,T>>() {
-							private T ele;
+							private final Iterator<T> iterator = set.iterator();
 							@Override
 							public boolean hasNext() {
 								
-								return !set.isEmpty();
+								return iterator.hasNext();
 							}
 
 							@Override
 							public Entry<T, T> next() {
 								
-								set.forEach((element) ->{
-									 ele = element;
-								});
-								Objects.requireNonNull(ele);
-								set.remove(ele);
+								if(!iterator.hasNext()) {
+									throw new NoSuchElementException();
+								}
+								var ele = iterator.next();
+								if(ele == null) {
+									throw new NullPointerException();
+								}
 								return new AbstractMap.SimpleEntry<T,T>(ele, ele);
 							}
 						};
@@ -111,5 +109,7 @@ public final class DedupVec<T> {
 		};
 	}
 	
-
+	public DedupVec<T> fromSet(Set<T> set){
+		return null;
+	}
 }
