@@ -1,0 +1,32 @@
+prevision en fonction de l'utilisation de l'usager 
+
+habitude differente en fonction de l'usager (uber, ) date de fin de session IMPORTANT.
+
+parc -> plus simple
+
+SITE
+
+depends du couts entrainement, machine learning 
+
+
+export mongodb
+
+borne, site, protocole des bornes
+
+API externes
+
+openMeteo
+
+
+
+clever cloud
+
+data J-1 ? 
+
+Volume de requetes
+tout les jours
+
+
+prod
+
+linux
