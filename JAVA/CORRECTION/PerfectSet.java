@@ -23,6 +23,7 @@ public final class PerfectSet<E> extends AbstractSet<E> {
     }
     this.function = function;
     this.tab = (E[]) new Object[capacity];
+    super();
   }
 
   public boolean add(E element) {
@@ -149,8 +150,8 @@ public final class PerfectSet<E> extends AbstractSet<E> {
 
                 var element = iteratorSet.next();
                 var index = function.applyAsInt(element);
-                return new AbstractMap.SimpleEntry<>(index, element);
-
+                return new SimpleEntry<>(index, element);
+                
               }
             };
           }

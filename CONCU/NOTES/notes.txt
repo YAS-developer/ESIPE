@@ -1,0 +1,47 @@
+THREAD-SAFE,
+
+
+TreasureSafe
+
+Qu'elle structure de données.
+
+ArrayList
+
+Max ? 
+
+
+lock constructeur
+	non final et valeur final par défaut, int i=0 , String winner = null, pas besoin lock 
+
+
+
+Q3 Interruptions
+
+methode bloquantes, await
+
+Penser aux actions de décrémentation, faire le nettoyage dans le cache
+
+
+Pokemon Producteur consommateur
+
+PRODUCTEUR, Verifie la condition avant de la mettre dans la queue
+
+prendre l'élement et le remettre car il est pas bon, PAS BON CREER UNE QUTRE BLOCKING QUEUE
+
+BLOCKING
+
+
+Cree la liste/hashmap avant de demarrer l'arbitre
+
+
+
+
+Hashmap, nom de la bank, blockingQueue
+
+
+Arbitre BlokingQueue, avec une variable locale qui signale que 
+
+
+
+
+put, take

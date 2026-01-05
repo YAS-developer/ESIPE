@@ -1,0 +1,73 @@
+@startuml
+
+left to right direction
+skinparam monochrome true
+skinparam linetype ortho
+skinparam rectangle {
+  BorderColor Black
+  BackgroundColor White
+}
+skinparam actorStyle "stickman"
+
+' =========================
+' Acteurs à gauche
+' =========================
+actor "Opérateur / Administrateur système" as OPE
+actor "Client" as Client
+actor "Application client" as AP
+actor "Gestionnaire des flux" as GF
+
+' =========================
+' Acteurs à droite
+' =========================
+actor "Data Scientist" as DS
+actor "Environnement isolé de test" as EIT
+actor "Système de surveillance et qualité" as SSQ
+actor "Bases de données" as BDD
+actor "Interface de connexion / communication" as ICC
+
+' =========================
+' Système BénéVolt
+' =========================
+rectangle "Système BénéVolt" as BeneVolt {
+
+  rectangle "Authentification & Sécurité" as Auth
+  rectangle "Gestion des Données & Flux" as Data
+  rectangle "Apprentissage & Modèle IA" as AI
+  rectangle "Prévisions & Services métiers" as Predict
+  rectangle "Monitoring & Supervision" as Monitoring
+}
+
+' =========================
+' Interactions principales (équilibrées)
+' =========================
+
+' Authentification & Sécurité
+Auth <--- DS
+Auth <--- EIT
+AP ---> Auth 
+ICC ---> Auth 
+
+' Gestion des données & flux
+Data <--- AP
+Data <--- GF
+Data <--- OPE
+BDD ---> Data 
+
+' Apprentissage & Modèle IA
+AI <--- DS
+AI <--- EIT
+BDD ---> AI  
+
+' Prévisions & Services métiers
+Predict <--- Client
+Predict <--- AP
+Predict <--- GF
+ICC ---> Predict  
+
+' Monitoring & Supervision
+Monitoring <--- DS
+SSQ ---> Monitoring 
+OPE ---> Monitoring 
+
+@enduml

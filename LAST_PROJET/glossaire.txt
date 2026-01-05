@@ -1,0 +1,61 @@
+
+
+données exogènes
+
+
+Projection des tendances: Méthode de prévision qui prolonge les tendances passées dans le futur en analysant les comportements historiques pour prédire l’évolution à venir.
+
+
+Lissage exponentiel: Méthode de prévision qui attribue plus de poids aux données récentes, permettant de mieux refléter l’évolution actuelle dans les prévisions.
+
+
+Moyenne mobile: Méthode de prévision à court terme qui calcule la moyenne des données récentes pour lisser les fluctuations et révéler la tendance générale.
+
+
+Amortissement linéaire: Méthode de prévision qui projette des valeurs futures en prolongeant une tendance de croissance constante observée dans le passé, adaptée aux évolutions régulières et continues.
+
+
+Prévision quantitative: Technique statistique utilisant des données historiques et des modèles mathématiques pour prédire des tendances futures, aidant à la prise de décision et à la planification stratégique.
+
+Prévisions de série chronologique: Technique statistique permettant de prédire des valeurs futures en analysant les données passées d'une variable, en tenant compte des tendances, cycles ou saisonnalités.
+
+
+bases de données de prédiction: informations utiles sur les bornes électriques et conservent aussi l’historique des anciennes prédictions.
+
+
+
+module d’analyse : regrouper et de traiter les données provenant à la fois des bornes et de sources externes
+
+
+module de prédiction: calcule alors des estimations par rapport au donnees recupere du modele d’analyse.
+
+
+ 
+système d’information: centralise les données envoyées par les bornes, interroge l’API BénéVolt pour obtenir les prévisions, puis transmet les résultats aux opérateurs.
+
+
+IA statistique: Approche de prévision basée sur des modèles linéaires qui analysent les relations entre valeurs passées et futures, en supposant la stabilité des caractéristiques de la série dans le temps (stationnarité).
+
+
+Machine Learning: Sous-domaine de l’IA permettant à des systèmes d’apprendre automatiquement à partir des données grâce à des algorithmes capables de modéliser des relations souvent complexes et non linéaires.
+
+
+Deep Learning: Technique d’apprentissage automatique basée sur des réseaux de neurones profonds, capable de modéliser des relations très complexes, mais nécessitant beaucoup de données et de puissance de calcul.
+
+
+habitudes locales: Comportements réguliers d’utilisation des bornes de recharge, influencés par les rythmes hebdomadaires (jours ouvrés, week-ends, heures de pointe) et modifiés par des facteurs externes.
+
+Données exogènes : Variables provenant de l’environnement et utilisées pour enrichir les séries temporelles afin de rendre les prévisions plus réalistes.
+
+KPI: Mesures utilisées pour évaluer l’efficacité et la fiabilité d’un modèle d’IA.
+
+Pipeline d’entraînement: Ensemble automatisé d’étapes permettant de préparer les données, d’entraîner, de valider et de déployer un modèle d’IA de manière reproductible. Il inclut la mise à jour automatique avec de nouvelles données, l’intégration et le déploiement continus (CI/CD), le suivi des performances et la génération de rapports de validation.
+
+
+CI/CD (Intégration Continue / Déploiement Continu): Ensemble de pratiques permettant d’automatiser la construction, le test et le déploiement des logiciels ou modèles d’IA.
+
+
+Langage de programmation: Ensemble de règles, de syntaxe et d’instructions permettant d’écrire des programmes informatiques pour créer des logiciels, des modèles ou des systèmes automatisés.
+
+
+Framework : Ensemble d’outils, de bibliothèques et de bonnes pratiques préconfigurées facilitant le développement d’applications ou de modèles en fournissant une structure standardisée et réutilisable

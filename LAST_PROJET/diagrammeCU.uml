@@ -1,0 +1,129 @@
+@startuml
+left to right direction
+skinparam actorStyle "stickman"
+skinparam monochrome true
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam usecase {
+  BorderColor Black
+  BackgroundColor White
+}
+actor "Opérateur / Administrateur système " as OPE
+actor "Data Scientist" as DS
+actor "Client" as Client
+actor "Application client" as AP
+actor "Environnement isolé de test" as EIT
+actor "Système de surveillance et qualité" as SSQ
+actor "Bases de données" as BDD
+
+actor "Gestionnaire des flux " as GF
+actor "Interface de connexion / communication" as ICC
+
+
+
+
+rectangle "Système BénéVolt" as System {
+
+  (UC-01 :Ajouter un token d’authentification)
+  (UC-02 :Remplacer / renouveler un token d’authentification)
+  (UC-03 :Intégrer de nouvelles données de consommation)
+  (UC-04 :Récupérer la consommation)
+  (UC-05 :Récupérer les données météo locales)
+  (UC-06 :Concevoir un modèle)
+  (UC-07 :Lancer un entraînement du modèle)
+  (UC-08 :Visualiser le modèle d’entraînement)
+  (UC-09 :Accéder à la liste des modèles)
+  (UC-10 :Accéder aux indicateurs de qualité du modèle)
+  (UC-11 :Promouvoir un modèle champion / challenger)
+  (UC-12 :Supprimer un modèle)
+  (UC-13 :Estimer la fin de charge prévisionnelle)
+  (UC-14 :Calculer la capacité d’effacement)
+  (UC-15 :Valider l’effacement après un événement)
+  (UC-16 :Surveiller la dérive du modèle et envoyer une alerte)
+  (UC-17 :Surveiller le modèle en production)
+  (UC-18 :Réentraîner le modèle en production)
+}
+
+
+
+
+' =========================
+' UC #1 & UC #2 – Authentification
+' =========================
+DS --> (UC-01 :Ajouter un token d’authentification)
+AP --> (UC-01 :Ajouter un token d’authentification)
+(UC-01 :Ajouter un token d’authentification) <-- ICC
+
+DS --> (UC-02 :Remplacer / renouveler un token d’authentification)
+(UC-02 :Remplacer / renouveler un token d’authentification) <-- AP
+ICC --> (UC-02 :Remplacer / renouveler un token d’authentification)
+
+' =========================
+' UC #3 à UC #5 – Données
+' =========================
+AP --> (UC-03 :Intégrer de nouvelles données de consommation)
+(UC-03 :Intégrer de nouvelles données de consommation) <-- GF
+BDD --> (UC-03 :Intégrer de nouvelles données de consommation)
+
+(UC-04 :Récupérer la consommation) <-- AP
+ICC --> (UC-04 :Récupérer la consommation)
+BDD --> (UC-04 :Récupérer la consommation)
+
+GF --> (UC-05 :Récupérer les données météo locales)
+(UC-05 :Récupérer les données météo locales) <-- BDD
+
+' =========================
+' Cycle de vie IA – UC #6 à UC #12
+' =========================
+DS --> (UC-06 :Concevoir un modèle)
+(UC-06 :Concevoir un modèle) <-- EIT
+
+DS --> (UC-07 :Lancer un entraînement du modèle)
+EIT --> (UC-07 :Lancer un entraînement du modèle)
+(UC-07 :Lancer un entraînement du modèle) <-- BDD
+
+DS --> (UC-08 :Visualiser le modèle d’entraînement)
+(UC-08 :Visualiser le modèle d’entraînement) <-- EIT
+
+DS --> (UC-09 :Accéder à la liste des modèles)
+EIT --> (UC-09 :Accéder à la liste des modèles)
+
+DS --> (UC-10 :Accéder aux indicateurs de qualité du modèle)
+(UC-10 :Accéder aux indicateurs de qualité du modèle) <-- SSQ
+
+DS --> (UC-11 :Promouvoir un modèle champion / challenger)
+(UC-11 :Promouvoir un modèle champion / challenger) <-- EIT
+GF --> (UC-11 :Promouvoir un modèle champion / challenger)
+
+DS --> (UC-12 :Supprimer un modèle)
+(UC-12 :Supprimer un modèle) <-- EIT
+
+' =========================
+' Services métiers – UC #13 à UC #15
+' =========================
+AP --> (UC-13 :Estimer la fin de charge prévisionnelle)
+Client --> (UC-13 :Estimer la fin de charge prévisionnelle)
+(UC-13 :Estimer la fin de charge prévisionnelle) <-- ICC
+
+Client --> (UC-14 :Calculer la capacité d’effacement)
+(UC-14 :Calculer la capacité d’effacement) <-- AP
+ICC --> (UC-14 :Calculer la capacité d’effacement)
+
+Client --> (UC-15 :Valider l’effacement après un événement)
+(UC-15 :Valider l’effacement après un événement) <-- AP
+ICC --> (UC-15 :Valider l’effacement après un événement)
+
+' =========================
+' Supervision & Maintenance – UC #16 à UC #18
+' =========================
+SSQ --> (UC-16 :Surveiller la dérive du modèle et envoyer une alerte)
+OPE --> (UC-16 :Surveiller la dérive du modèle et envoyer une alerte)
+(UC-16 :Surveiller la dérive du modèle et envoyer une alerte) <-- DS
+
+SSQ --> (UC-17 :Surveiller le modèle en production)
+(UC-17 :Surveiller le modèle en production) <-- OPE
+
+SSQ --> (UC-18 :Réentraîner le modèle en production)
+
+
+@enduml

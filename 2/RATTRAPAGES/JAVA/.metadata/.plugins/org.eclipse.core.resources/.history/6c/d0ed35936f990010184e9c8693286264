@@ -1,0 +1,38 @@
+package fr.uge.dedup;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
+
+public final class DedupVec<T> {
+	
+	
+	private final ArrayList<T> list = new ArrayList<T>(); 
+	private final HashMap<T, T> map = new HashMap<T, T>();
+	
+	public DedupVec(){
+		
+	}
+	
+	public void add(T item) {
+		Objects.requireNonNull(item);
+		
+		
+		var val = map.putIfAbsent(item, item);
+		if(val == null) {
+			list.add(item);
+		}
+		else {
+			list.add(val);
+		}
+	}
+	
+	public T get(int index) {
+		Objects.checkIndex(index, list.size());
+		return list.get(index);
+	}
+	public int size() {
+		return list.size();
+	}
+}

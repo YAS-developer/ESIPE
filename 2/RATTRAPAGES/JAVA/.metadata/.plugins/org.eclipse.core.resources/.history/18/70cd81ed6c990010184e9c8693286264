@@ -1,0 +1,23 @@
+package fr.uge.dedup;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+final class DedupVec<T> {
+	
+	
+	private final ArrayList<T> list = new ArrayList<T>(); 
+	private final HashMap<Integer, T> map = new HashMap<Integer, T>();
+	
+	public DedupVec(){
+		
+	}
+	
+	public T get(int index) {
+		ret
+	}
+	public int size() {
+		return 0;
+	}
+}

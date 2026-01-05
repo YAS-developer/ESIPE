@@ -1,0 +1,10 @@
+package fr.uge.dedup;
+
+final class DedupVec<T> {
+	int size;
+	
+	
+	public int size() {
+		return size;
+	}
+}
